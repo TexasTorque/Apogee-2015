@@ -7,7 +7,7 @@ sysProps.xml
 core
 nbproject/*
 !nbproject/project.xml
-!nbroject/project.properties
+nbroject/project.properties
 nbbuild/
 nbdist/
 nbactions.xml
