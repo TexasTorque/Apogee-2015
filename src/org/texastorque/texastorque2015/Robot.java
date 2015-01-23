@@ -37,6 +37,7 @@ public class Robot extends TorqueIterative {
         
         drivebase.setInput(activeInput);
         drivebase.setOutput(activeOutput);
+        drivebase.setOutputEnabled(true);
         
         drivebase.loadParams();
     }
