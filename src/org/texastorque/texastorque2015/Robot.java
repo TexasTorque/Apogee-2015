@@ -1,7 +1,7 @@
 package org.texastorque.texastorque2015;
 
-import edu.wpi.first.wpilibj.IterativeRobot;
+import org.texastorque.torquelib.base.TorqueIterative;
 
-public class Robot extends IterativeRobot {
+public class Robot extends TorqueIterative {
     
 }
