@@ -1,0 +1,36 @@
+#ant specific
+dist/
+build/
+sysProps.xml
+ 
+#netbeans specific
+core
+nbproject/*
+!nbproject/project.xml
+!nproject/project.properties
+nbbuild/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# Package Files
+*.jar
+*.war
+*.ear
+ 
+#java specific
+*.class
+ 
+#general swap/backup files
+*.so
+*.log
+*.out
+*~
+*.swp
+*.DS_Store
+*.lock
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
