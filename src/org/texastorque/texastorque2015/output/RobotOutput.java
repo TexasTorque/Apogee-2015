@@ -1,6 +1,7 @@
 package org.texastorque.texastorque2015.output;
 
 import edu.wpi.first.wpilibj.VictorSP;
+import org.texastorque.texastorque2015.constants.Ports;
 import org.texastorque.torquelib.component.Motor;
 
 public class RobotOutput extends Output {
@@ -13,12 +14,12 @@ public class RobotOutput extends Output {
     private Motor rearStrafeMotor;
     
     public RobotOutput() {
-        leftDriveAMotor = new Motor(new VictorSP(0), false);
-        leftDriveBMotor = new Motor(new VictorSP(1), false);
-        rightDriveAMotor = new Motor(new VictorSP(2), false);
-        rightDriveBMotor = new Motor(new VictorSP(3), false);
-        frontStrafeMotor = new Motor(new VictorSP(4), false);
-        rearStrafeMotor = new Motor(new VictorSP(5), false);
+        leftDriveAMotor = new Motor(new VictorSP(Ports.LEFT_A_DRIVE_PORT), false);
+        leftDriveBMotor = new Motor(new VictorSP(Ports.LEFT_B_DRIVE_PORT), false);
+        rightDriveAMotor = new Motor(new VictorSP(Ports.RIGHT_A_DRIVE_PORT), false);
+        rightDriveBMotor = new Motor(new VictorSP(Ports.RIGHT_B_DRIVE_PORT), false);
+        frontStrafeMotor = new Motor(new VictorSP(Ports.FRONT_STRAFE_PORT), false);
+        rearStrafeMotor = new Motor(new VictorSP(Ports.REAR_STRAFE_PORT), false);
     }
 
     @Override
