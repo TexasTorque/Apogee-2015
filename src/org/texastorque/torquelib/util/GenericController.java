@@ -73,7 +73,7 @@ public final class GenericController extends Joystick {
                 controllerMap = new int[]{2, 1, 4, 3, 5, 5, 11, 12, 5, 6, 7, 8, 9, 10, 1, 4, 3, 2};
                 break;
             case TYPE_XBOX:
-                controllerMap = new int[]{2, 1, 5, 4, 6, 6, 9, 10, 5, 6, 2, 3, 7, 8, 3, 4, 2, 1};
+                controllerMap = new int[]{1, 0, 5, 4, 6, 6, 9, 10, 5, 6, 2, 3, 7, 8, 3, 4, 2, 1};
                 break;
             default:
                 //default to xbox
