@@ -1,5 +1,7 @@
 package org.TexasTorque.Torquelib.controlloop;
 
+import org.texastorque.torquelib.controlloop.ControlLoop;
+
 public class TorquePV extends ControlLoop {
 
     private double kP;

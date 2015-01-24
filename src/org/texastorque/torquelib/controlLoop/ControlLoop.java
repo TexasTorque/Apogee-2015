@@ -1,10 +1,7 @@
-package org.texastorque.torquelib.controlLoop;
+package org.texastorque.torquelib.controlloop;
 
-/**
- * Superclass for all controllers.
- *
- * @author TexasTorque
- */
+import edu.wpi.first.wpilibj.DriverStation;
+
 public abstract class ControlLoop {
 
     protected double setPoint;
@@ -13,48 +10,32 @@ public abstract class ControlLoop {
     protected double doneRange;
     protected int minDoneCycles;
     protected int doneCyclesCount;
+    
+    protected DriverStation ds;
+    protected double tunedVoltage;
 
-    /**
-     * Create a new control loop.
-     */
     public ControlLoop() {
         setPoint = 0;
         doneRange = 0;
+        ds = DriverStation.getInstance();
     }
 
-    /**
-     * Set the setpoint.
-     *
-     * @param set The new setpoint.
-     */
     public void setSetpoint(double set) {
         setPoint = set;
     }
 
-    /**
-     * Set the range between which the controller treats as the setpoint.
-     *
-     * @param range The new range.
-     */
     public void setDoneRange(double range) {
         doneRange = range;
     }
 
-    /**
-     * Minimum number of times the controller hits the setpoint range.
-     *
-     * @param cycles Number of times.
-     */
     public void setDoneCycles(int cycles) {
         minDoneCycles = cycles;
     }
+    
+    public void setTunedVoltage(double volts) {
+        tunedVoltage = volts;
+    }
 
-    /**
-     * Get whether or not the controller has reached the setpoint and satisfied
-     * the range requirement.
-     *
-     * @return True means that it has completed enough done cycles.
-     */
     public boolean isDone() {
         double currError = Math.abs(setPoint - currentValue);
 
@@ -66,12 +47,4 @@ public abstract class ControlLoop {
 
         return doneCyclesCount > minDoneCycles;
     }
-
-    /**
-     * Calculate the current output for the system that is being controlled.
-     *
-     * @param current The current parameter.
-     * @return What the output should be.
-     */
-    public abstract double calculate(double current);
 }
