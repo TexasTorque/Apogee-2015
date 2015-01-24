@@ -5,14 +5,14 @@ import org.texastorque.texastorque2015.constants.Ports;
 import org.texastorque.torquelib.component.Motor;
 
 public class RobotOutput extends Output {
-    
+
     private Motor leftDriveAMotor;
     private Motor leftDriveBMotor;
     private Motor rightDriveAMotor;
     private Motor rightDriveBMotor;
     private Motor frontStrafeMotor;
     private Motor rearStrafeMotor;
-    
+
     public RobotOutput() {
         leftDriveAMotor = new Motor(new VictorSP(Ports.LEFT_A_DRIVE_PORT), false);
         leftDriveBMotor = new Motor(new VictorSP(Ports.LEFT_B_DRIVE_PORT), false);

@@ -1,5 +1,6 @@
 package org.texastorque.texastorque2015.subsystem;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.TexasTorque.Torquelib.controlloop.TorquePV;
 import org.TexasTorque.Torquelib.controlloop.TorqueTMP;
 
@@ -30,6 +31,12 @@ public class Elevator extends Subsystem {
 
     @Override
     public void pushToDashboard() {
+        SmartDashboard.putNumber("ElevatorSetPointElevation", setPointElevation);
+        SmartDashboard.putNumber("ElevatorCurrentPosition", currentPosition);
+        SmartDashboard.putNumber("ElevatorCurrentVelocity", currentVelocity);
+        SmartDashboard.putNumber("ElevatorTargetPosition", targetPosition);
+        SmartDashboard.putNumber("ElevatorTargetVelocity", targetVelocity);
+        SmartDashboard.putNumber("ElevatorTargetAcceleration", targetAcceleration);
     }
 
     @Override

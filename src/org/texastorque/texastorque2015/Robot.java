@@ -7,38 +7,46 @@ import org.texastorque.texastorque2015.output.Output;
 import org.texastorque.texastorque2015.output.RobotOutput;
 import org.texastorque.texastorque2015.subsystem.Drivebase;
 import org.texastorque.torquelib.base.TorqueIterative;
+import org.texastorque.torquelib.util.Parameters;
 
 public class Robot extends TorqueIterative {
+
     //Subsystems
     Drivebase drivebase;
-    
+
     //Input
     Input activeInput;
     DriverInput driverInput;
-    
+
     //Output
     Output activeOutput;
     RobotOutput robotOutput;
-    
+
     //Feedback
     Feedback activeFeedback;
+
+    //Parameters
+    Parameters params;
 
     @Override
     public void robotInit() {
         drivebase = new Drivebase();
         driverInput = new DriverInput();
         robotOutput = new RobotOutput();
+        params = new Parameters();
     }
 
     @Override
     public void teleopInit() {
+        params.load();
+
         activeInput = driverInput;
         activeOutput = robotOutput;
-        
+
         drivebase.setInput(activeInput);
         drivebase.setOutput(activeOutput);
         drivebase.setOutputEnabled(true);
-        
+
         drivebase.loadParams();
     }
 
@@ -52,5 +60,9 @@ public class Robot extends TorqueIterative {
     public void teleopContinuous() {
         drivebase.run();
     }
-    
+
+    @Override
+    public void autonomousInit() {
+        params.load();
+    }
 }
