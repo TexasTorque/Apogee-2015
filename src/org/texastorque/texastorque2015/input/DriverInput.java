@@ -8,7 +8,7 @@ public class DriverInput extends Input {
     GenericController operator;
     
     public DriverInput() {
-        driver = new GenericController(0, GenericController.TYPE_XBOX, 0.2);
+        driver = new GenericController(0, GenericController.TYPE_LOGITECH, 0.2);
         operator = new GenericController(1, GenericController.TYPE_XBOX, 0.1);
     }
 
