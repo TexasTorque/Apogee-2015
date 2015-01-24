@@ -6,6 +6,7 @@ import org.texastorque.texastorque2015.input.Input;
 import org.texastorque.texastorque2015.output.Output;
 import org.texastorque.texastorque2015.output.RobotOutput;
 import org.texastorque.texastorque2015.subsystem.Drivebase;
+import org.texastorque.texastorque2015.subsystem.Elevator;
 import org.texastorque.torquelib.base.TorqueIterative;
 import org.texastorque.torquelib.util.Parameters;
 
@@ -13,6 +14,7 @@ public class Robot extends TorqueIterative {
 
     //Subsystems
     Drivebase drivebase;
+    Elevator elevator;
 
     //Input
     Input activeInput;
@@ -31,6 +33,7 @@ public class Robot extends TorqueIterative {
     @Override
     public void robotInit() {
         drivebase = new Drivebase();
+        elevator = new Elevator();
         driverInput = new DriverInput();
         robotOutput = new RobotOutput();
         params = new Parameters();
@@ -59,6 +62,7 @@ public class Robot extends TorqueIterative {
     @Override
     public void teleopContinuous() {
         drivebase.run();
+        elevator.run();
     }
 
     @Override
