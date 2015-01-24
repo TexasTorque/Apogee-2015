@@ -3,6 +3,7 @@ package org.texastorque.texastorque2015.subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.TexasTorque.Torquelib.controlloop.TorquePV;
 import org.TexasTorque.Torquelib.controlloop.TorqueTMP;
+import org.texastorque.texastorque2015.constants.Constants;
 
 public class Elevator extends Subsystem {
 
@@ -16,6 +17,8 @@ public class Elevator extends Subsystem {
 
     private double currentPosition;
     private double currentVelocity;
+    
+    private double ffPosition;
 
     //up = positive, down = negative
     private double motorSpeed;
@@ -27,6 +30,16 @@ public class Elevator extends Subsystem {
 
     @Override
     public void loadParams() {
+        tmp = new TorqueTMP(Constants.ElevatorMaxV.getDouble(), Constants.ElevatorMaxA.getDouble());
+        
+        double p = Constants.ElevatorP.getDouble();
+        double v = Constants.ElevatorV.getDouble();
+        double ffV = Constants.ElevatorffV.getDouble();
+        double ffA = Constants.ElevatorffA.getDouble();
+        
+        pv.setGains(p, v, ffV, ffA);
+        
+        ffPosition = Constants.ElevatorffP.getDouble();
     }
 
     @Override
@@ -50,7 +63,7 @@ public class Elevator extends Subsystem {
             tmp.generateTrapezoid(setPointElevation, currentPosition, currentVelocity);
         }
 
-        motorSpeed = pv.calculate(tmp, currentPosition, currentVelocity);
+        motorSpeed = pv.calculate(tmp, currentPosition, currentVelocity) + ffPosition;
 
         if (outputEnabled) {
             output.setElevatorMotorSpeeds(motorSpeed);
