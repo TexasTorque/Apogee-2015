@@ -23,6 +23,14 @@ public class Drivebase extends Subsystem {
     
     @Override
     public void run() {
+        /**
+         * Drive directions are defined as following:
+         * +1 for leftSpeed and rightSpeed: full forward
+         * -1 for leftSpeed and rightSpeed: full reverse
+         * +1 for strafe: full right
+         * -1 for strafe: full left
+         * 
+         */
         leftSpeed = input.getLeftSpeed();
         rightSpeed = input.getRightSpeed();
         frontStrafeSpeed = input.getFrontStrafeSpeed();

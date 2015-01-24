@@ -14,6 +14,10 @@ public class DriverInput extends Input {
 
     @Override
     public void run() {
+        /**
+         * Left stick controls translation, right stick controls rotation.
+         * Both the forward and strafe wheels are utilized for rotation.
+         */
         leftSpeed = -1 * driver.getLeftYAxis() + driver.getRightXAxis();
         rightSpeed = -1 * driver.getLeftYAxis() - driver.getRightXAxis();
         frontStrafeSpeed = -1 * driver.getLeftXAxis() - driver.getRightXAxis();

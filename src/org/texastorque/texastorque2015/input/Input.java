@@ -1,6 +1,8 @@
 package org.texastorque.texastorque2015.input;
 
 public abstract class Input implements Runnable {
+    
+    //Drivebase
     protected volatile double leftSpeed;
     protected volatile double rightSpeed;
     protected volatile double frontStrafeSpeed;
