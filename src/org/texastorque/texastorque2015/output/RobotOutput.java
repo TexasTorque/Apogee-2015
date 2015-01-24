@@ -32,4 +32,8 @@ public class RobotOutput extends Output {
         rearStrafeMotor.set(rearStrafe);
     }
 
+    @Override
+    public void setElevatorMotorSpeeds(double speed) {
+    }
+
 }
