@@ -16,10 +16,10 @@ public class RobotOutput extends Output {
     public RobotOutput() {
         leftDriveAMotor = new Motor(new VictorSP(Ports.LEFT_A_DRIVE_PORT), false);
         leftDriveBMotor = new Motor(new VictorSP(Ports.LEFT_B_DRIVE_PORT), false);
-        rightDriveAMotor = new Motor(new VictorSP(Ports.RIGHT_A_DRIVE_PORT), false);
-        rightDriveBMotor = new Motor(new VictorSP(Ports.RIGHT_B_DRIVE_PORT), false);
+        rightDriveAMotor = new Motor(new VictorSP(Ports.RIGHT_A_DRIVE_PORT), true);
+        rightDriveBMotor = new Motor(new VictorSP(Ports.RIGHT_B_DRIVE_PORT), true);
         frontStrafeMotor = new Motor(new VictorSP(Ports.FRONT_STRAFE_PORT), false);
-        rearStrafeMotor = new Motor(new VictorSP(Ports.REAR_STRAFE_PORT), false);
+        rearStrafeMotor = new Motor(new VictorSP(Ports.REAR_STRAFE_PORT), true);
     }
 
     @Override

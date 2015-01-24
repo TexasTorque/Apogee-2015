@@ -1,5 +1,7 @@
 package org.texastorque.texastorque2015.subsystem;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class Drivebase extends Subsystem {
     
     private double leftSpeed;
@@ -13,6 +15,10 @@ public class Drivebase extends Subsystem {
     
     @Override
     public void pushToDashboard() {
+        SmartDashboard.putNumber("LeftSpeed", leftSpeed);
+        SmartDashboard.putNumber("RightSpeed", rightSpeed);
+        SmartDashboard.putNumber("FrontStrafeSpeed", frontStrafeSpeed);
+        SmartDashboard.putNumber("RearStrafeSpeed", rearStrafeSpeed);
     }
     
     @Override
