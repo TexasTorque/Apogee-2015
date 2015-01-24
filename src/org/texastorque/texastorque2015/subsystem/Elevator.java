@@ -17,7 +17,7 @@ public class Elevator extends Subsystem {
 
     private double currentPosition;
     private double currentVelocity;
-    
+
     private double ffPosition;
 
     //up = positive, down = negative
@@ -31,14 +31,14 @@ public class Elevator extends Subsystem {
     @Override
     public void loadParams() {
         tmp = new TorqueTMP(Constants.ElevatorMaxV.getDouble(), Constants.ElevatorMaxA.getDouble());
-        
+
         double p = Constants.ElevatorP.getDouble();
         double v = Constants.ElevatorV.getDouble();
         double ffV = Constants.ElevatorffV.getDouble();
         double ffA = Constants.ElevatorffA.getDouble();
-        
+
         pv.setGains(p, v, ffV, ffA);
-        
+
         ffPosition = Constants.ElevatorffP.getDouble();
     }
 
@@ -57,13 +57,17 @@ public class Elevator extends Subsystem {
         currentPosition = feedback.getElevatorHeight();
         currentVelocity = feedback.getElevatorVelocity();
 
-        if (input.getElevatorPosition() != setPointElevation) {
-            setPointElevation = input.getElevatorPosition();
+        if (!input.isElevatorOverride()) {
+            if (input.getElevatorPosition() != setPointElevation) {
+                setPointElevation = input.getElevatorPosition();
 
-            tmp.generateTrapezoid(setPointElevation, currentPosition, currentVelocity);
+                tmp.generateTrapezoid(setPointElevation, currentPosition, currentVelocity);
+            }
+
+            motorSpeed = pv.calculate(tmp, currentPosition, currentVelocity) + ffPosition;
+        } else {
+            motorSpeed = input.getOverrideElevatorMotorSpeed();
         }
-
-        motorSpeed = pv.calculate(tmp, currentPosition, currentVelocity) + ffPosition;
 
         if (outputEnabled) {
             output.setElevatorMotorSpeeds(motorSpeed);

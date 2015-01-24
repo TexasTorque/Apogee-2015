@@ -22,6 +22,24 @@ public class DriverInput extends Input {
         rightSpeed = -1 * driver.getLeftYAxis() - driver.getRightXAxis();
         frontStrafeSpeed = -1 * driver.getLeftXAxis() - driver.getRightXAxis();
         rearStrafeSpeed = -1 * driver.getLeftXAxis() + driver.getRightXAxis();
+
+        if (operator.getLeftCenterButton()) {
+            elevatorOverride = true;
+        } else if (operator.getRightCenterButton()) {
+            elevatorOverride = false;
+        }
+
+        if (elevatorOverride) {
+            calcElevatorOverride();
+        } else {
+            calcElevator();
+        }
     }
 
+    private void calcElevator() {
+    }
+
+    private void calcElevatorOverride() {
+        overrideElevatorMotorSpeed = operator.getLeftYAxis() * -1;
+    }
 }
