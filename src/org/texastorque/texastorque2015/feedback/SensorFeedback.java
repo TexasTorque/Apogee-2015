@@ -6,17 +6,23 @@ import org.texastorque.torquelib.component.TorqueEncoder;
 
 public class SensorFeedback extends Feedback {
 
-    private TorqueEncoder leftEncoder;
-    private TorqueEncoder rightEncoder;
+    private TorqueEncoder leftDriveEncoder;
+    private TorqueEncoder rightDriveEncoder;
 
     public SensorFeedback() {
-        rightEncoder = new TorqueEncoder(Ports.LEFT_ENCODER_PORT_A, Ports.LEFT_ENCODER_PORT_B, true, CounterBase.EncodingType.k2X);
-        leftEncoder = new TorqueEncoder(Ports.RIGHT_ENCODER_PORT_A, Ports.RIGHT_ENCODER_PORT_B, false, CounterBase.EncodingType.k2X);
+        rightDriveEncoder = new TorqueEncoder(Ports.LEFT_ENCODER_PORT_A, Ports.LEFT_ENCODER_PORT_B, true, CounterBase.EncodingType.k2X);
+        leftDriveEncoder = new TorqueEncoder(Ports.RIGHT_ENCODER_PORT_A, Ports.RIGHT_ENCODER_PORT_B, false, CounterBase.EncodingType.k2X);
     }
 
     @Override
     public void run() {
-        leftDrivePosition = leftEncoder.getDistance() * 0.07539822368;//250 clicks/rot & 6 in diam
-        rightDrivePosition = rightEncoder.getDistance() * 0.07539822368;
+        leftDriveEncoder.calc();
+        rightDriveEncoder.calc();
+        
+        leftDrivePosition = leftDriveEncoder.get() * 0.07539822368;//250 clicks/rot & 6 in diam
+        rightDrivePosition = rightDriveEncoder.get() * 0.07539822368;
+
+        leftDriveVelocity = leftDriveEncoder.getAverageRate()  * 0.07539822368;
+        rightDriveVelocity = rightDriveEncoder.getAverageRate() * 0.07539822368;
     }
 }
