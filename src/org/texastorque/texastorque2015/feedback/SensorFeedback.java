@@ -6,6 +6,7 @@ import org.texastorque.torquelib.component.TorqueEncoder;
 
 public class SensorFeedback extends Feedback {
 
+    //Drivebase
     private TorqueEncoder leftDriveEncoder;
     private TorqueEncoder rightDriveEncoder;
 
@@ -16,6 +17,7 @@ public class SensorFeedback extends Feedback {
 
     @Override
     public void run() {
+        //Drivebase
         leftDriveEncoder.calc();
         rightDriveEncoder.calc();
         
