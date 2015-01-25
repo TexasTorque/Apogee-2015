@@ -4,10 +4,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drivebase extends Subsystem {
     
+    //motor speeds
     private double leftSpeed;
     private double rightSpeed;
     private double frontStrafeSpeed;
     private double rearStrafeSpeed;
+    
+    //encoders
+    private double leftPosition;
+    private double rightPosition;
+    private double leftVelocity;
+    private double rightVelocity;
     
     @Override
     public void loadParams() {
@@ -19,6 +26,10 @@ public class Drivebase extends Subsystem {
         SmartDashboard.putNumber("RightSpeed", rightSpeed);
         SmartDashboard.putNumber("FrontStrafeSpeed", frontStrafeSpeed);
         SmartDashboard.putNumber("RearStrafeSpeed", rearStrafeSpeed);
+        SmartDashboard.putNumber("LeftPosition", leftPosition);
+        SmartDashboard.putNumber("RightPosition", rightPosition);
+        SmartDashboard.putNumber("LeftVelocity", leftVelocity);
+        SmartDashboard.putNumber("RightVelocity", rightVelocity);
     }
     
     @Override
@@ -35,6 +46,12 @@ public class Drivebase extends Subsystem {
         rightSpeed = input.getRightSpeed();
         frontStrafeSpeed = input.getFrontStrafeSpeed();
         rearStrafeSpeed = input.getRearStrafeSpeed();
+        
+        leftPosition = feedback.getLeftDrivePosition();
+        rightPosition = feedback.getRightDrivePosition();
+        
+        leftVelocity = feedback.getLeftDriveVelocity();
+        rightVelocity = feedback.getRightDriveVelocity();
         
         if (outputEnabled) {
             output.setDriveSpeeds(leftSpeed, rightSpeed, frontStrafeSpeed, rearStrafeSpeed);
