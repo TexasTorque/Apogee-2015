@@ -18,13 +18,14 @@ public class SensorFeedback extends Feedback {
     @Override
     public void run() {
         //Drivebase
+        //Units use feet and seconds.
         leftDriveEncoder.calc();
         rightDriveEncoder.calc();
         
-        leftDrivePosition = leftDriveEncoder.get() * 0.07539822368;//250 clicks/rot & 6 in diam
-        rightDrivePosition = rightDriveEncoder.get() * 0.07539822368;
+        leftDrivePosition = leftDriveEncoder.get() * 0.0062831853;//250 clicks/rot & 6 in diam
+        rightDrivePosition = rightDriveEncoder.get() * 0.0062831853;
 
-        leftDriveVelocity = leftDriveEncoder.getAverageRate()  * 0.07539822368;
-        rightDriveVelocity = rightDriveEncoder.getAverageRate() * 0.07539822368;
+        leftDriveVelocity = leftDriveEncoder.getAverageRate() * 0.0062831853;
+        rightDriveVelocity = rightDriveEncoder.getAverageRate() * 0.0062831853;
     }
 }
