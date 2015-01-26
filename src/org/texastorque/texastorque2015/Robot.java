@@ -8,12 +8,15 @@ import org.texastorque.texastorque2015.input.Input;
 import org.texastorque.texastorque2015.output.Output;
 import org.texastorque.texastorque2015.output.RobotOutput;
 import org.texastorque.texastorque2015.subsystem.Drivebase;
+import org.texastorque.texastorque2015.subsystem.Elevator;
 import org.texastorque.torquelib.base.TorqueIterative;
+import org.texastorque.torquelib.util.Parameters;
 
 public class Robot extends TorqueIterative {
 
     //Subsystems
     Drivebase drivebase;
+    Elevator elevator;
 
     //Input
     Input activeInput;
@@ -27,6 +30,9 @@ public class Robot extends TorqueIterative {
     Feedback activeFeedback;
     SensorFeedback sensorFeedback;
 
+    //Parameters
+    Parameters params;
+
     @Override
     public void robotInit() {
         drivebase = new Drivebase();
@@ -36,11 +42,17 @@ public class Robot extends TorqueIterative {
         sensorFeedback = new SensorFeedback();
         
         AutoPicker.init();
+        elevator = new Elevator();
+        driverInput = new DriverInput();
+        robotOutput = new RobotOutput();
+        params = new Parameters();
     }
 
     // ----- Teleop -----
     @Override
     public void teleopInit() {
+        params.load();
+
         activeInput = driverInput;
         activeOutput = robotOutput;
         activeFeedback = sensorFeedback;
@@ -69,6 +81,8 @@ public class Robot extends TorqueIterative {
     // ----- Autonomous -----
     @Override
     public void autonomousInit() {
+        params.load();
+        
         activeInput = AutoPicker.getAutonomous();
         activeOutput = robotOutput;
         activeFeedback = sensorFeedback;
@@ -92,6 +106,6 @@ public class Robot extends TorqueIterative {
         activeFeedback.run();
         
         drivebase.run();
+        elevator.run();
     }
-
 }

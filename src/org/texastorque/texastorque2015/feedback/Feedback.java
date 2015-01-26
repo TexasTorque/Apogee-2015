@@ -10,7 +10,7 @@ public abstract class Feedback implements Runnable {
 
     /**
      * Get the position of the left side of the drivetrain.
-     * 
+     *
      * @return The position in feet
      */
     public double getLeftDrivePosition() {
@@ -19,7 +19,7 @@ public abstract class Feedback implements Runnable {
 
     /**
      * Get the position of the right side of the drivetrain.
-     * 
+     *
      * @return The position in feet
      */
     public double getRightDrivePosition() {
@@ -28,7 +28,7 @@ public abstract class Feedback implements Runnable {
 
     /**
      * Get the velocity of the left side of the drivetrain.
-     * 
+     *
      * @return The position in feet
      */
     public double getLeftDriveVelocity() {
@@ -37,10 +37,21 @@ public abstract class Feedback implements Runnable {
 
     /**
      * Get the velocity of the right side of the drivetrain.
-     * 
+     *
      * @return The position in feet
      */
     public double getRightDriveVelocity() {
         return rightDriveVelocity;
+    }
+
+    private double elevatorHeight;
+    private double elevatorVelocity;
+
+    public double getElevatorHeight() {
+        return elevatorHeight;
+    }
+
+    public double getElevatorVelocity() {
+        return elevatorVelocity;
     }
 }
