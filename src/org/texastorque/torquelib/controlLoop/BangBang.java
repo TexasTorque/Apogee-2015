@@ -1,5 +1,7 @@
 package org.texastorque.torquelib.controlLoop;
 
+import org.texastorque.torquelib.controlloop.ControlLoop;
+
 /**
  * A controller that is either on or off depending on if the setpoint is
  * reached.
@@ -21,7 +23,6 @@ public class BangBang extends ControlLoop {
      * @param current the current sensor feedback.
      * @return Motor ouput to the system.
      */
-    @Override
     public double calculate(double current) {
         currentValue = current;
         if (currentValue < setPoint) {
