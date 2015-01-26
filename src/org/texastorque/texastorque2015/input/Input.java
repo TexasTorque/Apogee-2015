@@ -1,6 +1,14 @@
 package org.texastorque.texastorque2015.input;
 
+import org.texastorque.texastorque2015.feedback.Feedback;
+
 public abstract class Input implements Runnable {
+    
+    protected Feedback feedback;
+
+    public void setFeedback(Feedback feedback) {
+        this.feedback = feedback;
+    }
     
     //Drivebase
     protected volatile double leftSpeed;

@@ -7,12 +7,16 @@ public abstract class AutoCommand {
     protected double startTime;
     protected double timeOut;
     protected boolean timedOut;
-
+    
+    protected double doneCycles;
+    protected double minDoneCycles;
+    
     protected boolean firstCycle;
     protected String name;
 
-    public AutoCommand(String nm) {
+    public AutoCommand(String nm, double minDoneCycles) {
         this.name = nm;
+        this.minDoneCycles = minDoneCycles;
     }
 
     public boolean isTimedOut() {
@@ -22,7 +26,7 @@ public abstract class AutoCommand {
 
     public abstract void run();
 
-    public abstract void isDone();
+    public abstract boolean isDone();
 
     public abstract void reset();
 }
