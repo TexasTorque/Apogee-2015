@@ -30,9 +30,6 @@ public class Robot extends TorqueIterative {
     Feedback activeFeedback;
     SensorFeedback sensorFeedback;
 
-    //Parameters
-    Parameters params;
-
     @Override
     public void robotInit() {
         Parameters.makeFile();
@@ -51,7 +48,7 @@ public class Robot extends TorqueIterative {
     // ----- Teleop -----
     @Override
     public void teleopInit() {
-        params.load();
+        Parameters.load();
 
         activeInput = driverInput;
         activeOutput = robotOutput;
@@ -81,7 +78,7 @@ public class Robot extends TorqueIterative {
     // ----- Autonomous -----
     @Override
     public void autonomousInit() {
-        params.load();
+        Parameters.load();
         
         activeInput = AutoPicker.getAutonomous();
         activeOutput = robotOutput;
