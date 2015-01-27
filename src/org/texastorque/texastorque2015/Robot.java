@@ -1,5 +1,6 @@
 package org.texastorque.texastorque2015;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque2015.auto.AutoPicker;
 import org.texastorque.texastorque2015.feedback.Feedback;
 import org.texastorque.texastorque2015.feedback.SensorFeedback;
@@ -29,6 +30,8 @@ public class Robot extends TorqueIterative {
     //Feedback
     Feedback activeFeedback;
     SensorFeedback sensorFeedback;
+    
+    private volatile int numcycles;
 
     @Override
     public void robotInit() {
@@ -43,6 +46,8 @@ public class Robot extends TorqueIterative {
         sensorFeedback = new SensorFeedback();
         
         AutoPicker.init();
+        
+        numcycles = 0;
     }
 
     // ----- Teleop -----
@@ -60,6 +65,8 @@ public class Robot extends TorqueIterative {
         drivebase.setOutputEnabled(true);
 
         drivebase.loadParams();
+        
+        numcycles = 0;
     }
 
     @Override
@@ -73,6 +80,8 @@ public class Robot extends TorqueIterative {
         activeFeedback.run();
 
         drivebase.run();
+        
+        SmartDashboard.putNumber("NumCycles", numcycles++);
     }
 
     // ----- Autonomous -----
@@ -97,6 +106,8 @@ public class Robot extends TorqueIterative {
         
         Thread autoThread = new Thread(activeInput);
         autoThread.start();
+        
+        numcycles = 0;
     }
 
     @Override
@@ -110,5 +121,7 @@ public class Robot extends TorqueIterative {
         
         drivebase.run();
         elevator.run();
+        
+        SmartDashboard.putNumber("NumCycles", numcycles++);
     }
 }
