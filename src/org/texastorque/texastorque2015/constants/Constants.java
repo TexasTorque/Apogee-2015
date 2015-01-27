@@ -3,6 +3,8 @@ package org.texastorque.texastorque2015.constants;
 import org.texastorque.torquelib.util.Parameters.Constant;
 
 public class Constants {
+    public final static Constant ignoreThis = new Constant("Ignore", 0.0);
+    
     //Elevator
     public final static Constant ElevatorMaxV = new Constant("E_MaxV", 0.0);
     public final static Constant ElevatorMaxA = new Constant("E_MaxA", 0.0);

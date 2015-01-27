@@ -1,6 +1,7 @@
 package org.texastorque.texastorque2015;
 
 import org.texastorque.texastorque2015.auto.AutoPicker;
+import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.texastorque2015.feedback.Feedback;
 import org.texastorque.texastorque2015.feedback.SensorFeedback;
 import org.texastorque.texastorque2015.input.DriverInput;
@@ -36,6 +37,7 @@ public class Robot extends TorqueIterative {
     @Override
     public void robotInit() {
         params = new Parameters();
+        double temp = Constants.ignoreThis.getDouble();
         params.load();
         
         drivebase = new Drivebase();
