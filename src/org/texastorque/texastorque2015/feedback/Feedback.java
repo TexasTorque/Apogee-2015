@@ -43,6 +43,8 @@ public abstract class Feedback implements Runnable {
     public double getRightDriveVelocity() {
         return rightDriveVelocity;
     }
+    
+    public abstract void resetDriveEncoders();
 
     private double elevatorHeight;
     private double elevatorVelocity;

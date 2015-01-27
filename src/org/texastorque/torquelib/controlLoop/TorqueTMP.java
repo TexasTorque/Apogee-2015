@@ -1,4 +1,6 @@
-package org.TexasTorque.Torquelib.controlloop;
+package org.texastorque.torquelib.controlLoop;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Created by Gijs on 12/31/2014.
@@ -114,8 +116,7 @@ public class TorqueTMP {
      * @param dt
      */
     public void calculateNextSituation() {
-        
-        if (accelerationTime > 0.1) {
+        if (accelerationTime > 0.01) {
             accelerate(0.01);
             accelerationTime -= 0.01;
         } else if ((accelerationTime + cruiseTime) > 0.01) {

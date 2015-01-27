@@ -1,6 +1,4 @@
-package org.TexasTorque.Torquelib.controlloop;
-
-import org.texastorque.torquelib.controlloop.ControlLoop;
+package org.texastorque.torquelib.controlLoop;
 
 public class TorquePV extends ControlLoop {
 

@@ -28,4 +28,10 @@ public class SensorFeedback extends Feedback {
         leftDriveVelocity = leftDriveEncoder.getAverageRate() * 0.0062831853;
         rightDriveVelocity = rightDriveEncoder.getAverageRate() * 0.0062831853;
     }
+
+    @Override
+    public void resetDriveEncoders() {
+        leftDriveEncoder.reset();
+        rightDriveEncoder.reset();
+    }
 }

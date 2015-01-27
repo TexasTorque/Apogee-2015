@@ -1,7 +1,5 @@
 package org.texastorque.torquelib.controlLoop;
 
-import org.texastorque.torquelib.controlloop.ControlLoop;
-
 /**
  * A PID implementation.
  *

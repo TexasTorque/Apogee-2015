@@ -1,9 +1,9 @@
 package org.texastorque.texastorque2015.subsystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.TexasTorque.Torquelib.controlloop.TorquePV;
-import org.TexasTorque.Torquelib.controlloop.TorqueTMP;
 import org.texastorque.texastorque2015.constants.Constants;
+import org.texastorque.torquelib.controlLoop.TorquePV;
+import org.texastorque.torquelib.controlLoop.TorqueTMP;
 
 public class Elevator extends Subsystem {
 

@@ -35,17 +35,17 @@ public class Robot extends TorqueIterative {
 
     @Override
     public void robotInit() {
+        params = new Parameters();
+        params.load();
+        
         drivebase = new Drivebase();
+        elevator = new Elevator();
 
         driverInput = new DriverInput();
         robotOutput = new RobotOutput();
         sensorFeedback = new SensorFeedback();
         
         AutoPicker.init();
-        elevator = new Elevator();
-        driverInput = new DriverInput();
-        robotOutput = new RobotOutput();
-        params = new Parameters();
     }
 
     // ----- Teleop -----
@@ -91,6 +91,12 @@ public class Robot extends TorqueIterative {
         drivebase.setOutput(activeOutput);
         drivebase.setFeedback(activeFeedback);
         drivebase.setOutputEnabled(true);
+        
+        elevator.setInput(activeInput);
+        elevator.setOutput(activeOutput);
+        elevator.setFeedback(activeFeedback);
+
+        activeInput.setFeedback(activeFeedback);
         
         Thread autoThread = new Thread(activeInput);
         autoThread.start();

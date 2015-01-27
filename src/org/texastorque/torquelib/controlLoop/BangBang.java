@@ -1,7 +1,5 @@
 package org.texastorque.torquelib.controlLoop;
 
-import org.texastorque.torquelib.controlloop.ControlLoop;
-
 /**
  * A controller that is either on or off depending on if the setpoint is
  * reached.

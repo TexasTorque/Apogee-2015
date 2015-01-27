@@ -1,4 +1,4 @@
-package org.texastorque.torquelib.controlloop;
+package org.texastorque.torquelib.controlLoop;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
