@@ -24,7 +24,7 @@ public abstract class AutoMode extends Input {
             profile = new TorqueTMP(8, 3);
             pv = new TorquePV();
             pv.setGains(Constants.DrivebaseP.getDouble(), Constants.DrivebaseV.getDouble(),
-                    Constants.ElevatorffV.getDouble(), Constants.DrivebaseffA.getDouble());
+                    Constants.DrivebaseffV.getDouble(), Constants.DrivebaseffA.getDouble());
             pv.setTunedVoltage(12.5);
 
             reset();

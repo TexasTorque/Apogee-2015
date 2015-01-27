@@ -1,5 +1,6 @@
 package org.texastorque.torquelib.util;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -11,31 +12,17 @@ public class Parameters {
     /**
      * Constants loaded from params file.
      */
-    public static ArrayList<Constant> constants;
+    public static ArrayList<Constant> constants = new ArrayList<>();
 
-    private final File paramsFile;
+    private static File paramsFile;
 
-    /*declare constants here*/
-    /**
-     * Make a new Parameters loader.
-     *
-     * @param filePath String path of parameters file.
-     */
-    public Parameters(String filePath) {
-        paramsFile = new File(filePath);
+    public static void makeFile(){
+        paramsFile = new File("/home/admin/params.txt");
         try {
             paramsFile.createNewFile();
         } catch (IOException e) {
+            SmartDashboard.putString("e", e.getMessage());
         }
-
-        constants = new ArrayList<>();
-    }
-
-    /**
-     * Make a new Parameters loader using "/home/admin/params.txt".
-     */
-    public Parameters() {
-        this("/home/admin/params.txt");
     }
 
     /**
@@ -46,7 +33,7 @@ public class Parameters {
      *
      * Constants listed in the file override hardcoded constants.
      */
-    public void load() {
+    public static void load() {
         try (BufferedReader br = new BufferedReader(new FileReader(paramsFile))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -69,7 +56,7 @@ public class Parameters {
     public static class Constant {
 
         private final String key;
-        private double value;
+        private volatile double value;
 
         /**
          * Make a final Constant.
