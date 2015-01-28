@@ -29,7 +29,7 @@ public abstract class AutoMode extends Input {
 
             reset();
 
-            profile.generateTrapezoid(10, 0.0, 0.0);
+            profile.generateTrapezoid(distance, 0.0, 0.0);
         }
 
         @Override
@@ -55,7 +55,7 @@ public abstract class AutoMode extends Input {
 
         @Override
         public boolean isDone() {
-            if (Math.abs((feedback.getLeftDrivePosition() + feedback.getRightDrivePosition() / 2) - distance) <= doneRange) {
+            if (Math.abs((feedback.getLeftDrivePosition() + feedback.getRightDrivePosition()) / 2 - distance) <= doneRange) {
                 doneCycles++;
             }
             return doneCycles >= minDoneCycles;

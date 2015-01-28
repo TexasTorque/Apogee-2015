@@ -1,7 +1,5 @@
 package org.texastorque.torquelib.controlLoop;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 /**
  * Created by Gijs on 12/31/2014.
  */
