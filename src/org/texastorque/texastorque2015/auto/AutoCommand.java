@@ -29,4 +29,6 @@ public abstract class AutoCommand {
     public abstract boolean isDone();
 
     public abstract void reset();
+    
+    public abstract void stop();
 }

@@ -62,12 +62,21 @@ public abstract class AutoMode extends Input {
         }
 
         @Override
-        public final void reset() {
+        public void reset() {
+            leftSpeed = 0.0;
+            rightSpeed = 0.0;
             feedback.resetDriveEncoders();
+        }
+        
+        @Override
+        public void stop() {
+            leftSpeed = 0.0;
+            rightSpeed = 0.0;
         }
     }
     
     protected void runCommand(AutoCommand command) {
+        command.reset();
         while (!command.isDone()) {
             command.run();
             wait(0.01);
