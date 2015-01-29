@@ -12,6 +12,7 @@ import org.texastorque.texastorque2015.subsystem.Drivebase;
 import org.texastorque.texastorque2015.subsystem.Elevator;
 import org.texastorque.torquelib.base.TorqueIterative;
 import org.texastorque.torquelib.util.Parameters;
+import org.texastorque.texastorque2015.constants.Constants;
 
 public class Robot extends TorqueIterative {
 
@@ -30,23 +31,23 @@ public class Robot extends TorqueIterative {
     //Feedback
     Feedback activeFeedback;
     SensorFeedback sensorFeedback;
-    
+
     private volatile int numcycles;
 
     @Override
     public void robotInit() {
         Parameters.makeFile();
         Parameters.load();
-        
+
         drivebase = new Drivebase();
         elevator = new Elevator();
 
         driverInput = new DriverInput();
         robotOutput = new RobotOutput();
         sensorFeedback = new SensorFeedback();
-        
+
         AutoPicker.init();
-        
+
         numcycles = 0;
     }
 
@@ -65,7 +66,7 @@ public class Robot extends TorqueIterative {
         drivebase.setOutputEnabled(true);
 
         drivebase.loadParams();
-        
+
         numcycles = 0;
     }
 
@@ -80,7 +81,7 @@ public class Robot extends TorqueIterative {
         activeFeedback.run();
 
         drivebase.run();
-        
+
         SmartDashboard.putNumber("NumCycles", numcycles++);
     }
 
@@ -88,25 +89,25 @@ public class Robot extends TorqueIterative {
     @Override
     public void autonomousInit() {
         Parameters.load();
-        
+
         activeInput = AutoPicker.getAutonomous();
         activeOutput = robotOutput;
         activeFeedback = sensorFeedback;
-        
+
         drivebase.setInput(activeInput);
         drivebase.setOutput(activeOutput);
         drivebase.setFeedback(activeFeedback);
         drivebase.setOutputEnabled(true);
-        
+
         elevator.setInput(activeInput);
         elevator.setOutput(activeOutput);
         elevator.setFeedback(activeFeedback);
 
         activeInput.setFeedback(activeFeedback);
-        
+
         Thread autoThread = new Thread(activeInput);
         autoThread.start();
-        
+
         numcycles = 0;
     }
 
@@ -118,10 +119,10 @@ public class Robot extends TorqueIterative {
     @Override
     public void autonomousContinuous() {
         activeFeedback.run();
-        
+
         drivebase.run();
         elevator.run();
-        
+
         SmartDashboard.putNumber("NumCycles", numcycles++);
     }
 }

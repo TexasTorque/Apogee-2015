@@ -5,6 +5,7 @@ import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.texastorque2015.input.Input;
 import org.texastorque.torquelib.controlLoop.TorquePV;
 import org.texastorque.torquelib.controlLoop.TorqueTMP;
+import org.texastorque.torquelib.util.Parameters;
 
 public abstract class AutoMode extends Input {
 
@@ -34,6 +35,8 @@ public abstract class AutoMode extends Input {
 
         @Override
         public void run() {
+            SmartDashboard.putNumber("DrivebaseffV", Constants.DrivebaseffV.getDouble());
+            
             double currentVelocity = (feedback.getLeftDriveVelocity() + feedback.getElevatorVelocity()) / 2;
             double currentPosition = (feedback.getLeftDrivePosition() + feedback.getRightDrivePosition()) / 2;
             
