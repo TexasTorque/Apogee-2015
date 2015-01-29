@@ -24,5 +24,11 @@ public class Arms extends Subsystem {
         armsOpen = input.isArmOpen();
         punchOut = input.isPunchOut();
         tiltUp = input.isTiltUp();
+
+        if (outputEnabled) {
+            output.setArmsOpen(armsOpen);
+            output.setPunchOut(punchOut);
+            output.setTiltUp(tiltUp);
+        }
     }
 }
