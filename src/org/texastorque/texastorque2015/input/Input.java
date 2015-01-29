@@ -23,8 +23,8 @@ public abstract class Input implements Runnable {
 
     //Crazy Arms
     protected volatile boolean armOpen;
-    protected volatile boolean punchOn;
-    protected volatile int tiltState;
+    protected volatile boolean punchOut;
+    protected volatile boolean tiltUp;
 
     public boolean isElevatorOverride() {
         return elevatorOverride;
@@ -58,12 +58,12 @@ public abstract class Input implements Runnable {
         return armOpen;
     }
 
-    public boolean isPunchOn() {
-        return punchOn;
+    public boolean isPunchOut() {
+        return punchOut;
     }
 
-    public int getTiltState() {
-        return tiltState;
+    public boolean isTiltUp() {
+        return tiltUp;
     }
 
 }
