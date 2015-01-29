@@ -35,8 +35,6 @@ public abstract class AutoMode extends Input {
 
         @Override
         public void run() {
-            SmartDashboard.putNumber("DrivebaseffV", Constants.DrivebaseffV.getDouble());
-            
             double currentVelocity = (feedback.getLeftDriveVelocity() + feedback.getElevatorVelocity()) / 2;
             double currentPosition = (feedback.getLeftDrivePosition() + feedback.getRightDrivePosition()) / 2;
             
