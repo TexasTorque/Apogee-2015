@@ -20,7 +20,10 @@ public abstract class Input implements Runnable {
     protected volatile double elevatorPosition;
     protected volatile boolean elevatorOverride;
     protected volatile double overrideElevatorMotorSpeed;
-
+    
+    //Intake
+    protected volatile double intakeSpeed;
+    
     public boolean isElevatorOverride() {
         return elevatorOverride;
     }
@@ -48,5 +51,10 @@ public abstract class Input implements Runnable {
     public double getRearStrafeSpeed() {
         return rearStrafeSpeed;
     }
+
+    public double getIntakeSpeed() {
+        return intakeSpeed;
+    }
+
 
 }

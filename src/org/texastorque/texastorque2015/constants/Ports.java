@@ -15,4 +15,9 @@ public class Ports {
     public final static int RIGHT_ENCODER_PORT_B = 1;
     public final static int LEFT_ENCODER_PORT_A = 2;
     public final static int LEFT_ENCODER_PORT_B = 3;
+    
+    //intake
+    public final static int LEFT_INTAKE_PORT = -1;
+    public final static int RIGHT_INTAKE_PORT = -1;
+    
 }
