@@ -15,29 +15,7 @@ public abstract class Input implements Runnable {
     protected volatile double rightSpeed;
     protected volatile double frontStrafeSpeed;
     protected volatile double rearStrafeSpeed;
-
-    //Elevator
-    protected volatile double elevatorPosition;
-    protected volatile boolean elevatorOverride;
-    protected volatile double overrideElevatorMotorSpeed;
-
-    //Crazy Arms
-    protected volatile boolean armOpen;
-    protected volatile boolean punchOut;
-    protected volatile boolean tiltUp;
-
-    public boolean isElevatorOverride() {
-        return elevatorOverride;
-    }
-
-    public double getOverrideElevatorMotorSpeed() {
-        return overrideElevatorMotorSpeed;
-    }
-
-    public double getElevatorPosition() {
-        return elevatorPosition;
-    }
-
+    
     public double getLeftSpeed() {
         return leftSpeed;
     }
@@ -53,6 +31,28 @@ public abstract class Input implements Runnable {
     public double getRearStrafeSpeed() {
         return rearStrafeSpeed;
     }
+
+    //Elevator
+    protected volatile double elevatorPosition;
+    protected volatile boolean elevatorOverride;
+    protected volatile double overrideElevatorMotorSpeed;
+    
+    public boolean isElevatorOverride() {
+        return elevatorOverride;
+    }
+
+    public double getOverrideElevatorMotorSpeed() {
+        return overrideElevatorMotorSpeed;
+    }
+
+    public double getElevatorPosition() {
+        return elevatorPosition;
+    }
+
+    //Crazy Arms
+    protected volatile boolean armOpen;
+    protected volatile boolean punchOut;
+    protected volatile boolean tiltUp;
 
     public boolean isArmOpen() {
         return armOpen;

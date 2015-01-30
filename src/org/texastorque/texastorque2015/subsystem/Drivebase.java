@@ -4,13 +4,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drivebase extends Subsystem {
 
-    //motor speeds
+    //Motor speeds
     private double leftSpeed;
     private double rightSpeed;
     private double frontStrafeSpeed;
     private double rearStrafeSpeed;
 
-    //encoders
+    //Sensor values
     private double leftPosition;
     private double rightPosition;
     private double leftVelocity;

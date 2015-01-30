@@ -12,7 +12,6 @@ import org.texastorque.texastorque2015.subsystem.Drivebase;
 import org.texastorque.texastorque2015.subsystem.Elevator;
 import org.texastorque.torquelib.base.TorqueIterative;
 import org.texastorque.torquelib.util.Parameters;
-import org.texastorque.texastorque2015.constants.Constants;
 
 public class Robot extends TorqueIterative {
 

@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Arms extends Subsystem {
 
+    //Solenoid states
     private boolean armsOpen;
     private boolean punchOut;
     private boolean tiltUp;

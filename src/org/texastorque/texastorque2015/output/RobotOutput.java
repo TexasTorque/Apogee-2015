@@ -9,6 +9,7 @@ import org.texastorque.torquelib.component.TorqueMotor;
 
 public class RobotOutput extends Output {
 
+    //Drivebase
     private TorqueMotor leftDriveAMotor;
     private TorqueMotor leftDriveBMotor;
     private TorqueMotor rightDriveAMotor;
@@ -16,11 +17,13 @@ public class RobotOutput extends Output {
     private TorqueMotor frontStrafeMotor;
     private TorqueMotor rearStrafeMotor;
 
+    //Crazy Arms
     private Solenoid openSolenoid;
     private Solenoid punchSolenoid;
     private DoubleSolenoid tiltSolenoid;
 
     public RobotOutput() {
+        //Drivebase
         leftDriveAMotor = new TorqueMotor(new VictorSP(Ports.LEFT_A_DRIVE_PORT), false, TorqueMotor.LinearizationType.kNone);
         leftDriveBMotor = new TorqueMotor(new VictorSP(Ports.LEFT_B_DRIVE_PORT), false, TorqueMotor.LinearizationType.kNone);
         rightDriveAMotor = new TorqueMotor(new VictorSP(Ports.RIGHT_A_DRIVE_PORT), true, TorqueMotor.LinearizationType.kNone);
@@ -28,11 +31,13 @@ public class RobotOutput extends Output {
         frontStrafeMotor = new TorqueMotor(new VictorSP(Ports.FRONT_STRAFE_PORT), false, TorqueMotor.LinearizationType.kNone);
         rearStrafeMotor = new TorqueMotor(new VictorSP(Ports.REAR_STRAFE_PORT), true, TorqueMotor.LinearizationType.kNone);
 
+        //Crazy Arms
         openSolenoid = new Solenoid(Ports.OPEN_SOLENOID_PORT);
         punchSolenoid = new Solenoid(Ports.PUNCH_SOLENOID);
         tiltSolenoid = new DoubleSolenoid(Ports.TILT_SOLENOID_FORWARD_PORT, Ports.TILT_SOLENOID_BACKWARD_PORT);
     }
 
+    //Drivebase
     @Override
     public void setDriveSpeeds(double left, double right, double frontStrafe, double rearStrafe) {
         leftDriveAMotor.set(left);
@@ -43,10 +48,12 @@ public class RobotOutput extends Output {
         rearStrafeMotor.set(rearStrafe);
     }
 
+    //Elevator
     @Override
     public void setElevatorMotorSpeeds(double speed) {
     }
 
+    //Crazy Arms
     @Override
     public void setArmsOpen(boolean open) {
         openSolenoid.set(open);

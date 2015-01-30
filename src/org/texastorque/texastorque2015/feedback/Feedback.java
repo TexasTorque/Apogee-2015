@@ -44,15 +44,30 @@ public abstract class Feedback implements Runnable {
         return rightDriveVelocity;
     }
     
+    /**
+     * Reset the drive encoders to 0.
+     * 
+     */
     public abstract void resetDriveEncoders();
 
+    //Elevator
     private double elevatorHeight;
     private double elevatorVelocity;
 
+    /**
+     * Get the height of the elevator in inches.
+     *
+     * @return The height in inches.
+     */
     public double getElevatorHeight() {
         return elevatorHeight;
     }
 
+    /**
+     * Get the velocity of the elevator in inches/second.
+     * 
+     * @return The velocity in inches/second.
+     */
     public double getElevatorVelocity() {
         return elevatorVelocity;
     }
