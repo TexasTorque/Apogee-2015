@@ -13,10 +13,7 @@ public abstract class AutoMode extends Input {
             super(name, doneCycles);
             this.distance = distance;
             this.doneRange = tolerance;
-        }
-
-        @Override
-        public void run() {
+            
             drivebaseControlled = true;
             driveDistance = distance;
         }
@@ -30,11 +27,8 @@ public abstract class AutoMode extends Input {
         }
 
         @Override
-        public void reset() {
-        }
-
-        @Override
         public void stop() {
+            drivebaseControlled = false;
             leftSpeed = 0.0;
             rightSpeed = 0.0;
         }
