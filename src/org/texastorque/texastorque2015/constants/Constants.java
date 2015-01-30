@@ -23,6 +23,7 @@ public class Constants extends Parameters {
     public final static Constant DrivebaseV = new Constant("D_V", 0.0);
     public final static Constant DrivebaseffV = new Constant("D_ffV", 0.0);
     public final static Constant DrivebaseffA = new Constant("D_ffA", 0.0);
+    public final static Constant DrivebaseTunedVoltage = new Constant("D_TunedVoltage", 12.5);
 
     static {
         load();

@@ -1,6 +1,9 @@
 package org.texastorque.texastorque2015.subsystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.texastorque.texastorque2015.constants.Constants;
+import org.texastorque.torquelib.controlLoop.TorquePV;
+import org.texastorque.torquelib.controlLoop.TorqueTMP;
 
 public class Drivebase extends Subsystem {
 
@@ -16,8 +19,25 @@ public class Drivebase extends Subsystem {
     private double leftVelocity;
     private double rightVelocity;
 
+    //Control loop stuff
+    private double setPointPosition;
+    private double targetPosition;
+    private double targetVelocity;
+
+    private TorqueTMP profile;
+    private TorquePV pv;
+
+    public Drivebase() {
+        profile = new TorqueTMP(Constants.DrivebaseMaxV.getDouble(), Constants.DrivebaseMaxA.getDouble());
+        pv = new TorquePV();
+    }
+
     @Override
     public void loadParams() {
+        profile = new TorqueTMP(Constants.DrivebaseMaxV.getDouble(), Constants.DrivebaseMaxA.getDouble());
+        pv.setGains(Constants.DrivebaseP.getDouble(), Constants.DrivebaseV.getDouble(),
+                Constants.DrivebaseffV.getDouble(), Constants.DrivebaseffA.getDouble());
+        pv.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
     }
 
     @Override
@@ -30,6 +50,8 @@ public class Drivebase extends Subsystem {
         SmartDashboard.putNumber("RightPosition", rightPosition);
         SmartDashboard.putNumber("LeftVelocity", leftVelocity);
         SmartDashboard.putNumber("RightVelocity", rightVelocity);
+        SmartDashboard.putNumber("TargetPosition", targetPosition);
+        SmartDashboard.putNumber("TargetVelocity", targetVelocity);
     }
 
     @Override
@@ -46,10 +68,26 @@ public class Drivebase extends Subsystem {
          * reverse +1 for strafe: full right -1 for strafe: full left
          *
          */
-        leftSpeed = input.getLeftSpeed();
-        rightSpeed = input.getRightSpeed();
-        frontStrafeSpeed = input.getFrontStrafeSpeed();
-        rearStrafeSpeed = input.getRearStrafeSpeed();
+        if (input.isDrivebaseControlled()) {
+            if (setPointPosition != input.getDriveDistance()) {
+                setPointPosition = input.getDriveDistance();
+
+                profile.generateTrapezoid(setPointPosition, 0.0, (leftVelocity + rightVelocity) / 2);
+                
+                feedback.resetDriveEncoders();
+            }
+
+            profile.calculateNextSituation();
+            leftSpeed = rightSpeed = pv.calculate(profile,
+                    (leftPosition + rightPosition) / 2,
+                    (leftVelocity + rightVelocity) / 2);
+
+        } else {
+            leftSpeed = input.getLeftSpeed();
+            rightSpeed = input.getRightSpeed();
+            frontStrafeSpeed = input.getFrontStrafeSpeed();
+            rearStrafeSpeed = input.getRearStrafeSpeed();
+        }
 
         if (outputEnabled) {
             output.setDriveSpeeds(leftSpeed, rightSpeed, frontStrafeSpeed, rearStrafeSpeed);
