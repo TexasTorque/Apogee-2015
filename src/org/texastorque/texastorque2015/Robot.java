@@ -8,8 +8,10 @@ import org.texastorque.texastorque2015.input.DriverInput;
 import org.texastorque.texastorque2015.input.Input;
 import org.texastorque.texastorque2015.output.Output;
 import org.texastorque.texastorque2015.output.RobotOutput;
+import org.texastorque.texastorque2015.subsystem.Arms;
 import org.texastorque.texastorque2015.subsystem.Drivebase;
 import org.texastorque.texastorque2015.subsystem.Elevator;
+import org.texastorque.texastorque2015.subsystem.Intake;
 import org.texastorque.torquelib.base.TorqueIterative;
 import org.texastorque.torquelib.util.Parameters;
 
@@ -18,6 +20,8 @@ public class Robot extends TorqueIterative {
     //Subsystems
     Drivebase drivebase;
     Elevator elevator;
+    Arms arms;
+    Intake intake;
 
     //Input
     Input activeInput;
@@ -49,22 +53,55 @@ public class Robot extends TorqueIterative {
 
         numcycles = 0;
     }
+    
+    //Update Input, Output, Feedback for all subsystems.
+    private void updateIO(){
+        drivebase.setInput(activeInput);
+        drivebase.setOutput(activeOutput);
+        drivebase.setFeedback(activeFeedback);
+        
+        elevator.setInput(activeInput);
+        elevator.setOutput(activeOutput);
+        elevator.setFeedback(activeFeedback);
+        
+        arms.setInput(activeInput);
+        arms.setOutput(activeOutput);
+        arms.setFeedback(activeFeedback);
+        
+        intake.setInput(activeInput);
+        intake.setOutput(activeOutput);
+        intake.setFeedback(activeFeedback);
+    }
+    
+    //Load params for all subsystems.
+    private void loadParams() {
+        Parameters.load();
+        
+        drivebase.loadParams();
+        elevator.loadParams();
+        arms.loadParams();
+        intake.loadParams();
+    }
+    
+    //Push all sybsystems to dashboard.
+    private void pushToDashboard() {
+        drivebase.pushToDashboard();
+        elevator.pushToDashboard();
+        arms.pushToDashboard();
+        intake.pushToDashboard();
+    }
 
     // ----- Teleop -----
     @Override
     public void teleopInit() {
-        Parameters.load();
-
         activeInput = driverInput;
         activeOutput = robotOutput;
         activeFeedback = sensorFeedback;
+        
+        updateIO();
+        loadParams();
 
-        drivebase.setInput(activeInput);
-        drivebase.setOutput(activeOutput);
-        drivebase.setFeedback(activeFeedback);
         drivebase.setOutputEnabled(true);
-
-        drivebase.loadParams();
 
         numcycles = 0;
     }
@@ -72,7 +109,8 @@ public class Robot extends TorqueIterative {
     @Override
     public void teleopPeriodic() {
         activeInput.run();
-        drivebase.pushToDashboard();
+        
+        pushToDashboard();
     }
 
     @Override
@@ -87,20 +125,14 @@ public class Robot extends TorqueIterative {
     // ----- Autonomous -----
     @Override
     public void autonomousInit() {
-        Parameters.load();
-
         activeInput = AutoPicker.getAutonomous();
         activeOutput = robotOutput;
         activeFeedback = sensorFeedback;
+        
+        updateIO();
+        loadParams();
 
-        drivebase.setInput(activeInput);
-        drivebase.setOutput(activeOutput);
-        drivebase.setFeedback(activeFeedback);
         drivebase.setOutputEnabled(true);
-
-        elevator.setInput(activeInput);
-        elevator.setOutput(activeOutput);
-        elevator.setFeedback(activeFeedback);
 
         activeInput.setFeedback(activeFeedback);
 
@@ -112,7 +144,7 @@ public class Robot extends TorqueIterative {
 
     @Override
     public void autonomousPeriodic() {
-        drivebase.pushToDashboard();
+        pushToDashboard();
     }
 
     @Override
@@ -120,7 +152,6 @@ public class Robot extends TorqueIterative {
         activeFeedback.run();
 
         drivebase.run();
-        elevator.run();
 
         SmartDashboard.putNumber("NumCycles", numcycles++);
     }
