@@ -15,7 +15,7 @@ public abstract class Input implements Runnable {
     protected volatile double rightSpeed;
     protected volatile double frontStrafeSpeed;
     protected volatile double rearStrafeSpeed;
-    
+
     public double getLeftSpeed() {
         return leftSpeed;
     }
@@ -36,7 +36,7 @@ public abstract class Input implements Runnable {
     protected volatile double elevatorPosition;
     protected volatile boolean elevatorOverride;
     protected volatile double overrideElevatorMotorSpeed;
-    
+
     public boolean isElevatorOverride() {
         return elevatorOverride;
     }
@@ -64,6 +64,13 @@ public abstract class Input implements Runnable {
 
     public boolean isTiltUp() {
         return tiltUp;
+    }
+
+    //Intake
+    protected volatile double intakeSpeed;
+
+    public double getIntakeSpeed() {
+        return intakeSpeed;
     }
 
 }

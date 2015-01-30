@@ -21,6 +21,8 @@ public class RobotOutput extends Output {
     private Solenoid openSolenoid;
     private Solenoid punchSolenoid;
     private DoubleSolenoid tiltSolenoid;
+    private TorqueMotor leftIntakeMotor;
+    private TorqueMotor rightIntakeMotor;
 
     public RobotOutput() {
         //Drivebase
@@ -35,6 +37,8 @@ public class RobotOutput extends Output {
         openSolenoid = new Solenoid(Ports.OPEN_SOLENOID_PORT);
         punchSolenoid = new Solenoid(Ports.PUNCH_SOLENOID);
         tiltSolenoid = new DoubleSolenoid(Ports.TILT_SOLENOID_FORWARD_PORT, Ports.TILT_SOLENOID_BACKWARD_PORT);
+        leftIntakeMotor = new TorqueMotor(new VictorSP(Ports.LEFT_INTAKE_PORT), true, TorqueMotor.LinearizationType.kNone);
+        rightIntakeMotor = new TorqueMotor(new VictorSP(Ports.RIGHT_INTAKE_PORT), false, TorqueMotor.LinearizationType.kNone);
     }
 
     //Drivebase
@@ -67,5 +71,11 @@ public class RobotOutput extends Output {
     @Override
     public void setPunchOut(boolean out) {
         punchSolenoid.set(out);
+    }
+
+    @Override
+    public void setIntakeMotorSpeed(double speed) {
+        leftIntakeMotor.set(speed);
+        rightIntakeMotor.set(speed);
     }
 }

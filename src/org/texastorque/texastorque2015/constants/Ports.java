@@ -21,4 +21,7 @@ public class Ports {
     public final static int PUNCH_SOLENOID = -1;
     public final static int TILT_SOLENOID_FORWARD_PORT = -1;
     public final static int TILT_SOLENOID_BACKWARD_PORT = -1;
+    //intake
+    public final static int LEFT_INTAKE_PORT = -1;
+    public final static int RIGHT_INTAKE_PORT = -1;
 }
