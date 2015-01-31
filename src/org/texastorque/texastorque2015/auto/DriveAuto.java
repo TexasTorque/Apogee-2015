@@ -8,16 +8,7 @@ public class DriveAuto extends AutoMode {
     public void run() {
         System.out.println("Starting drive auto!");
         
-        runCommand(new DriveDistance("DriveForward", 6, 0.25, 10));
-        runCommand(new DriveDistance("DriveForward", -2, 0.25, 10));
-        
-        leftSpeed = -0.5;
-        rightSpeed = -0.5;
-        
-        wait(0.5);
-        
-        leftSpeed = 0;
-        rightSpeed = 0;
+        runCommand(new DriveDistance("DriveForward", 10, 0.25, 10));
     }
     
 }
