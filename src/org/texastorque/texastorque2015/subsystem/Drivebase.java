@@ -25,19 +25,26 @@ public class Drivebase extends Subsystem {
     private double targetVelocity;
 
     private TorqueTMP profile;
-    private TorquePV pv;
+    private TorquePV leftPV;
+    private TorquePV rightPV;
 
     public Drivebase() {
         profile = new TorqueTMP(Constants.DrivebaseMaxV.getDouble(), Constants.DrivebaseMaxA.getDouble());
-        pv = new TorquePV();
+        leftPV = new TorquePV();
+        rightPV = new TorquePV();
     }
 
     @Override
     public void loadParams() {
         profile = new TorqueTMP(Constants.DrivebaseMaxV.getDouble(), Constants.DrivebaseMaxA.getDouble());
-        pv.setGains(Constants.DrivebaseP.getDouble(), Constants.DrivebaseV.getDouble(),
-                Constants.DrivebaseffV.getDouble(), Constants.DrivebaseffA.getDouble());
-        pv.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
+
+        //pv
+        leftPV.setGains(Constants.DrivebaseLeftP.getDouble(), Constants.DrivebaseLeftV.getDouble(),
+                Constants.DrivebaseLeftffV.getDouble(), Constants.DrivebaseLeftffA.getDouble());
+        rightPV.setGains(Constants.DrivebaseRightP.getDouble(), Constants.DrivebaseRightV.getDouble(),
+                Constants.DrivebaseRightffV.getDouble(), Constants.DrivebaseffA.getDouble());
+        leftPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
+        rightPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
     }
 
     @Override
@@ -83,13 +90,16 @@ public class Drivebase extends Subsystem {
 
                 feedback.resetDriveEncoders();
             }
-            
+
             profile.calculateNextSituation();
-            
+
             targetVelocity = profile.getCurrentVelocity();
             targetPosition = profile.getCurrentPosition();
-            
-            leftSpeed = rightSpeed = pv.calculate(profile,
+
+            leftSpeed = leftPV.calculate(profile,
+                    (leftPosition + rightPosition) / 2,
+                    (leftVelocity + rightVelocity) / 2);
+            rightSpeed = rightPV.calculate(profile,
                     (leftPosition + rightPosition) / 2,
                     (leftVelocity + rightVelocity) / 2);
 
@@ -98,7 +108,7 @@ public class Drivebase extends Subsystem {
             rightSpeed = input.getRightSpeed();
             frontStrafeSpeed = input.getFrontStrafeSpeed();
             rearStrafeSpeed = input.getRearStrafeSpeed();
-            
+
             targetPosition = 0.0;
             targetVelocity = 0.0;
         }
