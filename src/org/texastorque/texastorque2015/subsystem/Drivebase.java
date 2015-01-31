@@ -42,7 +42,7 @@ public class Drivebase extends Subsystem {
         leftPV.setGains(Constants.DrivebaseLeftP.getDouble(), Constants.DrivebaseLeftV.getDouble(),
                 Constants.DrivebaseLeftffV.getDouble(), Constants.DrivebaseLeftffA.getDouble());
         rightPV.setGains(Constants.DrivebaseRightP.getDouble(), Constants.DrivebaseRightV.getDouble(),
-                Constants.DrivebaseRightffV.getDouble(), Constants.DrivebaseffA.getDouble());
+                Constants.DrivebaseRightffV.getDouble(), Constants.DrivebaseRightffA.getDouble());
         leftPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
         rightPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
     }
