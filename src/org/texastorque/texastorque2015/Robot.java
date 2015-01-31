@@ -44,6 +44,8 @@ public class Robot extends TorqueIterative {
 
         drivebase = new Drivebase();
         elevator = new Elevator();
+        arms = new Arms();
+        intake = new Intake();
 
         driverInput = new DriverInput();
         robotOutput = new RobotOutput();
