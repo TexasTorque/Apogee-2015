@@ -96,12 +96,8 @@ public class Drivebase extends Subsystem {
             targetVelocity = profile.getCurrentVelocity();
             targetPosition = profile.getCurrentPosition();
 
-            leftSpeed = leftPV.calculate(profile,
-                    (leftPosition + rightPosition) / 2,
-                    (leftVelocity + rightVelocity) / 2);
-            rightSpeed = rightPV.calculate(profile,
-                    (leftPosition + rightPosition) / 2,
-                    (leftVelocity + rightVelocity) / 2);
+            leftSpeed = leftPV.calculate(profile, leftPosition, leftVelocity);
+            rightSpeed = rightPV.calculate(profile, rightPosition, rightVelocity);
 
         } else {
             leftSpeed = input.getLeftSpeed();
