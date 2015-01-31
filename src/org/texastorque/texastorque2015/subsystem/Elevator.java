@@ -53,6 +53,10 @@ public class Elevator extends Subsystem {
     }
 
     @Override
+    public void enable() {
+    }
+    
+    @Override
     public void run() {
         currentPosition = feedback.getElevatorHeight();
         currentVelocity = feedback.getElevatorVelocity();

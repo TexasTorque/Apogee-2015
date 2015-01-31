@@ -25,8 +25,8 @@ public class SensorFeedback extends Feedback {
         leftDrivePosition = leftDriveEncoder.get() * 0.0062831853;//250 clicks/rot & 6 in diam
         rightDrivePosition = rightDriveEncoder.get() * 0.0062831853;
 
-        leftDriveVelocity = leftDriveEncoder.getAverageRate() * 0.0062831853;
-        rightDriveVelocity = rightDriveEncoder.getAverageRate() * 0.0062831853;
+        leftDriveVelocity = leftDriveEncoder.getRate() * 0.0062831853;
+        rightDriveVelocity = rightDriveEncoder.getRate() * 0.0062831853;
     }
 
     @Override

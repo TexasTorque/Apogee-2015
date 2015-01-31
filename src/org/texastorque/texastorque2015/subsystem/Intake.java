@@ -17,6 +17,10 @@ public class Intake extends Subsystem {
     public void pushToDashboard() {
         SmartDashboard.putNumber("IntakeSpeed", intakeSpeed);
     }
+    
+    @Override
+    public void enable() {
+    }
 
     @Override
     public void run() {

@@ -55,6 +55,13 @@ public class Drivebase extends Subsystem {
     }
 
     @Override
+    public void enable() {
+        setPointPosition = 0.0;
+        profile.generateTrapezoid(0.0, 0.0, (leftVelocity + rightVelocity) / 2);
+        feedback.resetDriveEncoders();
+    }
+
+    @Override
     public void run() {
         leftPosition = feedback.getLeftDrivePosition();
         rightPosition = feedback.getRightDrivePosition();
@@ -73,11 +80,15 @@ public class Drivebase extends Subsystem {
                 setPointPosition = input.getDriveDistance();
 
                 profile.generateTrapezoid(setPointPosition, 0.0, (leftVelocity + rightVelocity) / 2);
-                
+
                 feedback.resetDriveEncoders();
             }
-
+            
             profile.calculateNextSituation();
+            
+            targetVelocity = profile.getCurrentVelocity();
+            targetPosition = profile.getCurrentPosition();
+            
             leftSpeed = rightSpeed = pv.calculate(profile,
                     (leftPosition + rightPosition) / 2,
                     (leftVelocity + rightVelocity) / 2);
@@ -87,10 +98,15 @@ public class Drivebase extends Subsystem {
             rightSpeed = input.getRightSpeed();
             frontStrafeSpeed = input.getFrontStrafeSpeed();
             rearStrafeSpeed = input.getRearStrafeSpeed();
+            
+            targetPosition = 0.0;
+            targetVelocity = 0.0;
         }
 
         if (outputEnabled) {
             output.setDriveSpeeds(leftSpeed, rightSpeed, frontStrafeSpeed, rearStrafeSpeed);
+        } else {
+            output.setDriveSpeeds(0.0, 0.0, 0.0, 0.0);
         }
 
     }
