@@ -27,6 +27,9 @@ public class SensorFeedback extends Feedback {
 
         leftDriveVelocity = leftDriveEncoder.getRate() * 0.0062831853;
         rightDriveVelocity = rightDriveEncoder.getRate() * 0.0062831853;
+
+        leftDriveAcceleration = leftDriveEncoder.getAcceleration() * 0.0062831853;
+        rightDriveAcceleration = rightDriveEncoder.getAcceleration() * 0.0062831853;
     }
 
     @Override

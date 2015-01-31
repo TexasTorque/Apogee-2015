@@ -18,11 +18,14 @@ public class Drivebase extends Subsystem {
     private double rightPosition;
     private double leftVelocity;
     private double rightVelocity;
+    private double leftAcceleration;
+    private double rightAcceleration;
 
     //Control loop stuff
     private double setPointPosition;
     private double targetPosition;
     private double targetVelocity;
+    private double targetAcceleration;
 
     private TorqueTMP profile;
     private TorquePV leftPV;
@@ -57,8 +60,11 @@ public class Drivebase extends Subsystem {
         SmartDashboard.putNumber("RightPosition", rightPosition);
         SmartDashboard.putNumber("LeftVelocity", leftVelocity);
         SmartDashboard.putNumber("RightVelocity", rightVelocity);
+        SmartDashboard.putNumber("LeftAcceleration", leftAcceleration);
+        SmartDashboard.putNumber("RightAcceleration", rightAcceleration);
         SmartDashboard.putNumber("TargetPosition", targetPosition);
         SmartDashboard.putNumber("TargetVelocity", targetVelocity);
+        SmartDashboard.putNumber("TargetAcceleration", targetAcceleration);
     }
 
     @Override
@@ -75,6 +81,9 @@ public class Drivebase extends Subsystem {
 
         leftVelocity = feedback.getLeftDriveVelocity();
         rightVelocity = feedback.getRightDriveVelocity();
+
+        leftAcceleration = feedback.getLeftDriveAcceleration();
+        rightAcceleration = feedback.getRightDriveAcceleration();
 
         /**
          * Drive directions are defined as following: +1 for leftSpeed and
@@ -95,6 +104,7 @@ public class Drivebase extends Subsystem {
 
             targetVelocity = profile.getCurrentVelocity();
             targetPosition = profile.getCurrentPosition();
+            targetAcceleration = profile.getCurrentAcceleration();
 
             leftSpeed = leftPV.calculate(profile, leftPosition, leftVelocity);
             rightSpeed = rightPV.calculate(profile, rightPosition, rightVelocity);
