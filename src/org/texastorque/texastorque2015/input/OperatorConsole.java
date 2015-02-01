@@ -4,7 +4,11 @@ import edu.wpi.first.wpilibj.Joystick;
 
 public class OperatorConsole {
 
-    private Joystick joystick = new Joystick(-1);
+    private Joystick joystick;
+    
+    public OperatorConsole(int port) {
+        joystick = new Joystick(port);
+    }
 
     public boolean getTiltButton() {
         return joystick.getRawButton(-1);
