@@ -33,12 +33,12 @@ public class Intake extends Subsystem {
 
     @Override
     public String getLogNames() {
-        return "IntakeSpeed";
+        return "IntakeSpeed, ";
     }
 
     @Override
     public String getLogValues() {
-        return "" + intakeSpeed;
+        return intakeSpeed + ", ";
     }
 
 }

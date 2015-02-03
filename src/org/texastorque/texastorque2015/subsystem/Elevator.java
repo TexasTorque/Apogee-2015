@@ -80,11 +80,11 @@ public class Elevator extends Subsystem {
     
     @Override
     public String getLogNames() {
-        return "SetPointElevation, CurrentElevation, E_CurrentPosition, E_CurrentVelocity, E_TargetPosition, E_TargetVelocity";
+        return "SetPointElevation, E_CurrentPosition, E_CurrentVelocity, E_TargetPosition, E_TargetVelocity, ";
     }
 
     @Override
     public String getLogValues() {
-        return setPointElevation + ", " + currentPosition  + ", " + currentVelocity + ", " + targetPosition + ", " + targetVelocity;
+        return setPointElevation + ", " + currentPosition  + ", " + currentVelocity + ", " + targetPosition + ", " + targetVelocity + ", ";
     }
 }
