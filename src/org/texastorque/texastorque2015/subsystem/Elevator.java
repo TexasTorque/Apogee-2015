@@ -29,30 +29,6 @@ public class Elevator extends Subsystem {
     }
 
     @Override
-    public void loadParams() {
-        tmp = new TorqueTMP(Constants.ElevatorMaxV.getDouble(), Constants.ElevatorMaxA.getDouble());
-
-        double p = Constants.ElevatorP.getDouble();
-        double v = Constants.ElevatorV.getDouble();
-        double ffV = Constants.ElevatorffV.getDouble();
-        double ffA = Constants.ElevatorffA.getDouble();
-
-        pv.setGains(p, v, ffV, ffA);
-
-        ffPosition = Constants.ElevatorffP.getDouble();
-    }
-
-    @Override
-    public void pushToDashboard() {
-        SmartDashboard.putNumber("ElevatorSetPointElevation", setPointElevation);
-        SmartDashboard.putNumber("ElevatorCurrentPosition", currentPosition);
-        SmartDashboard.putNumber("ElevatorCurrentVelocity", currentVelocity);
-        SmartDashboard.putNumber("ElevatorTargetPosition", targetPosition);
-        SmartDashboard.putNumber("ElevatorTargetVelocity", targetVelocity);
-        SmartDashboard.putNumber("ElevatorTargetAcceleration", targetAcceleration);
-    }
-
-    @Override
     public void enable() {
     }
     
@@ -78,4 +54,37 @@ public class Elevator extends Subsystem {
         }
     }
 
+    @Override
+    public void loadParams() {
+        tmp = new TorqueTMP(Constants.ElevatorMaxV.getDouble(), Constants.ElevatorMaxA.getDouble());
+
+        double p = Constants.ElevatorP.getDouble();
+        double v = Constants.ElevatorV.getDouble();
+        double ffV = Constants.ElevatorffV.getDouble();
+        double ffA = Constants.ElevatorffA.getDouble();
+
+        pv.setGains(p, v, ffV, ffA);
+
+        ffPosition = Constants.ElevatorffP.getDouble();
+    }
+
+    @Override
+    public void pushToDashboard() {
+        SmartDashboard.putNumber("ElevatorSetPointElevation", setPointElevation);
+        SmartDashboard.putNumber("ElevatorCurrentPosition", currentPosition);
+        SmartDashboard.putNumber("ElevatorCurrentVelocity", currentVelocity);
+        SmartDashboard.putNumber("ElevatorTargetPosition", targetPosition);
+        SmartDashboard.putNumber("ElevatorTargetVelocity", targetVelocity);
+        SmartDashboard.putNumber("ElevatorTargetAcceleration", targetAcceleration);
+    }
+    
+    @Override
+    public String getLogNames() {
+        return "SetPointElevation, CurrentElevation, E_CurrentPosition, E_CurrentVelocity, E_TargetPosition, E_TargetVelocity";
+    }
+
+    @Override
+    public String getLogValues() {
+        return setPointElevation + ", " + currentPosition  + ", " + currentVelocity + ", " + targetPosition + ", " + targetVelocity;
+    }
 }

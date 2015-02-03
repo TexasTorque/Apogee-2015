@@ -14,6 +14,7 @@ import org.texastorque.texastorque2015.subsystem.Elevator;
 import org.texastorque.texastorque2015.subsystem.Intake;
 import org.texastorque.torquelib.base.TorqueIterative;
 import org.texastorque.torquelib.util.Parameters;
+import org.texastorque.torquelib.util.TorqueLogging;
 
 public class Robot extends TorqueIterative {
 
@@ -34,6 +35,9 @@ public class Robot extends TorqueIterative {
     //Feedback
     Feedback activeFeedback;
     SensorFeedback sensorFeedback;
+    
+    //Logging
+    TorqueLogging logger;
 
     private volatile int numcycles;
 
@@ -53,6 +57,12 @@ public class Robot extends TorqueIterative {
 
         AutoPicker.init();
 
+        logger = new TorqueLogging();
+        logger.addLoggable(drivebase);
+        logger.addLoggable(elevator);
+        logger.addLoggable(arms);
+        logger.addLoggable(intake);
+        
         numcycles = 0;
     }
     
@@ -110,6 +120,9 @@ public class Robot extends TorqueIterative {
 
         drivebase.setOutputEnabled(true);
 
+        logger.reset();
+        logger.enable();
+        
         numcycles = 0;
     }
 
@@ -125,6 +138,8 @@ public class Robot extends TorqueIterative {
         activeFeedback.run();
 
         drivebase.run();
+        
+        logger.log();
 
         SmartDashboard.putNumber("NumCycles", numcycles++);
     }
@@ -177,6 +192,8 @@ public class Robot extends TorqueIterative {
         drivebase.setOutputEnabled(false);
         
         initSubsystems();
+        
+        logger.close();
     }
 
     @Override

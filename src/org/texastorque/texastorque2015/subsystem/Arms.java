@@ -36,4 +36,15 @@ public class Arms extends Subsystem {
             output.setTiltUp(tiltUp);
         }
     }
+
+    @Override
+    public String getLogNames() {
+        return "ArmsOpen, PunchOut, TiltUp";
+    }
+
+    @Override
+    public String getLogValues() {
+        return armsOpen + ", " + punchOut + ", " + tiltUp;
+    }
+    
 }
