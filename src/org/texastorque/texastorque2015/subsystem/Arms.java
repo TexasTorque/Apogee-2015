@@ -21,6 +21,10 @@ public class Arms extends Subsystem {
     }
 
     @Override
+    public void enable() {
+    }
+    
+    @Override
     public void run() {
         armsOpen = input.isArmOpen();
         punchOut = input.isPunchOut();

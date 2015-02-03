@@ -17,12 +17,12 @@ public class Ports {
     public final static int LEFT_ENCODER_PORT_B = 3;
     
     //crazy arms
-    public final static int OPEN_SOLENOID_PORT = -1;
-    public final static int PUNCH_SOLENOID = -1;
-    public final static int TILT_SOLENOID_FORWARD_PORT = -1;
-    public final static int TILT_SOLENOID_BACKWARD_PORT = -1;
+    public final static int OPEN_SOLENOID_PORT = 0;
+    public final static int PUNCH_SOLENOID = 1;
+    public final static int TILT_SOLENOID_FORWARD_PORT = 2;
+    public final static int TILT_SOLENOID_BACKWARD_PORT = 3;
     
     //intake
-    public final static int LEFT_INTAKE_PORT = -1;
-    public final static int RIGHT_INTAKE_PORT = -1;
+    public final static int LEFT_INTAKE_PORT = 6;
+    public final static int RIGHT_INTAKE_PORT = 7;
 }

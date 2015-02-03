@@ -92,6 +92,10 @@ public class Robot extends TorqueIterative {
         arms.pushToDashboard();
         intake.pushToDashboard();
     }
+    
+    private void initSubsystems() {
+        drivebase.enable();
+    }
 
     // ----- Teleop -----
     @Override
@@ -102,6 +106,7 @@ public class Robot extends TorqueIterative {
         
         updateIO();
         loadParams();
+        initSubsystems();
 
         drivebase.setOutputEnabled(true);
 
@@ -133,6 +138,7 @@ public class Robot extends TorqueIterative {
         
         updateIO();
         loadParams();
+        initSubsystems();
 
         drivebase.setOutputEnabled(true);
 
@@ -156,5 +162,30 @@ public class Robot extends TorqueIterative {
         drivebase.run();
 
         SmartDashboard.putNumber("NumCycles", numcycles++);
+    }
+    
+    // ----- Disabled -----
+
+    @Override
+    public void disabledInit() {
+        activeInput = driverInput;
+        activeOutput = robotOutput;
+        activeFeedback = sensorFeedback;
+        
+        updateIO();
+        
+        drivebase.setOutputEnabled(false);
+        
+        initSubsystems();
+    }
+
+    @Override
+    public void disabledContinuous() {
+        drivebase.run();
+    }
+
+    @Override
+    public void disabledPeriodic() {
+        activeInput.run();
     }
 }

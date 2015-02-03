@@ -7,10 +7,10 @@ public abstract class AutoCommand {
     protected double startTime;
     protected double timeOut;
     protected boolean timedOut;
-    
+
     protected double doneCycles;
     protected double minDoneCycles;
-    
+
     protected boolean firstCycle;
     protected String name;
 
@@ -24,11 +24,16 @@ public abstract class AutoCommand {
         return timedOut;
     }
 
-    public abstract void run();
+    public void run() {
+    }
 
-    public abstract boolean isDone();
+    public boolean isDone() {
+        return isTimedOut();
+    }
 
-    public abstract void reset();
-    
-    public abstract void stop();
+    public void reset() {
+    }
+
+    public void stop() {
+    }
 }

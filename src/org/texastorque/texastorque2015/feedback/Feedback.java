@@ -7,6 +7,8 @@ public abstract class Feedback implements Runnable {
     protected volatile double rightDrivePosition;
     protected volatile double leftDriveVelocity;
     protected volatile double rightDriveVelocity;
+    protected volatile double leftDriveAcceleration;
+    protected volatile double rightDriveAcceleration;
 
     /**
      * Get the position of the left side of the drivetrain.
@@ -29,7 +31,7 @@ public abstract class Feedback implements Runnable {
     /**
      * Get the velocity of the left side of the drivetrain.
      *
-     * @return The position in feet
+     * @return The velocity in ft/s
      */
     public double getLeftDriveVelocity() {
         return leftDriveVelocity;
@@ -38,15 +40,33 @@ public abstract class Feedback implements Runnable {
     /**
      * Get the velocity of the right side of the drivetrain.
      *
-     * @return The position in feet
+     * @return The velocity in ft/s
      */
     public double getRightDriveVelocity() {
         return rightDriveVelocity;
     }
-    
+
+    /**
+     * Get the acceleration of the left side of the drivetrain.
+     *
+     * @return The acceleration in ft/s^2
+     */
+    public double getLeftDriveAcceleration() {
+        return leftDriveAcceleration;
+    }
+
+    /**
+     * Get the acceleration of the right side of the drivetrain.
+     *
+     * @return The acceleration in ft/s^2
+     */
+    public double getRightDriveAcceleration() {
+        return rightDriveAcceleration;
+    }
+
     /**
      * Reset the drive encoders to 0.
-     * 
+     *
      */
     public abstract void resetDriveEncoders();
 
@@ -65,7 +85,7 @@ public abstract class Feedback implements Runnable {
 
     /**
      * Get the velocity of the elevator in inches/second.
-     * 
+     *
      * @return The velocity in inches/second.
      */
     public double getElevatorVelocity() {

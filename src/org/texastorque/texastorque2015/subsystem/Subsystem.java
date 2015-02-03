@@ -30,5 +30,6 @@ public abstract class Subsystem implements Runnable {
     
     public abstract void loadParams();
     public abstract void pushToDashboard();
+    public abstract void enable();
 
 }

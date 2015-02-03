@@ -11,8 +11,8 @@ public class SensorFeedback extends Feedback {
     private TorqueEncoder rightDriveEncoder;
 
     public SensorFeedback() {
-        rightDriveEncoder = new TorqueEncoder(Ports.LEFT_ENCODER_PORT_A, Ports.LEFT_ENCODER_PORT_B, true, CounterBase.EncodingType.k2X);
-        leftDriveEncoder = new TorqueEncoder(Ports.RIGHT_ENCODER_PORT_A, Ports.RIGHT_ENCODER_PORT_B, false, CounterBase.EncodingType.k2X);
+        leftDriveEncoder = new TorqueEncoder(Ports.LEFT_ENCODER_PORT_A, Ports.LEFT_ENCODER_PORT_B, true, CounterBase.EncodingType.k2X);
+        rightDriveEncoder = new TorqueEncoder(Ports.RIGHT_ENCODER_PORT_A, Ports.RIGHT_ENCODER_PORT_B, false, CounterBase.EncodingType.k2X);
     }
 
     @Override
@@ -21,12 +21,15 @@ public class SensorFeedback extends Feedback {
         //Units use feet and seconds.
         leftDriveEncoder.calc();
         rightDriveEncoder.calc();
-        
+
         leftDrivePosition = leftDriveEncoder.get() * 0.0062831853;//250 clicks/rot & 6 in diam
         rightDrivePosition = rightDriveEncoder.get() * 0.0062831853;
 
-        leftDriveVelocity = leftDriveEncoder.getAverageRate() * 0.0062831853;
-        rightDriveVelocity = rightDriveEncoder.getAverageRate() * 0.0062831853;
+        leftDriveVelocity = leftDriveEncoder.getRate() * 0.0062831853;
+        rightDriveVelocity = rightDriveEncoder.getRate() * 0.0062831853;
+
+        leftDriveAcceleration = leftDriveEncoder.getAcceleration() * 0.0062831853;
+        rightDriveAcceleration = rightDriveEncoder.getAcceleration() * 0.0062831853;
     }
 
     @Override
