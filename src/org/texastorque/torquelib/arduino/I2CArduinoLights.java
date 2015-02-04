@@ -47,14 +47,9 @@ public class I2CArduinoLights {
     public enum LightState {
 
         WHITE((byte) 0),
-        /**
-         * Normal state on red alliance.
-         */
-        NORMAL_RED((byte) 1),
-        /**
-         * Normal state on blue alliance.
-         */
-        NORMAL_BLUE((byte) 2);
+        ENABLED_RED((byte) 1),
+        ENABLED_BLUE((byte) 2),
+        DISABLED((byte) 3);
 
         private byte data;
 
