@@ -36,8 +36,9 @@ public class Robot extends TorqueIterative {
     Feedback activeFeedback;
     SensorFeedback sensorFeedback;
 
-    //Logging
+    //Other
     TorqueLogging logger;
+    Lights lights;
 
     private volatile int numcycles;
 
@@ -50,6 +51,8 @@ public class Robot extends TorqueIterative {
         elevator = new Elevator();
         arms = new Arms();
         intake = new Intake();
+        
+        lights = new Lights();
 
         driverInput = new DriverInput();
         robotOutput = new RobotOutput();
@@ -83,6 +86,9 @@ public class Robot extends TorqueIterative {
         intake.setInput(activeInput);
         intake.setOutput(activeOutput);
         intake.setFeedback(activeFeedback);
+        
+        lights.setInput(activeInput);
+        lights.setFeedback(activeFeedback);
     }
 
     //Load params for all subsystems.
