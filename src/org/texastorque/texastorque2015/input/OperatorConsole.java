@@ -55,7 +55,7 @@ public class OperatorConsole {
         return joystick.getRawButton(10);
     }
 
-    public boolean getElevatorFFOspSwitch() {
+    public boolean getElevatorFFOffSwitch() {
         return joystick.getRawButton(11);
     }
 
@@ -66,5 +66,12 @@ public class OperatorConsole {
     public boolean getElevatorDownButton() {
         return joystick.getRawButton(13);
     }
+    
+    public boolean getIntakeButton() {
+        return joystick.getRawButton(14);
+    }
 
+    public boolean getOuttakeButton() {
+        return joystick.getRawButton(15);
+    }
 }

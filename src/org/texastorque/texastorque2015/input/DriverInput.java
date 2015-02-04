@@ -1,22 +1,51 @@
 package org.texastorque.texastorque2015.input;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.torquelib.util.GenericController;
+import org.texastorque.torquelib.util.TorqueToggle;
 
 public class DriverInput extends Input {
 
     GenericController driver;
-    GenericController operator;
+    OperatorConsole operator;
+    
+    TorqueToggle tiltToggle;
+    TorqueToggle armOpenToggle;
 
     public DriverInput() {
         driver = new GenericController(0, GenericController.TYPE_XBOX, 0.2);
-        operator = new GenericController(1, GenericController.TYPE_XBOX, 0.1);
+        operator = new OperatorConsole(1);
+        
+        tiltToggle = new TorqueToggle();
+        armOpenToggle = new TorqueToggle();
     }
 
     @Override
     public void run() {
         //Drivebase
+        calcDrivebase();
 
+        //Elevator
+        elevatorOverride = operator.getElevatorOverrideSwitch();
+
+        if (elevatorOverride) {
+            calcElevatorOverride();
+        } else {
+            calcElevator();
+        }
+        
+        //Intake
+        if (operator.getIntakeButton()) {
+            intakeSpeed = 1.0;
+        } else if (operator.getOuttakeButton()) {
+            intakeSpeed = -1.0;
+        }
+        
+        //Arms
+        calcArms();
+    }
+
+    //Drivebase
+    private void calcDrivebase() {
         /**
          * Left stick controls translation, right stick controls rotation. Both
          * the forward and strafe wheels are utilized for rotation.
@@ -37,19 +66,6 @@ public class DriverInput extends Input {
             frontStrafeSpeed = -1 * driver.getLeftXAxis() - driver.getRightXAxis() * 16 / 25;
             rearStrafeSpeed = -1 * driver.getLeftXAxis() + driver.getRightXAxis();
         }
-
-        //Elevator
-        if (operator.getLeftCenterButton()) {
-            elevatorOverride = true;
-        } else if (operator.getRightCenterButton()) {
-            elevatorOverride = false;
-        }
-
-        if (elevatorOverride) {
-            calcElevatorOverride();
-        } else {
-            calcElevator();
-        }
     }
 
     //Elevator
@@ -57,6 +73,21 @@ public class DriverInput extends Input {
     }
 
     private void calcElevatorOverride() {
-        overrideElevatorMotorSpeed = operator.getLeftYAxis() * -1;
+        if (operator.getElevatorUpButton()) {
+            overrideElevatorMotorSpeed = 0.4;
+        } else if (operator.getElevatorDownButton()) {
+            overrideElevatorMotorSpeed = -0.4;
+        }
+    }
+    
+    //Arms
+    private void calcArms() {
+        tiltToggle.calc(operator.getTiltButton());
+        tiltUp = tiltToggle.get();
+        
+        armOpenToggle.calc(operator.getArmOpenButton());
+        armOpen = armOpenToggle.get();
+        
+        punchOut = operator.getPunchButton();
     }
 }
