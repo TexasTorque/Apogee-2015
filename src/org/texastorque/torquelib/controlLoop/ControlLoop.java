@@ -10,7 +10,7 @@ public abstract class ControlLoop {
     protected double doneRange;
     protected int minDoneCycles;
     protected int doneCyclesCount;
-    
+
     protected DriverStation ds;
     protected double tunedVoltage;
 
@@ -31,7 +31,7 @@ public abstract class ControlLoop {
     public void setDoneCycles(int cycles) {
         minDoneCycles = cycles;
     }
-    
+
     public void setTunedVoltage(double volts) {
         tunedVoltage = volts;
     }

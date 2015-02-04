@@ -13,7 +13,7 @@ public abstract class AutoMode extends Input {
             super(name, doneCycles);
             this.distance = distance;
             this.doneRange = tolerance;
-            
+
             drivebaseControlled = true;
             driveDistance = distance;
         }

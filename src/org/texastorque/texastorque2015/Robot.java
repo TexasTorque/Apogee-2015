@@ -35,7 +35,7 @@ public class Robot extends TorqueIterative {
     //Feedback
     Feedback activeFeedback;
     SensorFeedback sensorFeedback;
-    
+
     //Logging
     TorqueLogging logger;
 
@@ -62,39 +62,39 @@ public class Robot extends TorqueIterative {
         logger.addLoggable(elevator);
         logger.addLoggable(arms);
         logger.addLoggable(intake);
-        
+
         numcycles = 0;
     }
-    
+
     //Update Input, Output, Feedback for all subsystems.
-    private void updateIO(){
+    private void updateIO() {
         drivebase.setInput(activeInput);
         drivebase.setOutput(activeOutput);
         drivebase.setFeedback(activeFeedback);
-        
+
         elevator.setInput(activeInput);
         elevator.setOutput(activeOutput);
         elevator.setFeedback(activeFeedback);
-        
+
         arms.setInput(activeInput);
         arms.setOutput(activeOutput);
         arms.setFeedback(activeFeedback);
-        
+
         intake.setInput(activeInput);
         intake.setOutput(activeOutput);
         intake.setFeedback(activeFeedback);
     }
-    
+
     //Load params for all subsystems.
     private void loadParams() {
         Parameters.load();
-        
+
         drivebase.loadParams();
         elevator.loadParams();
         arms.loadParams();
         intake.loadParams();
     }
-    
+
     //Push all sybsystems to dashboard.
     private void pushToDashboard() {
         drivebase.pushToDashboard();
@@ -102,7 +102,7 @@ public class Robot extends TorqueIterative {
         arms.pushToDashboard();
         intake.pushToDashboard();
     }
-    
+
     private void initSubsystems() {
         drivebase.enable();
     }
@@ -113,7 +113,7 @@ public class Robot extends TorqueIterative {
         activeInput = driverInput;
         activeOutput = robotOutput;
         activeFeedback = sensorFeedback;
-        
+
         updateIO();
         loadParams();
         initSubsystems();
@@ -122,14 +122,14 @@ public class Robot extends TorqueIterative {
 
         logger.reset();
         logger.enable();
-        
+
         numcycles = 0;
     }
 
     @Override
     public void teleopPeriodic() {
         activeInput.run();
-        
+
         pushToDashboard();
     }
 
@@ -138,7 +138,7 @@ public class Robot extends TorqueIterative {
         activeFeedback.run();
 
         drivebase.run();
-        
+
         logger.log();
 
         SmartDashboard.putNumber("NumCycles", numcycles++);
@@ -150,7 +150,7 @@ public class Robot extends TorqueIterative {
         activeInput = AutoPicker.getAutonomous();
         activeOutput = robotOutput;
         activeFeedback = sensorFeedback;
-        
+
         updateIO();
         loadParams();
         initSubsystems();
@@ -178,21 +178,20 @@ public class Robot extends TorqueIterative {
 
         SmartDashboard.putNumber("NumCycles", numcycles++);
     }
-    
-    // ----- Disabled -----
 
+    // ----- Disabled -----
     @Override
     public void disabledInit() {
         activeInput = driverInput;
         activeOutput = robotOutput;
         activeFeedback = sensorFeedback;
-        
+
         updateIO();
-        
+
         drivebase.setOutputEnabled(false);
-        
+
         initSubsystems();
-        
+
         logger.close();
     }
 

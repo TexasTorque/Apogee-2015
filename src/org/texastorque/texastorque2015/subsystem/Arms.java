@@ -10,20 +10,9 @@ public class Arms extends Subsystem {
     private boolean tiltUp;
 
     @Override
-    public void loadParams() {
-    }
-
-    @Override
-    public void pushToDashboard() {
-        SmartDashboard.putBoolean("ArmsOpen", armsOpen);
-        SmartDashboard.putBoolean("PunchOut", punchOut);
-        SmartDashboard.putBoolean("TiltUp", tiltUp);
-    }
-
-    @Override
     public void enable() {
     }
-    
+
     @Override
     public void run() {
         armsOpen = input.isArmOpen();
@@ -38,6 +27,17 @@ public class Arms extends Subsystem {
     }
 
     @Override
+    public void loadParams() {
+    }
+
+    @Override
+    public void pushToDashboard() {
+        SmartDashboard.putBoolean("ArmsOpen", armsOpen);
+        SmartDashboard.putBoolean("PunchOut", punchOut);
+        SmartDashboard.putBoolean("TiltUp", tiltUp);
+    }
+
+    @Override
     public String getLogNames() {
         return "ArmsOpen, PunchOut, TiltUp, ";
     }
@@ -46,5 +46,5 @@ public class Arms extends Subsystem {
     public String getLogValues() {
         return armsOpen + ", " + punchOut + ", " + tiltUp + ", ";
     }
-    
+
 }

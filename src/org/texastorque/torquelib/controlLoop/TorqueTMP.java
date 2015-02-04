@@ -40,9 +40,9 @@ public class TorqueTMP {
     }
 
     public void generateTrapezoid(double targetPosition, double realPosition, double realSpeed) {
-        
+
         double positionError = targetPosition - realPosition;
-        
+
         if (Math.abs(positionError) < 0.1) {
             return;
         } else if (positionError < 0.0) {
@@ -102,7 +102,7 @@ public class TorqueTMP {
         } else {
             cruiseTime = 0.0;
         }
-        
+
         currentPosition = realPosition;
         currentVelocity = realSpeed;
     }
@@ -120,14 +120,14 @@ public class TorqueTMP {
         } else if ((accelerationTime + cruiseTime) > 0.01) {
             accelerate(accelerationTime);
             cruise(0.01 - accelerationTime);
-            
+
             cruiseTime -= (0.01 - accelerationTime);
             accelerationTime = 0.0;
         } else if ((accelerationTime + cruiseTime + decelerationTime) > 0.01) {
             accelerate(accelerationTime);
             cruise(cruiseTime);
             decelerate(0.01 - accelerationTime - cruiseTime);
-            
+
             decelerationTime -= (0.01 - accelerationTime - cruiseTime);
             accelerationTime = 0.0;
             cruiseTime = 0.0;
@@ -135,7 +135,7 @@ public class TorqueTMP {
             accelerate(accelerationTime);
             cruise(cruiseTime);
             decelerate(decelerationTime);
-            
+
             accelerationTime = 0.0;
             cruiseTime = 0.0;
             decelerationTime = 0.0;

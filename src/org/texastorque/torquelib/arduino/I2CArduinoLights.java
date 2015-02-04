@@ -11,8 +11,8 @@ public class I2CArduinoLights {
     /**
      * Create a new set of Arduino lights.
      *
-     * @param address The Arduino's device address. Pass the same address you used
-     * in the arduino code.
+     * @param address The Arduino's device address. Pass the same address you
+     * used in the arduino code.
      */
     public I2CArduinoLights(int address) {
         i2c = new I2C(Port.kOnboard, address);

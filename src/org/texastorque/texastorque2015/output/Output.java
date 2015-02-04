@@ -14,7 +14,7 @@ public abstract class Output {
     public abstract void setTiltUp(boolean on);
 
     public abstract void setPunchOut(boolean out);
-    
+
     //Intake
     public abstract void setIntakeMotorSpeed(double speed);
 }

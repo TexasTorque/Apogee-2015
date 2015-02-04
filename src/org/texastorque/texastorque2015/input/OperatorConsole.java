@@ -2,10 +2,15 @@ package org.texastorque.texastorque2015.input;
 
 import edu.wpi.first.wpilibj.Joystick;
 
+/**
+ * Wraps a Joystick for the custom control panel we're using for this robot.
+ *
+ * @author Gijs
+ */
 public class OperatorConsole {
 
     private Joystick joystick;
-    
+
     public OperatorConsole(int port) {
         joystick = new Joystick(port);
     }

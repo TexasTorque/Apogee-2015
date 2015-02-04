@@ -111,7 +111,7 @@ public class TorqueMotor {
                 out = out / m_A;
                 out = Math.log(out);
                 out = out / m_B;
-                
+
                 return out;
             } else {
                 return in;

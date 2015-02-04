@@ -15,30 +15,30 @@ public class DriverInput extends Input {
 
     @Override
     public void run() {
+        //Drivebase
+
         /**
          * Left stick controls translation, right stick controls rotation. Both
          * the forward and strafe wheels are utilized for rotation.
          */
-        if (driver.getRightBumper()) {
+        if (driver.getRightBumper()) { //Turn over front of robot
             leftSpeed = -1 * driver.getLeftYAxis() + driver.getRightXAxis() * 0.1;
             rightSpeed = -1 * driver.getLeftYAxis() - driver.getRightXAxis() * 0.1;
             frontStrafeSpeed = -1 * driver.getLeftXAxis() - driver.getRightXAxis() * 121 / 400;
             rearStrafeSpeed = -1 * driver.getLeftXAxis() + driver.getRightXAxis();
-            SmartDashboard.putString("Drivemode", "frontTurn");
-        } else if (driver.getLeftBumper()) {
+        } else if (driver.getLeftBumper()) { //Turn over back of robot
             leftSpeed = -1 * driver.getLeftYAxis() + driver.getRightXAxis() * 0.1;
             rightSpeed = -1 * driver.getLeftYAxis() - driver.getRightXAxis() * 0.1;
             frontStrafeSpeed = -1 * driver.getLeftXAxis() - driver.getRightXAxis();
             rearStrafeSpeed = -1 * driver.getLeftXAxis() + driver.getRightXAxis() * 100 / 841;
-            SmartDashboard.putString("Drivemode", "rearTurn");
-        } else {
+        } else { //Turn over center of robot
             leftSpeed = -1 * driver.getLeftYAxis() + driver.getRightXAxis();
             rightSpeed = -1 * driver.getLeftYAxis() - driver.getRightXAxis();
             frontStrafeSpeed = -1 * driver.getLeftXAxis() - driver.getRightXAxis() * 16 / 25;
             rearStrafeSpeed = -1 * driver.getLeftXAxis() + driver.getRightXAxis();
-            SmartDashboard.putString("Drivemode", "normal");
         }
 
+        //Elevator
         if (operator.getLeftCenterButton()) {
             elevatorOverride = true;
         } else if (operator.getRightCenterButton()) {
@@ -52,6 +52,7 @@ public class DriverInput extends Input {
         }
     }
 
+    //Elevator
     private void calcElevator() {
     }
 

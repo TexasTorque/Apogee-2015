@@ -22,15 +22,17 @@ public abstract class Subsystem implements Runnable, Loggable {
     public void setFeedback(Feedback feedback) {
         this.feedback = feedback;
     }
-    
+
     protected boolean outputEnabled;
 
     public void setOutputEnabled(boolean outputEnabled) {
         this.outputEnabled = outputEnabled;
     }
-    
+
     public abstract void loadParams();
+
     public abstract void pushToDashboard();
+
     public abstract void enable();
 
 }

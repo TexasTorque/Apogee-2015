@@ -37,36 +37,7 @@ public class Drivebase extends Subsystem {
         rightPV = new TorquePV();
     }
 
-    @Override
-    public void loadParams() {
-        profile = new TorqueTMP(Constants.DrivebaseMaxV.getDouble(), Constants.DrivebaseMaxA.getDouble());
-
-        //pv
-        leftPV.setGains(Constants.DrivebaseLeftP.getDouble(), Constants.DrivebaseLeftV.getDouble(),
-                Constants.DrivebaseLeftffV.getDouble(), Constants.DrivebaseLeftffA.getDouble());
-        rightPV.setGains(Constants.DrivebaseRightP.getDouble(), Constants.DrivebaseRightV.getDouble(),
-                Constants.DrivebaseRightffV.getDouble(), Constants.DrivebaseRightffA.getDouble());
-        leftPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
-        rightPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
-    }
-
-    @Override
-    public void pushToDashboard() {
-        SmartDashboard.putNumber("LeftSpeed", leftSpeed);
-        SmartDashboard.putNumber("RightSpeed", rightSpeed);
-        SmartDashboard.putNumber("FrontStrafeSpeed", frontStrafeSpeed);
-        SmartDashboard.putNumber("RearStrafeSpeed", rearStrafeSpeed);
-        SmartDashboard.putNumber("LeftPosition", leftPosition);
-        SmartDashboard.putNumber("RightPosition", rightPosition);
-        SmartDashboard.putNumber("LeftVelocity", leftVelocity);
-        SmartDashboard.putNumber("RightVelocity", rightVelocity);
-        SmartDashboard.putNumber("LeftAcceleration", leftAcceleration);
-        SmartDashboard.putNumber("RightAcceleration", rightAcceleration);
-        SmartDashboard.putNumber("TargetPosition", targetPosition);
-        SmartDashboard.putNumber("TargetVelocity", targetVelocity);
-        SmartDashboard.putNumber("TargetAcceleration", targetAcceleration);
-    }
-
+    //Resets the TMP so that the robot does not try to move. Called every time the robot enables.
     @Override
     public void enable() {
         setPointPosition = 0.0;
@@ -127,9 +98,39 @@ public class Drivebase extends Subsystem {
     }
 
     @Override
+    public void loadParams() {
+        profile = new TorqueTMP(Constants.DrivebaseMaxV.getDouble(), Constants.DrivebaseMaxA.getDouble());
+
+        //pv
+        leftPV.setGains(Constants.DrivebaseLeftP.getDouble(), Constants.DrivebaseLeftV.getDouble(),
+                Constants.DrivebaseLeftffV.getDouble(), Constants.DrivebaseLeftffA.getDouble());
+        rightPV.setGains(Constants.DrivebaseRightP.getDouble(), Constants.DrivebaseRightV.getDouble(),
+                Constants.DrivebaseRightffV.getDouble(), Constants.DrivebaseRightffA.getDouble());
+        leftPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
+        rightPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
+    }
+
+    @Override
+    public void pushToDashboard() {
+        SmartDashboard.putNumber("LeftSpeed", leftSpeed);
+        SmartDashboard.putNumber("RightSpeed", rightSpeed);
+        SmartDashboard.putNumber("FrontStrafeSpeed", frontStrafeSpeed);
+        SmartDashboard.putNumber("RearStrafeSpeed", rearStrafeSpeed);
+        SmartDashboard.putNumber("LeftPosition", leftPosition);
+        SmartDashboard.putNumber("RightPosition", rightPosition);
+        SmartDashboard.putNumber("LeftVelocity", leftVelocity);
+        SmartDashboard.putNumber("RightVelocity", rightVelocity);
+        SmartDashboard.putNumber("LeftAcceleration", leftAcceleration);
+        SmartDashboard.putNumber("RightAcceleration", rightAcceleration);
+        SmartDashboard.putNumber("TargetPosition", targetPosition);
+        SmartDashboard.putNumber("TargetVelocity", targetVelocity);
+        SmartDashboard.putNumber("TargetAcceleration", targetAcceleration);
+    }
+
+    @Override
     public String getLogNames() {
-        return "LeftSpeed, RightSpeed, FrontStrafeSpeed, RearStrafeSpeed, " +
-                "LeftPosition, RightPosition, LeftVelocity, RightVelocity, TargetPosition, TargetVelocity, ";
+        return "LeftSpeed, RightSpeed, FrontStrafeSpeed, RearStrafeSpeed, "
+                + "LeftPosition, RightPosition, LeftVelocity, RightVelocity, TargetPosition, TargetVelocity, ";
     }
 
     @Override

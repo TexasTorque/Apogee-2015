@@ -23,7 +23,7 @@ public class TorquePV extends ControlLoop {
 
     public double calculate(TorqueTMP tmProfile, double currentPosition, double currentVelocity) {
         double voltageAdjustment = tunedVoltage / ds.getBatteryVoltage();
-        
+
         profile = tmProfile;
         setPoint = profile.getCurrentVelocity();
         currentValue = currentVelocity;
@@ -56,7 +56,7 @@ public class TorquePV extends ControlLoop {
 
     public void reset() {
     }
-    
+
     public void setPositionDoneRange(double range) {
         positionDoneRange = range;
     }
@@ -68,10 +68,10 @@ public class TorquePV extends ControlLoop {
         } else {
             doneCyclesCount = 0;
         }
-        
+
         return (doneCyclesCount > minDoneCycles);
     }
-    
+
     public boolean onTrack() {
         return Math.abs(profile.getCurrentVelocity() - actualVelocity) < doneRange;
     }

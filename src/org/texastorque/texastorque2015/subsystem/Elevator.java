@@ -31,7 +31,7 @@ public class Elevator extends Subsystem {
     @Override
     public void enable() {
     }
-    
+
     @Override
     public void run() {
         currentPosition = feedback.getElevatorHeight();
@@ -77,7 +77,7 @@ public class Elevator extends Subsystem {
         SmartDashboard.putNumber("ElevatorTargetVelocity", targetVelocity);
         SmartDashboard.putNumber("ElevatorTargetAcceleration", targetAcceleration);
     }
-    
+
     @Override
     public String getLogNames() {
         return "SetPointElevation, E_CurrentPosition, E_CurrentVelocity, E_TargetPosition, E_TargetVelocity, ";
@@ -85,6 +85,6 @@ public class Elevator extends Subsystem {
 
     @Override
     public String getLogValues() {
-        return setPointElevation + ", " + currentPosition  + ", " + currentVelocity + ", " + targetPosition + ", " + targetVelocity + ", ";
+        return setPointElevation + ", " + currentPosition + ", " + currentVelocity + ", " + targetPosition + ", " + targetVelocity + ", ";
     }
 }

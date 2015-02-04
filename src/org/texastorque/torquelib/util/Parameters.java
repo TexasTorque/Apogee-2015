@@ -16,7 +16,7 @@ public class Parameters {
 
     private static File paramsFile;
 
-    public static void makeFile(){
+    public static void makeFile() {
         paramsFile = new File("/home/admin/params.txt");
         try {
             paramsFile.createNewFile();
