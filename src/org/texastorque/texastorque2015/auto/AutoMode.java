@@ -1,6 +1,7 @@
 package org.texastorque.texastorque2015.auto;
 
 import org.texastorque.texastorque2015.input.Input;
+import org.texastorque.texastorque2015.constants.Constants;
 
 public abstract class AutoMode extends Input {
 
@@ -31,6 +32,18 @@ public abstract class AutoMode extends Input {
             drivebaseControlled = false;
             leftSpeed = 0.0;
             rightSpeed = 0.0;
+        }
+    }
+
+    public class PickupTote extends AutoCommand {
+
+        public PickupTote(String name, double doneCycles) {
+            super(name, doneCycles);
+        }
+
+        @Override
+        public void run() {
+            elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
         }
     }
 

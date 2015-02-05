@@ -124,7 +124,7 @@ public class Robot extends TorqueIterative {
         loadParams();
         initSubsystems();
 
-        drivebase.setOutputEnabled(true);
+        drivebase.setOutputEnabled(false);
 
         logger.reset();
         logger.enable();

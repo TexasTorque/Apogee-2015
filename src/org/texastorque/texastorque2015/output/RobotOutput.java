@@ -27,6 +27,17 @@ public class RobotOutput extends Output {
     private TorqueMotor rightIntakeMotor;
 
     public RobotOutput() {
+//        TorqueMotor m1 = new TorqueMotor(new VictorSP(0), false, TorqueMotor.LinearizationType.kNone);
+//        TorqueMotor m2 = new TorqueMotor(new VictorSP(1), false, TorqueMotor.LinearizationType.kNone);
+//        TorqueMotor m3 = new TorqueMotor(new VictorSP(2), false, TorqueMotor.LinearizationType.kNone);
+//        TorqueMotor m4 = new TorqueMotor(new VictorSP(3), false, TorqueMotor.LinearizationType.kNone);
+//        TorqueMotor m5 = new TorqueMotor(new VictorSP(4), false, TorqueMotor.LinearizationType.kNone);
+//        TorqueMotor m6 = new TorqueMotor(new VictorSP(5), false, TorqueMotor.LinearizationType.kNone);
+//        TorqueMotor m7 = new TorqueMotor(new VictorSP(6), false, TorqueMotor.LinearizationType.kNone);
+//        TorqueMotor m8 = new TorqueMotor(new VictorSP(7), false, TorqueMotor.LinearizationType.kNone);
+        TorqueMotor m9 = new TorqueMotor(new VictorSP(8), false, TorqueMotor.LinearizationType.kNone);
+        TorqueMotor m10 = new TorqueMotor(new VictorSP(9), false, TorqueMotor.LinearizationType.kNone);
+
         //Drivebase
         leftDriveAMotor = new TorqueMotor(new VictorSP(Ports.LEFT_A_DRIVE_PORT), false, TorqueMotor.LinearizationType.kNone);
         leftDriveBMotor = new TorqueMotor(new VictorSP(Ports.LEFT_B_DRIVE_PORT), false, TorqueMotor.LinearizationType.kNone);
