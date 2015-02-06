@@ -71,8 +71,10 @@ public abstract class Feedback implements Runnable {
     public abstract void resetDriveEncoders();
 
     //Elevator
-    private double elevatorHeight;
-    private double elevatorVelocity;
+    protected double elevatorHeight;
+    protected double elevatorVelocity;
+    protected boolean elevatorAtTop;
+    protected boolean elevatorAtBottom;
 
     /**
      * Get the height of the elevator in inches.
@@ -91,4 +93,22 @@ public abstract class Feedback implements Runnable {
     public double getElevatorVelocity() {
         return elevatorVelocity;
     }
+
+    public boolean isElevatorAtTop() {
+        return elevatorAtTop;
+    }
+
+    public boolean isElevatorAtBottom() {
+        return elevatorAtBottom;
+    }
+    
+    //Sluice
+    
+    protected boolean toteInSluice;
+
+    public boolean isToteInSluice() {
+        return toteInSluice;
+    }
+    
+    
 }
