@@ -37,13 +37,55 @@ public abstract class AutoMode extends Input {
 
     public class PickupTote extends AutoCommand {
 
+        private int step;
+        private boolean done;
+
         public PickupTote(String name, double doneCycles) {
             super(name, doneCycles);
+            step = 0;
+            done = false;
         }
 
         @Override
         public void run() {
-            elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
+            switch (step) {
+                case 0:
+                    elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
+                    if (feedback.getElevatorHeight() == Constants.FloorElevatorLevel2.getDouble()) {
+                        intakeSpeed = 1.0;
+
+                        step++;
+                    }
+                    break;
+                case 1:
+                    elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
+                    if (feedback.getElevatorHeight() == Constants.FloorElevatorLevel1.getDouble()) {
+                        step++;
+                    }
+                    break;
+                case 2:
+                    elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
+                    done = true;
+                    break;
+                default:
+            }
+        }
+
+        @Override
+        public boolean isDone() {
+            return done;
+        }
+
+        @Override
+        public void reset() {
+            super.reset();
+            step = 0;
+        }
+
+        @Override
+        public void stop() {
+            intakeSpeed = 0.0;
+            step = 0;
         }
     }
 

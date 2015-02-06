@@ -8,6 +8,7 @@ public class Constants extends Parameters {
     //Elevator
     public final static Constant ElevatorMaxV = new Constant("E_MaxV", 0.0);
     public final static Constant ElevatorMaxA = new Constant("E_MaxA", 0.0);
+    public final static Constant ElevatorVDeadband = new Constant("E_VDeadband", 0.0);
 
     public final static Constant ElevatorP1Tote = new Constant("E_P_1Tote", 0.0);
     public final static Constant ElevatorV1Tote = new Constant("E_V_1Tote", 0.0);
