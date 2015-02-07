@@ -38,13 +38,17 @@ public class Drivebase extends Subsystem {
     private double targetAngularVelocity;
     private double targetAngularAcceleration;
 
-    private TorqueTMP profile;
+    //linear
+    private TorqueTMP linearProfile;
     private TorquePV leftPV;
     private TorquePV rightPV;
+
+    //angular
+    private TorqueTMP angularProfile;
     private TorquePV turnPV;
 
     public Drivebase() {
-        profile = new TorqueTMP(Constants.DrivebaseMaxV.getDouble(), Constants.DrivebaseMaxA.getDouble());
+        linearProfile = new TorqueTMP(Constants.DrivebaseMaxV.getDouble(), Constants.DrivebaseMaxA.getDouble());
         leftPV = new TorquePV();
         rightPV = new TorquePV();
         turnPV = new TorquePV();
@@ -54,7 +58,8 @@ public class Drivebase extends Subsystem {
     @Override
     public void enable() {
         setPointPosition = 0.0;
-        profile.generateTrapezoid(0.0, 0.0, (leftVelocity + rightVelocity) / 2);
+        linearProfile.generateTrapezoid(0.0, 0.0, (leftVelocity + rightVelocity) / 2);
+        angularProfile.generateTrapezoid(0.0, 0.0, angle);
         feedback.resetDriveEncoders();
     }
 
@@ -83,22 +88,37 @@ public class Drivebase extends Subsystem {
             if (setPointPosition != input.getDriveDistance()) {
                 setPointPosition = input.getDriveDistance();
 
-                profile.generateTrapezoid(setPointPosition, 0.0, (leftVelocity + rightVelocity) / 2);
+                linearProfile.generateTrapezoid(setPointPosition, 0.0, (leftVelocity + rightVelocity) / 2);
 
                 feedback.resetDriveEncoders();
             }
 
-            profile.calculateNextSituation();
+            linearProfile.calculateNextSituation();
 
-            targetVelocity = profile.getCurrentVelocity();
-            targetPosition = profile.getCurrentPosition();
-            targetAcceleration = profile.getCurrentAcceleration();
+            targetVelocity = linearProfile.getCurrentVelocity();
+            targetPosition = linearProfile.getCurrentPosition();
+            targetAcceleration = linearProfile.getCurrentAcceleration();
 
-            leftSpeed = leftPV.calculate(profile, leftPosition, leftVelocity);
-            rightSpeed = rightPV.calculate(profile, rightPosition, rightVelocity);
+            leftSpeed = leftPV.calculate(linearProfile, leftPosition, leftVelocity);
+            rightSpeed = rightPV.calculate(linearProfile, rightPosition, rightVelocity);
 
         } else if (input.isDrivebaseControlled() && input.getDriveDistance() == 0.0) {
-            //calculate for angle
+            if (setPointAngle != input.getDriveAngle()) {
+                setPointAngle = input.getDriveAngle();
+
+                angularProfile.generateTrapezoid(setPointAngle, 0.0, angle);
+
+                feedback.resetGyro();
+            }
+
+            angularProfile.calculateNextSituation();
+
+            targetAngularVelocity = angularProfile.getCurrentVelocity();
+            targetAngle = angularProfile.getCurrentPosition();
+            targetAngularAcceleration = angularProfile.getCurrentAcceleration();
+
+            leftSpeed = turnPV.calculate(angularProfile, angle, angularVelocity);
+            rightSpeed = -leftSpeed;
         } else {
             leftSpeed = input.getLeftSpeed();
             rightSpeed = input.getRightSpeed();
@@ -118,7 +138,7 @@ public class Drivebase extends Subsystem {
 
     @Override
     public void loadParams() {
-        profile = new TorqueTMP(Constants.DrivebaseMaxV.getDouble(), Constants.DrivebaseMaxA.getDouble());
+        linearProfile = new TorqueTMP(Constants.DrivebaseMaxV.getDouble(), Constants.DrivebaseMaxA.getDouble());
 
         //pv
         leftPV.setGains(Constants.DrivebaseLeftP.getDouble(), Constants.DrivebaseLeftV.getDouble(),
@@ -127,6 +147,7 @@ public class Drivebase extends Subsystem {
                 Constants.DrivebaseRightffV.getDouble(), Constants.DrivebaseRightffA.getDouble());
         leftPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
         rightPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
+        //set turn pv gains and tuned voltage
     }
 
     @Override

@@ -6,6 +6,7 @@ public class AutoPicker {
 
     public final static byte DEFAULT_AUTO = 0;
     public final static byte DRIVE_AUTO = 1;
+    public final static byte TURN_AUTO = 2;
 
     public static void init() {
         SmartDashboard.putNumber("AutoMode", DEFAULT_AUTO);
@@ -18,6 +19,8 @@ public class AutoPicker {
             return new DoNothingAuto();
         } else if (mode == DRIVE_AUTO) {
             return new DriveAuto();
+        } else if (mode == TURN_AUTO) {
+            return new TurnAuto();
         }
 
         return new DoNothingAuto();

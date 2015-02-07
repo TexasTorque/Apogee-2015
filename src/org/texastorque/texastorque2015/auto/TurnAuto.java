@@ -4,8 +4,8 @@ public class TurnAuto extends AutoMode {
 
     @Override
     public void run() {
-        System.out.println("Starting drive auto!");
+        System.out.println("Starting turn auto!");
 
-        runCommand(new TurnAngle("TurnLeft", 12, 0.25, 10));
+        runCommand(new TurnAngle("TurnLeft", 180, 1, 10));
     }
 }

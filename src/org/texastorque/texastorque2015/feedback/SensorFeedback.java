@@ -67,7 +67,7 @@ public class SensorFeedback extends Feedback {
         //angle (radians)
         angle = gyro.getAngle();
         angularVelocity = gyro.getRate();
-        angularAcceleration = 0.0;//to do
+        angularAcceleration = gyro.getRatePerSecond();
     }
 
     @Override
