@@ -72,7 +72,7 @@ public class Constants extends Parameters {
     public final static Constant RCElevatorLevel5 = new Constant("E_RCL5", 0.0);
     public final static Constant RCElevatorLevel6 = new Constant("E_RCL6", 0.0);
 
-    //Drivebase
+    //Drivebase linear
     public final static Constant DrivebaseMaxV = new Constant("D_MaxV", 0.0);
     public final static Constant DrivebaseMaxA = new Constant("D_MaxA", 0.0);
     public final static Constant DrivebaseLeftP = new Constant("D_LeftP", 0.0);
@@ -84,6 +84,10 @@ public class Constants extends Parameters {
     public final static Constant DrivebaseRightffV = new Constant("D_RightffV", 0.0);
     public final static Constant DrivebaseRightffA = new Constant("D_RightffA", 0.0);
     public final static Constant DrivebaseTunedVoltage = new Constant("D_TunedVoltage", 12.5);
+
+    //Drivebase angular
+    public final static Constant DrivebaseMaxAngleV = new Constant("D_MaxAngleV", 0.0);
+    public final static Constant DrivebaseMaxAngleA = new Constant("D_MaxAngleA", 0.0);
 
     static {
         load();

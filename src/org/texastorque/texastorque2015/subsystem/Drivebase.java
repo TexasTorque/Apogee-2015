@@ -24,7 +24,6 @@ public class Drivebase extends Subsystem {
     //Sensor values (angular)
     private double angle;
     private double angularVelocity;
-    private double angularAcceleration;
 
     //Control loop stuff (linear)
     private double setPointPosition;
@@ -49,6 +48,7 @@ public class Drivebase extends Subsystem {
 
     public Drivebase() {
         linearProfile = new TorqueTMP(Constants.DrivebaseMaxV.getDouble(), Constants.DrivebaseMaxA.getDouble());
+        angularProfile = new TorqueTMP(Constants.DrivebaseMaxAngleV.getDouble(), Constants.DrivebaseMaxAngleA.getDouble());
         leftPV = new TorquePV();
         rightPV = new TorquePV();
         turnPV = new TorquePV();
@@ -58,6 +58,7 @@ public class Drivebase extends Subsystem {
     @Override
     public void enable() {
         setPointPosition = 0.0;
+        setPointAngle = 0.0;
         linearProfile.generateTrapezoid(0.0, 0.0, (leftVelocity + rightVelocity) / 2);
         angularProfile.generateTrapezoid(0.0, 0.0, angle);
         feedback.resetDriveEncoders();
@@ -76,7 +77,6 @@ public class Drivebase extends Subsystem {
 
         angle = feedback.getAngle();
         angularVelocity = feedback.getAngularVelocity();
-        angularAcceleration = feedback.getAngularAcceleration();
 
         /**
          * Drive directions are defined as following: +1 for leftSpeed and
@@ -139,6 +139,7 @@ public class Drivebase extends Subsystem {
     @Override
     public void loadParams() {
         linearProfile = new TorqueTMP(Constants.DrivebaseMaxV.getDouble(), Constants.DrivebaseMaxA.getDouble());
+        angularProfile = new TorqueTMP(Constants.DrivebaseMaxAngleV.getDouble(), Constants.DrivebaseMaxAngleA.getDouble());
 
         //pv
         leftPV.setGains(Constants.DrivebaseLeftP.getDouble(), Constants.DrivebaseLeftV.getDouble(),
@@ -147,7 +148,8 @@ public class Drivebase extends Subsystem {
                 Constants.DrivebaseRightffV.getDouble(), Constants.DrivebaseRightffA.getDouble());
         leftPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
         rightPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
-        //set turn pv gains and tuned voltage
+        //set turn gains
+        turnPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
     }
 
     @Override
@@ -165,6 +167,9 @@ public class Drivebase extends Subsystem {
         SmartDashboard.putNumber("TargetPosition", targetPosition);
         SmartDashboard.putNumber("TargetVelocity", targetVelocity);
         SmartDashboard.putNumber("TargetAcceleration", targetAcceleration);
+        SmartDashboard.putNumber("TargetAngle", targetAngle);
+        SmartDashboard.putNumber("TargetAngularVelocity", targetAngularVelocity);
+        SmartDashboard.putNumber("TargetAngularAcceleratoin", targetAngularAcceleration);
     }
 
     @Override

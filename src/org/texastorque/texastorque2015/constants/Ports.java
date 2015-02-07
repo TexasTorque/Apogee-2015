@@ -34,6 +34,6 @@ public class Ports {
     public final static int RIGHT_INTAKE_PORT = 7;
 
     //gyro
-    public final static int GYRO_PORT_A = 0;//not real
-    public final static int GYRO_PORT_B = 0;//not real
+    public final static int GYRO_PORT_A = 0;//temp
+    public final static int GYRO_PORT_B = 1;//temp
 }
