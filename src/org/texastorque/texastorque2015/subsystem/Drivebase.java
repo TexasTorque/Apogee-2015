@@ -13,7 +13,7 @@ public class Drivebase extends Subsystem {
     private double frontStrafeSpeed;
     private double rearStrafeSpeed;
 
-    //Sensor values
+    //Sensor values (linear)
     private double leftPosition;
     private double rightPosition;
     private double leftVelocity;
@@ -21,20 +21,33 @@ public class Drivebase extends Subsystem {
     private double leftAcceleration;
     private double rightAcceleration;
 
-    //Control loop stuff
+    //Sensor values (angular)
+    private double angle;
+    private double angularVelocity;
+    private double angularAcceleration;
+
+    //Control loop stuff (linear)
     private double setPointPosition;
     private double targetPosition;
     private double targetVelocity;
     private double targetAcceleration;
 
+    //Control loop stuff (angular)
+    private double setPointAngle;
+    private double targetAngle;
+    private double targetAngularVelocity;
+    private double targetAngularAcceleration;
+
     private TorqueTMP profile;
     private TorquePV leftPV;
     private TorquePV rightPV;
+    private TorquePV turnPV;
 
     public Drivebase() {
         profile = new TorqueTMP(Constants.DrivebaseMaxV.getDouble(), Constants.DrivebaseMaxA.getDouble());
         leftPV = new TorquePV();
         rightPV = new TorquePV();
+        turnPV = new TorquePV();
     }
 
     //Resets the TMP so that the robot does not try to move. Called every time the robot enables.
@@ -56,13 +69,17 @@ public class Drivebase extends Subsystem {
         leftAcceleration = feedback.getLeftDriveAcceleration();
         rightAcceleration = feedback.getRightDriveAcceleration();
 
+        angle = feedback.getAngle();
+        angularVelocity = feedback.getAngularVelocity();
+        angularAcceleration = feedback.getAngularAcceleration();
+
         /**
          * Drive directions are defined as following: +1 for leftSpeed and
          * rightSpeed: full forward -1 for leftSpeed and rightSpeed: full
          * reverse +1 for strafe: full right -1 for strafe: full left
          *
          */
-        if (input.isDrivebaseControlled()) {
+        if (input.isDrivebaseControlled() && input.getDriveAngle() == 0.0) {
             if (setPointPosition != input.getDriveDistance()) {
                 setPointPosition = input.getDriveDistance();
 
@@ -80,6 +97,8 @@ public class Drivebase extends Subsystem {
             leftSpeed = leftPV.calculate(profile, leftPosition, leftVelocity);
             rightSpeed = rightPV.calculate(profile, rightPosition, rightVelocity);
 
+        } else if (input.isDrivebaseControlled() && input.getDriveDistance() == 0.0) {
+            //calculate for angle
         } else {
             leftSpeed = input.getLeftSpeed();
             rightSpeed = input.getRightSpeed();

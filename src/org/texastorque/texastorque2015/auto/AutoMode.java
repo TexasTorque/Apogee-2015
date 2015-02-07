@@ -12,11 +12,13 @@ public abstract class AutoMode extends Input {
 
         public DriveDistance(String name, double distance, double tolerance, double doneCycles) {
             super(name, doneCycles);
+
             this.distance = distance;
             this.doneRange = tolerance;
 
             drivebaseControlled = true;
             driveDistance = distance;
+            driveAngle = 0.0;
         }
 
         @Override
@@ -86,6 +88,23 @@ public abstract class AutoMode extends Input {
         public void stop() {
             intakeSpeed = 0.0;
             step = 0;
+        }
+    }
+
+    public class TurnAngle extends AutoCommand {
+
+        private double angle;
+        private double doneRange;
+
+        public TurnAngle(String name, double angle, double tolerance, double doneCycles) {
+            super(name, doneCycles);
+
+            this.angle = angle;
+            this.doneRange = tolerance;
+
+            drivebaseControlled = true;
+            driveAngle = angle;
+            driveDistance = 0.0;
         }
     }
 

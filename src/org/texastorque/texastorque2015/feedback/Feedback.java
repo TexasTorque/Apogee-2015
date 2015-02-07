@@ -9,6 +9,9 @@ public abstract class Feedback implements Runnable {
     protected volatile double rightDriveVelocity;
     protected volatile double leftDriveAcceleration;
     protected volatile double rightDriveAcceleration;
+    protected volatile double angle;
+    protected volatile double angularVelocity;
+    protected volatile double angularAcceleration;
 
     /**
      * Get the position of the left side of the drivetrain.
@@ -65,10 +68,41 @@ public abstract class Feedback implements Runnable {
     }
 
     /**
-     * Reset the drive encoders to 0.
+     * Get the angle of the gyro.
      *
+     * @return The angle in degrees
+     */
+    public double getAngle() {
+        return angle;
+    }
+
+    /**
+     * Get the angle of the gyro.
+     *
+     * @return The angular velocity in degrees/s
+     */
+    public double getAngularVelocity() {
+        return angularVelocity;
+    }
+
+    /**
+     * Get the angle of the gyro.
+     *
+     * @return The angular velocity in degrees/s
+     */
+    public double getAngularAcceleration() {
+        return angularAcceleration;
+    }
+
+    /**
+     * Reset the drive encoders to 0.
      */
     public abstract void resetDriveEncoders();
+
+    /**
+     * Reset the gyro accumulators.
+     */
+    public abstract void resetGyro();
 
     //Elevator
     protected double elevatorHeight;
@@ -101,14 +135,12 @@ public abstract class Feedback implements Runnable {
     public boolean isElevatorAtBottom() {
         return elevatorAtBottom;
     }
-    
+
     //Sluice
-    
     protected boolean toteInSluice;
 
     public boolean isToteInSluice() {
         return toteInSluice;
     }
-    
-    
+
 }

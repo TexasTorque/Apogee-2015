@@ -32,4 +32,8 @@ public class Ports {
     //intake
     public final static int LEFT_INTAKE_PORT = 6;
     public final static int RIGHT_INTAKE_PORT = 7;
+    
+    //gyro
+    public final static int GYRO_PORT_A = -1;
+    public final static int GYRO_PORT_B = -1;
 }

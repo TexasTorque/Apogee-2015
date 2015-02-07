@@ -18,6 +18,7 @@ public abstract class Input implements Runnable {
 
     protected volatile boolean drivebaseControlled;
     protected volatile double driveDistance;
+    protected volatile double driveAngle;
 
     public double getLeftSpeed() {
         return leftSpeed;
@@ -41,6 +42,10 @@ public abstract class Input implements Runnable {
 
     public double getDriveDistance() {
         return driveDistance;
+    }
+
+    public double getDriveAngle() {
+        return driveAngle;
     }
 
     //Elevator
