@@ -103,7 +103,6 @@ public class Robot extends TorqueIterative {
 
     //Push all sybsystems to dashboard.
     private void pushToDashboard() {
-        System.out.println("pushed to dash");
         drivebase.pushToDashboard();
         elevator.pushToDashboard();
         arms.pushToDashboard();
