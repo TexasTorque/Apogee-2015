@@ -32,6 +32,8 @@ public class Ports {
     //intake
     public final static int LEFT_INTAKE_PORT = 6;
     public final static int RIGHT_INTAKE_PORT = 7;
+    public final static int LEFT_INTAKE_SOLENOID = 2;//temp
+    public final static int RIGHT_INTAKE_SOLENOID = 3;//temp
 
     //gyro
     public final static int GYRO_PORT_A = 0;//temp

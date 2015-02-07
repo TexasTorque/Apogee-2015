@@ -14,7 +14,7 @@ public class Lights {
     private DriverStation ds;
 
     public Lights() {
-        lightStrip = new I2CArduinoLights(1);
+        lightStrip = new I2CArduinoLights(84);
         ds = DriverStation.getInstance();
     }
     
