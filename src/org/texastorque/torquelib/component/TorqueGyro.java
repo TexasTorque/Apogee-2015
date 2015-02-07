@@ -216,4 +216,13 @@ public class TorqueGyro {
             return (rate1 + rate2);
         }
     }
+
+    /**
+     * Get the angular rate of rate of change of the gyro.
+     *
+     * @return The angular rate of change of the robot in degrees/second^2.
+     */
+    public double getRatePerSecond() {
+        return getRate() / ((1 << ((m1_analog.getOversampleBits() + m2_analog.getOversampleBits()) / 2)) * m_voltsPerDegreePerSecond);
+    }
 }
