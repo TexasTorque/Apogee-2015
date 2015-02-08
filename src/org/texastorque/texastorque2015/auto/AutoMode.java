@@ -19,6 +19,8 @@ public abstract class AutoMode extends Input {
             drivebaseControlled = true;
             driveDistance = distance;
             driveAngle = 0.0;
+            
+            feedback.resetDriveEncoders();
         }
 
         @Override
@@ -34,6 +36,7 @@ public abstract class AutoMode extends Input {
             drivebaseControlled = false;
             leftSpeed = 0.0;
             rightSpeed = 0.0;
+            feedback.resetDriveEncoders();
         }
     }
 
@@ -105,6 +108,25 @@ public abstract class AutoMode extends Input {
             drivebaseControlled = true;
             driveAngle = angle;
             driveDistance = 0.0;
+            
+            feedback.resetGyro();
+        }
+
+        @Override
+        public boolean isDone() {
+            if (Math.abs(feedback.getAngle() - angle) < doneRange) {
+                doneCycles ++;
+            }
+            
+            return doneCycles < minDoneCycles;
+        }
+
+        @Override
+        public void stop() {
+            drivebaseControlled = false;
+            leftSpeed = 0.0;
+            rightSpeed = 0.0;
+            feedback.resetGyro();
         }
     }
 
