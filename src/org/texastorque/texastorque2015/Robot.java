@@ -51,7 +51,7 @@ public class Robot extends TorqueIterative {
         elevator = new Elevator();
         arms = new Arms();
         intake = new Intake();
-        
+
         lights = new Lights();
 
         driverInput = new DriverInput();
@@ -86,7 +86,7 @@ public class Robot extends TorqueIterative {
         intake.setInput(activeInput);
         intake.setOutput(activeOutput);
         intake.setFeedback(activeFeedback);
-        
+
         lights.setInput(activeInput);
         lights.setFeedback(activeFeedback);
     }

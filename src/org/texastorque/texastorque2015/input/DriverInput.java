@@ -26,6 +26,7 @@ public class DriverInput extends Input {
 
         //Elevator
         elevatorOverride = operator.getElevatorOverrideSwitch();
+        elevatorFFpOff = operator.getElevatorFFpOffSwitch();
 
         if (elevatorOverride) {
             calcElevatorOverride();
@@ -36,8 +37,13 @@ public class DriverInput extends Input {
         //Intake
         if (operator.getIntakeButton()) {
             intakeSpeed = 1.0;
+            intakesIn = true;
         } else if (operator.getOuttakeButton()) {
             intakeSpeed = -1.0;
+            intakesIn = true;
+        } else {
+            intakeSpeed = 0.0;
+            intakesIn = false;
         }
         
         //Arms

@@ -18,6 +18,7 @@ public abstract class Input implements Runnable {
 
     protected volatile boolean drivebaseControlled;
     protected volatile double driveDistance;
+    protected volatile double driveAngle;
 
     public double getLeftSpeed() {
         return leftSpeed;
@@ -43,10 +44,15 @@ public abstract class Input implements Runnable {
         return driveDistance;
     }
 
+    public double getDriveAngle() {
+        return driveAngle;
+    }
+
     //Elevator
     protected volatile double elevatorPosition;
     protected volatile boolean elevatorOverride;
     protected volatile double overrideElevatorMotorSpeed;
+    protected volatile boolean elevatorFFpOff;
 
     public boolean isElevatorOverride() {
         return elevatorOverride;
@@ -60,6 +66,10 @@ public abstract class Input implements Runnable {
         return elevatorPosition;
     }
 
+    public boolean isElevatorFFpOff() {
+        return elevatorFFpOff;
+    }
+    
     //Crazy Arms
     protected volatile boolean armOpen;
     protected volatile boolean punchOut;
@@ -79,9 +89,14 @@ public abstract class Input implements Runnable {
 
     //Intake
     protected volatile double intakeSpeed;
+    protected volatile boolean intakesIn;
 
     public double getIntakeSpeed() {
         return intakeSpeed;
     }
 
+    public boolean areIntakesIn() {
+        return intakesIn;
+    }
+    
 }

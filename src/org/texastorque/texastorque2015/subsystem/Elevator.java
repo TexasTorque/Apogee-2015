@@ -52,6 +52,10 @@ public class Elevator extends Subsystem {
             motorSpeed = input.getOverrideElevatorMotorSpeed();
         }
 
+        if (!input.isElevatorFFpOff()) {
+            motorSpeed += ffPosition;
+        }
+
         if (outputEnabled) {
             output.setElevatorMotorSpeeds(motorSpeed);
         }

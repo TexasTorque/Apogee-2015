@@ -32,6 +32,7 @@ public abstract class AutoCommand {
     }
 
     public void reset() {
+        doneCycles = 0;
     }
 
     public void stop() {

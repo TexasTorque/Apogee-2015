@@ -17,4 +17,6 @@ public abstract class Output {
 
     //Intake
     public abstract void setIntakeMotorSpeed(double speed);
+
+    public abstract void setIntakeGrasp(boolean grasp);
 }

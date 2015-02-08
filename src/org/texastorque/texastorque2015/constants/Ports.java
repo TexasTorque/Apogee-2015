@@ -17,7 +17,7 @@ public class Ports {
     public final static int LEFT_ENCODER_PORT_B = 3;
     public final static int ELEVATOR_ENCODER_PORT_A = 4;
     public final static int ELEVATOR_ENCODER_PORT_B = 5;
-    
+
     //Limit switches
     public final static int ELEVATOR_TOP_LIMIT = 6;
     public final static int ELEVATOR_BOTTOM_LIMIT = 7;
@@ -32,4 +32,9 @@ public class Ports {
     //intake
     public final static int LEFT_INTAKE_PORT = 6;
     public final static int RIGHT_INTAKE_PORT = 7;
+    public final static int INTAKE_SOLENOID = 2;//temp
+
+    //gyro
+    public final static int GYRO_PORT_A = 0;//temp
+    public final static int GYRO_PORT_B = 1;//temp
 }
