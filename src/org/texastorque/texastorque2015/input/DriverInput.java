@@ -26,6 +26,7 @@ public class DriverInput extends Input {
 
         //Elevator
         elevatorOverride = operator.getElevatorOverrideSwitch();
+        elevatorFFpOff = operator.getElevatorFFpOffSwitch();
 
         if (elevatorOverride) {
             calcElevatorOverride();
