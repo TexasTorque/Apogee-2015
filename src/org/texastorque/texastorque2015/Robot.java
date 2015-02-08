@@ -135,6 +135,7 @@ public class Robot extends TorqueIterative {
     @Override
     public void teleopPeriodic() {
         activeInput.run();
+        lights.calcLightState();
 
         pushToDashboard();
     }
@@ -209,5 +210,6 @@ public class Robot extends TorqueIterative {
     @Override
     public void disabledPeriodic() {
         activeInput.run();
+        lights.calcLightState();
     }
 }

@@ -47,9 +47,11 @@ public class I2CArduinoLights {
     public enum LightState {
 
         WHITE((byte) 0),
-        ENABLED_RED((byte) 1),
-        ENABLED_BLUE((byte) 2),
-        DISABLED((byte) 3);
+        ENABLED_RED((byte) 4),
+        ENABLED_BLUE((byte) 1),
+        DISABLED((byte) 6),
+        GREEN((byte) 3),
+        YELLOW((byte) 2);
 
         private byte data;
 
