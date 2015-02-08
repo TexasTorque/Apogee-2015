@@ -84,9 +84,14 @@ public abstract class Input implements Runnable {
 
     //Intake
     protected volatile double intakeSpeed;
+    protected volatile boolean intakesIn;
 
     public double getIntakeSpeed() {
         return intakeSpeed;
     }
 
+    public boolean areIntakesIn() {
+        return intakesIn;
+    }
+    
 }

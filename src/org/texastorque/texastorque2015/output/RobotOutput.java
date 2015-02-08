@@ -20,8 +20,7 @@ public class RobotOutput extends Output {
     //Crazy Arms
     private Solenoid openSolenoid;
     private Solenoid punchSolenoid;
-    private Solenoid intakeSolenoidLeft;
-    private Solenoid intakeSolenoidRight;
+    private Solenoid intakeSolenoid;
     private DoubleSolenoid tiltSolenoid;
 
     //Intake
@@ -40,8 +39,7 @@ public class RobotOutput extends Output {
         //Crazy Arms
         openSolenoid = new Solenoid(Ports.OPEN_SOLENOID_PORT);
         punchSolenoid = new Solenoid(Ports.PUNCH_SOLENOID);
-        intakeSolenoidLeft = new Solenoid(Ports.LEFT_INTAKE_SOLENOID);
-        intakeSolenoidRight = new Solenoid(Ports.RIGHT_INTAKE_SOLENOID);
+        intakeSolenoid = new Solenoid(Ports.INTAKE_SOLENOID);
         tiltSolenoid = new DoubleSolenoid(Ports.TILT_SOLENOID_FORWARD_PORT, Ports.TILT_SOLENOID_BACKWARD_PORT);
 
         //Intake
@@ -90,7 +88,6 @@ public class RobotOutput extends Output {
 
     @Override
     public void setIntakeGrasp(boolean grasp) {
-        intakeSolenoidLeft.set(grasp);
-        intakeSolenoidRight.set(grasp);
+        intakeSolenoid.set(grasp);
     }
 }
