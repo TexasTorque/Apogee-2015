@@ -29,14 +29,14 @@ public class Elevator extends Subsystem {
     public Elevator() {
         tmp = new TorqueTMP(0.0, 0.0);
         pv = new TorquePV();
-        
+
         numTotes = 0;
     }
 
     @Override
     public void enable() {
     }
-    
+
     private boolean isDone() {
         return Math.abs(currentPosition - feedback.getElevatorHeight()) < 0.25 && Math.abs(feedback.getElevatorVelocity()) < 0.25;
     }
@@ -45,7 +45,7 @@ public class Elevator extends Subsystem {
     public void run() {
         currentPosition = feedback.getElevatorHeight();
         currentVelocity = feedback.getElevatorVelocity();
-        
+
         if (input.wantAutoStack()) {
             autoStack = true;
         }
@@ -81,9 +81,17 @@ public class Elevator extends Subsystem {
 
     @Override
     public void loadParams() {
-        tmp = new TorqueTMP(Constants.ElevatorMaxV.getDouble(), Constants.ElevatorMaxA.getDouble());
         double p = 0.0, v = 0.0, ffV = 0.0, ffA = 0.0;
-        if (numTotes == 1) {
+        if (numTotes == 0) {
+            tmp = new TorqueTMP(Constants.ElevatorMaxV0Tote.getDouble(), Constants.ElevatorMaxA0Tote.getDouble());
+            p = Constants.ElevatorP0Tote.getDouble();
+            v = Constants.ElevatorV0Tote.getDouble();
+            ffV = Constants.ElevatorffV0Tote.getDouble();
+            ffA = Constants.ElevatorffA0Tote.getDouble();
+
+            ffPosition = Constants.ElevatorffP0Tote.getDouble();
+        } else if (numTotes == 1) {
+            tmp = new TorqueTMP(Constants.ElevatorMaxV1Tote.getDouble(), Constants.ElevatorMaxA1Tote.getDouble());
             p = Constants.ElevatorP1Tote.getDouble();
             v = Constants.ElevatorV1Tote.getDouble();
             ffV = Constants.ElevatorffV1Tote.getDouble();
@@ -91,6 +99,7 @@ public class Elevator extends Subsystem {
 
             ffPosition = Constants.ElevatorffP1Tote.getDouble();
         } else if (numTotes == 2) {
+            tmp = new TorqueTMP(Constants.ElevatorMaxV2Tote.getDouble(), Constants.ElevatorMaxA2Tote.getDouble());
             p = Constants.ElevatorP2Tote.getDouble();
             v = Constants.ElevatorV2Tote.getDouble();
             ffV = Constants.ElevatorffV2Tote.getDouble();
@@ -98,6 +107,7 @@ public class Elevator extends Subsystem {
 
             ffPosition = Constants.ElevatorffP2Tote.getDouble();
         } else if (numTotes == 3) {
+            tmp = new TorqueTMP(Constants.ElevatorMaxV3Tote.getDouble(), Constants.ElevatorMaxA3Tote.getDouble());
             p = Constants.ElevatorP3Tote.getDouble();
             v = Constants.ElevatorV3Tote.getDouble();
             ffV = Constants.ElevatorffV3Tote.getDouble();
@@ -105,6 +115,7 @@ public class Elevator extends Subsystem {
 
             ffPosition = Constants.ElevatorffP3Tote.getDouble();
         } else if (numTotes == 4) {
+            tmp = new TorqueTMP(Constants.ElevatorMaxV4Tote.getDouble(), Constants.ElevatorMaxA4Tote.getDouble());
             p = Constants.ElevatorP4Tote.getDouble();
             v = Constants.ElevatorV4Tote.getDouble();
             ffV = Constants.ElevatorffV4Tote.getDouble();
@@ -112,6 +123,7 @@ public class Elevator extends Subsystem {
 
             ffPosition = Constants.ElevatorffP4Tote.getDouble();
         } else if (numTotes == 5) {
+            tmp = new TorqueTMP(Constants.ElevatorMaxV5Tote.getDouble(), Constants.ElevatorMaxA5Tote.getDouble());
             p = Constants.ElevatorP5Tote.getDouble();
             v = Constants.ElevatorV5Tote.getDouble();
             ffV = Constants.ElevatorffV5Tote.getDouble();
@@ -119,6 +131,7 @@ public class Elevator extends Subsystem {
 
             ffPosition = Constants.ElevatorffP5Tote.getDouble();
         } else if (numTotes == 6) {
+            tmp = new TorqueTMP(Constants.ElevatorMaxV6Tote.getDouble(), Constants.ElevatorMaxA6Tote.getDouble());
             p = Constants.ElevatorP6Tote.getDouble();
             v = Constants.ElevatorV6Tote.getDouble();
             ffV = Constants.ElevatorffV6Tote.getDouble();
