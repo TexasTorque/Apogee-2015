@@ -71,17 +71,26 @@ public class Constants extends Parameters {
     public final static Constant FloorElevatorLevel5 = new Constant("E_FloorL5", 0.0);
     public final static Constant FloorElevatorLevel6 = new Constant("E_FloorL6", 0.0);
 
+    //step
     public final static Constant StepElevatorLevel1 = new Constant("E_StepL1", 0.0);
     public final static Constant StepElevatorLevel2 = new Constant("E_StepL2", 0.0);
     public final static Constant StepElevatorLevel3 = new Constant("E_StepL3", 0.0);
     public final static Constant StepElevatorLevel4 = new Constant("E_StepL4", 0.0);
 
+    //
     public final static Constant SPElevatorLevel1 = new Constant("E_SPL1", 0.0);
     public final static Constant SPElevatorLevel2 = new Constant("E_SPL2", 0.0);
     public final static Constant SPElevatorLevel3 = new Constant("E_SPL3", 0.0);
     public final static Constant SPElevatorLevel4 = new Constant("E_SPL4", 0.0);
     public final static Constant SPElevatorLevel5 = new Constant("E_SPL5", 0.0);
     public final static Constant SPElevatorLevel6 = new Constant("E_SPL6", 0.0);
+
+    //Recycling can
+    public final static Constant RCElevatorP = new Constant("E_RC_P", 0.0);
+    public final static Constant RCElevatorV = new Constant("E_RV_V", 0.0);
+    public final static Constant RCElevatorffV = new Constant("E_RV_ffV", 0.0);
+    public final static Constant RCElevatorffA = new Constant("E_RV_ffA", 0.0);
+    public final static Constant RCElevatorffP = new Constant("E_RV_ffP", 0.0);
 
     public final static Constant RCElevatorLevel1 = new Constant("E_RCL1", 0.0);
     public final static Constant RCElevatorLevel2 = new Constant("E_RCL2", 0.0);
