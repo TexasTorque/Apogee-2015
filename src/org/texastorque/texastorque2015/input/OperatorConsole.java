@@ -74,4 +74,8 @@ public class OperatorConsole {
     public boolean getOuttakeButton() {
         return joystick.getRawButton(15);
     }
+    
+    public boolean getPlaceButton() {
+        return joystick.getRawButton(16);
+    }
 }

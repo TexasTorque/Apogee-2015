@@ -1,5 +1,6 @@
 package org.texastorque.texastorque2015.input;
 
+import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.torquelib.util.GenericController;
 import org.texastorque.torquelib.util.TorqueToggle;
 
@@ -7,14 +8,14 @@ public class DriverInput extends Input {
 
     GenericController driver;
     OperatorConsole operator;
-    
+
     TorqueToggle tiltToggle;
     TorqueToggle armOpenToggle;
 
     public DriverInput() {
         driver = new GenericController(0, GenericController.TYPE_XBOX, 0.2);
         operator = new OperatorConsole(1);
-        
+
         tiltToggle = new TorqueToggle();
         armOpenToggle = new TorqueToggle();
     }
@@ -33,7 +34,7 @@ public class DriverInput extends Input {
         } else {
             calcElevator();
         }
-        
+
         //Intake
         if (operator.getIntakeButton()) {
             intakeSpeed = 1.0;
@@ -45,7 +46,7 @@ public class DriverInput extends Input {
             intakeSpeed = 0.0;
             intakesIn = false;
         }
-        
+
         //Arms
         calcArms();
     }
@@ -76,6 +77,9 @@ public class DriverInput extends Input {
 
     //Elevator
     private void calcElevator() {
+        if (operator.getPlaceButton()) {
+            elevatorPosition = Constants.SPElevatorLevel1.getDouble();
+        }
     }
 
     private void calcElevatorOverride() {
@@ -85,14 +89,18 @@ public class DriverInput extends Input {
             overrideElevatorMotorSpeed = -0.4;
         }
     }
-    
+
     //Arms
     private void calcArms() {
         tiltToggle.calc(operator.getTiltButton());
         tiltUp = tiltToggle.get();
-        
+
         armOpenToggle.calc(operator.getArmOpenButton());
-        armOpen = armOpenToggle.get();
+        if (operator.getPlaceButton()) {
+            armOpen = true;
+        } else {
+            armOpen = armOpenToggle.get();
+        }
         
         punchOut = operator.getPunchButton();
     }

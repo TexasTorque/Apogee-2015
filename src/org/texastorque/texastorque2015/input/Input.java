@@ -99,4 +99,12 @@ public abstract class Input implements Runnable {
         return intakesIn;
     }
     
+    //Auto stacking
+    
+    protected volatile boolean autoStack;
+    
+    public boolean wantAutoStack() {
+        return autoStack;
+    }
+    
 }

@@ -125,7 +125,7 @@ public abstract class Feedback implements Runnable {
     public boolean isElevatorAtBottom() {
         return elevatorAtBottom;
     }
-
+    
     //Sluice
     protected boolean toteInSluice;
 

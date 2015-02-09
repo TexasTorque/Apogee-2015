@@ -21,6 +21,7 @@ public class Elevator extends Subsystem {
     private double ffPosition;
 
     private int numTotes;
+    private boolean autoStack;
 
     //up = positive, down = negative
     private double motorSpeed;
@@ -28,17 +29,34 @@ public class Elevator extends Subsystem {
     public Elevator() {
         tmp = new TorqueTMP(0.0, 0.0);
         pv = new TorquePV();
+        
         numTotes = 0;
     }
 
     @Override
     public void enable() {
     }
+    
+    private boolean isDone() {
+        return Math.abs(currentPosition - feedback.getElevatorHeight()) < 0.25 && Math.abs(feedback.getElevatorVelocity()) < 0.25;
+    }
 
     @Override
     public void run() {
         currentPosition = feedback.getElevatorHeight();
         currentVelocity = feedback.getElevatorVelocity();
+        
+        if (input.wantAutoStack()) {
+            autoStack = true;
+        }
+        if (autoStack) {
+            if (currentPosition == Constants.FloorElevatorLevel1.getDouble() && isDone()) {
+                currentPosition = Constants.FloorElevatorLevel2.getDouble();
+                autoStack = false;
+            } else if (isDone()) {
+                currentPosition = Constants.FloorElevatorLevel1.getDouble();
+            }
+        }
 
         if (!input.isElevatorOverride()) {
             if (input.getElevatorPosition() != setPointElevation) {

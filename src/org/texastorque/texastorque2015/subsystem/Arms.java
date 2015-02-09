@@ -15,8 +15,14 @@ public class Arms extends Subsystem {
 
     @Override
     public void run() {
-        armsOpen = input.isArmOpen();
-        punchOut = input.isPunchOut();
+        if (Math.abs(input.getElevatorPosition() - feedback.getElevatorHeight()) < 0.25 && Math.abs(feedback.getElevatorVelocity()) < 0.25) {
+            armsOpen = input.isArmOpen();
+            punchOut = input.isPunchOut();
+        } else {
+            armsOpen = false;
+            punchOut = false;
+        }
+        
         tiltUp = input.isTiltUp();
 
         if (outputEnabled) {
