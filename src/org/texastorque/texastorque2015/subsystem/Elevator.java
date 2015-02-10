@@ -21,7 +21,6 @@ public class Elevator extends Subsystem {
     private double ffPosition;
 
     private int numTotes;
-    private boolean autoStack;
 
     //up = positive, down = negative
     private double motorSpeed;
@@ -46,18 +45,8 @@ public class Elevator extends Subsystem {
         currentPosition = feedback.getElevatorHeight();
         currentVelocity = feedback.getElevatorVelocity();
 
-        if (input.wantAutoStack()) {
-            autoStack = true;
-        }
-        if (autoStack) {
-            if (currentPosition == Constants.FloorElevatorLevel1.getDouble() && isDone()) {
-                currentPosition = Constants.FloorElevatorLevel2.getDouble();
-                autoStack = false;
-            } else if (isDone()) {
-                currentPosition = Constants.FloorElevatorLevel1.getDouble();
-            }
-        }
-
+        feedback.setElevatorDone(isDone());
+        
         if (!input.isElevatorOverride()) {
             if (input.getElevatorPosition() != setPointElevation) {
                 setPointElevation = input.getElevatorPosition();

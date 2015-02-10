@@ -18,7 +18,7 @@ public class Intake extends Subsystem {
     public void run() {
         intakeSpeed = input.getIntakeSpeed();
         intakesIn = input.areIntakesIn();
-
+        
         if (outputEnabled) {
             output.setIntakeMotorSpeed(intakeSpeed);
             output.setIntakeGrasp(intakesIn);

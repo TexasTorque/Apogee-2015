@@ -99,7 +99,16 @@ public abstract class Feedback implements Runnable {
     protected double elevatorVelocity;
     protected boolean elevatorAtTop;
     protected boolean elevatorAtBottom;
+    protected boolean elevatorDone;
 
+    public boolean isElevatorDone() {
+        return elevatorDone;
+    }
+
+    public void setElevatorDone(boolean elevatorDone) {
+        this.elevatorDone = elevatorDone;
+    }
+    
     /**
      * Get the height of the elevator in inches.
      *

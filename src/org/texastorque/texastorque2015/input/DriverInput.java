@@ -11,6 +11,8 @@ public class DriverInput extends Input {
 
     TorqueToggle tiltToggle;
     TorqueToggle armOpenToggle;
+    
+    private boolean wentToBottom;
 
     public DriverInput() {
         driver = new GenericController(0, GenericController.TYPE_XBOX, 0.2);
@@ -29,8 +31,28 @@ public class DriverInput extends Input {
         elevatorOverride = operator.getElevatorOverrideSwitch();
         elevatorFFpOff = operator.getElevatorFFpOffSwitch();
 
+        if (operator.getAutoStackButton()) {
+            autoStack = true;
+        }
+
         if (elevatorOverride) {
             calcElevatorOverride();
+        } else if (autoStack) {
+            armOpen = false;
+            tiltUp = false;
+            punchOut = false;
+            if (elevatorPosition == Constants.FloorElevatorLevel1.getDouble() && feedback.isElevatorDone()) {
+                elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
+                wentToBottom = true;
+                intakeSpeed = 0.0;
+                intakesIn = false;
+            } else if (elevatorPosition == Constants.FloorElevatorLevel2.getDouble() && wentToBottom && feedback.isElevatorDone()) {
+                autoStack = false;
+            } else {
+                elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
+                intakeSpeed = 1.0;
+                intakesIn = true;
+            }
         } else {
             calcElevator();
         }
@@ -51,7 +73,7 @@ public class DriverInput extends Input {
         calcArms();
     }
 
-    //Drivebase
+//Drivebase
     private void calcDrivebase() {
         /**
          * Left stick controls translation, right stick controls rotation. Both
@@ -101,7 +123,7 @@ public class DriverInput extends Input {
         } else {
             armOpen = armOpenToggle.get();
         }
-        
+
         punchOut = operator.getPunchButton();
     }
 }

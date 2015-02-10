@@ -78,4 +78,8 @@ public class OperatorConsole {
     public boolean getPlaceButton() {
         return joystick.getRawButton(16);
     }
+    
+    public boolean getAutoStackButton() {
+        return joystick.getRawButton(17);
+    }
 }
