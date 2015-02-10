@@ -15,7 +15,7 @@ public class I2CArduinoLights {
      * used in the arduino code.
      */
     public I2CArduinoLights(int address) {
-        i2c = new I2C(Port.kMXP, address);
+        i2c = new I2C(Port.kOnboard, address);
         state = LightState.WHITE;
     }
 
