@@ -15,6 +15,7 @@ public class DriverInput extends Input {
 
     private boolean wentToBottom;
     private double toteInTime;
+    private boolean toteAvailable;
 
     public DriverInput() {
         driver = new GenericController(0, GenericController.TYPE_XBOX, 0.2);
@@ -22,6 +23,9 @@ public class DriverInput extends Input {
 
         tiltToggle = new TorqueToggle();
         armOpenToggle = new TorqueToggle();
+        
+        wentToBottom = false;
+        toteAvailable = false;
     }
 
     @Override
@@ -48,7 +52,7 @@ public class DriverInput extends Input {
             armOpen = false;
             tiltUp = false;
             punchOut = false;
-            
+
             if (elevatorPosition == Constants.FloorElevatorLevel1.getDouble() && feedback.isElevatorDone()) {
                 elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
                 wentToBottom = true;
@@ -56,6 +60,7 @@ public class DriverInput extends Input {
                 intakesIn = false;
             } else if (elevatorPosition == Constants.FloorElevatorLevel2.getDouble() && wentToBottom && feedback.isElevatorDone()) {
                 autoStack = false;
+                toteAvailable = false;
             } else {
                 elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
                 intakeSpeed = 1.0;
@@ -63,27 +68,29 @@ public class DriverInput extends Input {
             }
         } else if (feederStack) {
             double currentTime = Timer.getFPGATimestamp();
-            
+
             elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
             armOpen = false;
             punchOut = false;
             tiltUp = false;
-            
-            if (feedback.isToteInSluice()) {
+
+            if (feedback.isToteInSluice() && !toteAvailable) {
                 toteInTime = Timer.getFPGATimestamp();
-            }
-            if (currentTime - Constants.ToteSluiceWaitTime.getDouble() > toteInTime) {
-                intakeSpeed = 1.0;
-                if (currentTime - Constants.ToteSluiceWaitTime.getDouble() - Constants.TotePullBAckTime.getDouble() > toteInTime) {
-                    autoStack = true;
-                }
-            } else {
-                if (feedback.isElevatorDone()) {
-                    intakeSpeed = -1.0;
-                    intakesIn = true;
+                toteAvailable = true;
+            } else if (toteAvailable) {
+                if (currentTime - Constants.ToteSluiceWaitTime.getDouble() > toteInTime) {
+                    intakeSpeed = 1.0;
+                    if (currentTime - Constants.ToteSluiceWaitTime.getDouble() - Constants.TotePullBAckTime.getDouble() > toteInTime) {
+                        autoStack = true;
+                    }
                 } else {
-                    intakeSpeed = 0.0;
-                    intakesIn = false;
+                    if (feedback.isElevatorDone()) {
+                        intakeSpeed = -1.0;
+                        intakesIn = true;
+                    } else {
+                        intakeSpeed = 0.0;
+                        intakesIn = false;
+                    }
                 }
             }
         } else {
