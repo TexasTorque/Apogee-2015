@@ -1,5 +1,6 @@
 package org.texastorque.texastorque2015.auto;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque2015.input.Input;
 import org.texastorque.texastorque2015.constants.Constants;
 
@@ -114,11 +115,10 @@ public abstract class AutoMode extends Input {
 
         @Override
         public boolean isDone() {
-            if (Math.abs(feedback.getAngle() - angle) < doneRange) {
-                doneCycles ++;
+            if (Math.abs(feedback.getAngle() - angle) <= doneRange) {
+                doneCycles++;
             }
-            
-            return doneCycles < minDoneCycles;
+            return doneCycles > minDoneCycles;
         }
 
         @Override

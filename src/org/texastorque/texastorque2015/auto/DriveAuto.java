@@ -1,5 +1,7 @@
 package org.texastorque.texastorque2015.auto;
 
+import org.texastorque.texastorque2015.constants.Constants;
+
 public class DriveAuto extends AutoMode {
 
     //test auto to try out commands and raw inputs.
