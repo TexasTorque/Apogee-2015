@@ -9,6 +9,12 @@ public class Ports {
     public final static int RIGHT_B_DRIVE_PORT = 3;
     public final static int FRONT_STRAFE_PORT = 2;
     public final static int REAR_STRAFE_PORT = 5;
+    
+    //Elevator
+    public final static int LEFT_ELEVATOR_A = 8;
+    public final static int LEFT_ELEVATOR_B = 9;
+    public final static int RIGHT_ELEVATOR_A = 10;
+    public final static int RIGHT_ELEVATOR_B = 11;
 
     //encoders
     public final static int RIGHT_ENCODER_PORT_A = 0;
