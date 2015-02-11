@@ -66,6 +66,12 @@ public class Elevator extends Subsystem {
         if (!input.isElevatorFFpOff()) {
             motorSpeed += ffPosition;
         }
+        
+        if (feedback.isElevatorAtTop()) {
+            motorSpeed = Math.min(motorSpeed, 0.0);
+        } else if (feedback.isElevatorAtBottom()) {
+            motorSpeed = Math.max(motorSpeed, 0.0);
+        }
 
         if (outputEnabled) {
             output.setElevatorMotorSpeeds(motorSpeed);
