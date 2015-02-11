@@ -145,6 +145,9 @@ public class Robot extends TorqueIterative {
         activeFeedback.run();
 
         drivebase.run();
+        elevator.run();
+        arms.run();
+        intake.run();
 
         logger.log();
 
@@ -182,6 +185,9 @@ public class Robot extends TorqueIterative {
         activeFeedback.run();
 
         drivebase.run();
+        elevator.run();
+        arms.run();
+        intake.run();
 
         SmartDashboard.putNumber("NumCycles", numcycles++);
     }
