@@ -63,6 +63,14 @@ public class Constants extends Parameters {
     public final static Constant ElevatorffP6Tote = new Constant("E_ffP_6Tote", 0.0);
     public final static Constant ElevatorMaxV6Tote = new Constant("E_MaxV_6Tote", 0.0);
     public final static Constant ElevatorMaxA6Tote = new Constant("E_MaxA_6Tote", 0.0);
+    
+    public final static Constant ElevatorPRecyclingCan = new Constant("E_P_RC", 0.0);
+    public final static Constant ElevatorVRecyclingCan = new Constant("E_V_RC", 0.0);
+    public final static Constant ElevatorffVRecyclingCan = new Constant("E_ffV_RC", 0.0);
+    public final static Constant ElevatorffARecyclingCan = new Constant("E_ffA_RC", 0.0);
+    public final static Constant ElevatorffPRecyclingCan = new Constant("E_ffP_RC", 0.0);
+    public final static Constant ElevatorMaxVRecyclingCan = new Constant("E_MaxV_RC", 0.0);
+    public final static Constant ElevatorMaxARecyclingCan = new Constant("E_MaxA_RC", 0.0);
 
     public final static Constant FloorElevatorLevel1 = new Constant("E_FloorL1", 0.0);
     public final static Constant FloorElevatorLevel2 = new Constant("E_FloorL2", 0.0);

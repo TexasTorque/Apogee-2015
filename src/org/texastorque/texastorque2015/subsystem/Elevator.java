@@ -137,6 +137,14 @@ public class Elevator extends Subsystem {
             ffA = Constants.ElevatorffA6Tote.getDouble();
 
             ffPosition = Constants.ElevatorffP6Tote.getDouble();
+        } else if (numTotes == -1) {
+            tmp = new TorqueTMP(Constants.ElevatorMaxARecyclingCan.getDouble(), Constants.ElevatorMaxARecyclingCan.getDouble());
+            p = Constants.ElevatorPRecyclingCan.getDouble();
+            v = Constants.ElevatorVRecyclingCan.getDouble();
+            ffV = Constants.ElevatorffVRecyclingCan.getDouble();
+            ffA = Constants.ElevatorffARecyclingCan.getDouble();
+            
+            ffPosition = Constants.ElevatorffPRecyclingCan.getDouble();
         }
         pv.setGains(p, v, ffV, ffA);
     }
