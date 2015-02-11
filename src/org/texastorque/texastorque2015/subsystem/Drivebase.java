@@ -62,6 +62,7 @@ public class Drivebase extends Subsystem {
         linearProfile.generateTrapezoid(0.0, 0.0, (leftVelocity + rightVelocity) / 2);
         angularProfile.generateTrapezoid(0.0, 0.0, angle);
         feedback.resetDriveEncoders();
+        feedback.resetGyro();
     }
 
     @Override
@@ -102,11 +103,11 @@ public class Drivebase extends Subsystem {
             leftSpeed = leftPV.calculate(linearProfile, leftPosition, leftVelocity);
             rightSpeed = rightPV.calculate(linearProfile, rightPosition, rightVelocity);
 
-        } else if (input.isDrivebaseControlled() && input.getDriveDistance() == 0.0) {
+        } else if (input.isDrivebaseControlled()) {
             if (setPointAngle != input.getDriveAngle()) {
                 setPointAngle = input.getDriveAngle();
 
-                angularProfile.generateTrapezoid(setPointAngle, 0.0, angle);
+                angularProfile.generateTrapezoid(setPointAngle, 0.0, angularVelocity);
 
                 feedback.resetGyro();
             }
@@ -169,7 +170,7 @@ public class Drivebase extends Subsystem {
         SmartDashboard.putNumber("TargetAcceleration", targetAcceleration);
         SmartDashboard.putNumber("TargetAngle", targetAngle);
         SmartDashboard.putNumber("TargetAngularVelocity", targetAngularVelocity);
-        SmartDashboard.putNumber("TargetAngularAcceleratoin", targetAngularAcceleration);
+        SmartDashboard.putNumber("TargetAngularAcceleration", targetAngularAcceleration);
     }
 
     @Override

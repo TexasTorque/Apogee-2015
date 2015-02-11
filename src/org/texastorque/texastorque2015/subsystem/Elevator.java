@@ -46,13 +46,17 @@ public class Elevator extends Subsystem {
         currentVelocity = feedback.getElevatorVelocity();
 
         feedback.setElevatorDone(isDone());
-        
+
         if (!input.isElevatorOverride()) {
             if (input.getElevatorPosition() != setPointElevation) {
                 setPointElevation = input.getElevatorPosition();
 
                 tmp.generateTrapezoid(setPointElevation, currentPosition, currentVelocity);
+                targetPosition = tmp.getCurrentPosition();
+                targetVelocity = tmp.getCurrentVelocity();
+                targetAcceleration = tmp.getCurrentAcceleration();
             }
+            tmp.calculateNextSituation();
 
             motorSpeed = pv.calculate(tmp, currentPosition, currentVelocity) + ffPosition;
         } else {
