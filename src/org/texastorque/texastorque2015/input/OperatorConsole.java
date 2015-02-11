@@ -70,16 +70,16 @@ public class OperatorConsole {
     public boolean getIntakeButton() {
         return joystick.getRawButton(14);
     }
-
-    public boolean getOuttakeButton() {
+    
+    public boolean getPlaceButton() {
         return joystick.getRawButton(15);
     }
     
-    public boolean getPlaceButton() {
+    public boolean getAutoStackButton() {
         return joystick.getRawButton(16);
     }
     
-    public boolean getAutoStackButton() {
+    public boolean getFeederStackButton() {
         return joystick.getRawButton(17);
     }
 }

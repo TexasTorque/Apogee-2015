@@ -1,5 +1,6 @@
 package org.texastorque.texastorque2015.input;
 
+import edu.wpi.first.wpilibj.Timer;
 import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.torquelib.util.GenericController;
 import org.texastorque.torquelib.util.TorqueToggle;
@@ -11,8 +12,9 @@ public class DriverInput extends Input {
 
     TorqueToggle tiltToggle;
     TorqueToggle armOpenToggle;
-    
+
     private boolean wentToBottom;
+    private double toteInTime;
 
     public DriverInput() {
         driver = new GenericController(0, GenericController.TYPE_XBOX, 0.2);
@@ -34,13 +36,19 @@ public class DriverInput extends Input {
         if (operator.getAutoStackButton()) {
             autoStack = true;
         }
+        feederStack = operator.getFeederStackButton();
 
+        //Calculate what all of the subsystems should do either independently or 
+        //synchronized for complicated actions.
         if (elevatorOverride) {
             calcElevatorOverride();
+            calcArms();
+            calcIntake();
         } else if (autoStack) {
             armOpen = false;
             tiltUp = false;
             punchOut = false;
+            
             if (elevatorPosition == Constants.FloorElevatorLevel1.getDouble() && feedback.isElevatorDone()) {
                 elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
                 wentToBottom = true;
@@ -53,24 +61,36 @@ public class DriverInput extends Input {
                 intakeSpeed = 1.0;
                 intakesIn = true;
             }
+        } else if (feederStack) {
+            double currentTime = Timer.getFPGATimestamp();
+            
+            elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
+            armOpen = false;
+            punchOut = false;
+            tiltUp = false;
+            
+            if (feedback.isToteInSluice()) {
+                toteInTime = Timer.getFPGATimestamp();
+            }
+            if (currentTime - Constants.ToteSluiceWaitTime.getDouble() > toteInTime) {
+                intakeSpeed = 1.0;
+                if (currentTime - Constants.ToteSluiceWaitTime.getDouble() - Constants.TotePullBAckTime.getDouble() > toteInTime) {
+                    autoStack = true;
+                }
+            } else {
+                if (feedback.isElevatorDone()) {
+                    intakeSpeed = -1.0;
+                    intakesIn = true;
+                } else {
+                    intakeSpeed = 0.0;
+                    intakesIn = false;
+                }
+            }
         } else {
             calcElevator();
+            calcArms();
+            calcIntake();
         }
-
-        //Intake
-        if (operator.getIntakeButton()) {
-            intakeSpeed = 1.0;
-            intakesIn = true;
-        } else if (operator.getOuttakeButton()) {
-            intakeSpeed = -1.0;
-            intakesIn = true;
-        } else {
-            intakeSpeed = 0.0;
-            intakesIn = false;
-        }
-
-        //Arms
-        calcArms();
     }
 
 //Drivebase
@@ -125,5 +145,16 @@ public class DriverInput extends Input {
         }
 
         punchOut = operator.getPunchButton();
+    }
+
+    //Intake
+    private void calcIntake() {
+        if (operator.getIntakeButton()) {
+            intakeSpeed = 1.0;
+            intakesIn = true;
+        } else {
+            intakeSpeed = 0.0;
+            intakesIn = false;
+        }
     }
 }

@@ -71,13 +71,13 @@ public class Constants extends Parameters {
     public final static Constant FloorElevatorLevel5 = new Constant("E_FloorL5", 0.0);
     public final static Constant FloorElevatorLevel6 = new Constant("E_FloorL6", 0.0);
 
-    //step
+    //Step
     public final static Constant StepElevatorLevel1 = new Constant("E_StepL1", 0.0);
     public final static Constant StepElevatorLevel2 = new Constant("E_StepL2", 0.0);
     public final static Constant StepElevatorLevel3 = new Constant("E_StepL3", 0.0);
     public final static Constant StepElevatorLevel4 = new Constant("E_StepL4", 0.0);
 
-    //
+    //Scoring Platform
     public final static Constant SPElevatorLevel1 = new Constant("E_SPL1", 0.0);
     public final static Constant SPElevatorLevel2 = new Constant("E_SPL2", 0.0);
     public final static Constant SPElevatorLevel3 = new Constant("E_SPL3", 0.0);
@@ -115,6 +115,10 @@ public class Constants extends Parameters {
     //Drivebase angular
     public final static Constant DrivebaseMaxAngleV = new Constant("D_MaxAngleV", 0.0);
     public final static Constant DrivebaseMaxAngleA = new Constant("D_MaxAngleA", 0.0);
+    
+    //Manipulator
+    public final static Constant ToteSluiceWaitTime = new Constant("S_ToteWaitTime", 1.0);
+    public final static Constant TotePullBAckTime = new Constant("I_TotePullBAckTime", 1.0);
 
     static {
         load();

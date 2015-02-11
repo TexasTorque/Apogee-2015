@@ -102,6 +102,7 @@ public abstract class Input implements Runnable {
     //Auto stacking
     
     protected volatile boolean autoStack;
+    protected volatile boolean feederStack;
     
     public boolean wantAutoStack() {
         return autoStack;
