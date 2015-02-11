@@ -52,11 +52,12 @@ public class Elevator extends Subsystem {
                 setPointElevation = input.getElevatorPosition();
 
                 tmp.generateTrapezoid(setPointElevation, currentPosition, currentVelocity);
-                targetPosition = tmp.getCurrentPosition();
-                targetVelocity = tmp.getCurrentVelocity();
-                targetAcceleration = tmp.getCurrentAcceleration();
             }
             tmp.calculateNextSituation();
+
+            targetPosition = tmp.getCurrentPosition();
+            targetVelocity = tmp.getCurrentVelocity();
+            targetAcceleration = tmp.getCurrentAcceleration();
 
             motorSpeed = pv.calculate(tmp, currentPosition, currentVelocity) + ffPosition;
         } else {
@@ -66,7 +67,7 @@ public class Elevator extends Subsystem {
         if (!input.isElevatorFFpOff()) {
             motorSpeed += ffPosition;
         }
-        
+
         if (feedback.isElevatorAtTop()) {
             motorSpeed = Math.min(motorSpeed, 0.0);
         } else if (feedback.isElevatorAtBottom()) {
@@ -143,7 +144,7 @@ public class Elevator extends Subsystem {
             v = Constants.ElevatorVRecyclingCan.getDouble();
             ffV = Constants.ElevatorffVRecyclingCan.getDouble();
             ffA = Constants.ElevatorffARecyclingCan.getDouble();
-            
+
             ffPosition = Constants.ElevatorffPRecyclingCan.getDouble();
         }
         pv.setGains(p, v, ffV, ffA);
