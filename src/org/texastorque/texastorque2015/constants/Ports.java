@@ -13,8 +13,8 @@ public class Ports {
     //Elevator
     public final static int LEFT_ELEVATOR_A = 8;
     public final static int LEFT_ELEVATOR_B = 9;
-    public final static int RIGHT_ELEVATOR_A = 10;
-    public final static int RIGHT_ELEVATOR_B = 11;
+    public final static int RIGHT_ELEVATOR_A = 17;
+    public final static int RIGHT_ELEVATOR_B = 18;
 
     //encoders
     public final static int RIGHT_ENCODER_PORT_A = 0;

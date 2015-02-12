@@ -56,7 +56,7 @@ public class RobotOutput extends Output {
         //Elevator
         leftElevatorMotorA = new TorqueMotor(new VictorSP(Ports.LEFT_ELEVATOR_A), true, TorqueMotor.LinearizationType.kNone);
         leftElevatorMotorB = new TorqueMotor(new VictorSP(Ports.LEFT_ELEVATOR_B), true, TorqueMotor.LinearizationType.kNone);
-        rightElevatorMotorA = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR_B), false, TorqueMotor.LinearizationType.kNone);
+        rightElevatorMotorA = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR_A), false, TorqueMotor.LinearizationType.kNone);
         rightElevatorMotorB = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR_B), false, TorqueMotor.LinearizationType.kNone);
     }
 
