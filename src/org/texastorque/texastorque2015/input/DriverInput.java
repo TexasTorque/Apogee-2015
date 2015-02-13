@@ -23,7 +23,7 @@ public class DriverInput extends Input {
 
         tiltToggle = new TorqueToggle();
         armOpenToggle = new TorqueToggle();
-        
+
         wentToBottom = false;
         toteAvailable = false;
     }
@@ -61,6 +61,7 @@ public class DriverInput extends Input {
             } else if (elevatorPosition == Constants.FloorElevatorLevel2.getDouble() && wentToBottom && feedback.isElevatorDone()) {
                 autoStack = false;
                 toteAvailable = false;
+                wentToBottom = false;
             } else {
                 elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
                 intakeSpeed = 1.0;
@@ -79,18 +80,14 @@ public class DriverInput extends Input {
                 toteAvailable = true;
             } else if (toteAvailable) {
                 if (currentTime - Constants.ToteSluiceWaitTime.getDouble() > toteInTime) {
-                    intakeSpeed = 1.0;
                     if (currentTime - Constants.ToteSluiceWaitTime.getDouble() - Constants.TotePullBAckTime.getDouble() > toteInTime) {
                         autoStack = true;
+                    } else {
+                        intakeSpeed = 1.0;
                     }
                 } else {
-                    if (feedback.isElevatorDone()) {
-                        intakeSpeed = -1.0;
-                        intakesIn = true;
-                    } else {
-                        intakeSpeed = 0.0;
-                        intakesIn = false;
-                    }
+                    intakeSpeed = -1.0;
+                    intakesIn = true;
                 }
             }
         } else {
@@ -100,7 +97,7 @@ public class DriverInput extends Input {
         }
     }
 
-//Drivebase
+    //Drivebase
     private void calcDrivebase() {
         /**
          * Left stick controls translation, right stick controls rotation. Both
