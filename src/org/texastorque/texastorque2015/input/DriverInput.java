@@ -69,6 +69,7 @@ public class DriverInput extends Input {
                 SmartDashboard.putNumber("POS_TEST", 2);
                 autoStack = false;
                 toteAvailable = false;
+                wentToBottom = false;
             } else {
                 SmartDashboard.putNumber("POS_TEST", 3);
                 elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
@@ -92,21 +93,14 @@ public class DriverInput extends Input {
             } else if (toteAvailable) {
                 if (currentTime - Constants.ToteSluiceWaitTime.getDouble() > toteInTime) {
                     SmartDashboard.putNumber("feederstack", 1);
-                    intakeSpeed = 1.0;
                     if (currentTime - Constants.ToteSluiceWaitTime.getDouble() - Constants.TotePullBAckTime.getDouble() > toteInTime) {
                         autoStack = true;
-                        SmartDashboard.putNumber("feederstack", 2);
+                    } else {
+                        intakeSpeed = 1.0;
                     }
                 } else {
-                    if (feedback.isElevatorDone()) {
-                        intakeSpeed = -1.0;
-                        intakesIn = true;
-                        SmartDashboard.putNumber("feederstack", 3);
-                    } else {
-                        intakeSpeed = 0.0;
-                        intakesIn = false;
-                        SmartDashboard.putNumber("feederstack", 4);
-                    }
+                    intakeSpeed = -1.0;
+                    intakesIn = true;
                 }
             }
         } else {
@@ -116,7 +110,7 @@ public class DriverInput extends Input {
         }
     }
 
-//Drivebase
+    //Drivebase
     private void calcDrivebase() {
         /**
          * Left stick controls translation, right stick controls rotation. Both
