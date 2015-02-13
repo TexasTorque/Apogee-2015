@@ -1,6 +1,8 @@
 package org.texastorque.texastorque2015.input;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.torquelib.util.GenericController;
 import org.texastorque.torquelib.util.TorqueToggle;
@@ -23,7 +25,7 @@ public class DriverInput extends Input {
 
         tiltToggle = new TorqueToggle();
         armOpenToggle = new TorqueToggle();
-        
+
         wentToBottom = false;
         toteAvailable = false;
     }
@@ -41,6 +43,9 @@ public class DriverInput extends Input {
             autoStack = true;
         }
         feederStack = operator.getFeederStackButton();
+        autoStack = false;
+        feederStack = true;
+        elevatorOverride = false;
 
         //Calculate what all of the subsystems should do either independently or 
         //synchronized for complicated actions.
@@ -53,15 +58,19 @@ public class DriverInput extends Input {
             tiltUp = false;
             punchOut = false;
 
+            SmartDashboard.putNumber("POS_TEST", 0);
             if (elevatorPosition == Constants.FloorElevatorLevel1.getDouble() && feedback.isElevatorDone()) {
+                SmartDashboard.putNumber("POS_TEST", 1);
                 elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
                 wentToBottom = true;
                 intakeSpeed = 0.0;
                 intakesIn = false;
             } else if (elevatorPosition == Constants.FloorElevatorLevel2.getDouble() && wentToBottom && feedback.isElevatorDone()) {
+                SmartDashboard.putNumber("POS_TEST", 2);
                 autoStack = false;
                 toteAvailable = false;
             } else {
+                SmartDashboard.putNumber("POS_TEST", 3);
                 elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
                 intakeSpeed = 1.0;
                 intakesIn = true;
@@ -69,27 +78,34 @@ public class DriverInput extends Input {
         } else if (feederStack) {
             double currentTime = Timer.getFPGATimestamp();
 
-            elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
+            elevatorPosition = Constants.FloorElevatorLevel3.getDouble();
             armOpen = false;
             punchOut = false;
             tiltUp = false;
 
+            SmartDashboard.putBoolean("toteAvaliable", toteAvailable);
+
             if (feedback.isToteInSluice() && !toteAvailable) {
                 toteInTime = Timer.getFPGATimestamp();
                 toteAvailable = true;
+                SmartDashboard.putNumber("feederstack", 0);
             } else if (toteAvailable) {
                 if (currentTime - Constants.ToteSluiceWaitTime.getDouble() > toteInTime) {
+                    SmartDashboard.putNumber("feederstack", 1);
                     intakeSpeed = 1.0;
                     if (currentTime - Constants.ToteSluiceWaitTime.getDouble() - Constants.TotePullBAckTime.getDouble() > toteInTime) {
                         autoStack = true;
+                        SmartDashboard.putNumber("feederstack", 2);
                     }
                 } else {
                     if (feedback.isElevatorDone()) {
                         intakeSpeed = -1.0;
                         intakesIn = true;
+                        SmartDashboard.putNumber("feederstack", 3);
                     } else {
                         intakeSpeed = 0.0;
                         intakesIn = false;
+                        SmartDashboard.putNumber("feederstack", 4);
                     }
                 }
             }

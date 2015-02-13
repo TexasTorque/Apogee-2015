@@ -63,7 +63,7 @@ public class Constants extends Parameters {
     public final static Constant ElevatorffP6Tote = new Constant("E_ffP_6Tote", 0.0);
     public final static Constant ElevatorMaxV6Tote = new Constant("E_MaxV_6Tote", 0.0);
     public final static Constant ElevatorMaxA6Tote = new Constant("E_MaxA_6Tote", 0.0);
-    
+
     public final static Constant ElevatorPRecyclingCan = new Constant("E_P_RC", 0.0);
     public final static Constant ElevatorVRecyclingCan = new Constant("E_V_RC", 0.0);
     public final static Constant ElevatorffVRecyclingCan = new Constant("E_ffV_RC", 0.0);
@@ -73,11 +73,11 @@ public class Constants extends Parameters {
     public final static Constant ElevatorMaxARecyclingCan = new Constant("E_MaxA_RC", 0.0);
 
     public final static Constant FloorElevatorLevel1 = new Constant("E_FloorL1", 0.0);
-    public final static Constant FloorElevatorLevel2 = new Constant("E_FloorL2", 0.0);
-    public final static Constant FloorElevatorLevel3 = new Constant("E_FloorL3", 0.0);
-    public final static Constant FloorElevatorLevel4 = new Constant("E_FloorL4", 0.0);
-    public final static Constant FloorElevatorLevel5 = new Constant("E_FloorL5", 0.0);
-    public final static Constant FloorElevatorLevel6 = new Constant("E_FloorL6", 0.0);
+    public final static Constant FloorElevatorLevel2 = new Constant("E_FloorL2", 100.0);
+    public final static Constant FloorElevatorLevel3 = new Constant("E_FloorL3", 200.0);
+    public final static Constant FloorElevatorLevel4 = new Constant("E_FloorL4", 300.0);
+    public final static Constant FloorElevatorLevel5 = new Constant("E_FloorL5", 400.0);
+    public final static Constant FloorElevatorLevel6 = new Constant("E_FloorL6", 500.0);
 
     //Step
     public final static Constant StepElevatorLevel1 = new Constant("E_StepL1", 0.0);
@@ -123,7 +123,7 @@ public class Constants extends Parameters {
     //Drivebase angular
     public final static Constant DrivebaseMaxAngleV = new Constant("D_MaxAngleV", 0.0);
     public final static Constant DrivebaseMaxAngleA = new Constant("D_MaxAngleA", 0.0);
-    
+
     //Manipulator
     public final static Constant ToteSluiceWaitTime = new Constant("S_ToteWaitTime", 1.0);
     public final static Constant TotePullBAckTime = new Constant("I_TotePullBAckTime", 1.0);

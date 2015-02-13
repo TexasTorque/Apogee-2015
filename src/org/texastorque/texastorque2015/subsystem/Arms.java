@@ -22,7 +22,7 @@ public class Arms extends Subsystem {
             armsOpen = false;
             punchOut = false;
         }
-        
+
         tiltUp = input.isTiltUp();
 
         if (outputEnabled) {

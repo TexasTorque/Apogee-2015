@@ -69,7 +69,7 @@ public abstract class Input implements Runnable {
     public boolean isElevatorFFpOff() {
         return elevatorFFpOff;
     }
-    
+
     //Crazy Arms
     protected volatile boolean armOpen;
     protected volatile boolean punchOut;
@@ -98,14 +98,13 @@ public abstract class Input implements Runnable {
     public boolean areIntakesIn() {
         return intakesIn;
     }
-    
+
     //Auto stacking
-    
     protected volatile boolean autoStack;
     protected volatile boolean feederStack;
-    
+
     public boolean wantAutoStack() {
         return autoStack;
     }
-    
+
 }

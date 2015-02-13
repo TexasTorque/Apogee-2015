@@ -159,6 +159,7 @@ public class Elevator extends Subsystem {
         SmartDashboard.putNumber("ElevatorTargetVelocity", targetVelocity);
         SmartDashboard.putNumber("ElevatorTargetAcceleration", targetAcceleration);
         SmartDashboard.putNumber("NumTotes", numTotes);
+        SmartDashboard.putBoolean("ElevatorDone", isDone());
     }
 
     @Override

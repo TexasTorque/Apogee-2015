@@ -2,6 +2,7 @@ package org.texastorque.texastorque2015;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque2015.auto.AutoPicker;
+import org.texastorque.texastorque2015.feedback.DashboardFeedback;
 import org.texastorque.texastorque2015.feedback.Feedback;
 import org.texastorque.texastorque2015.feedback.SensorFeedback;
 import org.texastorque.texastorque2015.input.DriverInput;
@@ -35,6 +36,7 @@ public class Robot extends TorqueIterative {
     //Feedback
     Feedback activeFeedback;
     SensorFeedback sensorFeedback;
+    DashboardFeedback dashFeedback;
 
     //Other
     TorqueLogging logger;
@@ -44,6 +46,7 @@ public class Robot extends TorqueIterative {
 
     @Override
     public void robotInit() {
+        SmartDashboard.putBoolean("toteInSluice", false);//test
         Parameters.makeFile();
         Parameters.load();
 
@@ -57,6 +60,7 @@ public class Robot extends TorqueIterative {
         driverInput = new DriverInput();
         robotOutput = new RobotOutput();
         sensorFeedback = new SensorFeedback();
+        dashFeedback = new DashboardFeedback();
 
         AutoPicker.init();
 
@@ -71,6 +75,8 @@ public class Robot extends TorqueIterative {
 
     //Update Input, Output, Feedback for all subsystems.
     private void updateIO() {
+        driverInput.setFeedback(activeFeedback);
+
         drivebase.setInput(activeInput);
         drivebase.setOutput(activeOutput);
         drivebase.setFeedback(activeFeedback);
@@ -118,7 +124,7 @@ public class Robot extends TorqueIterative {
     public void teleopInit() {
         activeInput = driverInput;
         activeOutput = robotOutput;
-        activeFeedback = sensorFeedback;
+        activeFeedback = dashFeedback;
 
         updateIO();
         loadParams();

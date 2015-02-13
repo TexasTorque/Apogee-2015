@@ -62,7 +62,7 @@ public class SensorFeedback extends Feedback {
         elevatorAtBottom = bottomLimit.get();
 
         //Sluice
-        toteInSluice = topLimit.get();
+        toteInSluice = sluiceLimitSwitch.get();
 
         //angle (radians)
         angle = gyro.getAngle();

@@ -66,19 +66,19 @@ public class OperatorConsole {
     public boolean getElevatorDownButton() {
         return joystick.getRawButton(13);
     }
-    
+
     public boolean getIntakeButton() {
         return joystick.getRawButton(14);
     }
-    
+
     public boolean getPlaceButton() {
         return joystick.getRawButton(15);
     }
-    
+
     public boolean getAutoStackButton() {
         return joystick.getRawButton(16);
     }
-    
+
     public boolean getFeederStackButton() {
         return joystick.getRawButton(17);
     }
