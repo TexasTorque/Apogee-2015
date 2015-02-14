@@ -14,9 +14,10 @@ public abstract class AutoCommand {
     protected boolean firstCycle;
     protected String name;
 
-    public AutoCommand(String nm, double minDoneCycles) {
+    public AutoCommand(String nm, double minDoneCycles, double timeOut) {
         this.name = nm;
         this.minDoneCycles = minDoneCycles;
+        this.timeOut = timeOut;
     }
 
     public boolean isTimedOut() {
