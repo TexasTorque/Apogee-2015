@@ -76,10 +76,10 @@ public class OperatorConsole {
     }
 
     public boolean getAutoStackButton() {
-        return joystick.getRawButton(16);
+        return joystick.getRawButton(2);
     }
 
     public boolean getFeederStackButton() {
-        return joystick.getRawButton(17);
+        return joystick.getRawButton(1);
     }
 }

@@ -18,6 +18,7 @@ public class DriverInput extends Input {
     private boolean wentToBottom;
     private double toteInTime;
     private boolean toteAvailable;
+    private double autoStackHeight;
 
     public DriverInput() {
         driver = new GenericController(0, GenericController.TYPE_XBOX, 0.2);
@@ -28,6 +29,7 @@ public class DriverInput extends Input {
 
         wentToBottom = false;
         toteAvailable = false;
+        autoStackHeight = 0.0;
     }
 
     @Override
@@ -43,8 +45,6 @@ public class DriverInput extends Input {
             autoStack = true;
         }
         feederStack = operator.getFeederStackButton();
-        autoStack = false;
-        feederStack = true;
         elevatorOverride = false;
 
         //Calculate what all of the subsystems should do either independently or 
@@ -58,18 +58,24 @@ public class DriverInput extends Input {
             tiltUp = false;
             punchOut = false;
 
-            SmartDashboard.putNumber("POS_TEST", 0);
             if (elevatorPosition == Constants.FloorElevatorLevel1.getDouble() && feedback.isElevatorDone()) {
+                if (feederStack) {
+                    autoStackHeight = Constants.FloorElevatorLevel3.getDouble();
+                } else {
+                    autoStackHeight = Constants.FloorElevatorLevel2.getDouble();
+                }
+                elevatorPosition = autoStackHeight;
                 SmartDashboard.putNumber("POS_TEST", 1);
-                elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
                 wentToBottom = true;
                 intakeSpeed = 0.0;
                 intakesIn = false;
-            } else if (elevatorPosition == Constants.FloorElevatorLevel2.getDouble() && wentToBottom && feedback.isElevatorDone()) {
+            } else if (elevatorPosition == autoStackHeight && wentToBottom && feedback.isElevatorDone()) {
                 SmartDashboard.putNumber("POS_TEST", 2);
                 autoStack = false;
                 toteAvailable = false;
                 wentToBottom = false;
+            } else if (elevatorPosition == autoStackHeight && wentToBottom) {
+                SmartDashboard.putNumber("POS_TEST", 0);
             } else {
                 SmartDashboard.putNumber("POS_TEST", 3);
                 elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
@@ -86,28 +92,38 @@ public class DriverInput extends Input {
 
             SmartDashboard.putBoolean("toteAvaliable", toteAvailable);
 
+            SmartDashboard.putNumber("feederstack", -1);
+            System.out.println("IS TOTE IN: " + feedback.isToteInSluice());
             if (feedback.isToteInSluice() && !toteAvailable) {
                 toteInTime = Timer.getFPGATimestamp();
                 toteAvailable = true;
                 SmartDashboard.putNumber("feederstack", 0);
             } else if (toteAvailable) {
                 if (currentTime - Constants.ToteSluiceWaitTime.getDouble() > toteInTime) {
-                    SmartDashboard.putNumber("feederstack", 1);
                     if (currentTime - Constants.ToteSluiceWaitTime.getDouble() - Constants.TotePullBAckTime.getDouble() > toteInTime) {
-                        autoStack = true;
+                        if (feedback.isElevatorDone()) {
+                            autoStack = true;
+                        }
+                        SmartDashboard.putNumber("feederstack", 1);
                     } else {
                         intakeSpeed = 1.0;
+                        SmartDashboard.putNumber("feederstack", 2);
                     }
                 } else {
                     intakeSpeed = -1.0;
                     intakesIn = true;
+                    SmartDashboard.putNumber("feederstack", 3);
                 }
             }
         } else {
+            toteAvailable = false;
+            wentToBottom = false;
             calcElevator();
             calcArms();
             calcIntake();
         }
+
+        SmartDashboard.putBoolean("autoStack", autoStack);
     }
 
     //Drivebase
