@@ -53,6 +53,7 @@ public abstract class Input implements Runnable {
     protected volatile boolean elevatorOverride;
     protected volatile double overrideElevatorMotorSpeed;
     protected volatile boolean elevatorFFpOff;
+    protected volatile boolean newPosition;
 
     public boolean isElevatorOverride() {
         return elevatorOverride;
@@ -68,6 +69,10 @@ public abstract class Input implements Runnable {
 
     public boolean isElevatorFFpOff() {
         return elevatorFFpOff;
+    }
+
+    public boolean newPosition() {
+        return true;
     }
 
     //Crazy Arms

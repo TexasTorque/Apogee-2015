@@ -31,7 +31,19 @@ public class DriverInput extends Input {
     }
 
     @Override
+    public boolean newPosition() {
+        return newPosition;
+    }
+
+    @Override
     public void run() {
+        newPosition = operator.getLevel1Button()
+                || operator.getLevel2Button()
+                || operator.getLevel3Button()
+                || operator.getLevel4Button()
+                || operator.getLevel5Button()
+                || operator.getLevel6Button();
+
         //Drivebase
         calcDrivebase();
 

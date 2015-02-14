@@ -38,7 +38,7 @@ public class Elevator extends Subsystem {
         //We do not want it flying off to its previous setpoint for sagety reasons.
         setPointElevation = currentPosition = feedback.getElevatorHeight();
         currentVelocity = feedback.getElevatorVelocity();
-        
+
         tmp.generateTrapezoid(setPointElevation, currentPosition, currentVelocity);
     }
 
@@ -56,7 +56,7 @@ public class Elevator extends Subsystem {
 
         //Control loop operation
         if (!input.isElevatorOverride()) {
-            if (input.getElevatorPosition() != setPointElevation) {
+            if (input.getElevatorPosition() != setPointElevation && input.newPosition()) {
                 setPointElevation = input.getElevatorPosition();
 
                 tmp.generateTrapezoid(setPointElevation, currentPosition, currentVelocity);
