@@ -43,7 +43,6 @@ public class DriverInput extends Input {
             autoStack = true;
         }
         feederStack = operator.getFeederStackButton();
-        elevatorOverride = false;
 
         if (elevatorOverride) {
             calcElevatorOverride();
@@ -112,7 +111,7 @@ public class DriverInput extends Input {
                 }
             }
         } else {
-            //not feederStack-ing or autoStack-ing = reset
+            //not feederStack-ing or autoStack-ing = normal operation
             toteAvailable = false;
             wentToBottom = false;
             calcElevator();

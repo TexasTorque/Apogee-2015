@@ -123,7 +123,7 @@ public class Robot extends TorqueIterative {
     public void teleopInit() {
         activeInput = driverInput;
         activeOutput = robotOutput;
-        activeFeedback = dashFeedback;
+        activeFeedback = sensorFeedback;
 
         updateIO();
         loadParams();
