@@ -98,13 +98,16 @@ public abstract class AutoMode extends Input {
 
         @Override
         public boolean isDone() {
-            return elevatorPosition == Constants.FloorElevatorLevel2.getDouble() && feedback.isElevatorDone() && wentDown;
+            if (elevatorPosition == Constants.FloorElevatorLevel2.getDouble() && feedback.isElevatorDone() && wentDown) {
+                doneCycles++;
+            }
+            return doneCycles > minDoneCycles;
         }
     }
 
     protected void runCommand(AutoCommand command) {
         command.reset();
-        while (!command.isDone()) {
+        while (!command.isDone() && command.isTimedOut()) {
             command.run();
             wait(0.01);
         }

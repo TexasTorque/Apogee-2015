@@ -22,6 +22,9 @@ public abstract class AutoCommand {
 
     public boolean isTimedOut() {
         timedOut = Timer.getFPGATimestamp() - startTime > timeOut;
+        if (timedOut) {
+            System.out.println(name + " timed out!");
+        }
         return timedOut;
     }
 
