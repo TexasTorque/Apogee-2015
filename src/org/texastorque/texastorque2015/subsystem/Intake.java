@@ -11,7 +11,7 @@ public class Intake extends Subsystem {
     }
 
     @Override
-    public void enable() {
+    public void init() {
     }
 
     @Override

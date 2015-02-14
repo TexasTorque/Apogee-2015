@@ -33,7 +33,13 @@ public class Elevator extends Subsystem {
     }
 
     @Override
-    public void enable() {
+    public void init() {
+        //Make the elevator hold its current position when we enable.
+        //We do not want it flying off to its previous setpoint for sagety reasons.
+        setPointElevation = currentPosition = feedback.getElevatorHeight();
+        currentVelocity = feedback.getElevatorVelocity();
+        
+        tmp.generateTrapezoid(setPointElevation, currentPosition, currentVelocity);
     }
 
     private boolean isDone() {

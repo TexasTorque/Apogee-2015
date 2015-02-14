@@ -33,6 +33,6 @@ public abstract class Subsystem implements Runnable, Loggable {
 
     public abstract void pushToDashboard();
 
-    public abstract void enable();
+    public abstract void init();
 
 }

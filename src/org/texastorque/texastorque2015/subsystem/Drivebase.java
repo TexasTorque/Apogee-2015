@@ -56,7 +56,7 @@ public class Drivebase extends Subsystem {
 
     //Resets the TMP so that the robot does not try to move. Called every time the robot enables.
     @Override
-    public void enable() {
+    public void init() {
         setPointPosition = 0.0;
         setPointAngle = 0.0;
         linearProfile.generateTrapezoid(0.0, 0.0, (leftVelocity + rightVelocity) / 2);
