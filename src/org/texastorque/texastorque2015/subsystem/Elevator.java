@@ -47,6 +47,7 @@ public class Elevator extends Subsystem {
 
         feedback.setElevatorDone(isDone());
 
+        //Control loop operation
         if (!input.isElevatorOverride()) {
             if (input.getElevatorPosition() != setPointElevation) {
                 setPointElevation = input.getElevatorPosition();
@@ -60,20 +61,23 @@ public class Elevator extends Subsystem {
             targetAcceleration = tmp.getCurrentAcceleration();
 
             motorSpeed = pv.calculate(tmp, currentPosition, currentVelocity) + ffPosition;
-        } else {
+        } else { //Raw motor speeds for manual control
             motorSpeed = input.getOverrideElevatorMotorSpeed();
         }
 
+        //Add in constant power to balance gravity.
         if (!input.isElevatorFFpOff()) {
             motorSpeed += ffPosition;
         }
 
+        //Use limit switches so that the elevator does not force itself through the top and bottom.
         if (feedback.isElevatorAtTop()) {
             motorSpeed = Math.min(motorSpeed, 0.0);
         } else if (feedback.isElevatorAtBottom()) {
             motorSpeed = Math.max(motorSpeed, 0.0);
         }
 
+        //Output to the robot if we want to.
         if (outputEnabled) {
             output.setElevatorMotorSpeeds(motorSpeed);
         }
