@@ -1,8 +1,6 @@
 package org.texastorque.texastorque2015.input;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.torquelib.util.GenericController;
 import org.texastorque.torquelib.util.TorqueToggle;
@@ -47,63 +45,74 @@ public class DriverInput extends Input {
         feederStack = operator.getFeederStackButton();
         elevatorOverride = false;
 
-        //Calculate what all of the subsystems should do either independently or 
-        //synchronized for complicated actions.
         if (elevatorOverride) {
             calcElevatorOverride();
             calcArms();
             calcIntake();
         } else if (autoStack) {
+            //autoStack = bring elevator down to stack tote
             armOpen = false;
             tiltUp = false;
             punchOut = false;
 
+            //check what to do with the elevator
             if (elevatorPosition == Constants.FloorElevatorLevel1.getDouble() && feedback.isElevatorDone()) {
+                // if autoStacking from feederStack, go back to level 3, else go to 2
                 if (feederStack) {
                     autoStackHeight = Constants.FloorElevatorLevel3.getDouble();
                 } else {
                     autoStackHeight = Constants.FloorElevatorLevel2.getDouble();
                 }
+                //set state of elevator
                 elevatorPosition = autoStackHeight;
                 wentToBottom = true;
                 intakeSpeed = 0.0;
                 intakesIn = false;
             } else if (elevatorPosition == autoStackHeight && wentToBottom && feedback.isElevatorDone()) {
+                //if autoStacking cycle has been finished, reset
                 autoStack = false;
                 toteAvailable = false;
                 wentToBottom = false;
             } else if (elevatorPosition == autoStackHeight && wentToBottom) {
+                //catch else to make sure that nothing happens if elevator is not done
             } else {
+                //if elevator is at the bottom, intake tote
                 elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
                 intakeSpeed = 1.0;
                 intakesIn = true;
             }
         } else if (feederStack) {
+            //feederStack means intake tote from sluice, outtake it, re-intake it, then autoStack
             double currentTime = Timer.getFPGATimestamp();
 
+            //setup feederStack cycle
             elevatorPosition = Constants.FloorElevatorLevel3.getDouble();
             armOpen = false;
             punchOut = false;
             tiltUp = false;
 
             if (feedback.isToteInSluice() && !toteAvailable) {
+                //start of feederStack cycle when tote is in sluice but not ready to be intake-d
                 toteInTime = Timer.getFPGATimestamp();
                 toteAvailable = true;
             } else if (toteAvailable) {
+                //can intake tote
                 if (currentTime - Constants.ToteSluiceWaitTime.getDouble() > toteInTime) {
                     if (currentTime - Constants.ToteSluiceWaitTime.getDouble() - Constants.TotePullBAckTime.getDouble() > toteInTime) {
-                        if (feedback.isElevatorDone()) {
-                            autoStack = true;
-                        }
+                        //wait for enough time to intake tote
+                        autoStack = feedback.isElevatorDone();
                     } else {
+                        //need to intake longer
                         intakeSpeed = 1.0;
                     }
                 } else {
+                    //re-intake so that tote is ready to be autoStack-ed
                     intakeSpeed = -1.0;
                     intakesIn = true;
                 }
             }
         } else {
+            //not feederStack-ing or autoStack-ing = reset
             toteAvailable = false;
             wentToBottom = false;
             calcElevator();
