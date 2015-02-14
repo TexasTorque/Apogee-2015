@@ -1,6 +1,5 @@
 package org.texastorque.texastorque2015.auto;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque2015.input.Input;
 import org.texastorque.texastorque2015.constants.Constants;
 
@@ -11,8 +10,8 @@ public abstract class AutoMode extends Input {
         private double distance;
         private double doneRange;
 
-        public DriveDistance(String name, double distance, double tolerance, double doneCycles) {
-            super(name, doneCycles);
+        public DriveDistance(String name, double distance, double tolerance, double doneCycles, double timeOut) {
+            super(name, doneCycles, timeOut);
 
             this.distance = distance;
             this.doneRange = tolerance;
@@ -20,7 +19,7 @@ public abstract class AutoMode extends Input {
             drivebaseControlled = true;
             driveDistance = distance;
             driveAngle = 0.0;
-            
+
             feedback.resetDriveEncoders();
         }
 
@@ -46,8 +45,8 @@ public abstract class AutoMode extends Input {
         private int step;
         private boolean done;
 
-        public PickupTote(String name, double doneCycles) {
-            super(name, doneCycles);
+        public PickupTote(String name, double doneCycles, double timeOut) {
+            super(name, doneCycles, timeOut);
             step = 0;
             done = false;
         }
@@ -100,8 +99,8 @@ public abstract class AutoMode extends Input {
         private double angle;
         private double doneRange;
 
-        public TurnAngle(String name, double angle, double tolerance, double doneCycles) {
-            super(name, doneCycles);
+        public TurnAngle(String name, double angle, double tolerance, double doneCycles, double timeOut) {
+            super(name, doneCycles, timeOut);
 
             this.angle = angle;
             this.doneRange = tolerance;
@@ -109,7 +108,7 @@ public abstract class AutoMode extends Input {
             drivebaseControlled = true;
             driveAngle = angle;
             driveDistance = 0.0;
-            
+
             feedback.resetGyro();
         }
 
@@ -127,6 +126,40 @@ public abstract class AutoMode extends Input {
             leftSpeed = 0.0;
             rightSpeed = 0.0;
             feedback.resetGyro();
+        }
+    }
+
+    public class ToteStack extends AutoCommand {
+
+        private int step;
+
+        public ToteStack(String name, double doneCycles, double timeOut) {
+            super(name, doneCycles, timeOut);
+            step = 0;
+        }
+
+        @Override
+        public void run() {
+            switch (step) {
+                case 0:
+                    elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
+                    if (feedback.getElevatorHeight() == Constants.FloorElevatorLevel1.getDouble()) {
+                        step++;
+                    }
+                    break;
+                case 1:
+                    elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
+                    if (feedback.getElevatorHeight() == Constants.FloorElevatorLevel2.getDouble()) {
+                        step++;
+                    }
+                    break;
+                default:
+            }
+        }
+
+        @Override
+        public boolean isDone() {
+            return elevatorPosition == Constants.FloorElevatorLevel1.getDouble() && feedback.isElevatorDone();
         }
     }
 
