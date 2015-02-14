@@ -65,19 +65,15 @@ public class DriverInput extends Input {
                     autoStackHeight = Constants.FloorElevatorLevel2.getDouble();
                 }
                 elevatorPosition = autoStackHeight;
-                SmartDashboard.putNumber("POS_TEST", 1);
                 wentToBottom = true;
                 intakeSpeed = 0.0;
                 intakesIn = false;
             } else if (elevatorPosition == autoStackHeight && wentToBottom && feedback.isElevatorDone()) {
-                SmartDashboard.putNumber("POS_TEST", 2);
                 autoStack = false;
                 toteAvailable = false;
                 wentToBottom = false;
             } else if (elevatorPosition == autoStackHeight && wentToBottom) {
-                SmartDashboard.putNumber("POS_TEST", 0);
             } else {
-                SmartDashboard.putNumber("POS_TEST", 3);
                 elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
                 intakeSpeed = 1.0;
                 intakesIn = true;
@@ -90,29 +86,21 @@ public class DriverInput extends Input {
             punchOut = false;
             tiltUp = false;
 
-            SmartDashboard.putBoolean("toteAvaliable", toteAvailable);
-
-            SmartDashboard.putNumber("feederstack", -1);
-            System.out.println("IS TOTE IN: " + feedback.isToteInSluice());
             if (feedback.isToteInSluice() && !toteAvailable) {
                 toteInTime = Timer.getFPGATimestamp();
                 toteAvailable = true;
-                SmartDashboard.putNumber("feederstack", 0);
             } else if (toteAvailable) {
                 if (currentTime - Constants.ToteSluiceWaitTime.getDouble() > toteInTime) {
                     if (currentTime - Constants.ToteSluiceWaitTime.getDouble() - Constants.TotePullBAckTime.getDouble() > toteInTime) {
                         if (feedback.isElevatorDone()) {
                             autoStack = true;
                         }
-                        SmartDashboard.putNumber("feederstack", 1);
                     } else {
                         intakeSpeed = 1.0;
-                        SmartDashboard.putNumber("feederstack", 2);
                     }
                 } else {
                     intakeSpeed = -1.0;
                     intakesIn = true;
-                    SmartDashboard.putNumber("feederstack", 3);
                 }
             }
         } else {
@@ -122,8 +110,6 @@ public class DriverInput extends Input {
             calcArms();
             calcIntake();
         }
-
-        SmartDashboard.putBoolean("autoStack", autoStack);
     }
 
     //Drivebase
