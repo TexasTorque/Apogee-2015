@@ -46,7 +46,6 @@ public class Robot extends TorqueIterative {
 
     @Override
     public void robotInit() {
-        SmartDashboard.putBoolean("toteInSluice", false);//test
         Parameters.makeFile();
         Parameters.load();
 
