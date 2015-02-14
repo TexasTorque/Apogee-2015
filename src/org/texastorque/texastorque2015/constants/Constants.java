@@ -6,7 +6,8 @@ import org.texastorque.torquelib.util.Parameters.Constant;
 public class Constants extends Parameters {
 
     //Elevator
-    public final static Constant ElevatorVDeadband = new Constant("E_VDeadband", 0.0);
+    public final static Constant ElevatorVDoneRange = new Constant("E_VDoneRange", 0.0);
+    public final static Constant ElevatorPDoneRange = new Constant("E_PDoneRange", 0.0);
 
     public final static Constant ElevatorP0Tote = new Constant("E_P_0Tote", 0.0);
     public final static Constant ElevatorV0Tote = new Constant("E_V_0Tote", 0.0);

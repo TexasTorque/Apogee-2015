@@ -37,7 +37,8 @@ public class Elevator extends Subsystem {
     }
 
     private boolean isDone() {
-        return Math.abs(setPointElevation - feedback.getElevatorHeight()) < 0.25 && Math.abs(feedback.getElevatorVelocity()) < 0.25;
+        return Math.abs(setPointElevation - feedback.getElevatorHeight()) < Constants.ElevatorPDoneRange.getDouble()
+                && Math.abs(feedback.getElevatorVelocity()) < Constants.ElevatorVDoneRange.getDouble();
     }
 
     @Override
