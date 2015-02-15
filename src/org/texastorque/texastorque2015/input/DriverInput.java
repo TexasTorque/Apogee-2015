@@ -60,20 +60,19 @@ public class DriverInput extends Input {
             calcArms();
             calcIntake();
         } else if (autoStack) {
-            //autoStack = bring elevator down to stack tote
+            //autoStack = bring elevator down and back up to stack tote
             armOpen = false;
             tiltUp = false;
             punchOut = false;
 
-            //check what to do with the elevator
             if (elevatorPosition == Constants.FloorElevatorLevel1.getDouble() && feedback.isElevatorDone()) {
+                // go back up to get ready for another tote in from underneath
                 // if autoStacking from feederStack, go back to level 3, else go to 2
                 if (feederStack) {
                     autoStackHeight = Constants.FloorElevatorLevel3.getDouble();
                 } else {
                     autoStackHeight = Constants.FloorElevatorLevel2.getDouble();
                 }
-                //set state of elevator
                 elevatorPosition = autoStackHeight;
                 wentToBottom = true;
                 intakeSpeed = 0.0;
@@ -86,7 +85,7 @@ public class DriverInput extends Input {
             } else if (elevatorPosition == autoStackHeight && wentToBottom) {
                 //catch else to make sure that nothing happens if elevator is not done
             } else {
-                //if elevator is at the bottom, intake tote
+                //intake the tote while the elevator is moving down
                 elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
                 intakeSpeed = 1.0;
                 intakesIn = true;
@@ -102,21 +101,21 @@ public class DriverInput extends Input {
             tiltUp = false;
 
             if (feedback.isToteInSluice() && !toteAvailable) {
-                //start of feederStack cycle when tote is in sluice but not ready to be intake-d
+                //get the time for the start of the feederstack cycle
                 toteInTime = Timer.getFPGATimestamp();
                 toteAvailable = true;
             } else if (toteAvailable) {
                 //can intake tote
                 if (currentTime - Constants.ToteSluiceWaitTime.getDouble() > toteInTime) {
                     if (currentTime - Constants.ToteSluiceWaitTime.getDouble() - Constants.TotePullBAckTime.getDouble() > toteInTime) {
-                        //wait for enough time to intake tote
+                        //wait for the elevator to be ready
                         autoStack = feedback.isElevatorDone();
                     } else {
-                        //need to intake longer
+                        //pull the tote back in to get ready for the elevator to pick it up
                         intakeSpeed = 1.0;
                     }
                 } else {
-                    //re-intake so that tote is ready to be autoStack-ed
+                    //Reverse intake to make sure the tote comes off of the sluice
                     intakeSpeed = -1.0;
                     intakesIn = true;
                 }

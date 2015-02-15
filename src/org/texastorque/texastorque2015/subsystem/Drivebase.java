@@ -85,6 +85,8 @@ public class Drivebase extends Subsystem {
          * reverse +1 for strafe: full right -1 for strafe: full left
          *
          */
+        
+        //Linear control loop operation
         if (input.isDrivebaseControlled() && input.getDriveAngle() == 0.0) {
             if (setPointPosition != input.getDriveDistance()) {
                 setPointPosition = input.getDriveDistance();
@@ -103,6 +105,7 @@ public class Drivebase extends Subsystem {
             leftSpeed = leftPV.calculate(linearProfile, leftPosition, leftVelocity);
             rightSpeed = rightPV.calculate(linearProfile, rightPosition, rightVelocity);
 
+        //Turning control loop operation
         } else if (input.isDrivebaseControlled()) {
             if (setPointAngle != input.getDriveAngle()) {
                 setPointAngle = input.getDriveAngle();
@@ -121,6 +124,7 @@ public class Drivebase extends Subsystem {
             leftSpeed = turnPV.calculate(angularProfile, angle, angularVelocity);
             rightSpeed = -leftSpeed;
         } else {
+            //Regular teleop control
             leftSpeed = input.getLeftSpeed();
             rightSpeed = input.getRightSpeed();
             frontStrafeSpeed = input.getFrontStrafeSpeed();

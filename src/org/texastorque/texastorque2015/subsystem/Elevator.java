@@ -35,13 +35,18 @@ public class Elevator extends Subsystem {
     @Override
     public void init() {
         //Make the elevator hold its current position when we enable.
-        //We do not want it flying off to its previous setpoint for sagety reasons.
+        //We do not want it flying off to its previous setpoint for safety reasons.
         setPointElevation = currentPosition = feedback.getElevatorHeight();
         currentVelocity = feedback.getElevatorVelocity();
 
         tmp.generateTrapezoid(setPointElevation, currentPosition, currentVelocity);
     }
 
+    /**
+     * Check if the control loops have finished moving the elevator to its new position.
+     * 
+     * @return Is the elevator done moving.
+     */
     private boolean isDone() {
         return Math.abs(setPointElevation - feedback.getElevatorHeight()) < Constants.ElevatorPDoneRange.getDouble()
                 && Math.abs(feedback.getElevatorVelocity()) < Constants.ElevatorVDoneRange.getDouble();
