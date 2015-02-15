@@ -22,6 +22,8 @@ public class Intake extends Subsystem {
         if (outputEnabled) {
             output.setIntakeMotorSpeed(intakeSpeed);
             output.setIntakeGrasp(intakesIn);
+        } else {
+            output.setIntakeMotorSpeed(0.0);
         }
     }
 

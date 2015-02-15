@@ -92,6 +92,8 @@ public class Elevator extends Subsystem {
         //Output to the robot if we want to.
         if (outputEnabled) {
             output.setElevatorMotorSpeeds(motorSpeed);
+        } else {
+            output.setElevatorMotorSpeeds(0.0);
         }
     }
 
