@@ -48,8 +48,7 @@ public class DriverInput extends Input {
         calcDrivebase();
 
         //Elevator
-        elevatorOverride = operator.getElevatorOverrideSwitch();
-        elevatorFFpOff = operator.getElevatorFFpOffSwitch();
+        elevatorFFpOff = elevatorOverride = operator.getElevatorDownButton() || operator.getElevatorUpButton();
 
         if (operator.getAutoStackButton()) {
             autoStack = true;
