@@ -112,8 +112,8 @@ public abstract class Feedback implements Runnable {
     }
     
     public boolean isElevatorHere(double height) {
-        return Math.abs(height - elevatorHeight) < Constants.ElevatorPDoneRange.getDouble()
-                && Math.abs(elevatorVelocity) < Constants.ElevatorVDoneRange.getDouble();
+        return Math.abs(height - elevatorHeight) <= Constants.ElevatorPDoneRange.getDouble()
+                && Math.abs(elevatorVelocity) <= Constants.ElevatorVDoneRange.getDouble();
     }
     
     /**

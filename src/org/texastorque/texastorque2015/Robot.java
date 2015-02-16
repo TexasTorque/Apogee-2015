@@ -124,13 +124,16 @@ public class Robot extends TorqueIterative {
     public void teleopInit() {
         activeInput = driverInput;
         activeOutput = robotOutput;
-        activeFeedback = sensorFeedback;
+        activeFeedback = dashFeedback;
 
         updateIO();
         loadParams();
         initSubsystems();
 
         drivebase.setOutputEnabled(true);
+        elevator.setOutputEnabled(true);
+        arms.setOutputEnabled(true);
+        intake.setOutputEnabled(true);
 
         logger.reset();
         logger.enable();

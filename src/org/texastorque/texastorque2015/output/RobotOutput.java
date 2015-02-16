@@ -44,10 +44,10 @@ public class RobotOutput extends Output {
         rearStrafeMotor = new TorqueMotor(new VictorSP(Ports.REAR_STRAFE_PORT), true, TorqueMotor.LinearizationType.kNone);
 
         //Crazy Arms
-        openSolenoid = new Solenoid(Ports.OPEN_SOLENOID_PORT);
+        openSolenoid = new Solenoid(Ports.ARM);
         punchSolenoid = new Solenoid(Ports.PUNCH_SOLENOID);
         intakeSolenoid = new Solenoid(Ports.INTAKE_SOLENOID);
-        tiltSolenoid = new DoubleSolenoid(Ports.TILT_SOLENOID_FORWARD_PORT, Ports.TILT_SOLENOID_BACKWARD_PORT);
+        tiltSolenoid = new DoubleSolenoid(Ports.TILT_SOLENOID_A_PORT, Ports.TILT_SOLENOID_B_PORT);
 
         //Intake
         leftIntakeMotor = new TorqueMotor(new VictorSP(Ports.LEFT_INTAKE_PORT), true, TorqueMotor.LinearizationType.kNone);
@@ -77,7 +77,7 @@ public class RobotOutput extends Output {
         leftElevatorMotorA.set(speed);
         leftElevatorMotorB.set(speed);
         rightElevatorMotorA.set(speed);
-        rightDriveMotorB.set(speed);
+        rightElevatorMotorB.set(speed);
     }
 
     //Crazy Arms

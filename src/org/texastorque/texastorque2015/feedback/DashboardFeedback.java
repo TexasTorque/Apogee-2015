@@ -33,7 +33,7 @@ public class DashboardFeedback extends Feedback {
         elevatorVelocity = SmartDashboard.getNumber("ElevatorTargetVelocity", 0.0);
 
         elevatorAtTop = SmartDashboard.getBoolean("elevatorAtTop", false);
-        elevatorAtBottom = SmartDashboard.getBoolean("elevatorAtBottom", true);
+        elevatorAtBottom = SmartDashboard.getBoolean("elevatorAtBottom", false);
 
         //Sluice
         toteInSluice = SmartDashboard.getBoolean("toteInSluice", false);

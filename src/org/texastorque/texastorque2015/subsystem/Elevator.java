@@ -1,6 +1,7 @@
 package org.texastorque.texastorque2015.subsystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import static javafx.scene.input.KeyCode.A;
 import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.torquelib.controlLoop.TorquePV;
 import org.texastorque.torquelib.controlLoop.TorqueTMP;
@@ -179,6 +180,7 @@ public class Elevator extends Subsystem {
         SmartDashboard.putNumber("ElevatorTargetAcceleration", targetAcceleration);
         SmartDashboard.putNumber("NumTotes", numTotes);
         SmartDashboard.putBoolean("ElevatorDone", isDone());
+        SmartDashboard.putNumber("ElevatorMotorSpeed", motorSpeed);
     }
 
     @Override

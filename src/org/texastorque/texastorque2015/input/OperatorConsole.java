@@ -52,11 +52,11 @@ public class OperatorConsole {
     }
 
     public boolean getElevatorDownButton() {
-        return joystick.getRawButton(13);
+        return joystick.getRawButton(3);
     }
 
     public boolean getIntakeButton() {
-        return joystick.getRawButton(14);
+        return joystick.getRawButton(4);
     }
 
     public boolean getAutoStackButton() {

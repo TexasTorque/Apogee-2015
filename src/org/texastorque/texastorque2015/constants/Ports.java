@@ -30,15 +30,15 @@ public class Ports {
     public final static int SLUICE_BUTTON = 9;
 
     //crazy arms
-    public final static int OPEN_SOLENOID_PORT = 0;
-    public final static int PUNCH_SOLENOID = 1;
-    public final static int TILT_SOLENOID_FORWARD_PORT = 2;
-    public final static int TILT_SOLENOID_BACKWARD_PORT = 3;
+    public final static int ARM = 4;
+    public final static int PUNCH_SOLENOID = 5;
+    public final static int INTAKE_SOLENOID = 6;
+    public final static int TILT_SOLENOID_A_PORT = 0;
+    public final static int TILT_SOLENOID_B_PORT = 7;
 
     //intake
     public final static int LEFT_INTAKE_PORT = 6;
     public final static int RIGHT_INTAKE_PORT = 7;
-    public final static int INTAKE_SOLENOID = 2;//temp
 
     //gyro
     public final static int GYRO_PORT_A = 0;//temp

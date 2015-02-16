@@ -16,9 +16,11 @@ public class Arms extends Subsystem {
     @Override
     public void run() {
         if (feedback.isElevatorHere(input.getElevatorPosition()) || input.isOverride()) {
+            SmartDashboard.putBoolean("hi", true);
             armsOpen = input.isArmOpen();
             punchOut = input.isPunchOut();
         } else {
+            SmartDashboard.putBoolean("hi", false);
             armsOpen = false;
             punchOut = false;
         }
