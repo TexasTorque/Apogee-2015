@@ -10,6 +10,9 @@ public abstract class Input implements Runnable {
         this.feedback = feedback;
     }
 
+    public void pushToDashboard() {
+    }
+
     //Drivebase
     protected volatile double leftSpeed;
     protected volatile double rightSpeed;

@@ -17,7 +17,7 @@ public class DriverInput extends Input {
     private double toteInTime;
     private boolean toteAvailable;
     private double autoStackHeight;
-    private boolean coopStack;
+    private boolean stepStack;
     
     private boolean elevationInputThisCycle;
 
@@ -32,6 +32,17 @@ public class DriverInput extends Input {
         autoStackHeight = 0.0;
         
         newPosition = false;
+    }
+    
+    @Override
+    public void pushToDashboard() {
+        SmartDashboard.putBoolean("tiltToggle", tiltToggle.get());
+        SmartDashboard.putBoolean("wentToBottom", wentToBottom);
+        SmartDashboard.putNumber("toteInTime", toteInTime);
+        SmartDashboard.putBoolean("toteAvailable", toteAvailable);
+        SmartDashboard.putNumber("autoStackHeight", autoStackHeight);
+        SmartDashboard.putBoolean("stepStack", stepStack);
+        SmartDashboard.putBoolean("elevationInputThisCycle", elevationInputThisCycle);
     }
 
     @Override
@@ -166,7 +177,7 @@ public class DriverInput extends Input {
     //Elevator
     private void calcNormal() {
         if (operator.getCoopStackButton()) {
-            coopStack = true;
+            stepStack = true;
             
             if (operator.getLevel1Button()) {
                 elevatorPosition = Constants.StepElevatorLevel1.getDouble();
@@ -182,7 +193,7 @@ public class DriverInput extends Input {
                 elevationInputThisCycle = true;
             }
         } else {
-            coopStack = false;
+            stepStack = false;
             
             if (operator.getLevel1Button()) {
                 elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
@@ -204,12 +215,12 @@ public class DriverInput extends Input {
                 elevationInputThisCycle = true;
             }
         }
-
+        
         if (operator.getScoreButton()) {
             if (tiltToggle.get()) {
                 punchOut = true;
                 armOpen = false;
-            } else if (coopStack) {
+            } else if (stepStack) {
                 if (elevatorPosition == Constants.StepElevatorLevel1.getDouble()) {
                     elevatorPosition = Constants.StepPlaceLevel1.getDouble();
                     elevationInputThisCycle = true;
@@ -246,13 +257,13 @@ public class DriverInput extends Input {
         } else {
             overrideElevatorMotorSpeed = 0.0;
         }
-        
-        SmartDashboard.putNumber("test", overrideElevatorMotorSpeed);
 
         if (tiltToggle.get()) {
             punchOut = operator.getScoreButton();
+            armOpen = false;
         } else {
             armOpen = operator.getScoreButton();
+            punchOut = false;
         }
     }
 

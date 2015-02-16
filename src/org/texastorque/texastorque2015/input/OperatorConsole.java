@@ -16,35 +16,35 @@ public class OperatorConsole {
     }
     
     public boolean getTiltButton() {
-        return joystick.getRawButton(1);
+        return joystick.getRawButton(9);
     }
 
     public boolean getScoreButton() {
-        return joystick.getRawButton(2);
+        return joystick.getRawButton(13);
     }
 
     public boolean getLevel1Button() {
-        return joystick.getRawButton(4);
-    }
-
-    public boolean getLevel2Button() {
         return joystick.getRawButton(5);
     }
 
-    public boolean getLevel3Button() {
+    public boolean getLevel2Button() {
         return joystick.getRawButton(6);
     }
 
+    public boolean getLevel3Button() {
+        return joystick.getRawButton(4);
+    }
+
     public boolean getLevel4Button() {
-        return joystick.getRawButton(7);
+        return joystick.getRawButton(3);
     }
 
     public boolean getLevel5Button() {
-        return joystick.getRawButton(8);
+        return joystick.getRawButton(1);
     }
 
     public boolean getLevel6Button() {
-        return joystick.getRawButton(9);
+        return joystick.getRawButton(2);
     }
 
     public boolean getElevatorUpButton() {
@@ -52,22 +52,22 @@ public class OperatorConsole {
     }
 
     public boolean getElevatorDownButton() {
-        return joystick.getRawButton(3);
-    }
-
-    public boolean getIntakeButton() {
-        return joystick.getRawButton(4);
-    }
-
-    public boolean getAutoStackButton() {
         return joystick.getRawButton(15);
     }
 
-    public boolean getFeederStackButton() {
+    public boolean getIntakeButton() {
+        return joystick.getRawButton(7);
+    }
+
+    public boolean getAutoStackButton() {
         return joystick.getRawButton(16);
+    }
+
+    public boolean getFeederStackButton() {
+        return joystick.getRawButton(11);
     }
     
     public boolean getCoopStackButton() {
-        return joystick.getRawButton(17);
+        return joystick.getRawButton(14);
     }
 }
