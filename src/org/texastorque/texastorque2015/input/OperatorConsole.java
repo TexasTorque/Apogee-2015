@@ -14,17 +14,13 @@ public class OperatorConsole {
     public OperatorConsole(int port) {
         joystick = new Joystick(port);
     }
-
+    
     public boolean getTiltButton() {
         return joystick.getRawButton(1);
     }
 
-    public boolean getPunchButton() {
+    public boolean getScoreButton() {
         return joystick.getRawButton(2);
-    }
-
-    public boolean getArmOpenButton() {
-        return joystick.getRawButton(3);
     }
 
     public boolean getLevel1Button() {
@@ -63,15 +59,15 @@ public class OperatorConsole {
         return joystick.getRawButton(14);
     }
 
-    public boolean getPlaceButton() {
+    public boolean getAutoStackButton() {
         return joystick.getRawButton(15);
     }
 
-    public boolean getAutoStackButton() {
-        return joystick.getRawButton(2);
-    }
-
     public boolean getFeederStackButton() {
-        return joystick.getRawButton(1);
+        return joystick.getRawButton(16);
+    }
+    
+    public boolean getCoopStackButton() {
+        return joystick.getRawButton(17);
     }
 }

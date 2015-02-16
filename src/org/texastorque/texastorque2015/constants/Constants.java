@@ -73,26 +73,24 @@ public class Constants extends Parameters {
     public final static Constant ElevatorMaxVRecyclingCan = new Constant("E_MaxV_RC", 0.0);
     public final static Constant ElevatorMaxARecyclingCan = new Constant("E_MaxA_RC", 0.0);
 
+    //Regular stacking levels
     public final static Constant FloorElevatorLevel1 = new Constant("E_FloorL1", 0.0);
     public final static Constant FloorElevatorLevel2 = new Constant("E_FloorL2", 100.0);
     public final static Constant FloorElevatorLevel3 = new Constant("E_FloorL3", 200.0);
     public final static Constant FloorElevatorLevel4 = new Constant("E_FloorL4", 300.0);
     public final static Constant FloorElevatorLevel5 = new Constant("E_FloorL5", 400.0);
     public final static Constant FloorElevatorLevel6 = new Constant("E_FloorL6", 500.0);
+    public final static Constant PlaceLevel = new Constant("E_PlaceLevel", 0.0);
 
     //Step
     public final static Constant StepElevatorLevel1 = new Constant("E_StepL1", 0.0);
     public final static Constant StepElevatorLevel2 = new Constant("E_StepL2", 0.0);
     public final static Constant StepElevatorLevel3 = new Constant("E_StepL3", 0.0);
     public final static Constant StepElevatorLevel4 = new Constant("E_StepL4", 0.0);
-
-    //Scoring Platform
-    public final static Constant SPElevatorLevel1 = new Constant("E_SPL1", 0.0);
-    public final static Constant SPElevatorLevel2 = new Constant("E_SPL2", 0.0);
-    public final static Constant SPElevatorLevel3 = new Constant("E_SPL3", 0.0);
-    public final static Constant SPElevatorLevel4 = new Constant("E_SPL4", 0.0);
-    public final static Constant SPElevatorLevel5 = new Constant("E_SPL5", 0.0);
-    public final static Constant SPElevatorLevel6 = new Constant("E_SPL6", 0.0);
+    public final static Constant StepPlaceLevel1 = new Constant("E_StepPlaceLevel1", 0.0);
+    public final static Constant StepPlaceLevel2 = new Constant("E_StepPlaceLevel2", 0.0);
+    public final static Constant StepPlaceLevel3 = new Constant("E_StepPlaceLevel3", 0.0);
+    public final static Constant StepPlaceLevel4 = new Constant("E_StepPlaceLevel4", 0.0);
 
     //Recycling can
     public final static Constant RCElevatorP = new Constant("E_RC_P", 0.0);

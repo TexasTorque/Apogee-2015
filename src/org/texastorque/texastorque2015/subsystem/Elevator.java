@@ -43,8 +43,9 @@ public class Elevator extends Subsystem {
     }
 
     /**
-     * Check if the control loops have finished moving the elevator to its new position.
-     * 
+     * Check if the control loops have finished moving the elevator to its new
+     * position.
+     *
      * @return Is the elevator done moving.
      */
     private boolean isDone() {
@@ -60,7 +61,7 @@ public class Elevator extends Subsystem {
         feedback.setElevatorDone(isDone());
 
         //Control loop operation
-        if (!input.isElevatorOverride()) {
+        if (!input.isOverride()) {
             if (input.getElevatorPosition() != setPointElevation && input.newPosition()) {
                 setPointElevation = input.getElevatorPosition();
 

@@ -1,5 +1,7 @@
 package org.texastorque.texastorque2015.feedback;
 
+import org.texastorque.texastorque2015.constants.Constants;
+
 public abstract class Feedback implements Runnable {
 
     //Drivebase
@@ -107,6 +109,11 @@ public abstract class Feedback implements Runnable {
 
     public void setElevatorDone(boolean elevatorDone) {
         this.elevatorDone = elevatorDone;
+    }
+    
+    public boolean isElevatorHere(double height) {
+        return Math.abs(height - elevatorHeight) < Constants.ElevatorPDoneRange.getDouble()
+                && Math.abs(elevatorVelocity) < Constants.ElevatorVDoneRange.getDouble();
     }
     
     /**

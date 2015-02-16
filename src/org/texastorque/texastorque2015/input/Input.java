@@ -50,13 +50,13 @@ public abstract class Input implements Runnable {
 
     //Elevator
     protected volatile double elevatorPosition;
-    protected volatile boolean elevatorOverride;
+    protected volatile boolean override;
     protected volatile double overrideElevatorMotorSpeed;
     protected volatile boolean elevatorFFpOff;
     protected volatile boolean newPosition;
 
-    public boolean isElevatorOverride() {
-        return elevatorOverride;
+    public boolean isOverride() {
+        return override;
     }
 
     public double getOverrideElevatorMotorSpeed() {
