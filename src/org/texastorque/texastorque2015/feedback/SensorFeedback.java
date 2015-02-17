@@ -27,7 +27,7 @@ public class SensorFeedback extends Feedback {
         leftDriveEncoder = new TorqueEncoder(Ports.LEFT_ENCODER_PORT_A, Ports.LEFT_ENCODER_PORT_B, true, CounterBase.EncodingType.k2X);
         rightDriveEncoder = new TorqueEncoder(Ports.RIGHT_ENCODER_PORT_A, Ports.RIGHT_ENCODER_PORT_B, false, CounterBase.EncodingType.k2X);
 
-        elevatorEncoder = new TorqueEncoder(Ports.ELEVATOR_ENCODER_PORT_A, Ports.ELEVATOR_ENCODER_PORT_B, false, CounterBase.EncodingType.k4X);
+        elevatorEncoder = new TorqueEncoder(Ports.LEFT_ELEVATOR_ENCODER_PORT_A, Ports.LEFT_ELEVATOR_ENCODER_PORT_B, false, CounterBase.EncodingType.k4X);
         topLimit = new DigitalInput(Ports.ELEVATOR_TOP_LIMIT);
         bottomLimit = new DigitalInput(Ports.ELEVATOR_BOTTOM_LIMIT);
 
