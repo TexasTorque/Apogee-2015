@@ -18,7 +18,7 @@ public class DriverInput extends Input {
     private boolean toteAvailable;
     private double autoStackHeight;
     private boolean stepStack;
-    
+
     private boolean elevationInputThisCycle;
 
     public DriverInput() {
@@ -30,10 +30,11 @@ public class DriverInput extends Input {
         wentToBottom = false;
         toteAvailable = false;
         autoStackHeight = 0.0;
-        
+
         newPosition = false;
+        numTotes = 0;
     }
-    
+
     @Override
     public void pushToDashboard() {
         SmartDashboard.putBoolean("tiltToggle", tiltToggle.get());
@@ -52,8 +53,11 @@ public class DriverInput extends Input {
 
     @Override
     public void run() {
+        //numTotes override
+        calcNumTotesOverride();
+
         elevationInputThisCycle = false;
-        
+
         //Drivebase
         calcDrivebase();
 
@@ -87,7 +91,8 @@ public class DriverInput extends Input {
                 }
                 elevatorPosition = autoStackHeight;
                 elevationInputThisCycle = true;
-                
+
+                numTotes++;
                 wentToBottom = true;
                 intakeSpeed = 0.0;
                 intakesIn = false;
@@ -102,7 +107,7 @@ public class DriverInput extends Input {
                 //intake the tote while the elevator is moving down
                 elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
                 elevationInputThisCycle = true;
-                
+
                 intakeSpeed = 1.0;
                 intakesIn = true;
             }
@@ -113,7 +118,7 @@ public class DriverInput extends Input {
             //setup feederStack cycle
             elevatorPosition = Constants.FloorElevatorLevel3.getDouble();
             elevationInputThisCycle = true;
-            
+
             armOpen = false;
             punchOut = false;
             tiltUp = false;
@@ -146,8 +151,26 @@ public class DriverInput extends Input {
             calcArms();
             calcIntake();
         }
-        
+
         newPosition = elevationInputThisCycle;
+    }
+
+    private void calcNumTotesOverride() {
+        if (operator.getNumTotesButton()) {
+            if (operator.getLevel1Button()) {
+                numTotes = 1;
+            } else if (operator.getLevel2Button()) {
+                numTotes = 2;
+            } else if (operator.getLevel3Button()) {
+                numTotes = 3;
+            } else if (operator.getLevel4Button()) {
+                numTotes = 4;
+            } else if (operator.getLevel5Button()) {
+                numTotes = 5;
+            } else if (operator.getLevel6Button()) {
+                numTotes = 6;
+            }
+        }
     }
 
     //Drivebase
@@ -178,7 +201,7 @@ public class DriverInput extends Input {
     private void calcNormal() {
         if (operator.getCoopStackButton()) {
             stepStack = true;
-            
+
             if (operator.getLevel1Button()) {
                 elevatorPosition = Constants.StepElevatorLevel1.getDouble();
                 elevationInputThisCycle = true;
@@ -194,7 +217,7 @@ public class DriverInput extends Input {
             }
         } else {
             stepStack = false;
-            
+
             if (operator.getLevel1Button()) {
                 elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
                 elevationInputThisCycle = true;
@@ -215,7 +238,7 @@ public class DriverInput extends Input {
                 elevationInputThisCycle = true;
             }
         }
-        
+
         if (operator.getScoreButton()) {
             if (tiltToggle.get()) {
                 punchOut = true;
@@ -239,7 +262,7 @@ public class DriverInput extends Input {
             } else {
                 elevatorPosition = Constants.PlaceLevel.getDouble();
                 elevationInputThisCycle = true;
-                
+
                 armOpen = true;
                 punchOut = false;
             }

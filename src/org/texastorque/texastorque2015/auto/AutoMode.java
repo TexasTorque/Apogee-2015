@@ -93,6 +93,7 @@ public abstract class AutoMode extends Input {
                 }
             } else {
                 elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
+                numTotes++;
             }
         }
 

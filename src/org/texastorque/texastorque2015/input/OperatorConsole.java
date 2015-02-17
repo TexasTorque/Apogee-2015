@@ -14,7 +14,7 @@ public class OperatorConsole {
     public OperatorConsole(int port) {
         joystick = new Joystick(port);
     }
-    
+
     public boolean getTiltButton() {
         return joystick.getRawButton(9);
     }
@@ -66,8 +66,12 @@ public class OperatorConsole {
     public boolean getFeederStackButton() {
         return joystick.getRawButton(11);
     }
-    
+
     public boolean getCoopStackButton() {
         return joystick.getRawButton(14);
+    }
+
+    public boolean getNumTotesButton() {
+        return joystick.getRawButton(13) || joystick.getRawButton(14);
     }
 }

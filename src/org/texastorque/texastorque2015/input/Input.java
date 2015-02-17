@@ -5,6 +5,11 @@ import org.texastorque.texastorque2015.feedback.Feedback;
 public abstract class Input implements Runnable {
 
     protected Feedback feedback;
+    protected volatile int numTotes;
+
+    public void setNumTotes(int totes) {
+        numTotes = totes;
+    }
 
     public void setFeedback(Feedback feedback) {
         this.feedback = feedback;
