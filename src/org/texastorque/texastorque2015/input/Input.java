@@ -10,6 +10,10 @@ public abstract class Input implements Runnable {
     public void setNumTotes(int totes) {
         numTotes = totes;
     }
+    
+    public int getNumTotes() {
+        return numTotes;
+    }
 
     public void setFeedback(Feedback feedback) {
         this.feedback = feedback;

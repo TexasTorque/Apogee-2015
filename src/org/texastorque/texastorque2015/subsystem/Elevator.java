@@ -55,6 +55,10 @@ public class Elevator extends Subsystem {
 
     @Override
     public void run() {
+        if (input.getNumTotes() != numTotes) {
+            numTotes = input.getNumTotes();
+            loadParams();
+        }
         currentPosition = feedback.getElevatorHeight();
         currentVelocity = feedback.getElevatorVelocity();
 
@@ -73,7 +77,7 @@ public class Elevator extends Subsystem {
             targetVelocity = tmp.getCurrentVelocity();
             targetAcceleration = tmp.getCurrentAcceleration();
 
-            motorSpeed = pv.calculate(tmp, currentPosition, currentVelocity) + ffPosition;
+            motorSpeed = pv.calculate(tmp, currentPosition, currentVelocity);
         } else { //Raw motor speeds for manual control
             motorSpeed = input.getOverrideElevatorMotorSpeed();
         }
@@ -84,12 +88,11 @@ public class Elevator extends Subsystem {
         }
 
         //Use limit switches so that the elevator does not force itself through the top and bottom.
-        if (feedback.isElevatorAtTop()) {
-            motorSpeed = Math.min(motorSpeed, 0.0);
-        } else if (feedback.isElevatorAtBottom()) {
-            motorSpeed = Math.max(motorSpeed, 0.0);
-        }
-
+//        if (feedback.isElevatorAtTop()) {
+//            motorSpeed = Math.min(motorSpeed, 0.0);
+//        } else if (feedback.isElevatorAtBottom()) {
+//            motorSpeed = Math.max(motorSpeed, 0.0);
+//        }
         //Output to the robot if we want to.
         if (outputEnabled) {
             output.setElevatorMotorSpeeds(motorSpeed);
@@ -167,6 +170,7 @@ public class Elevator extends Subsystem {
             ffPosition = Constants.ElevatorffPRecyclingCan.getDouble();
         }
         pv.setGains(p, v, ffV, ffA);
+        pv.setTunedVoltage(12.3);
     }
 
     @Override
@@ -180,6 +184,8 @@ public class Elevator extends Subsystem {
         SmartDashboard.putNumber("NumTotes", numTotes);
         SmartDashboard.putBoolean("ElevatorDone", isDone());
         SmartDashboard.putNumber("ElevatorMotorSpeed", motorSpeed);
+        SmartDashboard.putBoolean("ElevatorAtBottom", feedback.isElevatorAtBottom());
+        SmartDashboard.putBoolean("ElevatorAtTop", feedback.isElevatorAtTop());
     }
 
     @Override

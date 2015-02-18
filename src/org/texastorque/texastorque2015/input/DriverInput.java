@@ -66,16 +66,18 @@ public class DriverInput extends Input {
             elevatorFFpOff = override = true;
         }
 
-        if (operator.getAutoStackButton()) {
-            autoStack = true;
-        }
         feederStack = operator.getFeederStackButton();
+        if (!operator.getFeederStackButton()) {
+            autoStack = operator.getAutoStackButton();
+        }
 
         if (override) {
+            SmartDashboard.putNumber("POS_TEST", 1);
             calcOverride();
             calcArmsOverride();
             calcIntake();
         } else if (autoStack) {
+            SmartDashboard.putNumber("POS_TEST", 2);
             //autoStack = bring elevator down and back up to stack tote
             armOpen = false;
             tiltUp = false;
@@ -112,6 +114,7 @@ public class DriverInput extends Input {
                 intakesIn = true;
             }
         } else if (feederStack) {
+            SmartDashboard.putNumber("POS_TEST", 3);
             //feederStack means intake tote from sluice, outtake it, re-intake it, then autoStack
             double currentTime = Timer.getFPGATimestamp();
 
@@ -144,10 +147,13 @@ public class DriverInput extends Input {
                 }
             }
         } else {
+            SmartDashboard.putNumber("POS_TEST", 4);
             //not feederStack-ing or autoStack-ing = normal operation
             toteAvailable = false;
             wentToBottom = false;
-            calcNormal();
+            if (!operator.getNumTotesButton() && !operator.getNumTotesResetButton()) {
+                calcNormal();
+            }
             calcArms();
             calcIntake();
         }
@@ -170,6 +176,9 @@ public class DriverInput extends Input {
             } else if (operator.getLevel6Button()) {
                 numTotes = 6;
             }
+        }
+        if (operator.getNumTotesResetButton()) {
+            numTotes = 0;
         }
     }
 
@@ -240,6 +249,7 @@ public class DriverInput extends Input {
         }
 
         if (operator.getScoreButton()) {
+            numTotes = 0;
             if (tiltToggle.get()) {
                 punchOut = true;
                 armOpen = false;
@@ -274,9 +284,9 @@ public class DriverInput extends Input {
 
     private void calcOverride() {
         if (operator.getElevatorUpButton()) {
-            overrideElevatorMotorSpeed = 0.4;
+            overrideElevatorMotorSpeed = 1.0;
         } else if (operator.getElevatorDownButton()) {
-            overrideElevatorMotorSpeed = -0.4;
+            overrideElevatorMotorSpeed = -1.0;
         } else {
             overrideElevatorMotorSpeed = 0.0;
         }

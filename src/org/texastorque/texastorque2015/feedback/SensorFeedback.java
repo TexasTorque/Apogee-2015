@@ -74,6 +74,11 @@ public class SensorFeedback extends Feedback {
         leftDriveEncoder.reset();
         rightDriveEncoder.reset();
     }
+    
+    @Override
+    public void resetElevatorEncoders() {
+        elevatorEncoder.reset();
+    }
 
     @Override
     public void resetGyro() {

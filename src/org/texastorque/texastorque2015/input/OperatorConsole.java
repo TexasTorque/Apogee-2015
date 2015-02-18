@@ -72,6 +72,10 @@ public class OperatorConsole {
     }
 
     public boolean getNumTotesButton() {
-        return joystick.getRawButton(13) || joystick.getRawButton(14);
+        return joystick.getRawButton(8);
+    }
+    
+    public boolean getNumTotesResetButton() {
+        return joystick.getRawButton(10);
     }
 }

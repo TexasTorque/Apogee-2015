@@ -16,6 +16,11 @@ public class DashboardFeedback extends Feedback {
     }
 
     @Override
+    public void resetElevatorEncoders() {
+        elevatorHeight = 0.0;
+    }
+
+    @Override
     public void run() {
         //Drivebase
         //Units use feet and seconds.

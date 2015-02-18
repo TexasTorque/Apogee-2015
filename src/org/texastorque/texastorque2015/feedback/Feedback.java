@@ -92,6 +92,11 @@ public abstract class Feedback implements Runnable {
     public abstract void resetDriveEncoders();
 
     /**
+     * Reset the elevator encoders to 0.
+     */
+    public abstract void resetElevatorEncoders();
+
+    /**
      * Reset the gyro accumulators.
      */
     public abstract void resetGyro();
@@ -110,12 +115,12 @@ public abstract class Feedback implements Runnable {
     public void setElevatorDone(boolean elevatorDone) {
         this.elevatorDone = elevatorDone;
     }
-    
+
     public boolean isElevatorHere(double height) {
         return Math.abs(height - elevatorHeight) <= Constants.ElevatorPDoneRange.getDouble()
                 && Math.abs(elevatorVelocity) <= Constants.ElevatorVDoneRange.getDouble();
     }
-    
+
     /**
      * Get the height of the elevator in inches.
      *
@@ -141,7 +146,7 @@ public abstract class Feedback implements Runnable {
     public boolean isElevatorAtBottom() {
         return elevatorAtBottom;
     }
-    
+
     //Sluice
     protected boolean toteInSluice;
 

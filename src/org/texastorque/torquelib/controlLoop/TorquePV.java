@@ -1,5 +1,7 @@
 package org.texastorque.torquelib.controlLoop;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class TorquePV extends ControlLoop {
 
     private double kP;
@@ -52,6 +54,7 @@ public class TorquePV extends ControlLoop {
         kV = v;
         kFFV = ffV;
         kFFA = ffA;
+        SmartDashboard.putNumber("ffV", kFFV);
     }
 
     public void reset() {
