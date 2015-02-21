@@ -1,7 +1,6 @@
 package org.texastorque.texastorque2015.input;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.texastorque2015.subsystem.Intake;
 import org.texastorque.torquelib.util.GenericController;
@@ -39,32 +38,18 @@ public class DriverInput extends Input {
     }
 
     @Override
-    public void pushToDashboard() {
-        SmartDashboard.putBoolean("tiltToggle", tiltToggle.get());
-        SmartDashboard.putBoolean("wentToBottom", wentToBottom);
-        SmartDashboard.putNumber("toteInTime", toteInTime);
-        SmartDashboard.putBoolean("toteAvailable", toteAvailable);
-        SmartDashboard.putNumber("autoStackHeight", autoStackHeight);
-        SmartDashboard.putBoolean("stepStack", stepStack);
-        SmartDashboard.putBoolean("elevationInputThisCycle", elevationInputThisCycle);
-    }
-
-    @Override
     public boolean newPosition() {
         return newPosition;
     }
 
     @Override
     public void run() {
-        //numTotes override
         calcNumTotesOverride();
 
         elevationInputThisCycle = false;
 
-        //Drivebase
         calcDrivebase();
 
-        //Elevator
         if (operator.getElevatorDownButton() || operator.getElevatorUpButton()) {
             elevatorFFpOff = override = true;
         }
@@ -76,7 +61,7 @@ public class DriverInput extends Input {
 
         if (override) {
             calcOverride();
-            calcArms();
+            calcTilt();
             calcIntake();
         } else if (autoStack) {
             //autoStack = bring elevator down and back up to stack tote
@@ -110,7 +95,6 @@ public class DriverInput extends Input {
                 elevationInputThisCycle = true;
             }
         } else if (feederStack) {
-            //setup feederStack cycle
             elevatorPosition = Constants.FloorElevatorLevel3.getDouble();
             elevationInputThisCycle = true;
 
@@ -119,7 +103,6 @@ public class DriverInput extends Input {
             tiltUp = false;
 
             if (feedback.isToteInSluice() && !toteAvailable) {
-                //get the time for the start of the feederstack cycle
                 toteInTime = Timer.getFPGATimestamp();
                 toteAvailable = true;
             } else if (toteAvailable && feedback.isElevatorHere(elevatorPosition)) {
@@ -136,7 +119,7 @@ public class DriverInput extends Input {
             if (!operator.getNumTotesButton() && !operator.getNumTotesResetButton()) {
                 calcNormal();
             }
-            calcArms();
+            calcTilt();
             calcIntake();
         }
 
@@ -172,64 +155,22 @@ public class DriverInput extends Input {
 
     //Elevator
     private void calcNormal() {
-        if (operator.getCoopStackButton()) {
-            stepStack = true;
-
-            if (operator.getLevel1Button()) {
-                elevatorPosition = Constants.StepElevatorLevel1.getDouble();
-                elevationInputThisCycle = true;
-            } else if (operator.getLevel2Button()) {
-                elevatorPosition = Constants.StepElevatorLevel2.getDouble();
-                elevationInputThisCycle = true;
-            } else if (operator.getLevel3Button()) {
-                elevatorPosition = Constants.StepElevatorLevel3.getDouble();
-                elevationInputThisCycle = true;
-            } else if (operator.getLevel4Button()) {
-                elevatorPosition = Constants.StepElevatorLevel4.getDouble();
-                elevationInputThisCycle = true;
-            }
-        } else {
-            stepStack = false;
-
-            if (operator.getLevel1Button()) {
-                elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
-                elevationInputThisCycle = true;
-            } else if (operator.getLevel2Button()) {
-                elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
-                elevationInputThisCycle = true;
-            } else if (operator.getLevel3Button()) {
-                elevatorPosition = Constants.FloorElevatorLevel3.getDouble();
-                elevationInputThisCycle = true;
-            } else if (operator.getLevel4Button()) {
-                elevatorPosition = Constants.FloorElevatorLevel4.getDouble();
-                elevationInputThisCycle = true;
-            } else if (operator.getLevel5Button()) {
-                elevatorPosition = Constants.FloorElevatorLevel5.getDouble();
-                elevationInputThisCycle = true;
-            } else if (operator.getLevel6Button()) {
-                elevatorPosition = Constants.FloorElevatorLevel6.getDouble();
-                elevationInputThisCycle = true;
-            }
-        }
-
         if (operator.getScoreButton()) {
             numTotes = 0;
             if (tiltToggle.get()) {
                 punchOut = true;
                 armOpen = false;
             } else if (stepStack) {
+                elevationInputThisCycle = true;
+                
                 if (elevatorPosition == Constants.StepElevatorLevel1.getDouble()) {
                     elevatorPosition = Constants.StepPlaceLevel1.getDouble();
-                    elevationInputThisCycle = true;
                 } else if (elevatorPosition == Constants.StepElevatorLevel2.getDouble()) {
                     elevatorPosition = Constants.StepPlaceLevel2.getDouble();
-                    elevationInputThisCycle = true;
                 } else if (elevatorPosition == Constants.StepElevatorLevel3.getDouble()) {
                     elevatorPosition = Constants.StepPlaceLevel3.getDouble();
-                    elevationInputThisCycle = true;
                 } else if (elevatorPosition == Constants.StepElevatorLevel4.getDouble()) {
                     elevatorPosition = Constants.StepPlaceLevel4.getDouble();
-                    elevationInputThisCycle = true;
                 }
                 armOpen = true;
                 punchOut = false;
@@ -240,9 +181,42 @@ public class DriverInput extends Input {
                 armOpen = true;
                 punchOut = false;
             }
+        } else if (operator.getCoopStackButton()) {
+            armOpen = false;
+            punchOut = false;
+
+            stepStack = true;
+            elevationInputThisCycle = true;
+
+            if (operator.getLevel1Button()) {
+                elevatorPosition = Constants.StepElevatorLevel1.getDouble();
+            } else if (operator.getLevel2Button()) {
+                elevatorPosition = Constants.StepElevatorLevel2.getDouble();
+            } else if (operator.getLevel3Button()) {
+                elevatorPosition = Constants.StepElevatorLevel3.getDouble();
+            } else if (operator.getLevel4Button()) {
+                elevatorPosition = Constants.StepElevatorLevel4.getDouble();
+            }
         } else {
             armOpen = false;
             punchOut = false;
+            
+            stepStack = false;
+            elevationInputThisCycle = true;
+
+            if (operator.getLevel1Button()) {
+                elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
+            } else if (operator.getLevel2Button()) {
+                elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
+            } else if (operator.getLevel3Button()) {
+                elevatorPosition = Constants.FloorElevatorLevel3.getDouble();
+            } else if (operator.getLevel4Button()) {
+                elevatorPosition = Constants.FloorElevatorLevel4.getDouble();
+            } else if (operator.getLevel5Button()) {
+                elevatorPosition = Constants.FloorElevatorLevel5.getDouble();
+            } else if (operator.getLevel6Button()) {
+                elevatorPosition = Constants.FloorElevatorLevel6.getDouble();
+            }
         }
     }
 
@@ -267,7 +241,7 @@ public class DriverInput extends Input {
     }
 
     //Arms
-    private void calcArms() {
+    private void calcTilt() {
         tiltToggle.calc(operator.getTiltButton());
         tiltUp = tiltToggle.get();
     }
