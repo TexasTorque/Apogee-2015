@@ -27,9 +27,7 @@ public class RobotOutput extends Output {
 
     //Elevator
     private TorqueMotor leftElevatorMotorA;
-    private TorqueMotor leftElevatorMotorB;
     private TorqueMotor rightElevatorMotorA;
-    private TorqueMotor rightElevatorMotorB;
 
     public RobotOutput() {
         //Drivebase
@@ -49,10 +47,8 @@ public class RobotOutput extends Output {
         rightIntakeMotor = new TorqueMotor(new VictorSP(Ports.RIGHT_INTAKE_PORT), false, TorqueMotor.LinearizationType.kNone);
 
         //Elevator
-        leftElevatorMotorA = new TorqueMotor(new VictorSP(Ports.LEFT_ELEVATOR_A), true, TorqueMotor.LinearizationType.kNone);
-        leftElevatorMotorB = new TorqueMotor(new VictorSP(Ports.LEFT_ELEVATOR_B), true, TorqueMotor.LinearizationType.kNone);
-        rightElevatorMotorA = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR_A), false, TorqueMotor.LinearizationType.kNone);
-        rightElevatorMotorB = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR_B), false, TorqueMotor.LinearizationType.kNone);
+        leftElevatorMotorA = new TorqueMotor(new VictorSP(Ports.LEFT_ELEVATOR), true, TorqueMotor.LinearizationType.kNone);
+        rightElevatorMotorA = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR), false, TorqueMotor.LinearizationType.kNone);
     }
 
     //Drivebase
@@ -68,9 +64,7 @@ public class RobotOutput extends Output {
     @Override
     public void setElevatorMotorSpeeds(double speed) {
         leftElevatorMotorA.set(speed);
-        leftElevatorMotorB.set(speed);
         rightElevatorMotorA.set(speed);
-        rightElevatorMotorB.set(speed);
     }
 
     //Crazy Arms
