@@ -13,6 +13,7 @@ public class DriverInput extends Input {
     OperatorConsole operator;
 
     TorqueToggle tiltToggle;
+    TorqueToggle armToggle;
 
     private boolean wentToBottom;
     private double toteInTime;
@@ -27,6 +28,7 @@ public class DriverInput extends Input {
         operator = new OperatorConsole(1);
 
         tiltToggle = new TorqueToggle();
+        armToggle = new TorqueToggle();
 
         wentToBottom = false;
         toteAvailable = false;
@@ -74,7 +76,7 @@ public class DriverInput extends Input {
 
         if (override) {
             calcOverride();
-            calcArmsOverride();
+            calcArms();
             calcIntake();
         } else if (autoStack) {
             //autoStack = bring elevator down and back up to stack tote
@@ -255,20 +257,17 @@ public class DriverInput extends Input {
 
         if (tiltToggle.get()) {
             punchOut = operator.getScoreButton();
+            armToggle.set(false);
             armOpen = false;
         } else {
-            armOpen = operator.getScoreButton();
+            armToggle.calc(operator.getScoreButton());
+            armOpen = armToggle.get();
             punchOut = false;
         }
     }
 
     //Arms
     private void calcArms() {
-        tiltToggle.calc(operator.getTiltButton());
-        tiltUp = tiltToggle.get();
-    }
-
-    private void calcArmsOverride() {
         tiltToggle.calc(operator.getTiltButton());
         tiltUp = tiltToggle.get();
     }

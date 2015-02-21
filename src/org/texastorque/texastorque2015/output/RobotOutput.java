@@ -70,7 +70,7 @@ public class RobotOutput extends Output {
     //Crazy Arms
     @Override
     public void setArmsOpen(boolean open) {
-        openSolenoid.set(open);
+        openSolenoid.set(!open);
     }
 
     @Override
