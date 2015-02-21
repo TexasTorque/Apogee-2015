@@ -15,7 +15,6 @@ public class DriverInput extends Input {
     TorqueToggle armToggle;
 
     private boolean wentToBottom;
-    private double toteInTime;
     private boolean toteAvailable;
     private double autoStackHeight;
     private boolean stepStack;
@@ -103,7 +102,6 @@ public class DriverInput extends Input {
             tiltUp = false;
 
             if (feedback.isToteInSluice() && !toteAvailable) {
-                toteInTime = Timer.getFPGATimestamp();
                 toteAvailable = true;
             } else if (toteAvailable && feedback.isElevatorHere(elevatorPosition)) {
                 double toteSlideTime = feedback.getToteSlideTime();
