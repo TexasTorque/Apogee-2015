@@ -14,8 +14,6 @@ public class RobotOutput extends Output {
     private TorqueMotor leftDriveMotorB;
     private TorqueMotor rightDriveMotorA;
     private TorqueMotor rightDriveMotorB;
-    private TorqueMotor frontStrafeMotor;
-    private TorqueMotor rearStrafeMotor;
 
     //Crazy Arms
     private Solenoid openSolenoid;
@@ -39,8 +37,6 @@ public class RobotOutput extends Output {
         leftDriveMotorB = new TorqueMotor(new VictorSP(Ports.LEFT_B_DRIVE_PORT), false, TorqueMotor.LinearizationType.kNone);
         rightDriveMotorA = new TorqueMotor(new VictorSP(Ports.RIGHT_A_DRIVE_PORT), true, TorqueMotor.LinearizationType.kNone);
         rightDriveMotorB = new TorqueMotor(new VictorSP(Ports.RIGHT_B_DRIVE_PORT), true, TorqueMotor.LinearizationType.kNone);
-        frontStrafeMotor = new TorqueMotor(new VictorSP(Ports.FRONT_STRAFE_PORT), false, TorqueMotor.LinearizationType.kNone);
-        rearStrafeMotor = new TorqueMotor(new VictorSP(Ports.REAR_STRAFE_PORT), true, TorqueMotor.LinearizationType.kNone);
 
         //Crazy Arms
         openSolenoid = new Solenoid(Ports.ARM);
@@ -61,13 +57,11 @@ public class RobotOutput extends Output {
 
     //Drivebase
     @Override
-    public void setDriveSpeeds(double left, double right, double frontStrafe, double rearStrafe) {
+    public void setDriveSpeeds(double left, double right) {
         leftDriveMotorA.set(left);
         leftDriveMotorB.set(left);
         rightDriveMotorA.set(right);
         rightDriveMotorB.set(right);
-        frontStrafeMotor.set(frontStrafe);
-        rearStrafeMotor.set(rearStrafe);
     }
 
     //Elevator

@@ -164,26 +164,8 @@ public class DriverInput extends Input {
 
     //Drivebase
     private void calcDrivebase() {
-        /**
-         * Left stick controls translation, right stick controls rotation. Both
-         * the forward and strafe wheels are utilized for rotation.
-         */
-        if (driver.getRightBumper()) { //Turn over front of robot
-            leftSpeed = -1 * driver.getLeftYAxis() + driver.getRightXAxis() * 0.1;
-            rightSpeed = -1 * driver.getLeftYAxis() - driver.getRightXAxis() * 0.1;
-            frontStrafeSpeed = -1 * driver.getLeftXAxis() - driver.getRightXAxis() * 121 / 400;
-            rearStrafeSpeed = -1 * driver.getLeftXAxis() + driver.getRightXAxis();
-        } else if (driver.getLeftBumper()) { //Turn over back of robot
-            leftSpeed = -1 * driver.getLeftYAxis() + driver.getRightXAxis() * 0.1;
-            rightSpeed = -1 * driver.getLeftYAxis() - driver.getRightXAxis() * 0.1;
-            frontStrafeSpeed = -1 * driver.getLeftXAxis() - driver.getRightXAxis();
-            rearStrafeSpeed = -1 * driver.getLeftXAxis() + driver.getRightXAxis() * 100 / 841;
-        } else { //Turn over center of robot
-            leftSpeed = -1 * driver.getLeftYAxis() + driver.getRightXAxis();
-            rightSpeed = -1 * driver.getLeftYAxis() - driver.getRightXAxis();
-            frontStrafeSpeed = -1 * driver.getLeftXAxis() - driver.getRightXAxis() * 16 / 25;
-            rearStrafeSpeed = -1 * driver.getLeftXAxis() + driver.getRightXAxis();
-        }
+        leftSpeed = -1 * driver.getLeftYAxis() + driver.getRightXAxis();
+        rightSpeed = -1 * driver.getLeftYAxis() - driver.getRightXAxis();
     }
 
     //Elevator

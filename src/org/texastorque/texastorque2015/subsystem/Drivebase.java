@@ -10,8 +10,6 @@ public class Drivebase extends Subsystem {
     //Motor speeds
     private double leftSpeed;
     private double rightSpeed;
-    private double frontStrafeSpeed;
-    private double rearStrafeSpeed;
 
     //Sensor values (linear)
     private double leftPosition;
@@ -127,17 +125,15 @@ public class Drivebase extends Subsystem {
             //Regular teleop control
             leftSpeed = input.getLeftSpeed();
             rightSpeed = input.getRightSpeed();
-            frontStrafeSpeed = input.getFrontStrafeSpeed();
-            rearStrafeSpeed = input.getRearStrafeSpeed();
 
             targetPosition = 0.0;
             targetVelocity = 0.0;
         }
 
         if (outputEnabled) {
-            output.setDriveSpeeds(leftSpeed, rightSpeed, frontStrafeSpeed, rearStrafeSpeed);
+            output.setDriveSpeeds(leftSpeed, rightSpeed);
         } else {
-            output.setDriveSpeeds(0.0, 0.0, 0.0, 0.0);
+            output.setDriveSpeeds(0.0, 0.0);
         }
     }
 
@@ -161,8 +157,6 @@ public class Drivebase extends Subsystem {
     public void pushToDashboard() {
         SmartDashboard.putNumber("LeftSpeed", leftSpeed);
         SmartDashboard.putNumber("RightSpeed", rightSpeed);
-        SmartDashboard.putNumber("FrontStrafeSpeed", frontStrafeSpeed);
-        SmartDashboard.putNumber("RearStrafeSpeed", rearStrafeSpeed);
         SmartDashboard.putNumber("LeftPosition", leftPosition);
         SmartDashboard.putNumber("RightPosition", rightPosition);
         SmartDashboard.putNumber("LeftVelocity", leftVelocity);
@@ -179,13 +173,13 @@ public class Drivebase extends Subsystem {
 
     @Override
     public String getLogNames() {
-        return "LeftSpeed, RightSpeed, FrontStrafeSpeed, RearStrafeSpeed, "
+        return "LeftSpeed, RightSpeed, "
                 + "LeftPosition, RightPosition, LeftVelocity, RightVelocity, TargetPosition, TargetVelocity, ";
     }
 
     @Override
     public String getLogValues() {
-        return leftSpeed + ", " + rightSpeed + ", " + frontStrafeSpeed + ", " + rearStrafeSpeed + ", "
+        return leftSpeed + ", " + rightSpeed + ", "
                 + leftPosition + ", " + rightPosition + ", " + leftVelocity + ", "
                 + rightVelocity + ", " + targetPosition + ", " + targetVelocity + ", ";
     }

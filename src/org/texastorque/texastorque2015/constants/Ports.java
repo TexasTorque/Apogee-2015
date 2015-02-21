@@ -7,8 +7,6 @@ public class Ports {
     public final static int LEFT_B_DRIVE_PORT = 3;
     public final static int RIGHT_A_DRIVE_PORT = 0;
     public final static int RIGHT_B_DRIVE_PORT = 1;
-    public final static int FRONT_STRAFE_PORT = 7;//more board
-    public final static int REAR_STRAFE_PORT = 17;//more board
 
     //Elevator
     public final static int LEFT_ELEVATOR_A = 5;
