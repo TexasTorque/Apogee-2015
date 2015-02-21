@@ -2,6 +2,7 @@ package org.texastorque.texastorque2015.feedback;
 
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import org.texastorque.texastorque2015.constants.Ports;
 import org.texastorque.torquelib.component.TorqueEncoder;
 import org.texastorque.torquelib.component.TorqueGyro;
@@ -62,7 +63,10 @@ public class SensorFeedback extends Feedback {
         elevatorAtBottom = bottomLimit.get();
 
         //Sluice
-        toteInSluice = sluiceLimitSwitch.get();
+        if (!toteInSluice && !toteInSluice) {
+            toteSlideTime = Timer.getFPGATimestamp();
+        }
+        toteInSluice = !sluiceLimitSwitch.get();
 
         //angle (radians)
         angle = gyro.getAngle();

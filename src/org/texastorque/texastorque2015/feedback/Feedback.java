@@ -149,9 +149,14 @@ public abstract class Feedback implements Runnable {
 
     //Sluice
     protected boolean toteInSluice;
+    protected volatile double toteSlideTime;
 
     public boolean isToteInSluice() {
         return toteInSluice;
+    }
+
+    public double getToteSlideTime() {
+        return toteSlideTime;
     }
 
 }

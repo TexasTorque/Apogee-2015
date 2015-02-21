@@ -3,6 +3,7 @@ package org.texastorque.texastorque2015.input;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque2015.constants.Constants;
+import org.texastorque.texastorque2015.subsystem.Intake;
 import org.texastorque.torquelib.util.GenericController;
 import org.texastorque.torquelib.util.TorqueToggle;
 
@@ -67,17 +68,15 @@ public class DriverInput extends Input {
         }
 
         feederStack = operator.getFeederStackButton();
-        if (!operator.getFeederStackButton()) {
+        if (!feederStack) {
             autoStack = operator.getAutoStackButton();
         }
 
         if (override) {
-            SmartDashboard.putNumber("POS_TEST", 1);
             calcOverride();
             calcArmsOverride();
             calcIntake();
         } else if (autoStack) {
-            SmartDashboard.putNumber("POS_TEST", 2);
             //autoStack = bring elevator down and back up to stack tote
             armOpen = false;
             tiltUp = false;
@@ -96,8 +95,6 @@ public class DriverInput extends Input {
 
                 numTotes++;
                 wentToBottom = true;
-                intakeSpeed = 0.0;
-                intakesIn = false;
             } else if (feedback.isElevatorHere(autoStackHeight) && wentToBottom) {
                 //if autoStacking cycle has been finished, reset
                 autoStack = false;
@@ -109,15 +106,8 @@ public class DriverInput extends Input {
                 //intake the tote while the elevator is moving down
                 elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
                 elevationInputThisCycle = true;
-
-                intakeSpeed = 1.0;
-                intakesIn = true;
             }
         } else if (feederStack) {
-            SmartDashboard.putNumber("POS_TEST", 3);
-            //feederStack means intake tote from sluice, outtake it, re-intake it, then autoStack
-            double currentTime = Timer.getFPGATimestamp();
-
             //setup feederStack cycle
             elevatorPosition = Constants.FloorElevatorLevel3.getDouble();
             elevationInputThisCycle = true;
@@ -130,25 +120,15 @@ public class DriverInput extends Input {
                 //get the time for the start of the feederstack cycle
                 toteInTime = Timer.getFPGATimestamp();
                 toteAvailable = true;
-            } else if (toteAvailable) {
-                //can intake tote
-                if (currentTime - Constants.ToteSluiceWaitTime.getDouble() > toteInTime) {
-                    if (currentTime - Constants.ToteSluiceWaitTime.getDouble() - Constants.TotePullBAckTime.getDouble() > toteInTime) {
-                        //wait for the elevator to be ready
-                        autoStack = feedback.isElevatorDone();
-                    } else {
-                        //pull the tote back in to get ready for the elevator to pick it up
-                        intakeSpeed = 1.0;
-                    }
-                } else {
-                    //Reverse intake to make sure the tote comes off of the sluice
-                    intakeSpeed = -1.0;
-                    intakesIn = true;
+            } else if (toteAvailable && feedback.isElevatorHere(elevatorPosition)) {
+                double toteSlideTime = feedback.getToteSlideTime();
+                intakeState = Intake.SLUICE_GATHER;
+                if (Timer.getFPGATimestamp() - toteSlideTime < Constants.ToteSluiceWaitTime.getDouble() + Constants.TotePullBAckTime.getDouble()) {
+                    autoStack = true;
+                    intakeState = Intake.OFF;
                 }
             }
         } else {
-            SmartDashboard.putNumber("POS_TEST", 4);
-            //not feederStack-ing or autoStack-ing = normal operation
             toteAvailable = false;
             wentToBottom = false;
             if (!operator.getNumTotesButton() && !operator.getNumTotesResetButton()) {
@@ -314,11 +294,9 @@ public class DriverInput extends Input {
     //Intake
     private void calcIntake() {
         if (operator.getIntakeButton()) {
-            intakeSpeed = 1.0;
-            intakesIn = true;
+            intakeState = Intake.INTAKE;
         } else {
-            intakeSpeed = 0.0;
-            intakesIn = false;
+            intakeState = Intake.OFF;
         }
     }
 }

@@ -1,11 +1,21 @@
 package org.texastorque.texastorque2015.subsystem;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.texastorque.texastorque2015.constants.Constants;
 
 public class Intake extends Subsystem {
 
     private double intakeSpeed;
     private boolean intakesIn;
+
+    private byte state;
+    public static final byte OFF = 0;
+    public static final byte INTAKE = 1;
+    public static final byte OUTTAKE = 2;
+    public static final byte SLUICE_GATHER = 3;
+
+    private double toteSlideTime;
 
     public Intake() {
     }
@@ -16,9 +26,35 @@ public class Intake extends Subsystem {
 
     @Override
     public void run() {
-        intakeSpeed = input.getIntakeSpeed();
-        intakesIn = input.areIntakesIn();
-        
+        state = input.getIntakeState();
+
+        switch (state) {
+            case INTAKE:
+                intakeSpeed = 1.0;
+                intakesIn = true;
+                break;
+            case OUTTAKE:
+                intakeSpeed = -1.0;
+                intakesIn = true;
+                break;
+            case SLUICE_GATHER:
+                toteSlideTime = feedback.getToteSlideTime();
+                if (Timer.getFPGATimestamp() - toteSlideTime < Constants.ToteSluiceWaitTime.getDouble()) {
+                    intakeSpeed = -1.0;
+                    intakesIn = true;
+                } else if (Timer.getFPGATimestamp() - toteSlideTime < Constants.ToteSluiceWaitTime.getDouble() + Constants.TotePullBAckTime.getDouble()) {
+                    intakeSpeed = 1.0;
+                    intakesIn = true;
+                } else {
+                    intakeSpeed = 0.0;
+                    intakesIn = false;
+                }
+                break;
+            default:
+                intakeSpeed = 0.0;
+                intakesIn = false;
+        }
+
         if (outputEnabled) {
             output.setIntakeMotorSpeed(intakeSpeed);
             output.setIntakeGrasp(intakesIn);
@@ -35,6 +71,7 @@ public class Intake extends Subsystem {
     public void pushToDashboard() {
         SmartDashboard.putNumber("IntakeSpeed", intakeSpeed);
         SmartDashboard.putBoolean("IntakesIn", intakesIn);
+        SmartDashboard.putNumber("IntakeState", state);
     }
 
     @Override

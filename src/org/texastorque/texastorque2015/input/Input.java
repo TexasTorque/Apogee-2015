@@ -105,15 +105,10 @@ public abstract class Input implements Runnable {
     }
 
     //Intake
-    protected volatile double intakeSpeed;
-    protected volatile boolean intakesIn;
+    protected volatile byte intakeState;
 
-    public double getIntakeSpeed() {
-        return intakeSpeed;
-    }
-
-    public boolean areIntakesIn() {
-        return intakesIn;
+    public byte getIntakeState() {
+        return intakeState;
     }
 
     //Auto stacking
