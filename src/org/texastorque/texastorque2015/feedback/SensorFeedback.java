@@ -57,7 +57,7 @@ public class SensorFeedback extends Feedback {
         elevatorEncoder.calc();
 
         elevatorHeight = elevatorEncoder.get() * 0.0225; //Put in conversion
-        elevatorVelocity = elevatorEncoder.getRate() * 0.0225; //Put in conversion
+        elevatorVelocity = elevatorEncoder.getAverageRate() * 0.0225; //Put in conversion
 
         elevatorAtTop = topLimit.get();
         elevatorAtBottom = bottomLimit.get();

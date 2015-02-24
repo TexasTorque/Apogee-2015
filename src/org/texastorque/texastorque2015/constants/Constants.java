@@ -91,6 +91,10 @@ public class Constants extends Parameters {
     public final static Constant StepPlaceLevel2 = new Constant("E_StepPlaceLevel2", 225.0);
     public final static Constant StepPlaceLevel3 = new Constant("E_StepPlaceLevel3", 325.0);
     public final static Constant StepPlaceLevel4 = new Constant("E_StepPlaceLevel4", 425.0);
+    
+    //Autostack
+    public final static Constant autoStackLevel = new Constant("E_AutoStackLevel", 0.0);
+    public final static Constant autoStackArmOpenLevel = new Constant("E_AutoStackArmOpenLevel", 0.0);
 
     //Recycling can
     public final static Constant RCElevatorP = new Constant("E_RC_P", 0.0);

@@ -34,6 +34,8 @@ public class DriverInput extends Input {
 
         newPosition = false;
         numTotes = 0;
+
+        elevatorFFpOff = false;
     }
 
     @Override
@@ -50,7 +52,7 @@ public class DriverInput extends Input {
         calcDrivebase();
 
         if (operator.getElevatorDownButton() || operator.getElevatorUpButton()) {
-            elevatorFFpOff = override = true;
+            override = true;
         }
 
         feederStack = operator.getFeederStackButton();
@@ -64,13 +66,12 @@ public class DriverInput extends Input {
             calcIntake();
         } else if (autoStack) {
             //autoStack = bring elevator down and back up to stack tote
-            armOpen = false;
             tiltUp = false;
             punchOut = false;
 
-            if (feedback.isElevatorHere(Constants.FloorElevatorLevel1.getDouble())) {
-                // go back up to get ready for another tote in from underneath
-                // if autoStacking from feederStack, go back to level 3, else go to 2
+            if (feedback.isElevatorHere(Constants.autoStackLevel.getDouble()) && !wentToBottom) {
+                armOpen = false;
+
                 if (feederStack) {
                     autoStackHeight = Constants.FloorElevatorLevel3.getDouble();
                 } else {
@@ -82,16 +83,16 @@ public class DriverInput extends Input {
                 numTotes++;
                 wentToBottom = true;
             } else if (feedback.isElevatorHere(autoStackHeight) && wentToBottom) {
-                //if autoStacking cycle has been finished, reset
                 autoStack = false;
                 toteAvailable = false;
                 wentToBottom = false;
             } else if (elevatorPosition == autoStackHeight && wentToBottom) {
                 //catch else to make sure that nothing happens if elevator is not done
             } else {
-                //intake the tote while the elevator is moving down
-                elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
+                elevatorPosition = Constants.autoStackLevel.getDouble();
                 elevationInputThisCycle = true;
+
+                armOpen = feedback.getElevatorHeight() < Constants.autoStackArmOpenLevel.getDouble();
             }
         } else if (feederStack) {
             elevatorPosition = Constants.FloorElevatorLevel3.getDouble();
@@ -121,6 +122,7 @@ public class DriverInput extends Input {
             calcIntake();
         }
 
+        armOpen = armOpen || driver.getRightTrigger();
         newPosition = elevationInputThisCycle;
     }
 
@@ -160,7 +162,7 @@ public class DriverInput extends Input {
                 armOpen = false;
             } else if (stepStack) {
                 elevationInputThisCycle = true;
-                
+
                 if (elevatorPosition == Constants.StepElevatorLevel1.getDouble()) {
                     elevatorPosition = Constants.StepPlaceLevel1.getDouble();
                 } else if (elevatorPosition == Constants.StepElevatorLevel2.getDouble()) {
@@ -170,13 +172,17 @@ public class DriverInput extends Input {
                 } else if (elevatorPosition == Constants.StepElevatorLevel4.getDouble()) {
                     elevatorPosition = Constants.StepPlaceLevel4.getDouble();
                 }
-                armOpen = true;
+                if (feedback.isElevatorHere(elevatorPosition)) {
+                    armOpen = true;
+                }
                 punchOut = false;
             } else {
                 elevatorPosition = Constants.PlaceLevel.getDouble();
                 elevationInputThisCycle = true;
 
-                armOpen = true;
+                if (feedback.isElevatorHere(elevatorPosition)) {
+                    armOpen = true;
+                }
                 punchOut = false;
             }
         } else if (operator.getCoopStackButton()) {
@@ -198,7 +204,7 @@ public class DriverInput extends Input {
         } else {
             armOpen = false;
             punchOut = false;
-            
+
             stepStack = false;
             elevationInputThisCycle = true;
 
@@ -220,9 +226,9 @@ public class DriverInput extends Input {
 
     private void calcOverride() {
         if (operator.getElevatorUpButton()) {
-            overrideElevatorMotorSpeed = 1.0;
+            overrideElevatorMotorSpeed = 0.4;
         } else if (operator.getElevatorDownButton()) {
-            overrideElevatorMotorSpeed = -1.0;
+            overrideElevatorMotorSpeed = -0.4;
         } else {
             overrideElevatorMotorSpeed = 0.0;
         }
@@ -230,10 +236,14 @@ public class DriverInput extends Input {
         if (tiltToggle.get()) {
             punchOut = operator.getScoreButton();
             armToggle.set(false);
+            numTotes = 0;
             armOpen = false;
         } else {
             armToggle.calc(operator.getScoreButton());
             armOpen = armToggle.get();
+            if (armOpen) {
+                numTotes = 0;
+            }
             punchOut = false;
         }
     }

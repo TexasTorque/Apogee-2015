@@ -34,11 +34,11 @@ public class TorquePV extends ControlLoop {
 
         //Position P
         double error = profile.getCurrentPosition() - currentPosition;
-        output += (error * kP * voltageAdjustment);
+        output += (error * kP);
 
         //Velocity P
         double velocityError = profile.getCurrentVelocity() - currentVelocity;
-        output += (velocityError * kV * voltageAdjustment);
+        output += (velocityError * kV);
 
         //Velocity FeedForward
         output += (profile.getCurrentVelocity() * kFFV * voltageAdjustment);
@@ -54,7 +54,6 @@ public class TorquePV extends ControlLoop {
         kV = v;
         kFFV = ffV;
         kFFA = ffA;
-        SmartDashboard.putNumber("ffV", kFFV);
     }
 
     public void reset() {

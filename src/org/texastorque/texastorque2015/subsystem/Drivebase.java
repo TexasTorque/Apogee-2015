@@ -1,5 +1,6 @@
 package org.texastorque.texastorque2015.subsystem;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.torquelib.controlLoop.TorquePV;
@@ -43,6 +44,8 @@ public class Drivebase extends Subsystem {
     //angular
     private TorqueTMP angularProfile;
     private TorquePV turnPV;
+    
+    double prevTime;
 
     public Drivebase() {
         linearProfile = new TorqueTMP(Constants.DrivebaseMaxV.getDouble(), Constants.DrivebaseMaxA.getDouble());
@@ -61,6 +64,8 @@ public class Drivebase extends Subsystem {
         angularProfile.generateTrapezoid(0.0, 0.0, angle);
         feedback.resetDriveEncoders();
         feedback.resetGyro();
+        
+        prevTime = Timer.getFPGATimestamp();
     }
 
     @Override
@@ -84,6 +89,9 @@ public class Drivebase extends Subsystem {
          *
          */
         
+        double dt = Timer.getFPGATimestamp() - prevTime;
+        prevTime = Timer.getFPGATimestamp();
+        
         //Linear control loop operation
         if (input.isDrivebaseControlled() && input.getDriveAngle() == 0.0) {
             if (setPointPosition != input.getDriveDistance()) {
@@ -94,7 +102,7 @@ public class Drivebase extends Subsystem {
                 feedback.resetDriveEncoders();
             }
 
-            linearProfile.calculateNextSituation();
+            linearProfile.calculateNextSituation(dt);
 
             targetVelocity = linearProfile.getCurrentVelocity();
             targetPosition = linearProfile.getCurrentPosition();
@@ -113,7 +121,7 @@ public class Drivebase extends Subsystem {
                 feedback.resetGyro();
             }
 
-            angularProfile.calculateNextSituation();
+            angularProfile.calculateNextSituation(dt);
 
             targetAngularVelocity = angularProfile.getCurrentVelocity();
             targetAngle = angularProfile.getCurrentPosition();

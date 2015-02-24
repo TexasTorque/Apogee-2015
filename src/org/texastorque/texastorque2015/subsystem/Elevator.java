@@ -1,5 +1,6 @@
 package org.texastorque.texastorque2015.subsystem;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.torquelib.controlLoop.TorquePV;
@@ -9,6 +10,8 @@ public class Elevator extends Subsystem {
 
     private TorqueTMP tmp;
     private TorquePV pv;
+    
+    double prevTime;
 
     private double setPointElevation;
     private double targetPosition;
@@ -40,6 +43,8 @@ public class Elevator extends Subsystem {
         currentVelocity = feedback.getElevatorVelocity();
 
         tmp.generateTrapezoid(setPointElevation, currentPosition, currentVelocity);
+        
+        prevTime = Timer.getFPGATimestamp();
     }
 
     /**
@@ -71,7 +76,9 @@ public class Elevator extends Subsystem {
 
                 tmp.generateTrapezoid(setPointElevation, currentPosition, currentVelocity);
             }
-            tmp.calculateNextSituation();
+            double dt = Timer.getFPGATimestamp() - prevTime;
+            prevTime = Timer.getFPGATimestamp();
+            tmp.calculateNextSituation(dt);
 
             targetPosition = tmp.getCurrentPosition();
             targetVelocity = tmp.getCurrentVelocity();

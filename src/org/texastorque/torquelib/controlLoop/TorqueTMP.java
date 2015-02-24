@@ -113,22 +113,22 @@ public class TorqueTMP {
      *
      * @param dt
      */
-    public void calculateNextSituation() {
-        if (accelerationTime > 0.01) {
-            accelerate(0.01);
-            accelerationTime -= 0.01;
-        } else if ((accelerationTime + cruiseTime) > 0.01) {
+    public void calculateNextSituation(double dt) {
+        if (accelerationTime > dt) {
+            accelerate(dt);
+            accelerationTime -= dt;
+        } else if ((accelerationTime + cruiseTime) > dt) {
             accelerate(accelerationTime);
-            cruise(0.01 - accelerationTime);
+            cruise(dt - accelerationTime);
 
-            cruiseTime -= (0.01 - accelerationTime);
+            cruiseTime -= (dt - accelerationTime);
             accelerationTime = 0.0;
-        } else if ((accelerationTime + cruiseTime + decelerationTime) > 0.01) {
+        } else if ((accelerationTime + cruiseTime + decelerationTime) > dt) {
             accelerate(accelerationTime);
             cruise(cruiseTime);
-            decelerate(0.01 - accelerationTime - cruiseTime);
+            decelerate(dt - accelerationTime - cruiseTime);
 
-            decelerationTime -= (0.01 - accelerationTime - cruiseTime);
+            decelerationTime -= (dt - accelerationTime - cruiseTime);
             accelerationTime = 0.0;
             cruiseTime = 0.0;
         } else {
