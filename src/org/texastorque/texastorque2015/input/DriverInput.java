@@ -45,8 +45,6 @@ public class DriverInput extends Input {
 
     @Override
     public void run() {
-        calcNumTotesOverride();
-
         elevationInputThisCycle = false;
 
         calcDrivebase();
@@ -65,6 +63,9 @@ public class DriverInput extends Input {
             calcTilt();
             calcIntake();
         } else if (autoStack) {
+            
+            intakeState = Intake.OFF;
+            
             //autoStack = bring elevator down and back up to stack tote
             tiltUp = false;
             punchOut = false;
@@ -107,7 +108,7 @@ public class DriverInput extends Input {
             } else if (toteAvailable && feedback.isElevatorHere(elevatorPosition)) {
                 double toteSlideTime = feedback.getToteSlideTime();
                 intakeState = Intake.SLUICE_GATHER;
-                if (Timer.getFPGATimestamp() - toteSlideTime < Constants.ToteSluiceWaitTime.getDouble() + Constants.TotePullBAckTime.getDouble()) {
+                if (Timer.getFPGATimestamp() - toteSlideTime > Constants.ToteSluiceWaitTime.getDouble() + Constants.TotePullBAckTime.getDouble()) {
                     autoStack = true;
                     intakeState = Intake.OFF;
                 }
@@ -117,6 +118,8 @@ public class DriverInput extends Input {
             wentToBottom = false;
             if (!operator.getNumTotesButton() && !operator.getNumTotesResetButton()) {
                 calcNormal();
+            } else {
+                calcNumTotesOverride();
             }
             calcTilt();
             calcIntake();
@@ -177,7 +180,20 @@ public class DriverInput extends Input {
                 }
                 punchOut = false;
             } else {
-                elevatorPosition = Constants.PlaceLevel.getDouble();
+                if (elevatorPosition == Constants.FloorElevatorLevel1.getDouble()) {
+                    elevatorPosition = Constants.PlaceLevel1.getDouble();
+                } else if (elevatorPosition == Constants.FloorElevatorLevel2.getDouble()) {
+                    elevatorPosition = Constants.PlaceLevel2.getDouble();
+                } else if (elevatorPosition == Constants.FloorElevatorLevel3.getDouble()) {
+                    elevatorPosition = Constants.PlaceLevel3.getDouble();
+                } else if (elevatorPosition == Constants.FloorElevatorLevel4.getDouble()) {
+                    elevatorPosition = Constants.PlaceLevel4.getDouble();
+                } else if (elevatorPosition == Constants.FloorElevatorLevel5.getDouble()) {
+                    elevatorPosition = Constants.PlaceLevel5.getDouble();
+                } else if (elevatorPosition == Constants.FloorElevatorLevel6.getDouble()) {
+                    elevatorPosition = Constants.PlaceLevel6.getDouble();
+                }
+
                 elevationInputThisCycle = true;
 
                 if (feedback.isElevatorHere(elevatorPosition)) {

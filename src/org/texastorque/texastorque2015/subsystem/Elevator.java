@@ -60,14 +60,14 @@ public class Elevator extends Subsystem {
 
     @Override
     public void run() {
-        if (input.getNumTotes() != numTotes) {
-            numTotes = input.getNumTotes();
-            loadParams();
-        }
         currentPosition = feedback.getElevatorHeight();
         currentVelocity = feedback.getElevatorVelocity();
 
-        feedback.setElevatorDone(isDone());
+        if (input.getNumTotes() != numTotes) {
+            numTotes = input.getNumTotes();
+            loadParams();
+            tmp.generateTrapezoid(setPointElevation, currentPosition, currentVelocity);
+        }
 
         //Control loop operation
         if (!input.isOverride()) {
@@ -100,6 +100,9 @@ public class Elevator extends Subsystem {
 //        } else if (feedback.isElevatorAtBottom()) {
 //            motorSpeed = Math.max(motorSpeed, 0.0);
 //        }
+        
+        feedback.setElevatorDone(isDone());
+        
         //Output to the robot if we want to.
         if (outputEnabled) {
             output.setElevatorMotorSpeeds(motorSpeed);

@@ -80,7 +80,12 @@ public class Constants extends Parameters {
     public final static Constant FloorElevatorLevel4 = new Constant("E_FloorL4", 400.0);
     public final static Constant FloorElevatorLevel5 = new Constant("E_FloorL5", 500.0);
     public final static Constant FloorElevatorLevel6 = new Constant("E_FloorL6", 600.0);
-    public final static Constant PlaceLevel = new Constant("E_PlaceLevel", 50.0);
+    public final static Constant PlaceLevel1 = new Constant("E_PlaceLevel1", 50.0);
+    public final static Constant PlaceLevel2 = new Constant("E_PlaceLevel2", 50.0);
+    public final static Constant PlaceLevel3 = new Constant("E_PlaceLevel3", 50.0);
+    public final static Constant PlaceLevel4 = new Constant("E_PlaceLevel4", 50.0);
+    public final static Constant PlaceLevel5 = new Constant("E_PlaceLevel5", 50.0);
+    public final static Constant PlaceLevel6 = new Constant("E_PlaceLevel6", 50.0);
 
     //Step
     public final static Constant StepElevatorLevel1 = new Constant("E_StepL1", 150.0);
