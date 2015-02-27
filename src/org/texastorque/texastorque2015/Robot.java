@@ -210,8 +210,10 @@ public class Robot extends TorqueIterative {
         activeFeedback = sensorFeedback;
 
         updateIO();
-
         drivebase.setOutputEnabled(false);
+        elevator.setOutputEnabled(false);
+        arms.setOutputEnabled(false);
+        intake.setOutputEnabled(false);
 
         initSubsystems();
 
@@ -221,11 +223,16 @@ public class Robot extends TorqueIterative {
     @Override
     public void disabledContinuous() {
         drivebase.run();
+        elevator.run();
+        arms.run();
+        intake.run();
+        
+        activeFeedback.run();
     }
 
     @Override
     public void disabledPeriodic() {
-        activeInput.run();
         lights.calcLightState();
+        pushToDashboard();
     }
 }

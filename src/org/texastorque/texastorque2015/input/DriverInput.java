@@ -63,9 +63,9 @@ public class DriverInput extends Input {
             calcTilt();
             calcIntake();
         } else if (autoStack) {
-            
+
             intakeState = Intake.OFF;
-            
+
             //autoStack = bring elevator down and back up to stack tote
             tiltUp = false;
             punchOut = false;
@@ -103,9 +103,9 @@ public class DriverInput extends Input {
             punchOut = false;
             tiltUp = false;
 
-            if (feedback.isToteInSluice() && !toteAvailable) {
-                toteAvailable = true;
-            } else if (toteAvailable && feedback.isElevatorHere(elevatorPosition)) {
+            toteAvailable = feedback.isToteInSluice();
+            
+            if (toteAvailable && feedback.isElevatorHere(elevatorPosition)) {
                 double toteSlideTime = feedback.getToteSlideTime();
                 intakeState = Intake.SLUICE_GATHER;
                 if (Timer.getFPGATimestamp() - toteSlideTime > Constants.ToteSluiceWaitTime.getDouble() + Constants.TotePullBAckTime.getDouble()) {
@@ -224,18 +224,34 @@ public class DriverInput extends Input {
             stepStack = false;
             elevationInputThisCycle = true;
 
-            if (operator.getLevel1Button()) {
-                elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
-            } else if (operator.getLevel2Button()) {
-                elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
-            } else if (operator.getLevel3Button()) {
-                elevatorPosition = Constants.FloorElevatorLevel3.getDouble();
-            } else if (operator.getLevel4Button()) {
-                elevatorPosition = Constants.FloorElevatorLevel4.getDouble();
-            } else if (operator.getLevel5Button()) {
-                elevatorPosition = Constants.FloorElevatorLevel5.getDouble();
-            } else if (operator.getLevel6Button()) {
-                elevatorPosition = Constants.FloorElevatorLevel6.getDouble();
+            if (tiltToggle.get()) {
+                if (operator.getLevel1Button()) {
+                    elevatorPosition = Constants.RCElevatorLevel1.getDouble();
+                } else if (operator.getLevel2Button()) {
+                    elevatorPosition = Constants.RCElevatorLevel2.getDouble();
+                } else if (operator.getLevel3Button()) {
+                    elevatorPosition = Constants.RCElevatorLevel3.getDouble();
+                } else if (operator.getLevel4Button()) {
+                    elevatorPosition = Constants.RCElevatorLevel4.getDouble();
+                } else if (operator.getLevel5Button()) {
+                    elevatorPosition = Constants.RCElevatorLevel5.getDouble();
+                } else if (operator.getLevel6Button()) {
+                    elevatorPosition = Constants.RCElevatorLevel6.getDouble();
+                }
+            } else {
+                if (operator.getLevel1Button()) {
+                    elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
+                } else if (operator.getLevel2Button()) {
+                    elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
+                } else if (operator.getLevel3Button()) {
+                    elevatorPosition = Constants.FloorElevatorLevel3.getDouble();
+                } else if (operator.getLevel4Button()) {
+                    elevatorPosition = Constants.FloorElevatorLevel4.getDouble();
+                } else if (operator.getLevel5Button()) {
+                    elevatorPosition = Constants.FloorElevatorLevel5.getDouble();
+                } else if (operator.getLevel6Button()) {
+                    elevatorPosition = Constants.FloorElevatorLevel6.getDouble();
+                }
             }
         }
     }
@@ -274,6 +290,8 @@ public class DriverInput extends Input {
     private void calcIntake() {
         if (operator.getIntakeButton()) {
             intakeState = Intake.INTAKE;
+        } else if (driver.getRightBumper()) {
+            intakeState = Intake.OUTTAKE;
         } else {
             intakeState = Intake.OFF;
         }

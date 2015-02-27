@@ -16,6 +16,7 @@ public class Intake extends Subsystem {
     public static final byte SLUICE_GATHER = 3;
 
     private double toteSlideTime;
+    private boolean toteInSluice;
 
     public Intake() {
     }
@@ -27,6 +28,8 @@ public class Intake extends Subsystem {
     @Override
     public void run() {
         state = input.getIntakeState();
+        
+        toteInSluice = feedback.isToteInSluice();
 
         switch (state) {
             case INTAKE:
@@ -34,13 +37,13 @@ public class Intake extends Subsystem {
                 intakesIn = true;
                 break;
             case OUTTAKE:
-                intakeSpeed = -1.0;
+                intakeSpeed = -0.2;
                 intakesIn = true;
                 break;
             case SLUICE_GATHER:
                 toteSlideTime = feedback.getToteSlideTime();
                 if (Timer.getFPGATimestamp() - toteSlideTime < Constants.ToteSluiceWaitTime.getDouble()) {
-                    intakeSpeed = -1.0;
+                    intakeSpeed = -0.2;
                     intakesIn = true;
                 } else if (Timer.getFPGATimestamp() - toteSlideTime < Constants.ToteSluiceWaitTime.getDouble() + Constants.TotePullBAckTime.getDouble()) {
                     intakeSpeed = 1.0;
@@ -50,6 +53,9 @@ public class Intake extends Subsystem {
                     intakesIn = false;
                 }
                 break;
+            case OFF:
+                intakeSpeed = 0.0;
+                intakesIn = false;
             default:
                 intakeSpeed = 0.0;
                 intakesIn = false;
@@ -72,6 +78,8 @@ public class Intake extends Subsystem {
         SmartDashboard.putNumber("IntakeSpeed", intakeSpeed);
         SmartDashboard.putBoolean("IntakesIn", intakesIn);
         SmartDashboard.putNumber("IntakeState", state);
+        SmartDashboard.putBoolean("ToteInSluice", toteInSluice);
+        SmartDashboard.putNumber("ToteSlideTime", toteSlideTime);
     }
 
     @Override
