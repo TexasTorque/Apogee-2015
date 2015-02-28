@@ -104,7 +104,7 @@ public class DriverInput extends Input {
             tiltUp = false;
 
             toteAvailable = feedback.isToteInSluice();
-            
+
             if (toteAvailable && feedback.isElevatorHere(elevatorPosition)) {
                 double toteSlideTime = feedback.getToteSlideTime();
                 intakeState = Intake.SLUICE_GATHER;
@@ -154,6 +154,11 @@ public class DriverInput extends Input {
     private void calcDrivebase() {
         leftSpeed = -1 * driver.getLeftYAxis() + driver.getRightXAxis();
         rightSpeed = -1 * driver.getLeftYAxis() - driver.getRightXAxis();
+
+        if (driver.getLeftBumper()) {
+            leftSpeed = leftSpeed / 2;
+            rightSpeed = rightSpeed / 2;
+        }
     }
 
     //Elevator

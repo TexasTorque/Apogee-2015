@@ -7,13 +7,14 @@ public class AutoPicker {
     public final static byte TEST_AUTO = 100;
     public final static byte DEFAULT_AUTO = 0;
     public final static byte DRIVE_AUTO = 1;
+    public final static byte TAKE_AUTO = 2;
 
     public static void init() {
         SmartDashboard.putNumber("AutoMode", DEFAULT_AUTO);
     }
 
     public static AutoMode getAutonomous() {
-        byte mode = (byte) SmartDashboard.getNumber("AutoMode", DEFAULT_AUTO);
+        byte mode = 1;
 
         if (mode == DEFAULT_AUTO) {
             return new DoNothingAuto();
@@ -21,6 +22,8 @@ public class AutoPicker {
             return new DriveAuto();
         } else if (mode == TEST_AUTO) {
             return new TestAuto();
+        } else if (mode == TAKE_AUTO) {
+            return new TakeSomethingAuto();
         }
         return new DoNothingAuto();
     }

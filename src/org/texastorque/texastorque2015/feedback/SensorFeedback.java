@@ -63,7 +63,7 @@ public class SensorFeedback extends Feedback {
         elevatorAtBottom = bottomLimit.get();
 
         //Sluice
-        if (!toteInSluice && !toteInSluice) {
+        if (!toteInSluice && !sluiceLimitSwitch.get()) {
             toteSlideTime = Timer.getFPGATimestamp();
         }
         toteInSluice = !sluiceLimitSwitch.get();

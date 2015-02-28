@@ -5,6 +5,10 @@ import org.texastorque.torquelib.util.Parameters.Constant;
 
 public class Constants extends Parameters {
 
+    public final static Constant autoMode = new Constant("Auto", 0);
+    public final static Constant driveForwardTime = new Constant("U_DriveForwardTime", 0.0);
+    public final static Constant turnTime = new Constant("U_TurnTime", 0.0);
+    
     //Elevator
     public final static Constant ElevatorVDoneRange = new Constant("E_VDoneRange", 0.0);
     public final static Constant ElevatorPDoneRange = new Constant("E_PDoneRange", 0.0);
