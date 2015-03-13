@@ -2,6 +2,7 @@ package org.texastorque.texastorque2015.input;
 
 import edu.wpi.first.wpilibj.Timer;
 import org.texastorque.texastorque2015.constants.Constants;
+import org.texastorque.texastorque2015.subsystem.Arms;
 import org.texastorque.texastorque2015.subsystem.Intake;
 import org.texastorque.torquelib.util.GenericController;
 import org.texastorque.torquelib.util.TorqueToggle;
@@ -67,7 +68,7 @@ public class DriverInput extends Input {
             intakeState = Intake.OFF;
 
             //autoStack = bring elevator down and back up to stack tote
-            tiltUp = false;
+            tiltAngle = Arms.HORIZONTAL;
             punchOut = false;
 
             if (feedback.isElevatorHere(Constants.autoStackLevel.getDouble()) && !wentToBottom) {
@@ -101,7 +102,7 @@ public class DriverInput extends Input {
 
             armOpen = false;
             punchOut = false;
-            tiltUp = false;
+            tiltAngle = Arms.HORIZONTAL;
 
             toteAvailable = feedback.isToteInSluice();
 
@@ -288,7 +289,7 @@ public class DriverInput extends Input {
     //Arms
     private void calcTilt() {
         tiltToggle.calc(operator.getTiltButton());
-        tiltUp = tiltToggle.get();
+        tiltAngle = (tiltToggle.get() ? Arms.UP : Arms.HORIZONTAL);
     }
 
     //Intake

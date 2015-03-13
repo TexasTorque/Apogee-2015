@@ -80,7 +80,7 @@ public abstract class Input implements Runnable {
     //Crazy Arms
     protected volatile boolean armOpen;
     protected volatile boolean punchOut;
-    protected volatile boolean tiltUp;
+    protected volatile double tiltAngle;
 
     public boolean isArmOpen() {
         return armOpen;
@@ -90,8 +90,8 @@ public abstract class Input implements Runnable {
         return punchOut;
     }
 
-    public boolean isTiltUp() {
-        return tiltUp;
+    public double getTiltAngle() {
+        return tiltAngle;
     }
 
     //Intake

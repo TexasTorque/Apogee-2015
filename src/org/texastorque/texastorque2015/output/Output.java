@@ -11,9 +11,9 @@ public abstract class Output {
     //Crazy Arms
     public abstract void setArmsOpen(boolean open);
 
-    public abstract void setTiltUp(boolean on);
-
     public abstract void setPunchOut(boolean out);
+
+    public abstract void setTiltMotorSpeed(double speed);
 
     //Intake
     public abstract void setIntakeMotorSpeed(double speed);
