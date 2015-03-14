@@ -81,6 +81,7 @@ public abstract class Input implements Runnable {
     protected volatile boolean armOpen;
     protected volatile boolean punchOut;
     protected volatile double tiltAngle;
+    protected volatile double tiltOverrideMotorSpeed;
 
     public boolean isArmOpen() {
         return armOpen;
@@ -92,6 +93,10 @@ public abstract class Input implements Runnable {
 
     public double getTiltAngle() {
         return tiltAngle;
+    }
+
+    public double getTiltOverrideMotorSpeed() {
+        return tiltOverrideMotorSpeed;
     }
 
     //Intake

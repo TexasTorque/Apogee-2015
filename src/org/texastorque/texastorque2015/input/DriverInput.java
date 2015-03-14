@@ -61,7 +61,6 @@ public class DriverInput extends Input {
 
         if (override) {
             calcOverride();
-            calcTilt();
             calcIntake();
         } else if (autoStack) {
 
@@ -117,11 +116,12 @@ public class DriverInput extends Input {
         } else {
             toteAvailable = false;
             wentToBottom = false;
-            if (!operator.getNumTotesButton() && !operator.getNumTotesResetButton()) {
-                calcNormal();
-            } else {
+            if (driver.getYButton() || driver.getAButton()) {
                 calcNumTotesOverride();
+            } else {
+                calcNormal();
             }
+            
             calcTilt();
             calcIntake();
         }
@@ -131,7 +131,7 @@ public class DriverInput extends Input {
     }
 
     private void calcNumTotesOverride() {
-        if (operator.getNumTotesButton()) {
+        if (driver.getAButton()) {
             if (operator.getLevel1Button()) {
                 numTotes = 1;
             } else if (operator.getLevel2Button()) {
@@ -146,7 +146,7 @@ public class DriverInput extends Input {
                 numTotes = 6;
             }
         }
-        if (operator.getNumTotesResetButton()) {
+        if (driver.getYButton()) {
             numTotes = 0;
         }
     }
@@ -164,7 +164,7 @@ public class DriverInput extends Input {
 
     //Elevator
     private void calcNormal() {
-        if (operator.getScoreButton()) {
+        if (driver.getRightTrigger()) {
             numTotes = 0;
             if (tiltToggle.get()) {
                 punchOut = true;
@@ -263,21 +263,35 @@ public class DriverInput extends Input {
     }
 
     private void calcOverride() {
-        if (operator.getElevatorUpButton()) {
-            overrideElevatorMotorSpeed = 0.4;
-        } else if (operator.getElevatorDownButton()) {
-            overrideElevatorMotorSpeed = -0.4;
-        } else {
+        if (operator.getTiltOverrideButton()) {
             overrideElevatorMotorSpeed = 0.0;
+
+            if (operator.getElevatorUpButton()) {
+                tiltOverrideMotorSpeed = 1.0;
+            } else if (operator.getElevatorDownButton()) {
+                tiltOverrideMotorSpeed = -1.0;
+            } else {
+                tiltOverrideMotorSpeed = 0.0;
+            }
+        } else {
+            if (operator.getElevatorUpButton()) {
+                overrideElevatorMotorSpeed = 0.4;
+            } else if (operator.getElevatorDownButton()) {
+                overrideElevatorMotorSpeed = -0.4;
+            } else {
+                overrideElevatorMotorSpeed = 0.0;
+            }
+
+            tiltOverrideMotorSpeed = 0.0;
         }
 
         if (tiltToggle.get()) {
-            punchOut = operator.getScoreButton();
+            punchOut = driver.getRightTrigger();
             armToggle.set(false);
             numTotes = 0;
             armOpen = false;
         } else {
-            armToggle.calc(operator.getScoreButton());
+            armToggle.calc(driver.getRightTrigger());
             armOpen = armToggle.get();
             if (armOpen) {
                 numTotes = 0;
