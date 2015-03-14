@@ -45,8 +45,8 @@ public class RobotOutput extends Output {
         intakeSolenoid = new Solenoid(Ports.INTAKE_SOLENOID);
 
         //Intake
-        leftIntakeMotor = new TorqueMotor(new VictorSP(Ports.LEFT_INTAKE_PORT), true, TorqueMotor.LinearizationType.kNone);
-        rightIntakeMotor = new TorqueMotor(new VictorSP(Ports.RIGHT_INTAKE_PORT), false, TorqueMotor.LinearizationType.kNone);
+        leftIntakeMotor = new TorqueMotor(new VictorSP(Ports.LEFT_INTAKE_PORT), false, TorqueMotor.LinearizationType.kNone);
+        rightIntakeMotor = new TorqueMotor(new VictorSP(Ports.RIGHT_INTAKE_PORT), true, TorqueMotor.LinearizationType.kNone);
 
         //Elevator
         leftElevatorMotorA = new TorqueMotor(new VictorSP(Ports.LEFT_ELEVATOR), true, TorqueMotor.LinearizationType.kNone);
@@ -95,6 +95,6 @@ public class RobotOutput extends Output {
 
     @Override
     public void setIntakeGrasp(boolean grasp) {
-        intakeSolenoid.set(grasp);
+        intakeSolenoid.set(!grasp);
     }
 }

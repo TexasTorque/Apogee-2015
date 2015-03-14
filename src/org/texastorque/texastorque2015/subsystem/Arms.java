@@ -16,11 +16,11 @@ public class Arms extends Subsystem {
 
     //pid
     private double setPointAngle;
-    
+
     private double leftAngle;
     private double leftMotorSpeed;
     private TorquePID leftPID;
-    
+
     private double rightAngle;
     private double rightMotorSpeed;
     private TorquePID rightPID;
@@ -41,14 +41,20 @@ public class Arms extends Subsystem {
 
         leftAngle = feedback.getLeftTiltAngle();
         rightAngle = feedback.getRightTiltAngle();
-        
-        setPointAngle = input.getTiltAngle();
-        
-        leftPID.setSetpoint(setPointAngle);
-        rightPID.setSetpoint(setPointAngle);
-        
-        leftMotorSpeed = leftPID.calculate(leftAngle);
-        rightMotorSpeed = rightPID.calculate(rightAngle);
+
+        if (!input.isOverride()) {
+
+            setPointAngle = input.getTiltAngle();
+
+            leftPID.setSetpoint(setPointAngle);
+            rightPID.setSetpoint(setPointAngle);
+
+            leftMotorSpeed = leftPID.calculate(leftAngle);
+            rightMotorSpeed = rightPID.calculate(rightAngle);
+        } else {
+            leftMotorSpeed = input.getTiltOverrideMotorSpeed();
+            rightMotorSpeed = input.getTiltOverrideMotorSpeed();
+        }
 
         if (outputEnabled) {
             output.setArmsOpen(armsOpen);
@@ -62,7 +68,7 @@ public class Arms extends Subsystem {
         UP = Constants.TiltUpAngle.getDouble();
         HORIZONTAL = Constants.TiltHorizontalAngle.getDouble();
         DOWN = Constants.TiltDownAngle.getDouble();
-        
+
         leftPID.setPIDGains(Constants.TiltP.getDouble(),
                 Constants.TiltI.getDouble(),
                 Constants.TiltD.getDouble());

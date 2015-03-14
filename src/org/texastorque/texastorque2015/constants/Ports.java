@@ -3,10 +3,10 @@ package org.texastorque.texastorque2015.constants;
 public class Ports {
 
     //Drivebase motor ports
-    public final static int LEFT_A_DRIVE_PORT = 2;
+    public final static int LEFT_A_DRIVE_PORT = 11;
     public final static int LEFT_B_DRIVE_PORT = 3;
     public final static int RIGHT_A_DRIVE_PORT = 4;
-    public final static int RIGHT_B_DRIVE_PORT = 1;
+    public final static int RIGHT_B_DRIVE_PORT = 12;
 
     //slide 0
     
