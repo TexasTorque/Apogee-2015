@@ -11,6 +11,7 @@ public class Drivebase extends Subsystem {
     //Motor speeds
     private double leftSpeed;
     private double rightSpeed;
+    private double strafeSpeed;
 
     //Sensor values (linear)
     private double leftPosition;
@@ -44,7 +45,7 @@ public class Drivebase extends Subsystem {
     //angular
     private TorqueTMP angularProfile;
     private TorquePV turnPV;
-    
+
     double prevTime;
 
     public Drivebase() {
@@ -64,7 +65,7 @@ public class Drivebase extends Subsystem {
         angularProfile.generateTrapezoid(0.0, 0.0, angle);
         feedback.resetDriveEncoders();
         feedback.resetGyro();
-        
+
         prevTime = Timer.getFPGATimestamp();
     }
 
@@ -88,10 +89,9 @@ public class Drivebase extends Subsystem {
          * reverse +1 for strafe: full right -1 for strafe: full left
          *
          */
-        
         double dt = Timer.getFPGATimestamp() - prevTime;
         prevTime = Timer.getFPGATimestamp();
-        
+
         //Linear control loop operation
         if (input.isDrivebaseControlled() && input.getDriveAngle() == 0.0) {
             if (setPointPosition != input.getDriveDistance()) {
@@ -111,7 +111,7 @@ public class Drivebase extends Subsystem {
             leftSpeed = leftPV.calculate(linearProfile, leftPosition, leftVelocity);
             rightSpeed = rightPV.calculate(linearProfile, rightPosition, rightVelocity);
 
-        //Turning control loop operation
+            //Turning control loop operation
         } else if (input.isDrivebaseControlled()) {
             if (setPointAngle != input.getDriveAngle()) {
                 setPointAngle = input.getDriveAngle();
@@ -133,15 +133,16 @@ public class Drivebase extends Subsystem {
             //Regular teleop control
             leftSpeed = input.getLeftSpeed();
             rightSpeed = input.getRightSpeed();
+            strafeSpeed = input.getStrafeSpeed();
 
             targetPosition = 0.0;
             targetVelocity = 0.0;
         }
 
         if (outputEnabled) {
-            output.setDriveSpeeds(leftSpeed, rightSpeed);
+            output.setDriveSpeeds(leftSpeed, rightSpeed, strafeSpeed);
         } else {
-            output.setDriveSpeeds(0.0, 0.0);
+            output.setDriveSpeeds(0.0, 0.0, 0.0);
         }
     }
 

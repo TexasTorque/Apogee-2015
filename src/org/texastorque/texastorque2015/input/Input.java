@@ -25,6 +25,7 @@ public abstract class Input implements Runnable {
     //Drivebase
     protected volatile double leftSpeed;
     protected volatile double rightSpeed;
+    protected volatile double strafeSpeed;
 
     protected volatile boolean drivebaseControlled;
     protected volatile double driveDistance;
@@ -36,6 +37,10 @@ public abstract class Input implements Runnable {
 
     public double getRightSpeed() {
         return rightSpeed;
+    }
+
+    public double getStrafeSpeed() {
+        return strafeSpeed;
     }
 
     public boolean isDrivebaseControlled() {

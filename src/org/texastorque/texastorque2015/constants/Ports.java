@@ -7,9 +7,8 @@ public class Ports {
     public final static int LEFT_B_DRIVE_PORT = 3;
     public final static int RIGHT_A_DRIVE_PORT = 4;
     public final static int RIGHT_B_DRIVE_PORT = 12;
+    public final static int STRAFE_PORT = 0;
 
-    //slide 0
-    
     //Elevator
     public final static int LEFT_ELEVATOR = 5;
     public final static int RIGHT_ELEVATOR = 8;
@@ -43,7 +42,7 @@ public class Ports {
     //Analog in
     public final static int GYRO_PORT_A = 0;
     public final static int GYRO_PORT_B = 1;
-    
+
     public final static int LEFT_TILT_POT = 3;
     public final static int RIGHT_TILT_POT = 2;
 }

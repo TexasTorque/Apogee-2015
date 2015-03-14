@@ -3,7 +3,7 @@ package org.texastorque.texastorque2015.output;
 public abstract class Output {
 
     //Drivebase
-    public abstract void setDriveSpeeds(double left, double right);
+    public abstract void setDriveSpeeds(double left, double right, double strage);
 
     //Elevator
     public abstract void setElevatorMotorSpeeds(double speed);

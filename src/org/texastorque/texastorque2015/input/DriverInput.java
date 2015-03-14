@@ -121,7 +121,7 @@ public class DriverInput extends Input {
             } else {
                 calcNormal();
             }
-            
+
             calcTilt();
             calcIntake();
         }
@@ -155,6 +155,7 @@ public class DriverInput extends Input {
     private void calcDrivebase() {
         leftSpeed = -1 * driver.getLeftYAxis() + driver.getRightXAxis();
         rightSpeed = -1 * driver.getLeftYAxis() - driver.getRightXAxis();
+        strafeSpeed = driver.getLeftXAxis();
 
         if (driver.getLeftBumper()) {
             leftSpeed = leftSpeed / 2;
