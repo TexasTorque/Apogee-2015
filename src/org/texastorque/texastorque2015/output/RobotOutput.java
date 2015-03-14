@@ -76,9 +76,9 @@ public class RobotOutput extends Output {
     }
 
     @Override
-    public void setTiltMotorSpeed(double speed) {
-        rightTiltMotor.set(speed);
-        leftTiltMotor.set(speed);
+    public void setTiltMotorSpeeds(double left, double right) {
+        rightTiltMotor.set(right);
+        leftTiltMotor.set(left);
     }
 
     @Override

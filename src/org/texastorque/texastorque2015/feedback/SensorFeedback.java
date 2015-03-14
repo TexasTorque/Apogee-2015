@@ -3,15 +3,18 @@ package org.texastorque.texastorque2015.feedback;
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
+import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.texastorque2015.constants.Ports;
 import org.texastorque.torquelib.component.TorqueEncoder;
 import org.texastorque.torquelib.component.TorqueGyro;
+import org.texastorque.torquelib.component.TorquePotentiometer;
 
 public class SensorFeedback extends Feedback {
 
     //Drivebase
     private TorqueEncoder leftDriveEncoder;
     private TorqueEncoder rightDriveEncoder;
+    private TorqueGyro gyro;
 
     //Elevator
     private TorqueEncoder elevatorEncoder;
@@ -21,20 +24,32 @@ public class SensorFeedback extends Feedback {
     //Sluice
     private DigitalInput sluiceLimitSwitch;
 
-    //Angle
-    private TorqueGyro gyro;
+    //Arms
+    private TorquePotentiometer leftTiltPot;
+    private TorquePotentiometer rightTiltPot;
 
     public SensorFeedback() {
         leftDriveEncoder = new TorqueEncoder(Ports.LEFT_ENCODER_PORT_A, Ports.LEFT_ENCODER_PORT_B, true, CounterBase.EncodingType.k2X);
         rightDriveEncoder = new TorqueEncoder(Ports.RIGHT_ENCODER_PORT_A, Ports.RIGHT_ENCODER_PORT_B, false, CounterBase.EncodingType.k2X);
+        gyro = new TorqueGyro(Ports.GYRO_PORT_A, Ports.GYRO_PORT_B);
 
         elevatorEncoder = new TorqueEncoder(Ports.LEFT_ELEVATOR_ENCODER_PORT_A, Ports.LEFT_ELEVATOR_ENCODER_PORT_B, false, CounterBase.EncodingType.k4X);
         topLimit = new DigitalInput(Ports.ELEVATOR_TOP_LIMIT);
         bottomLimit = new DigitalInput(Ports.ELEVATOR_BOTTOM_LIMIT);
 
         sluiceLimitSwitch = new DigitalInput(Ports.SLUICE_BUTTON);
+        
+        leftTiltPot = new TorquePotentiometer(Ports.LEFT_TILT_POT);
+        rightTiltPot = new TorquePotentiometer(Ports.RIGHT_TILT_POT);
+    }
 
-        gyro = new TorqueGyro(Ports.GYRO_PORT_A, Ports.GYRO_PORT_B);
+    @Override
+    public void loadParams() {
+        leftTiltPot.setInputRange(Constants.leftBottomVoltage.getDouble(), Constants.leftTopVoltage.getDouble());
+        rightTiltPot.setInputRange(Constants.rightBottomVoltage.getDouble(), Constants.rightTopVoltage.getDouble());
+        
+        leftTiltPot.setPositionRange(Constants.tiltMaxAngle.getDouble(), Constants.tiltMinAngle.getDouble());
+        rightTiltPot.setPositionRange(Constants.tiltMaxAngle.getDouble(), Constants.tiltMinAngle.getDouble());
     }
 
     @Override

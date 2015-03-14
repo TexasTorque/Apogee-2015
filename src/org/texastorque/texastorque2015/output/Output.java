@@ -13,7 +13,7 @@ public abstract class Output {
 
     public abstract void setPunchOut(boolean out);
 
-    public abstract void setTiltMotorSpeed(double speed);
+    public abstract void setTiltMotorSpeeds(double left, double right);
 
     //Intake
     public abstract void setIntakeMotorSpeed(double speed);

@@ -16,12 +16,18 @@ public class Arms extends Subsystem {
 
     //pid
     private double setPointAngle;
-    private double currentAngle;
-    private double tiltMotorSpeed;
-    private TorquePID anglePID;
+    
+    private double leftAngle;
+    private double leftMotorSpeed;
+    private TorquePID leftPID;
+    
+    private double rightAngle;
+    private double rightMotorSpeed;
+    private TorquePID rightPID;
 
     public Arms() {
-        anglePID = new TorquePID();
+        leftPID = new TorquePID();
+        rightPID = new TorquePID();
     }
 
     @Override
@@ -30,22 +36,21 @@ public class Arms extends Subsystem {
 
     @Override
     public void run() {
-        //if (feedback.isElevatorHere(input.getElevatorPosition()) || input.isOverride()) {
         armsOpen = input.isArmOpen();
         punchOut = input.isPunchOut();
-        //} else {
-        //    armsOpen = false;
-        //    punchOut = false;
-        //}
 
         setPointAngle = input.getTiltAngle();
-        anglePID.setSetpoint(setPointAngle);
-        tiltMotorSpeed = anglePID.calculate(currentAngle);
+        
+        leftPID.setSetpoint(setPointAngle);
+        rightPID.setSetpoint(setPointAngle);
+        
+        leftMotorSpeed = leftPID.calculate(leftAngle);
+        rightMotorSpeed = rightPID.calculate(rightAngle);
 
         if (outputEnabled) {
             output.setArmsOpen(armsOpen);
             output.setPunchOut(punchOut);
-            output.setTiltMotorSpeed(tiltMotorSpeed);
+            output.setTiltMotorSpeeds(leftMotorSpeed, rightMotorSpeed);
         }
     }
 
@@ -54,7 +59,11 @@ public class Arms extends Subsystem {
         UP = Constants.TiltUpAngle.getDouble();
         HORIZONTAL = Constants.TiltHorizontalAngle.getDouble();
         DOWN = Constants.TiltDownAngle.getDouble();
-        anglePID.setPIDGains(Constants.TiltP.getDouble(),
+        
+        leftPID.setPIDGains(Constants.TiltP.getDouble(),
+                Constants.TiltI.getDouble(),
+                Constants.TiltD.getDouble());
+        rightPID.setPIDGains(Constants.TiltP.getDouble(),
                 Constants.TiltI.getDouble(),
                 Constants.TiltD.getDouble());
     }
@@ -63,7 +72,8 @@ public class Arms extends Subsystem {
     public void pushToDashboard() {
         SmartDashboard.putBoolean("ArmsOpen", armsOpen);
         SmartDashboard.putBoolean("PunchOut", punchOut);
-        SmartDashboard.putNumber("TiltMotorSpeed", tiltMotorSpeed);
+        SmartDashboard.putNumber("LeftTiltMotorSpeed", leftMotorSpeed);
+        SmartDashboard.putNumber("RightTiltMotorSpeed", rightMotorSpeed);
     }
 
     @Override
@@ -73,7 +83,7 @@ public class Arms extends Subsystem {
 
     @Override
     public String getLogValues() {
-        return armsOpen + ", " + punchOut + ", " + tiltMotorSpeed + ", ";
+        return armsOpen + ", " + punchOut + ", " + leftMotorSpeed + ", ";
     }
 
 }
