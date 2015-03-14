@@ -5,9 +5,11 @@ public class Ports {
     //Drivebase motor ports
     public final static int LEFT_A_DRIVE_PORT = 2;
     public final static int LEFT_B_DRIVE_PORT = 3;
-    public final static int RIGHT_A_DRIVE_PORT = 0;
+    public final static int RIGHT_A_DRIVE_PORT = 4;
     public final static int RIGHT_B_DRIVE_PORT = 1;
 
+    //slide 0
+    
     //Elevator
     public final static int LEFT_ELEVATOR = 5;
     public final static int RIGHT_ELEVATOR = 8;
@@ -31,8 +33,8 @@ public class Ports {
     public final static int ARM = 5;
     public final static int PUNCH_SOLENOID = 6;
     public final static int INTAKE_SOLENOID = 4;
-    public final static int LEFT_TILT_MOTOR_PORT = -1;
-    public final static int RIGHT_TILT_MOTOR_PORT = -1;
+    public final static int LEFT_TILT_MOTOR_PORT = 17;
+    public final static int RIGHT_TILT_MOTOR_PORT = 2;
 
     //intake
     public final static int LEFT_INTAKE_PORT = 6;
@@ -42,6 +44,6 @@ public class Ports {
     public final static int GYRO_PORT_A = 0;
     public final static int GYRO_PORT_B = 1;
     
-    public final static int LEFT_TILT_POT = 2;
-    public final static int RIGHT_TILT_POT = 3;
+    public final static int LEFT_TILT_POT = 3;
+    public final static int RIGHT_TILT_POT = 2;
 }
