@@ -39,6 +39,9 @@ public class Arms extends Subsystem {
         armsOpen = input.isArmOpen();
         punchOut = input.isPunchOut();
 
+        leftAngle = feedback.getLeftTiltAngle();
+        rightAngle = feedback.getRightTiltAngle();
+        
         setPointAngle = input.getTiltAngle();
         
         leftPID.setSetpoint(setPointAngle);
@@ -74,6 +77,7 @@ public class Arms extends Subsystem {
         SmartDashboard.putBoolean("PunchOut", punchOut);
         SmartDashboard.putNumber("LeftTiltMotorSpeed", leftMotorSpeed);
         SmartDashboard.putNumber("RightTiltMotorSpeed", rightMotorSpeed);
+        SmartDashboard.putNumber("TiltSetpoint", setPointAngle);
     }
 
     @Override

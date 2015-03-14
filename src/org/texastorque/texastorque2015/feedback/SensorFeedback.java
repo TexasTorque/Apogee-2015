@@ -83,9 +83,12 @@ public class SensorFeedback extends Feedback {
         }
         toteInSluice = !sluiceLimitSwitch.get();
 
-        //angle (radians)
+        //angle
         angle = gyro.getAngle();
         angularVelocity = gyro.getRate();
+        
+        leftTiltAngle = leftTiltPot.getPosition();
+        rightTiltAngle = rightTiltPot.getPosition();
     }
 
     @Override
