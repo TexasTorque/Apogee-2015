@@ -26,8 +26,12 @@ public class Arms extends Subsystem {
     private TorquePID rightPID;
 
     public Arms() {
+        //Limit motor output on the left arm so that the right arm will not get behind.
         leftPID = new TorquePID();
+        leftPID.setMaxOutput(0.8);
+        
         rightPID = new TorquePID();
+        rightPID.setMaxOutput(1.0);
     }
 
     @Override
@@ -39,15 +43,18 @@ public class Arms extends Subsystem {
         armsOpen = input.isArmOpen();
         punchOut = input.isPunchOut();
 
+        //Get the current angles from the Potentiometers.
         leftAngle = feedback.getLeftTiltAngle();
         rightAngle = feedback.getRightTiltAngle();
 
         if (!input.isOverride()) {
-
+            //The angle we want to arms to go to.
             setPointAngle = input.getTiltAngle();
 
+            //Set the left arm to go to the desired angle, and the right arm to follow it.
+            //This should keep the two sides level with each other.
             leftPID.setSetpoint(setPointAngle);
-            rightPID.setSetpoint(setPointAngle);
+            rightPID.setSetpoint(leftAngle);
 
             leftMotorSpeed = leftPID.calculate(leftAngle);
             rightMotorSpeed = rightPID.calculate(rightAngle);
