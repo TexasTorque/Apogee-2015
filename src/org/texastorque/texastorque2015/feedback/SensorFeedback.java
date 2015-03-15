@@ -3,6 +3,7 @@ package org.texastorque.texastorque2015.feedback;
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.texastorque2015.constants.Ports;
 import org.texastorque.torquelib.component.TorqueEncoder;
@@ -89,6 +90,9 @@ public class SensorFeedback extends Feedback {
         
         leftTiltAngle = leftTiltPot.getPosition();
         rightTiltAngle = rightTiltPot.getPosition();
+        
+        SmartDashboard.putNumber("leftTiltVoltage", leftTiltPot.getRawVoltage());
+        SmartDashboard.putNumber("rightTiltVoltage", rightTiltPot.getRawVoltage());
     }
 
     @Override
