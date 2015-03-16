@@ -1,5 +1,6 @@
 package org.texastorque.texastorque2015.auto;
 
+import edu.wpi.first.wpilibj.Timer;
 import org.texastorque.texastorque2015.input.Input;
 import org.texastorque.texastorque2015.constants.Constants;
 
@@ -116,9 +117,13 @@ public abstract class AutoMode extends Input {
     }
 
     protected void wait(double time) {
-        try {
-            Thread.sleep((long) (time * 1000));
-        } catch (InterruptedException ex) {
+        double startTime = Timer.getFPGATimestamp();
+
+        while (Timer.getFPGATimestamp() < startTime + time) {
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException ex) {
+            }
         }
     }
 }
