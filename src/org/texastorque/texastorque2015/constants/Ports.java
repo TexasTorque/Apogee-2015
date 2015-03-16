@@ -34,6 +34,8 @@ public class Ports {
     public final static int INTAKE_SOLENOID = 4;
     public final static int LEFT_TILT_MOTOR_PORT = 17;
     public final static int RIGHT_TILT_MOTOR_PORT = 2;
+    public final static int LEFT_TILT_POWER_PORT = -1;
+    public final static int RIGHT_TILT_POWER_PORT = -1;
 
     //intake
     public final static int LEFT_INTAKE_PORT = 6;

@@ -20,10 +20,12 @@ public class Arms extends Subsystem {
     private double leftAngle;
     private double leftMotorSpeed;
     private TorquePID leftPID;
+    private double leftCurrent;
 
     private double rightAngle;
     private double rightMotorSpeed;
     private TorquePID rightPID;
+    private double rightCurrent;
 
     public Arms() {
         //Limit motor output on the left arm so that the right arm will not get behind.
@@ -46,6 +48,9 @@ public class Arms extends Subsystem {
         //Get the current angles from the Potentiometers.
         leftAngle = feedback.getLeftTiltAngle();
         rightAngle = feedback.getRightTiltAngle();
+        
+        leftCurrent = feedback.getLeftTiltCurrent();
+        rightCurrent = feedback.getRightTiltCurrent();
 
         if (!input.isOverride()) {
             //The angle we want to arms to go to.
@@ -91,6 +96,8 @@ public class Arms extends Subsystem {
         SmartDashboard.putNumber("LeftTiltMotorSpeed", leftMotorSpeed);
         SmartDashboard.putNumber("RightTiltMotorSpeed", rightMotorSpeed);
         SmartDashboard.putNumber("TiltSetpoint", setPointAngle);
+        SmartDashboard.putNumber("LeftTiltCurrent", leftCurrent);
+        SmartDashboard.putNumber("RightTiltCurrent", rightCurrent);
     }
 
     @Override

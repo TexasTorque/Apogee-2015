@@ -2,6 +2,7 @@ package org.texastorque.texastorque2015.feedback;
 
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque2015.constants.Constants;
@@ -11,6 +12,9 @@ import org.texastorque.torquelib.component.TorqueGyro;
 import org.texastorque.torquelib.component.TorquePotentiometer;
 
 public class SensorFeedback extends Feedback {
+    
+    //PD Panel
+    PowerDistributionPanel pdp;
 
     //Drivebase
     private TorqueEncoder leftDriveEncoder;
@@ -30,6 +34,8 @@ public class SensorFeedback extends Feedback {
     private TorquePotentiometer rightTiltPot;
 
     public SensorFeedback() {
+        pdp = new PowerDistributionPanel();
+        
         leftDriveEncoder = new TorqueEncoder(Ports.LEFT_ENCODER_PORT_A, Ports.LEFT_ENCODER_PORT_B, true, CounterBase.EncodingType.k2X);
         rightDriveEncoder = new TorqueEncoder(Ports.RIGHT_ENCODER_PORT_A, Ports.RIGHT_ENCODER_PORT_B, false, CounterBase.EncodingType.k2X);
         gyro = new TorqueGyro(Ports.GYRO_PORT_A, Ports.GYRO_PORT_B);
@@ -90,6 +96,9 @@ public class SensorFeedback extends Feedback {
         
         leftTiltAngle = leftTiltPot.getPosition();
         rightTiltAngle = rightTiltPot.getPosition();
+        
+        leftTiltCurrent = pdp.getCurrent(Ports.LEFT_TILT_POWER_PORT);
+        rightTiltCurrent = pdp.getCurrent(Ports.RIGHT_TILT_POWER_PORT);
         
         SmartDashboard.putNumber("leftTiltVoltage", leftTiltPot.getRawVoltage());
         SmartDashboard.putNumber("rightTiltVoltage", rightTiltPot.getRawVoltage());
