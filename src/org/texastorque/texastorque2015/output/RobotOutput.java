@@ -37,7 +37,7 @@ public class RobotOutput extends Output {
         leftDriveMotorB = new TorqueMotor(new VictorSP(Ports.LEFT_B_DRIVE_PORT), false, TorqueMotor.LinearizationType.kNone);
         rightDriveMotorA = new TorqueMotor(new VictorSP(Ports.RIGHT_A_DRIVE_PORT), true, TorqueMotor.LinearizationType.kNone);
         rightDriveMotorB = new TorqueMotor(new VictorSP(Ports.RIGHT_B_DRIVE_PORT), true, TorqueMotor.LinearizationType.kNone);
-        strafeMotor = new TorqueMotor(new VictorSP(Ports.STRAFE_PORT), false, TorqueMotor.LinearizationType.kNone);
+        strafeMotor = new TorqueMotor(new VictorSP(Ports.STRAFE_PORT), true, TorqueMotor.LinearizationType.kNone);
 
         //Crazy Arms
         leftTiltMotor = new TorqueMotor(new Victor(Ports.LEFT_TILT_MOTOR_PORT), true, LinearizationType.kNone);

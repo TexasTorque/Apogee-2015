@@ -54,7 +54,7 @@ public class TorquePotentiometer {
      * @return A value from 0 to 1.
      */
     public double get() {
-        return (getRaw() - minValue) / (maxValue - minValue);
+        return (getRawVoltage() - minValue) / (maxValue - minValue);
     }
 
     /**
