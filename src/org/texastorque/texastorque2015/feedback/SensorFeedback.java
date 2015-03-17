@@ -97,9 +97,6 @@ public class SensorFeedback extends Feedback {
         leftTiltAngle = leftTiltPot.getPosition();
         rightTiltAngle = rightTiltPot.getPosition();
         
-        leftTiltCurrent = pdp.getCurrent(Ports.LEFT_TILT_POWER_PORT);
-        rightTiltCurrent = pdp.getCurrent(Ports.RIGHT_TILT_POWER_PORT);
-        
         SmartDashboard.putNumber("leftTiltVoltage", leftTiltPot.getRawVoltage());
         SmartDashboard.putNumber("rightTiltVoltage", rightTiltPot.getRawVoltage());
     }

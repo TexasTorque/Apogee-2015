@@ -8,7 +8,7 @@ public class Constants extends Parameters {
     public final static Constant autoMode = new Constant("Auto", 0);
     public final static Constant driveForwardTime = new Constant("U_DriveForwardTime", 0.0);
     public final static Constant turnTime = new Constant("U_TurnTime", 0.0);
-
+    
     //Elevator
     public final static Constant ElevatorVDoneRange = new Constant("E_VDoneRange", 0.0);
     public final static Constant ElevatorPDoneRange = new Constant("E_PDoneRange", 0.0);
@@ -100,7 +100,7 @@ public class Constants extends Parameters {
     public final static Constant StepPlaceLevel2 = new Constant("E_StepPlaceLevel2", 225.0);
     public final static Constant StepPlaceLevel3 = new Constant("E_StepPlaceLevel3", 325.0);
     public final static Constant StepPlaceLevel4 = new Constant("E_StepPlaceLevel4", 425.0);
-
+    
     //Autostack
     public final static Constant autoStackLevel = new Constant("E_AutoStackLevel", 0.0);
     public final static Constant autoStackArmOpenLevel = new Constant("E_AutoStackArmOpenLevel", 0.0);
@@ -140,6 +140,7 @@ public class Constants extends Parameters {
     public final static Constant ToteSluiceWaitTime = new Constant("S_ToteWaitTime", 1.0);
     public final static Constant TotePullBAckTime = new Constant("I_TotePullBAckTime", 1.0);
 
+<<<<<<< HEAD
     //Arms
     public final static Constant TiltUpAngle = new Constant("T_UpAngle", 45.0);
     public final static Constant TiltHorizontalAngle = new Constant("T_HorizontalAngle", 0.0);
@@ -156,6 +157,8 @@ public class Constants extends Parameters {
     public final static Constant tiltMaxAngle = new Constant("T_MaxAngle", 0.0);
     public final static Constant tiltMinAngle = new Constant("T_MinAngle", 0.0);
 
+=======
+>>>>>>> parent of 4cd3260... added tilt motor and pid loop control
     static {
         load();
     }

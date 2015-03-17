@@ -2,7 +2,6 @@ package org.texastorque.texastorque2015.input;
 
 import edu.wpi.first.wpilibj.Timer;
 import org.texastorque.texastorque2015.constants.Constants;
-import org.texastorque.texastorque2015.subsystem.Arms;
 import org.texastorque.texastorque2015.subsystem.Intake;
 import org.texastorque.torquelib.util.GenericController;
 import org.texastorque.torquelib.util.TorqueToggle;
@@ -67,7 +66,7 @@ public class DriverInput extends Input {
             intakeState = Intake.OFF;
 
             //autoStack = bring elevator down and back up to stack tote
-            tiltAngle = Arms.HORIZONTAL;
+            tiltUp = false;
             punchOut = false;
 
             if (feedback.isElevatorHere(Constants.autoStackLevel.getDouble()) && !wentToBottom) {
@@ -101,7 +100,7 @@ public class DriverInput extends Input {
 
             armOpen = false;
             punchOut = false;
-            tiltAngle = Arms.HORIZONTAL;
+            tiltUp = false;
 
             toteAvailable = feedback.isToteInSluice();
 
@@ -264,26 +263,12 @@ public class DriverInput extends Input {
     }
 
     private void calcOverride() {
-        if (operator.getTiltOverrideButton()) {
-            overrideElevatorMotorSpeed = 0.0;
-
-            if (operator.getElevatorUpButton()) {
-                tiltOverrideMotorSpeed = 1.0;
-            } else if (operator.getElevatorDownButton()) {
-                tiltOverrideMotorSpeed = -1.0;
-            } else {
-                tiltOverrideMotorSpeed = 0.0;
-            }
+        if (operator.getElevatorUpButton()) {
+            overrideElevatorMotorSpeed = 1.0;
+        } else if (operator.getElevatorDownButton()) {
+            overrideElevatorMotorSpeed = -1.0;
         } else {
-            if (operator.getElevatorUpButton()) {
-                overrideElevatorMotorSpeed = 1.0;
-            } else if (operator.getElevatorDownButton()) {
-                overrideElevatorMotorSpeed = -1.0;
-            } else {
-                overrideElevatorMotorSpeed = 0.0;
-            }
-
-            tiltOverrideMotorSpeed = 0.0;
+            overrideElevatorMotorSpeed = 0.0;
         }
 
         if (tiltToggle.get()) {
@@ -304,7 +289,7 @@ public class DriverInput extends Input {
     //Arms
     private void calcTilt() {
         tiltToggle.calc(operator.getTiltButton());
-        tiltAngle = (tiltToggle.get() ? Arms.UP : Arms.HORIZONTAL);
+        tiltUp = tiltToggle.get();
     }
 
     //Intake

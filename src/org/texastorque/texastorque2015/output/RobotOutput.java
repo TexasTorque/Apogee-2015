@@ -1,11 +1,11 @@
 package org.texastorque.texastorque2015.output;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.VictorSP;
 import org.texastorque.texastorque2015.constants.Ports;
 import org.texastorque.torquelib.component.TorqueMotor;
-import org.texastorque.torquelib.component.TorqueMotor.LinearizationType;
 
 public class RobotOutput extends Output {
 
@@ -15,13 +15,12 @@ public class RobotOutput extends Output {
     private TorqueMotor rightDriveMotorA;
     private TorqueMotor rightDriveMotorB;
     private TorqueMotor strafeMotor;
-    private TorqueMotor rightTiltMotor;
-    private TorqueMotor leftTiltMotor;
 
     //Crazy Arms
     private Solenoid openSolenoid;
     private Solenoid punchSolenoid;
     private Solenoid intakeSolenoid;
+    private DoubleSolenoid tiltSolenoid;
 
     //Intake
     private TorqueMotor leftIntakeMotor;
@@ -40,11 +39,10 @@ public class RobotOutput extends Output {
         strafeMotor = new TorqueMotor(new VictorSP(Ports.STRAFE_PORT), true, TorqueMotor.LinearizationType.kNone);
 
         //Crazy Arms
-        leftTiltMotor = new TorqueMotor(new Victor(Ports.LEFT_TILT_MOTOR_PORT), true, LinearizationType.kNone);
-        rightTiltMotor = new TorqueMotor(new Victor(Ports.RIGHT_TILT_MOTOR_PORT), false, LinearizationType.kNone);
         openSolenoid = new Solenoid(Ports.ARM);
         punchSolenoid = new Solenoid(Ports.PUNCH_SOLENOID);
         intakeSolenoid = new Solenoid(Ports.INTAKE_SOLENOID);
+        tiltSolenoid = new DoubleSolenoid(Ports.TILT_SOLENOID_A_PORT, Ports.TILT_SOLENOID_B_PORT);
 
         //Intake
         leftIntakeMotor = new TorqueMotor(new VictorSP(Ports.LEFT_INTAKE_PORT), false, TorqueMotor.LinearizationType.kNone);
@@ -79,9 +77,8 @@ public class RobotOutput extends Output {
     }
 
     @Override
-    public void setTiltMotorSpeeds(double left, double right) {
-        rightTiltMotor.set(right);
-        leftTiltMotor.set(left);
+    public void setTiltUp(boolean on) {
+        tiltSolenoid.set(on ? Value.kForward : Value.kReverse);
     }
 
     @Override
