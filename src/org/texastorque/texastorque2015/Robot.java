@@ -104,8 +104,6 @@ public class Robot extends TorqueIterative {
         elevator.loadParams();
         arms.loadParams();
         intake.loadParams();
-        
-        sensorFeedback.loadParams();
     }
 
     //Push all sybsystems to dashboard.

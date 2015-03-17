@@ -9,18 +9,16 @@ public class Arms extends Subsystem {
     private boolean punchOut;
     private boolean tiltUp;
 
+
     @Override
     public void init() {
     }
 
     @Override
     public void run() {
+        //if (feedback.isElevatorHere(input.getElevatorPosition()) || input.isOverride()) {
         armsOpen = input.isArmOpen();
         punchOut = input.isPunchOut();
-
-        //if (feedback.isElevatorHere(input.getElevatorPosition()) || input.isOverride()) {
-            armsOpen = input.isArmOpen();
-            punchOut = input.isPunchOut();
         //} else {
         //    armsOpen = false;
         //    punchOut = false;

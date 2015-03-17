@@ -140,25 +140,6 @@ public class Constants extends Parameters {
     public final static Constant ToteSluiceWaitTime = new Constant("S_ToteWaitTime", 1.0);
     public final static Constant TotePullBAckTime = new Constant("I_TotePullBAckTime", 1.0);
 
-<<<<<<< HEAD
-    //Arms
-    public final static Constant TiltUpAngle = new Constant("T_UpAngle", 45.0);
-    public final static Constant TiltHorizontalAngle = new Constant("T_HorizontalAngle", 0.0);
-    public final static Constant TiltDownAngle = new Constant("T_DownAngle", -45.0);
-    public final static Constant TiltP = new Constant("T_P", 0.0);
-    public final static Constant TiltI = new Constant("T_I", 0.0);
-    public final static Constant TiltD = new Constant("T_D", 0.0);
-    
-    public final static Constant leftBottomVoltage = new Constant("T_LeftBottomVoltage", 0.0);
-    public final static Constant leftTopVoltage = new Constant("T_LeftTopVoltage", 0.0);
-    public final static Constant rightBottomVoltage = new Constant("T_RightBottomVoltage", 0.0);
-    public final static Constant rightTopVoltage = new Constant("T_RightTopVoltage", 0.0);
-    
-    public final static Constant tiltMaxAngle = new Constant("T_MaxAngle", 0.0);
-    public final static Constant tiltMinAngle = new Constant("T_MinAngle", 0.0);
-
-=======
->>>>>>> parent of 4cd3260... added tilt motor and pid loop control
     static {
         load();
     }

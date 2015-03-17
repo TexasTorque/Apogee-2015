@@ -39,10 +39,7 @@ public class Ports {
     public final static int LEFT_INTAKE_PORT = 6;
     public final static int RIGHT_INTAKE_PORT = 9;//?
 
-    //Analog in
+    //gyro
     public final static int GYRO_PORT_A = 0;
     public final static int GYRO_PORT_B = 1;
-
-    public final static int LEFT_TILT_POT = 3;
-    public final static int RIGHT_TILT_POT = 2;
 }

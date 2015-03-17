@@ -158,30 +158,4 @@ public abstract class Feedback implements Runnable {
     public double getToteSlideTime() {
         return toteSlideTime;
     }
-    
-    //Arms
-    protected volatile double leftTiltAngle;
-    protected volatile double rightTiltAngle;
-    protected volatile double leftTiltCurrent;
-    protected volatile double rightTiltCurrent;
-
-    public double getLeftTiltAngle() {
-        return leftTiltAngle;
-    }
-
-    public double getRightTiltAngle() {
-        return rightTiltAngle;
-    }
-
-    public double getLeftTiltCurrent() {
-        return leftTiltCurrent;
-    }
-
-    public double getRightTiltCurrent() {
-        return rightTiltCurrent;
-    }
-    
-    public void loadParams() {
-        
-    }
 }
