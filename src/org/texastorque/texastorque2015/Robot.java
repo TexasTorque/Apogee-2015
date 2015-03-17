@@ -68,6 +68,7 @@ public class Robot extends TorqueIterative {
         logger.addLoggable(elevator);
         logger.addLoggable(arms);
         logger.addLoggable(intake);
+        logger.addLoggable(new PDPLogger());
 
         numcycles = 0;
     }
