@@ -61,6 +61,7 @@ public class DriverInput extends Input {
         if (override) {
             calcOverride();
             calcIntake();
+            calcTilt();
         } else if (autoStack) {
 
             intakeState = Intake.OFF;

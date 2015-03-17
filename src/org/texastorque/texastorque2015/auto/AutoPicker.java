@@ -24,6 +24,8 @@ public class AutoPicker {
             return new TestAuto();
         } else if (mode == TAKE_AUTO) {
             return new TakeSomethingAuto();
+        } else if (mode == 3) {
+            return new YellowToteAuto();
         }
         return new DoNothingAuto();
     }

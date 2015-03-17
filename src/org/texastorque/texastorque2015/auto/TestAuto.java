@@ -4,6 +4,6 @@ public class TestAuto extends AutoMode {
 
     @Override
     public void run() {
-        runCommand(new DriveDistance("test", 25.0, 0.25, 10, 30.0));
+        runCommand(new TurnAngle("test", 360.0, 5.0, 10, 30.0));
     }
 }

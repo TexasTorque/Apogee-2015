@@ -2,9 +2,9 @@ package org.texastorque.texastorque2015.feedback;
 
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque2015.constants.Ports;
 import org.texastorque.torquelib.component.TorqueEncoder;
 import org.texastorque.torquelib.component.TorqueGyro;
@@ -28,6 +28,8 @@ public class SensorFeedback extends Feedback {
 
     //Angle
     private TorqueGyro gyro;
+    private double angleOffset;
+    private double prevTime;
 
     public SensorFeedback() {
         pdp = new PowerDistributionPanel();
@@ -42,6 +44,7 @@ public class SensorFeedback extends Feedback {
         sluiceLimitSwitch = new DigitalInput(Ports.SLUICE_BUTTON);
 
         gyro = new TorqueGyro(Ports.GYRO_PORT_A, Ports.GYRO_PORT_B);
+        angleOffset = gyro.getAngle();
     }
 
     @Override
@@ -76,7 +79,9 @@ public class SensorFeedback extends Feedback {
         toteInSluice = !sluiceLimitSwitch.get();
 
         //angle
-        angle = gyro.getAngle();
+        //angularVelocity = (gyro.getAngle() - angle) / (Timer.getFPGATimestamp() - prevTime);
+        prevTime = Timer.getFPGATimestamp();
+        angle = gyro.getAngle() - angleOffset;
         angularVelocity = gyro.getRate();
     }
 
@@ -93,6 +98,6 @@ public class SensorFeedback extends Feedback {
 
     @Override
     public void resetGyro() {
-        gyro.reset();
+        angleOffset = gyro.getAngle();
     }
 }

@@ -59,6 +59,8 @@ public abstract class AutoMode extends Input {
             driveDistance = 0.0;
 
             feedback.resetGyro();
+            
+            startTime = Timer.getFPGATimestamp();
         }
 
         @Override
@@ -66,7 +68,7 @@ public abstract class AutoMode extends Input {
             if (Math.abs(feedback.getAngle() - angle) <= doneRange) {
                 doneCycles++;
             }
-            return doneCycles > minDoneCycles;
+            return doneCycles >= minDoneCycles;
         }
 
         @Override

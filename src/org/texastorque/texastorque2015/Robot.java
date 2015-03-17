@@ -177,6 +177,8 @@ public class Robot extends TorqueIterative {
         initSubsystems();
 
         drivebase.setOutputEnabled(true);
+        elevator.setOutputEnabled(true);
+        intake.setOutputEnabled(true);
 
         activeInput.setFeedback(activeFeedback);
 

@@ -213,7 +213,7 @@ public class TorqueGyro {
                     * m2_analog.getLSBWeight()
                     / ((1 << m2_analog.getOversampleBits()) * m_voltsPerDegreePerSecond);
 
-            return (rate1 + rate2);
+            return (rate1 + rate2) / 2;
         }
     }
 }
