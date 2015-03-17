@@ -95,6 +95,6 @@ public class RobotOutput extends Output {
 
     @Override
     public void setIntakeGrasp(boolean grasp) {
-        intakeSolenoid.set(!grasp);
+        intakeSolenoid.set(grasp);
     }
 }

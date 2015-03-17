@@ -19,7 +19,7 @@ public class OperatorConsole {
         return joystick.getRawButton(9);
     }
 
-    public boolean getTiltOverrideButton() {
+    public boolean getScoreButton() {
         return joystick.getRawButton(13);
     }
 
@@ -74,7 +74,7 @@ public class OperatorConsole {
     public boolean getNumTotesButton() {
         return joystick.getRawButton(8);
     }
-    
+
     public boolean getNumTotesResetButton() {
         return joystick.getRawButton(10);
     }

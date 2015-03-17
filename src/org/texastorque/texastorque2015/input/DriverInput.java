@@ -125,7 +125,7 @@ public class DriverInput extends Input {
             calcIntake();
         }
 
-        armOpen = armOpen || driver.getRightTrigger();
+        armOpen = armOpen || operator.getScoreButton();
         newPosition = elevationInputThisCycle;
     }
 
