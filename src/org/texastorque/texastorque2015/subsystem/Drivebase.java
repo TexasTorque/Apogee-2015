@@ -185,6 +185,7 @@ public class Drivebase extends Subsystem {
         SmartDashboard.putNumber("TargetAngularAcceleration", targetAngularAcceleration);
         SmartDashboard.putNumber("SetPointDistance", setPointPosition);
         SmartDashboard.putNumber("GyroAngle", angle);
+        SmartDashboard.putNumber("GyroSpeed", angularVelocity);
     }
 
     @Override
