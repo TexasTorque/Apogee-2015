@@ -22,6 +22,8 @@ public abstract class AutoMode extends Input {
             driveAngle = 0.0;
 
             feedback.resetDriveEncoders();
+            
+            startTime = Timer.getFPGATimestamp();
         }
 
         @Override
@@ -109,11 +111,13 @@ public abstract class AutoMode extends Input {
 
     protected void runCommand(AutoCommand command) {
         command.reset();
-        while (!command.isDone() && command.isTimedOut()) {
+        System.out.println("Reset" + command.name);
+        while (!command.isDone() && !command.isTimedOut()) {
             command.run();
             wait(0.01);
         }
         command.stop();
+        System.out.println("stop" + command.name);
     }
 
     protected void wait(double time) {

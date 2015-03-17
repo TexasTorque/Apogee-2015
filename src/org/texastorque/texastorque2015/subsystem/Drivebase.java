@@ -98,6 +98,7 @@ public class Drivebase extends Subsystem {
                 setPointPosition = input.getDriveDistance();
 
                 linearProfile.generateTrapezoid(setPointPosition, 0.0, (leftVelocity + rightVelocity) / 2);
+                System.out.println("new linear terpazoid: " + setPointPosition);
 
                 feedback.resetDriveEncoders();
             }
@@ -159,6 +160,10 @@ public class Drivebase extends Subsystem {
         leftPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
         rightPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
         //set turn gains
+        turnPV.setGains(Constants.DrivebaseAngularP.getDouble(),
+                Constants.DrivebaseAngularV.getDouble(),
+                Constants.DrivebaseAngularffV.getDouble(),
+                Constants.DrivebaseAngularffA.getDouble());
         turnPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
     }
 
@@ -178,6 +183,8 @@ public class Drivebase extends Subsystem {
         SmartDashboard.putNumber("TargetAngle", targetAngle);
         SmartDashboard.putNumber("TargetAngularVelocity", targetAngularVelocity);
         SmartDashboard.putNumber("TargetAngularAcceleration", targetAngularAcceleration);
+        SmartDashboard.putNumber("SetPointDistance", setPointPosition);
+        SmartDashboard.putNumber("GyroAngle", angle);
     }
 
     @Override

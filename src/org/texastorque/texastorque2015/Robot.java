@@ -184,6 +184,9 @@ public class Robot extends TorqueIterative {
         autoThread.start();
 
         numcycles = 0;
+        
+        logger.reset();
+        logger.enable();
     }
 
     @Override
@@ -201,6 +204,8 @@ public class Robot extends TorqueIterative {
         intake.run();
 
         SmartDashboard.putNumber("NumCycles", numcycles++);
+        
+        logger.log();
     }
 
     // ----- Disabled -----

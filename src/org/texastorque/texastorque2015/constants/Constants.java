@@ -8,7 +8,7 @@ public class Constants extends Parameters {
     public final static Constant autoMode = new Constant("Auto", 0);
     public final static Constant driveForwardTime = new Constant("U_DriveForwardTime", 0.0);
     public final static Constant turnTime = new Constant("U_TurnTime", 0.0);
-    
+
     //Elevator
     public final static Constant ElevatorVDoneRange = new Constant("E_VDoneRange", 0.0);
     public final static Constant ElevatorPDoneRange = new Constant("E_PDoneRange", 0.0);
@@ -100,7 +100,7 @@ public class Constants extends Parameters {
     public final static Constant StepPlaceLevel2 = new Constant("E_StepPlaceLevel2", 225.0);
     public final static Constant StepPlaceLevel3 = new Constant("E_StepPlaceLevel3", 325.0);
     public final static Constant StepPlaceLevel4 = new Constant("E_StepPlaceLevel4", 425.0);
-    
+
     //Autostack
     public final static Constant autoStackLevel = new Constant("E_AutoStackLevel", 0.0);
     public final static Constant autoStackArmOpenLevel = new Constant("E_AutoStackArmOpenLevel", 0.0);
@@ -135,6 +135,10 @@ public class Constants extends Parameters {
     //Drivebase angular
     public final static Constant DrivebaseMaxAngleV = new Constant("D_MaxAngleV", 0.0);
     public final static Constant DrivebaseMaxAngleA = new Constant("D_MaxAngleA", 0.0);
+    public final static Constant DrivebaseAngularP = new Constant("D_AngularP", 0.0);
+    public final static Constant DrivebaseAngularV = new Constant("D_AngularV", 0.0);
+    public final static Constant DrivebaseAngularffV = new Constant("D_AngularffV", 0.0);
+    public final static Constant DrivebaseAngularffA = new Constant("D_AngularffA", 0.0);
 
     //Manipulator
     public final static Constant ToteSluiceWaitTime = new Constant("S_ToteWaitTime", 1.0);

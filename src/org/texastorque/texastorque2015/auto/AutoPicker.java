@@ -14,7 +14,7 @@ public class AutoPicker {
     }
 
     public static AutoMode getAutonomous() {
-        byte mode = 1;
+        byte mode = (byte) SmartDashboard.getNumber("AutoMode", 0);
 
         if (mode == DEFAULT_AUTO) {
             return new DoNothingAuto();

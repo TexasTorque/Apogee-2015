@@ -180,7 +180,7 @@ public class Elevator extends Subsystem {
             ffPosition = Constants.ElevatorffPRecyclingCan.getDouble();
         }
         pv.setGains(p, v, ffV, ffA);
-        pv.setTunedVoltage(12.3);
+        pv.setTunedVoltage(12.5);
     }
 
     @Override
