@@ -126,7 +126,7 @@ public class DriverInput extends Input {
             calcIntake();
         }
 
-        armOpen = armOpen || operator.getScoreButton();
+        armOpen = armOpen || driver.getRightTrigger();
         newPosition = elevationInputThisCycle;
     }
 
@@ -165,7 +165,7 @@ public class DriverInput extends Input {
 
     //Elevator
     private void calcNormal() {
-        if (driver.getRightTrigger()) {
+        if (operator.getScoreButton()) {
             numTotes = 0;
             if (tiltToggle.get()) {
                 punchOut = true;
@@ -273,12 +273,12 @@ public class DriverInput extends Input {
         }
 
         if (tiltToggle.get()) {
-            punchOut = driver.getRightTrigger();
+            punchOut = operator.getScoreButton();
             armToggle.set(false);
             numTotes = 0;
             armOpen = false;
         } else {
-            armToggle.calc(driver.getRightTrigger());
+            armToggle.calc(operator.getScoreButton());
             armOpen = armToggle.get();
             if (armOpen) {
                 numTotes = 0;
