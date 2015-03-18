@@ -37,7 +37,7 @@ public class Intake extends Subsystem {
                 intakesIn = true;
                 break;
             case OUTTAKE:
-                intakeSpeed = -0.2;
+                intakeSpeed = -0.75;
                 intakesIn = true;
                 break;
             case SLUICE_GATHER:
