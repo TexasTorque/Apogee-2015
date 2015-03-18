@@ -17,7 +17,7 @@ public class RobotOutput extends Output {
     private TorqueMotor strafeMotor;
 
     //Crazy Arms
-    private Solenoid openSolenoid;
+    private DoubleSolenoid openSolenoid;
     private Solenoid punchSolenoid;
     private Solenoid intakeSolenoid;
     private DoubleSolenoid tiltSolenoid;
@@ -39,7 +39,7 @@ public class RobotOutput extends Output {
         strafeMotor = new TorqueMotor(new VictorSP(Ports.STRAFE_PORT), true, TorqueMotor.LinearizationType.kNone);
 
         //Crazy Arms
-        openSolenoid = new Solenoid(Ports.ARM);
+        openSolenoid = new DoubleSolenoid(Ports.ARM_A, Ports.ARM_B);
         punchSolenoid = new Solenoid(Ports.PUNCH_SOLENOID);
         intakeSolenoid = new Solenoid(Ports.INTAKE_SOLENOID);
         tiltSolenoid = new DoubleSolenoid(Ports.TILT_SOLENOID_A_PORT, Ports.TILT_SOLENOID_B_PORT);
@@ -73,12 +73,12 @@ public class RobotOutput extends Output {
     //Crazy Arms
     @Override
     public void setArmsOpen(boolean open) {
-        openSolenoid.set(!open);
+        openSolenoid.set((open) ? DoubleSolenoid.Value.kReverse : DoubleSolenoid.Value.kForward);
     }
 
     @Override
     public void setTiltUp(boolean on) {
-        tiltSolenoid.set(on ? Value.kForward : Value.kReverse);
+        tiltSolenoid.set(on ? Value.kReverse : Value.kForward);
     }
 
     @Override

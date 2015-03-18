@@ -29,7 +29,8 @@ public class Ports {
     public final static int SLUICE_BUTTON = 5;
 
     //crazy arms
-    public final static int ARM = 5;
+    public final static int ARM_A = 3;
+    public final static int ARM_B = 5;
     public final static int PUNCH_SOLENOID = 6;
     public final static int INTAKE_SOLENOID = 4;
     public final static int TILT_SOLENOID_A_PORT = 0;
