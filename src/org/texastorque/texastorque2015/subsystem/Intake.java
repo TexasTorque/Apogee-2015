@@ -14,6 +14,7 @@ public class Intake extends Subsystem {
     public static final byte INTAKE = 1;
     public static final byte OUTTAKE = 2;
     public static final byte SLUICE_GATHER = 3;
+    public static final byte OPEN_ROLL_IN = 4;
 
     private double toteSlideTime;
     private boolean toteInSluice;
@@ -53,6 +54,9 @@ public class Intake extends Subsystem {
                     intakesIn = false;
                 }
                 break;
+            case OPEN_ROLL_IN:
+                intakesIn = false;
+                intakeSpeed = 1.0;
             case OFF:
                 intakeSpeed = 0.0;
                 intakesIn = false;
