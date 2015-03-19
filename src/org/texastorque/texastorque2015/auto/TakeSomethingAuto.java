@@ -11,8 +11,11 @@ public class TakeSomethingAuto extends AutoMode {
         elevatorPosition = Constants.FloorElevatorLevel3.getDouble();
         wait(2.0);
         intakeState = Intake.OUTTAKE;
-        runCommand(new DriveDistance("drive forward", 11.5, 1.0, 10.0, 5.0));
-        runCommand(new DriveDistance("drive back", -0.25, 0.5, 10.0, 2.0));
+        
+        double distanceDoneRange = Constants.distanceDoneRange.getDouble();
+        
+        runCommand(new DriveDistance("drive forward", Constants.TakeSomethingFeet.getDouble(), distanceDoneRange, 10.0, 4.0));
+        runCommand(new DriveDistance("drive back", -0.25, distanceDoneRange, 10.0, 1.0));
     }
 
 }
