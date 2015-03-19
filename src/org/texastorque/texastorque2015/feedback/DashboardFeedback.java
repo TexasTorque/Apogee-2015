@@ -45,6 +45,5 @@ public class DashboardFeedback extends Feedback {
 
         //angle (radians)
         angle = SmartDashboard.getNumber("angle", 0.0);
-        angularVelocity = SmartDashboard.getNumber("angularVelocity", 0.0);
     }
 }

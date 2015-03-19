@@ -82,7 +82,6 @@ public class SensorFeedback extends Feedback {
         //angularVelocity = (gyro.getAngle() - angle) / (Timer.getFPGATimestamp() - prevTime);
         prevTime = Timer.getFPGATimestamp();
         angle = gyro.getAngle() - angleOffset;
-        angularVelocity = gyro.getRate();
     }
 
     @Override

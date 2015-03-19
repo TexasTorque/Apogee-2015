@@ -3,6 +3,7 @@ package org.texastorque.texastorque2015.subsystem;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque2015.constants.Constants;
+import org.texastorque.torquelib.controlLoop.TorquePID;
 import org.texastorque.torquelib.controlLoop.TorquePV;
 import org.texastorque.torquelib.controlLoop.TorqueTMP;
 
@@ -23,7 +24,6 @@ public class Drivebase extends Subsystem {
 
     //Sensor values (angular)
     private double angle;
-    private double angularVelocity;
 
     //Control loop stuff (linear)
     private double setPointPosition;
@@ -33,9 +33,6 @@ public class Drivebase extends Subsystem {
 
     //Control loop stuff (angular)
     private double setPointAngle;
-    private double targetAngle;
-    private double targetAngularVelocity;
-    private double targetAngularAcceleration;
 
     //linear
     private TorqueTMP linearProfile;
@@ -43,28 +40,28 @@ public class Drivebase extends Subsystem {
     private TorquePV rightPV;
 
     //angular
-    private TorqueTMP angularProfile;
-    private TorquePV turnPV;
-
+    private TorquePID turnPID;
+    
     double prevTime;
 
     public Drivebase() {
         linearProfile = new TorqueTMP(Constants.DrivebaseMaxV.getDouble(), Constants.DrivebaseMaxA.getDouble());
-        angularProfile = new TorqueTMP(Constants.DrivebaseMaxAngleV.getDouble(), Constants.DrivebaseMaxAngleA.getDouble());
         leftPV = new TorquePV();
         rightPV = new TorquePV();
-        turnPV = new TorquePV();
+        
+        turnPID = new TorquePID();
     }
 
-    //Resets the TMP so that the robot does not try to move. Called every time the robot enables.
+    //Resets the control loops so that the robot does not try to move. Called every time the robot enables.
     @Override
     public void init() {
         setPointPosition = 0.0;
         setPointAngle = 0.0;
         linearProfile.generateTrapezoid(0.0, 0.0, (leftVelocity + rightVelocity) / 2);
-        angularProfile.generateTrapezoid(0.0, 0.0, angle);
         feedback.resetDriveEncoders();
+        
         feedback.resetGyro();
+        turnPID.setSetpoint(feedback.getAngle());
 
         prevTime = Timer.getFPGATimestamp();
     }
@@ -81,7 +78,6 @@ public class Drivebase extends Subsystem {
         rightAcceleration = feedback.getRightDriveAcceleration();
 
         angle = feedback.getAngle();
-        angularVelocity = feedback.getAngularVelocity();
 
         /**
          * Drive directions are defined as following: +1 for leftSpeed and
@@ -117,18 +113,13 @@ public class Drivebase extends Subsystem {
             if (setPointAngle != input.getDriveAngle()) {
                 setPointAngle = input.getDriveAngle();
 
-                angularProfile.generateTrapezoid(setPointAngle, 0.0, angularVelocity);
-
+                turnPID.setSetpoint(setPointAngle);
+                turnPID.reset();
+                
                 feedback.resetGyro();
             }
 
-            angularProfile.calculateNextSituation(dt);
-
-            targetAngularVelocity = angularProfile.getCurrentVelocity();
-            targetAngle = angularProfile.getCurrentPosition();
-            targetAngularAcceleration = angularProfile.getCurrentAcceleration();
-
-            leftSpeed = turnPV.calculate(angularProfile, angle, angularVelocity);
+            leftSpeed = turnPID.calculate(angle);
             rightSpeed = -leftSpeed;
         } else {
             //Regular teleop control
@@ -138,6 +129,9 @@ public class Drivebase extends Subsystem {
 
             targetPosition = 0.0;
             targetVelocity = 0.0;
+            targetAcceleration = 0.0;
+            setPointPosition = 0.0;
+            setPointAngle = 0.0;
         }
 
         if (outputEnabled) {
@@ -150,7 +144,6 @@ public class Drivebase extends Subsystem {
     @Override
     public void loadParams() {
         linearProfile = new TorqueTMP(Constants.DrivebaseMaxV.getDouble(), Constants.DrivebaseMaxA.getDouble());
-        angularProfile = new TorqueTMP(Constants.DrivebaseMaxAngleV.getDouble(), Constants.DrivebaseMaxAngleA.getDouble());
 
         //pv
         leftPV.setGains(Constants.DrivebaseLeftP.getDouble(), Constants.DrivebaseLeftV.getDouble(),
@@ -159,12 +152,9 @@ public class Drivebase extends Subsystem {
                 Constants.DrivebaseRightffV.getDouble(), Constants.DrivebaseRightffA.getDouble());
         leftPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
         rightPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
+        
         //set turn gains
-        turnPV.setGains(Constants.DrivebaseAngularP.getDouble(),
-                Constants.DrivebaseAngularV.getDouble(),
-                Constants.DrivebaseAngularffV.getDouble(),
-                Constants.DrivebaseAngularffA.getDouble());
-        turnPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
+        turnPID.setPIDGains(Constants.DrivebaseTurnP.getDouble(), Constants.DrivebaseTurnI.getDouble(), Constants.DrivebaseTurnD.getDouble());
     }
 
     @Override
@@ -180,12 +170,8 @@ public class Drivebase extends Subsystem {
         SmartDashboard.putNumber("TargetPosition", targetPosition);
         SmartDashboard.putNumber("TargetVelocity", targetVelocity);
         SmartDashboard.putNumber("TargetAcceleration", targetAcceleration);
-        SmartDashboard.putNumber("TargetAngle", targetAngle);
-        SmartDashboard.putNumber("TargetAngularVelocity", targetAngularVelocity);
-        SmartDashboard.putNumber("TargetAngularAcceleration", targetAngularAcceleration);
         SmartDashboard.putNumber("SetPointDistance", setPointPosition);
         SmartDashboard.putNumber("GyroAngle", angle);
-        SmartDashboard.putNumber("GyroSpeed", angularVelocity);
     }
 
     @Override

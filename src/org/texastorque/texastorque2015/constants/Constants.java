@@ -133,12 +133,10 @@ public class Constants extends Parameters {
     public final static Constant DrivebaseTunedVoltage = new Constant("D_TunedVoltage", 12.5);
 
     //Drivebase angular
-    public final static Constant DrivebaseMaxAngleV = new Constant("D_MaxAngleV", 0.0);
-    public final static Constant DrivebaseMaxAngleA = new Constant("D_MaxAngleA", 0.0);
-    public final static Constant DrivebaseAngularP = new Constant("D_AngularP", 0.0);
-    public final static Constant DrivebaseAngularV = new Constant("D_AngularV", 0.0);
-    public final static Constant DrivebaseAngularffV = new Constant("D_AngularffV", 0.0);
-    public final static Constant DrivebaseAngularffA = new Constant("D_AngularffA", 0.0);
+    public final static Constant DrivebaseTurnP = new Constant("D_TurnP", 0.0);
+    public final static Constant DrivebaseTurnI = new Constant("D_TurnI", 0.0);
+    public final static Constant DrivebaseTurnD = new Constant("D_TurnP", 0.0);
+    public final static Constant DrivebaseTurnDoneRange = new Constant("D_TurnDoneRange", 0.0);
 
     //Manipulator
     public final static Constant ToteSluiceWaitTime = new Constant("S_ToteWaitTime", 1.0);

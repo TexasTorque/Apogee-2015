@@ -12,7 +12,6 @@ public abstract class Feedback implements Runnable {
     protected volatile double leftDriveAcceleration;
     protected volatile double rightDriveAcceleration;
     protected volatile double angle;
-    protected volatile double angularVelocity;
 
     /**
      * Get the position of the left side of the drivetrain.
@@ -75,15 +74,6 @@ public abstract class Feedback implements Runnable {
      */
     public double getAngle() {
         return angle;
-    }
-
-    /**
-     * Get the angle of the gyro.
-     *
-     * @return The angular velocity in degrees/s
-     */
-    public double getAngularVelocity() {
-        return angularVelocity;
     }
 
     /**
