@@ -57,9 +57,8 @@ public class Intake extends Subsystem {
             case OPEN_ROLL_IN:
                 intakesIn = false;
                 intakeSpeed = 1.0;
+                break;
             case OFF:
-                intakeSpeed = 0.0;
-                intakesIn = false;
             default:
                 intakeSpeed = 0.0;
                 intakesIn = false;

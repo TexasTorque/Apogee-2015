@@ -7,7 +7,7 @@ public class Ports {
     public final static int LEFT_B_DRIVE_PORT = 3;
     public final static int RIGHT_A_DRIVE_PORT = 1;
     public final static int RIGHT_B_DRIVE_PORT = 12;//unused
-    public final static int STRAFE_PORT = 0;
+    public final static int STRAFE_PORT = 4;
 
     //Elevator
     public final static int LEFT_ELEVATOR = 5;
@@ -37,7 +37,7 @@ public class Ports {
     public final static int TILT_SOLENOID_B_PORT = 0;
 
     //intake
-    public final static int LEFT_INTAKE_PORT = 9;
+    public final static int LEFT_INTAKE_PORT = 7;
     public final static int RIGHT_INTAKE_PORT = 6;//?
 
     //gyro

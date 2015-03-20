@@ -27,6 +27,7 @@ public class Constants extends Parameters {
     
     //Take Something Auto
     public final static Constant TakeSomethingFeet = new Constant("A_TakeSomethingFeet", 0.0);
+    public final static Constant turnRightDegrees = new Constant("A_TurnRightDegrees", 90.0);
     
     //Elevator
     public final static Constant ElevatorVDoneRange = new Constant("E_VDoneRange", 0.0);

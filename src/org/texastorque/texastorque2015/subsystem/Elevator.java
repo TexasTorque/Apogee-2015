@@ -71,7 +71,7 @@ public class Elevator extends Subsystem {
 
         //Control loop operation
         if (!input.isOverride()) {
-            if (input.getElevatorPosition() != setPointElevation && input.newPosition()) {
+            if (input.getElevatorPosition() != setPointElevation && input.newPosition())  {
                 setPointElevation = input.getElevatorPosition();
 
                 tmp.generateTrapezoid(setPointElevation, currentPosition, currentVelocity);
