@@ -46,12 +46,12 @@ public class Arms extends Subsystem {
 
     @Override
     public String getLogNames() {
-        return "ArmsOpen, PunchOut, TiltUp, ";
+        return "ArmsOpen,PunchOut,TiltUp,";
     }
 
     @Override
     public String getLogValues() {
-        return armsOpen + ", " + punchOut + ", " + tiltUp + ", ";
+        return armsOpen + "," + punchOut + "," + tiltUp + ",";
     }
 
 }

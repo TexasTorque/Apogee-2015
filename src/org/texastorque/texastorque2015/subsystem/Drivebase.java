@@ -176,15 +176,15 @@ public class Drivebase extends Subsystem {
 
     @Override
     public String getLogNames() {
-        return "LeftSpeed, RightSpeed, "
-                + "LeftPosition, RightPosition, LeftVelocity, RightVelocity, TargetPosition, TargetVelocity, ";
+        return "LeftSpeed,RightSpeed, "
+                + "LeftPosition,RightPosition,LeftVelocity,RightVelocity,TargetPosition,TargetVelocity,D_Distance,D_Angle,";
     }
 
     @Override
     public String getLogValues() {
-        return leftSpeed + ", " + rightSpeed + ", "
-                + leftPosition + ", " + rightPosition + ", " + leftVelocity + ", "
-                + rightVelocity + ", " + targetPosition + ", " + targetVelocity + ", ";
+        return leftSpeed + "," + rightSpeed + ","
+                + leftPosition + "," + rightPosition + "," + leftVelocity + ","
+                + rightVelocity + "," + targetPosition + "," + targetVelocity + "," + setPointPosition + "," + setPointAngle + ",";
     }
 
 }

@@ -147,7 +147,7 @@ public class Robot extends TorqueIterative {
     public void teleopPeriodic() {
         activeInput.run();
         lights.calcLightState();
-
+        logger.log();
         pushToDashboard();
     }
 
@@ -159,8 +159,6 @@ public class Robot extends TorqueIterative {
         elevator.run();
         arms.run();
         intake.run();
-
-        logger.log();
 
         SmartDashboard.putNumber("NumCycles", numcycles++);
     }
@@ -194,6 +192,7 @@ public class Robot extends TorqueIterative {
     @Override
     public void autonomousPeriodic() {
         pushToDashboard();
+        logger.log();
     }
 
     @Override
@@ -206,8 +205,6 @@ public class Robot extends TorqueIterative {
         intake.run();
 
         SmartDashboard.putNumber("NumCycles", numcycles++);
-        
-        logger.log();
     }
 
     // ----- Disabled -----
