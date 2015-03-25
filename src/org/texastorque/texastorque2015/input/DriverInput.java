@@ -276,9 +276,9 @@ public class DriverInput extends Input {
 
     private void calcOverride() {
         if (operator.getElevatorUpButton()) {
-            overrideElevatorMotorSpeed = 1.0;
+            overrideElevatorMotorSpeed = 0.5;
         } else if (operator.getElevatorDownButton()) {
-            overrideElevatorMotorSpeed = -1.0;
+            overrideElevatorMotorSpeed = -0.5;
         } else {
             overrideElevatorMotorSpeed = 0.0;
         }
