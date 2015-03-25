@@ -79,7 +79,7 @@ public abstract class Input implements Runnable {
     }
 
     public boolean newPosition() {
-        return true;
+        return newPosition;
     }
 
     //Crazy Arms

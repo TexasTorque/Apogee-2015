@@ -15,7 +15,7 @@ public class YellowToteAuto extends AutoMode {
         armOpen = true;
         intakeState = Intake.INTAKE;
 
-        wait(0.5);
+        wait(1.0);
 
         intakeState = Intake.OFF;
 
@@ -32,11 +32,12 @@ public class YellowToteAuto extends AutoMode {
 
         runCommand(new TurnAngle("turn left with first tote", Constants.FirstLeftTurnDegrees.getDouble(), turnDoneRange, 10, 4.0));
         runCommand(new DriveDistance("drive after first tote", Constants.DriveWithFirstToteFeet.getDouble(), distanceDoneRange, 10, 4.0));
-        runCommand(new TurnAngle("turn right to second tote", Constants.TurnToSecondToteDegrees.getDouble(), turnDoneRange, 10, 10.0));
-
+        
         while (!feedback.isElevatorHere(elevatorPosition)) {
             wait(0.05);
         }
+        
+        runCommand(new TurnAngle("turn right to second tote", Constants.TurnToSecondToteDegrees.getDouble(), turnDoneRange, 10, 10.0));
 
         intakeState = Intake.OPEN_ROLL_IN;
 

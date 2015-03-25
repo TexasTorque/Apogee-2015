@@ -162,7 +162,7 @@ public class Elevator extends Subsystem {
             ffA = Constants.ElevatorffA5Tote.getDouble();
 
             ffPosition = Constants.ElevatorffP5Tote.getDouble();
-        } else if (numTotes == 6) {
+        } else if (numTotes >= 6) {
             tmp = new TorqueTMP(Constants.ElevatorMaxV6Tote.getDouble(), Constants.ElevatorMaxA6Tote.getDouble());
             p = Constants.ElevatorP6Tote.getDouble();
             v = Constants.ElevatorV6Tote.getDouble();
@@ -178,6 +178,14 @@ public class Elevator extends Subsystem {
             ffA = Constants.ElevatorffARecyclingCan.getDouble();
 
             ffPosition = Constants.ElevatorffPRecyclingCan.getDouble();
+        } else {
+            tmp = new TorqueTMP(Constants.ElevatorMaxV0Tote.getDouble(), Constants.ElevatorMaxA0Tote.getDouble());
+            p = Constants.ElevatorP0Tote.getDouble();
+            v = Constants.ElevatorV0Tote.getDouble();
+            ffV = Constants.ElevatorffV0Tote.getDouble();
+            ffA = Constants.ElevatorffA0Tote.getDouble();
+
+            ffPosition = Constants.ElevatorffP0Tote.getDouble();
         }
         pv.setGains(p, v, ffV, ffA);
         pv.setTunedVoltage(12.5);

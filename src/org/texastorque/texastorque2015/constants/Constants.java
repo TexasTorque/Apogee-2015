@@ -12,8 +12,8 @@ public class Constants extends Parameters {
     //Yellow Tote Auto
     public final static Constant autoMode = new Constant("Auto", 0);
     public final static Constant FirstLeftTurnDegrees = new Constant("A_FirstTurnLeftDegrees", 0.0);
-    public final static Constant DriveWithFirstToteFeet = new Constant("A_DriveWithFirstToteFeet",04.0);
-    public final static Constant TurnToSecondToteDegrees = new Constant("A_TurnToSecondToteDegrees",60.0);
+    public final static Constant DriveWithFirstToteFeet = new Constant("A_DriveWithFirstToteFeet", 6.0);
+    public final static Constant TurnToSecondToteDegrees = new Constant("A_TurnToSecondToteDegrees", 50.0);
     public final static Constant DriveToSecondToteFeet = new Constant("A_DriveToSecondToteFeet", 0.0);
     public final static Constant DriveWithSecondToteFeet = new Constant("A_DriveWithSecondToteFeet", 0.0);
     public final static Constant TurnToThirdToteDegrees = new Constant("A_TurnToThirdToteDegrees", 0.0);

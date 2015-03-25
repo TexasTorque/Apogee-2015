@@ -7,6 +7,6 @@ public class DriveAuto extends AutoMode {
     @Override
     public void run() {
         double distanceDoneRange = Constants.distanceDoneRange.getDouble();
-        runCommand(new DriveDistance("forward", Constants.DriveForwardFeet.getDouble(), distanceDoneRange, 10.0, 4.0));
+        runCommand(new DriveDistance("forward", Constants.DriveForwardFeet.getDouble(), distanceDoneRange, 10.0, 10.0));
     }
 }

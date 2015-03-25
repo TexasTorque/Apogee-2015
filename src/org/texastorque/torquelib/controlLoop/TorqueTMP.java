@@ -43,7 +43,10 @@ public class TorqueTMP {
 
         double positionError = targetPosition - realPosition;
 
-        if (Math.abs(positionError) < 0.1) {
+        if (Math.abs(positionError) < 0.01) {
+            currentPosition = realPosition;
+            currentVelocity = 0.0;
+            currentAcceleration = 0.0;
             return;
         } else if (positionError < 0.0) {
             generateTrapezoid(-targetPosition, -realPosition, -realSpeed);

@@ -117,8 +117,8 @@ public class Robot extends TorqueIterative {
     }
 
     private void initSubsystems() {
-        //drivebase.init();
-        //elevator.init();
+        drivebase.init();
+        elevator.init();
     }
 
     // ----- Teleop -----
@@ -177,6 +177,7 @@ public class Robot extends TorqueIterative {
         drivebase.setOutputEnabled(true);
         elevator.setOutputEnabled(true);
         intake.setOutputEnabled(true);
+        arms.setOutputEnabled(true);
 
         activeInput.setFeedback(activeFeedback);
 

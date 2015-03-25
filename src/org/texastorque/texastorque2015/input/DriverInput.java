@@ -18,6 +18,8 @@ public class DriverInput extends Input {
     private boolean toteAvailable;
     private double autoStackHeight;
     private boolean stepStack;
+    private boolean pulledToteForward;
+    private double pullOutTime;
 
     private boolean elevationInputThisCycle;
 
@@ -36,11 +38,6 @@ public class DriverInput extends Input {
         numTotes = 0;
 
         elevatorFFpOff = false;
-    }
-
-    @Override
-    public boolean newPosition() {
-        return newPosition;
     }
 
     @Override
@@ -88,7 +85,7 @@ public class DriverInput extends Input {
                 toteAvailable = false;
                 wentToBottom = false;
             } else if (elevatorPosition == autoStackHeight && wentToBottom) {
-                //catch else to make sure that nothing happens if elevator is not done
+                //catch else to make sure that nothing happens if elevator is not donee
             } else {
                 elevatorPosition = Constants.autoStackLevel.getDouble();
                 elevationInputThisCycle = true;
@@ -103,15 +100,18 @@ public class DriverInput extends Input {
             punchOut = false;
             tiltUp = false;
 
-            toteAvailable = feedback.isToteInSluice();
-
-            if (toteAvailable && feedback.isElevatorHere(elevatorPosition)) {
-                double toteSlideTime = feedback.getToteSlideTime();
-                intakeState = Intake.SLUICE_GATHER;
-                if (Timer.getFPGATimestamp() - toteSlideTime > Constants.ToteSluiceWaitTime.getDouble() + Constants.TotePullBAckTime.getDouble()) {
-                    autoStack = true;
-                    intakeState = Intake.OFF;
-                }
+            intakeState = Intake.OUTTAKE;
+            pulledToteForward = true;
+            pullOutTime = Timer.getFPGATimestamp();
+        } else if (pulledToteForward) {
+            if (Timer.getFPGATimestamp() > Constants.TotePullBAckTime.getDouble() + pullOutTime) {
+                pulledToteForward = false;
+                autoStack = true;
+                intakeState = Intake.OFF;
+            } else if (Timer.getFPGATimestamp() > 0.2 + pullOutTime) {
+                intakeState = Intake.INTAKE;
+            } else {
+                intakeState = Intake.OFF;
             }
         } else {
             toteAvailable = false;
@@ -229,35 +229,46 @@ public class DriverInput extends Input {
             punchOut = false;
 
             stepStack = false;
-            elevationInputThisCycle = true;
 
             if (tiltToggle.get()) {
                 if (operator.getLevel1Button()) {
+                    elevationInputThisCycle = true;
                     elevatorPosition = Constants.RCElevatorLevel1.getDouble();
                 } else if (operator.getLevel2Button()) {
                     elevatorPosition = Constants.RCElevatorLevel2.getDouble();
+                    elevationInputThisCycle = true;
                 } else if (operator.getLevel3Button()) {
                     elevatorPosition = Constants.RCElevatorLevel3.getDouble();
+                    elevationInputThisCycle = true;
                 } else if (operator.getLevel4Button()) {
                     elevatorPosition = Constants.RCElevatorLevel4.getDouble();
+                    elevationInputThisCycle = true;
                 } else if (operator.getLevel5Button()) {
                     elevatorPosition = Constants.RCElevatorLevel5.getDouble();
+                    elevationInputThisCycle = true;
                 } else if (operator.getLevel6Button()) {
                     elevatorPosition = Constants.RCElevatorLevel6.getDouble();
+                    elevationInputThisCycle = true;
                 }
             } else {
                 if (operator.getLevel1Button()) {
                     elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
+                    elevationInputThisCycle = true;
                 } else if (operator.getLevel2Button()) {
                     elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
+                    elevationInputThisCycle = true;
                 } else if (operator.getLevel3Button()) {
                     elevatorPosition = Constants.FloorElevatorLevel3.getDouble();
+                    elevationInputThisCycle = true;
                 } else if (operator.getLevel4Button()) {
                     elevatorPosition = Constants.FloorElevatorLevel4.getDouble();
+                    elevationInputThisCycle = true;
                 } else if (operator.getLevel5Button()) {
                     elevatorPosition = Constants.FloorElevatorLevel5.getDouble();
+                    elevationInputThisCycle = true;
                 } else if (operator.getLevel6Button()) {
                     elevatorPosition = Constants.FloorElevatorLevel6.getDouble();
+                    elevationInputThisCycle = true;
                 }
             }
         }
