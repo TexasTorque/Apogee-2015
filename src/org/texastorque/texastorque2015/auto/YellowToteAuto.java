@@ -13,11 +13,11 @@ public class YellowToteAuto extends AutoMode {
         newPosition = true;
         elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
         armOpen = true;
-        intakeState = Intake.INTAKE;
+        //intakeState = Intake.INTAKE;
 
         wait(1.0);
 
-        intakeState = Intake.OFF;
+        //intakeState = Intake.OFF;
 
         elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
 
@@ -39,15 +39,15 @@ public class YellowToteAuto extends AutoMode {
         
         runCommand(new TurnAngle("turn right to second tote", Constants.TurnToSecondToteDegrees.getDouble(), turnDoneRange, 10, 10.0));
 
-        intakeState = Intake.OPEN_ROLL_IN;
+        //intakeState = Intake.OPEN_ROLL_IN;
 
         runCommand(new DriveDistance("drive forward to second tote", Constants.DriveToSecondToteFeet.getDouble(), distanceDoneRange, 10, 4.0));
 
-        intakeState = Intake.INTAKE;
+        //intakeState = Intake.INTAKE;
 
         wait(0.5);
 
-        intakeState = Intake.OFF;
+        //intakeState = Intake.OFF;
         armOpen = true;
         elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
 
@@ -67,15 +67,15 @@ public class YellowToteAuto extends AutoMode {
             wait(0.05);
         }
 
-        intakeState = Intake.OPEN_ROLL_IN;
+        //intakeState = Intake.OPEN_ROLL_IN;
 
         runCommand(new DriveDistance("drive forward to third tote", Constants.DriveToThirdToteFeet.getDouble(), distanceDoneRange, 10, 4.0));
 
-        intakeState = Intake.INTAKE;
+        //intakeState = Intake.INTAKE;
 
         wait(0.5);
         
-        intakeState = Intake.OFF;
+        //intakeState = Intake.OFF;
         armOpen = true;
         elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
 
@@ -98,7 +98,7 @@ public class YellowToteAuto extends AutoMode {
         }
         
         armOpen = true;
-        intakeState = Intake.OUTTAKE;
+        //intakeState = Intake.OUTTAKE;
         
         wait(0.5);
         

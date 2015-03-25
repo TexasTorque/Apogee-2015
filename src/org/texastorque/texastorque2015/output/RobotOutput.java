@@ -88,9 +88,9 @@ public class RobotOutput extends Output {
 
     //Intake
     @Override
-    public void setIntakeMotorSpeed(double speed) {
-        leftIntakeMotor.set(speed);
-        rightIntakeMotor.set(speed);
+    public void setIntakeMotorSpeed(double left, double right) {
+        leftIntakeMotor.set(left);
+        rightIntakeMotor.set(right);
     }
 
     @Override

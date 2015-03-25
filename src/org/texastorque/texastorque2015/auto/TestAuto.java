@@ -13,7 +13,7 @@ public class TestAuto extends AutoMode {
         newPosition = true;
         elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
 
-        intakeState = Intake.INTAKE;
+        //intakeState = Intake.INTAKE;
 
         runCommand(new DriveDistance("drive through first tote", Constants.DriveWithFirstToteFeet.getDouble(), distanceDoneRange, 10, 5.0));
         runCommand(new TurnAngle("turn right", Constants.TurnToSecondToteDegrees.getDouble(), turnDoneRange, 10, 5.0));
@@ -22,7 +22,7 @@ public class TestAuto extends AutoMode {
 
         armOpen = true;
         elevatorPosition = Constants.autoStackLevel.getDouble();
-        intakeState = Intake.OFF;
+        //intakeState = Intake.OFF;
 
         //wait for elevator to lower
         while (!feedback.isElevatorHere(elevatorPosition)) {
@@ -42,11 +42,11 @@ public class TestAuto extends AutoMode {
         
         runCommand(new TurnAngle("turn right", Constants.TurnToSecondToteDegrees.getDouble(), turnDoneRange, 10, 5.0));
         
-        intakeState = Intake.OPEN_ROLL_IN;
+        //intakeState = Intake.OPEN_ROLL_IN;
         
         runCommand(new DriveDistance("drive through second tote", Constants.DriveToSecondToteFeet.getDouble(), distanceDoneRange, 10, 6.0));
         
-        intakeState = Intake.INTAKE;
+        //intakeState = Intake.INTAKE;
 //        
 //        wait(0.5);
 //        

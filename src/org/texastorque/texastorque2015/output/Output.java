@@ -16,7 +16,7 @@ public abstract class Output {
     public abstract void setPunchOut(boolean out);
 
     //Intake
-    public abstract void setIntakeMotorSpeed(double speed);
+    public abstract void setIntakeMotorSpeed(double left, double right);
 
     public abstract void setIntakeGrasp(boolean grasp);
 }
