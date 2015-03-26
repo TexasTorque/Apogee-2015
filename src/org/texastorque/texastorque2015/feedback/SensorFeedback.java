@@ -23,9 +23,6 @@ public class SensorFeedback extends Feedback {
     private DigitalInput topLimit;
     private DigitalInput bottomLimit;
 
-    //Sluice
-    private DigitalInput sluiceLimitSwitch;
-
     //Angle
     private TorqueGyro gyro;
     private double angleOffset;
@@ -40,8 +37,6 @@ public class SensorFeedback extends Feedback {
         elevatorEncoder = new TorqueEncoder(Ports.LEFT_ELEVATOR_ENCODER_PORT_A, Ports.LEFT_ELEVATOR_ENCODER_PORT_B, false, CounterBase.EncodingType.k4X);
         topLimit = new DigitalInput(Ports.ELEVATOR_TOP_LIMIT);
         bottomLimit = new DigitalInput(Ports.ELEVATOR_BOTTOM_LIMIT);
-
-        sluiceLimitSwitch = new DigitalInput(Ports.SLUICE_BUTTON);
 
         gyro = new TorqueGyro(Ports.GYRO_PORT_A, Ports.GYRO_PORT_B);
         angleOffset = gyro.getAngle();
@@ -71,12 +66,6 @@ public class SensorFeedback extends Feedback {
 
         elevatorAtTop = topLimit.get();
         elevatorAtBottom = bottomLimit.get();
-
-        //Sluice
-        if (!toteInSluice && !sluiceLimitSwitch.get()) {
-            toteSlideTime = Timer.getFPGATimestamp();
-        }
-        toteInSluice = !sluiceLimitSwitch.get();
 
         //angle
         //angularVelocity = (gyro.getAngle() - angle) / (Timer.getFPGATimestamp() - prevTime);

@@ -26,7 +26,6 @@ public class Ports {
     //Limit switches
     public final static int ELEVATOR_TOP_LIMIT = 19;//?
     public final static int ELEVATOR_BOTTOM_LIMIT = 18;//?
-    public final static int SLUICE_BUTTON = 5;
 
     //crazy arms
     public final static int ARM_A = 0;

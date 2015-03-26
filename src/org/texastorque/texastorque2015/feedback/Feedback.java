@@ -136,16 +136,4 @@ public abstract class Feedback implements Runnable {
     public boolean isElevatorAtBottom() {
         return elevatorAtBottom;
     }
-
-    //Sluice
-    protected boolean toteInSluice;
-    protected volatile double toteSlideTime;
-
-    public boolean isToteInSluice() {
-        return toteInSluice;
-    }
-
-    public double getToteSlideTime() {
-        return toteSlideTime;
-    }
 }

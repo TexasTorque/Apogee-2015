@@ -40,9 +40,6 @@ public class DashboardFeedback extends Feedback {
         elevatorAtTop = SmartDashboard.getBoolean("elevatorAtTop", false);
         elevatorAtBottom = SmartDashboard.getBoolean("elevatorAtBottom", false);
 
-        //Sluice
-        toteInSluice = SmartDashboard.getBoolean("toteInSluice", false);
-
         //angle (radians)
         angle = SmartDashboard.getNumber("angle", 0.0);
     }

@@ -159,7 +159,6 @@ public class Constants extends Parameters {
     public final static Constant DrivebaseTurnDoneRange = new Constant("D_TurnDoneRange", 0.0);
 
     //Manipulator
-    public final static Constant ToteSluiceWaitTime = new Constant("S_ToteWaitTime", 1.0);
     public final static Constant TotePullBAckTime = new Constant("I_TotePullBAckTime", 1.0);
 
     static {

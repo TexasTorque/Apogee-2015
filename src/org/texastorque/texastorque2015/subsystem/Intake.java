@@ -8,9 +8,6 @@ public class Intake extends Subsystem {
     private double rightIntakeSpeed;
     private boolean intakesIn;
 
-    private double toteSlideTime;
-    private boolean toteInSluice;
-
     public Intake() {
     }
 
@@ -20,8 +17,6 @@ public class Intake extends Subsystem {
 
     @Override
     public void run() {
-        toteInSluice = feedback.isToteInSluice();
-        
         leftIntakeSpeed = input.getLeftIntakeSpeed();
         rightIntakeSpeed = input.getRightIntakeSpeed();
         intakesIn = input.getIntakeIn();
@@ -42,8 +37,6 @@ public class Intake extends Subsystem {
     public void pushToDashboard() {
         SmartDashboard.putNumber("IntakeSpeed", leftIntakeSpeed);
         SmartDashboard.putBoolean("IntakesIn", intakesIn);
-        SmartDashboard.putBoolean("ToteInSluice", toteInSluice);
-        SmartDashboard.putNumber("ToteSlideTime", toteSlideTime);
     }
 
     @Override
