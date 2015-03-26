@@ -1,15 +1,22 @@
 package org.texastorque.texastorque2015.input;
 
 import org.texastorque.torquelib.util.GenericController;
+import org.texastorque.torquelib.util.TorqueFilter;
 
 public class DriverInput extends Input {
 
-    GenericController driver;
-    GenericController operator;
+    private GenericController driver;
+    private GenericController operator;
+
+    private TorqueFilter driveAccelFilter;
+    private TorqueFilter turnAccelFilter;
 
     public DriverInput() {
         driver = new GenericController(0, GenericController.TYPE_XBOX, 0.2);
         operator = new GenericController(1, GenericController.TYPE_XBOX, 0.2);
+
+        driveAccelFilter = new TorqueFilter(50);
+        turnAccelFilter = new TorqueFilter(50);
 
         override = false;
         armOpen = false;
@@ -24,47 +31,50 @@ public class DriverInput extends Input {
         } else if (operator.getRightCenterButton()) {
             override = false;
         }
-        
+
         if (override) {
             calcOverride();
         } else {
             calcElevator();
         }
-        
+
         calcIntake();
         calcDrivebase();
     }
-    
+
     //Drivebase
     private void calcDrivebase() {
-        leftSpeed = -1 * driver.getLeftYAxis() + driver.getRightXAxis();
-        rightSpeed = -1 * driver.getLeftYAxis() - driver.getRightXAxis();
         strafeSpeed = driver.getLeftXAxis();
 
         if (driver.getLeftBumper()) {
-            leftSpeed = leftSpeed / 2;
-            rightSpeed = rightSpeed / 2;
+            driveAccelFilter.add(-driver.getLeftYAxis());
+            turnAccelFilter.add(driver.getRightXAxis());
+
+            leftSpeed = (driveAccelFilter.getAverage() + turnAccelFilter.getAverage()) / 2;
+            rightSpeed = (driveAccelFilter.getAverage() - turnAccelFilter.getAverage()) / 2;
+        } else {
+            driveAccelFilter.reset();
+            turnAccelFilter.reset();
+            
+            leftSpeed = -1 * driver.getLeftYAxis() + driver.getRightXAxis();
+            rightSpeed = -1 * driver.getLeftYAxis() - driver.getRightXAxis();
         }
     }
-    
+
     private void calcElevator() {
-        
+
     }
-    
+
     private void calcOverride() {
         overrideElevatorMotorSpeed = -1 * operator.getLeftYAxis();
     }
-    
+
     private void calcIntake() {
         if (operator.getRightBumper()) {
-            leftIntakeSpeed = 1.0 - operator.getRightXAxis() / 2;
-            rightIntakeSpeed = 1.0 + operator.getRightXAxis() / 2;
-            
-            if (operator.getRightYAxis() > 0.75) {
-                intakeIn = true;
-            } else {
-                intakeIn = false;
-            }
+            leftIntakeSpeed = 1.0 - operator.getRightXAxis();
+            rightIntakeSpeed = 1.0 + operator.getRightXAxis();
+
+            intakeIn = operator.getRightYAxis() > 0.75;
         } else {
             leftIntakeSpeed = 0.0;
             rightIntakeSpeed = 0.0;
