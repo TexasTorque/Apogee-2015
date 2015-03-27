@@ -15,8 +15,8 @@ public class DriverInput extends Input {
         driver = new GenericController(0, GenericController.TYPE_XBOX, 0.2);
         operator = new GenericController(1, GenericController.TYPE_XBOX, 0.2);
 
-        driveAccelFilter = new TorqueFilter(50);
-        turnAccelFilter = new TorqueFilter(50);
+        driveAccelFilter = new TorqueFilter(25);
+        turnAccelFilter = new TorqueFilter(25);
 
         override = false;
         armOpen = false;
