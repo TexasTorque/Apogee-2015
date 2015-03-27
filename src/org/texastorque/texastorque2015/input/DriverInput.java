@@ -55,7 +55,7 @@ public class DriverInput extends Input {
         } else {
             driveAccelFilter.reset();
             turnAccelFilter.reset();
-            
+
             leftSpeed = -1 * driver.getLeftYAxis() + driver.getRightXAxis();
             rightSpeed = -1 * driver.getLeftYAxis() - driver.getRightXAxis();
         }
@@ -70,15 +70,9 @@ public class DriverInput extends Input {
     }
 
     private void calcIntake() {
-        if (operator.getRightBumper()) {
-            leftIntakeSpeed = 1.0 - operator.getRightXAxis();
-            rightIntakeSpeed = 1.0 + operator.getRightXAxis();
+        intakeIn = operator.getRightBumper();
 
-            intakeIn = operator.getRightYAxis() > 0.75;
-        } else {
-            leftIntakeSpeed = 0.0;
-            rightIntakeSpeed = 0.0;
-            intakeIn = false;
-        }
+        leftIntakeSpeed = operator.getRightXAxis() - operator.getRightXAxis();
+        rightIntakeSpeed = operator.getRightXAxis() + operator.getRightXAxis();
     }
 }
