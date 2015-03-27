@@ -72,7 +72,7 @@ public class DriverInput extends Input {
     private void calcIntake() {
         intakeIn = operator.getRightBumper();
 
-        leftIntakeSpeed = operator.getRightXAxis() - operator.getRightXAxis();
-        rightIntakeSpeed = operator.getRightXAxis() + operator.getRightXAxis();
+        leftIntakeSpeed = operator.getRightYAxis() - operator.getRightXAxis();
+        rightIntakeSpeed = operator.getRightYAxis() + operator.getRightXAxis();
     }
 }
