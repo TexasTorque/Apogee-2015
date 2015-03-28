@@ -42,4 +42,10 @@ public class Ports {
     //gyro
     public final static int GYRO_PORT_A = 1;
     public final static int GYRO_PORT_B = 0;
+    
+    //Stingers
+    public final static int leftStingerServoPort = -1;
+    public final static int rightStingerServoPort = -1;
+    public final static int leftStingerMotor = -1;
+    public final static int rightStingerMotor = -1;
 }

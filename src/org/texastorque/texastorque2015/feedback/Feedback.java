@@ -136,4 +136,17 @@ public abstract class Feedback implements Runnable {
     public boolean isElevatorAtBottom() {
         return elevatorAtBottom;
     }
+    
+    //Stingers
+    
+    private volatile double leftStingerAngle;
+    private volatile double rightStingerAngle;
+
+    public double getLeftStingerAngle() {
+        return leftStingerAngle;
+    }
+
+    public double getRightStingerAngle() {
+        return rightStingerAngle;
+    }
 }

@@ -160,6 +160,14 @@ public class Constants extends Parameters {
 
     //Manipulator
     public final static Constant TotePullBAckTime = new Constant("I_TotePullBAckTime", 1.0);
+    
+    //Stingers
+    public final static Constant leftStingerP = new Constant("S_LeftP", 0.0);
+    public final static Constant leftStingerI = new Constant("S_LeftI", 0.0);
+    public final static Constant leftStingerD = new Constant("S_LeftD", 0.0);
+    public final static Constant rightStingerP = new Constant("S_RightP", 0.0);
+    public final static Constant rightStingerI = new Constant("S_RightI", 0.0);
+    public final static Constant rightStingerD = new Constant("S_RightD", 0.0);
 
     static {
         load();

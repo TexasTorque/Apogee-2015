@@ -13,6 +13,7 @@ import org.texastorque.texastorque2015.subsystem.Arms;
 import org.texastorque.texastorque2015.subsystem.Drivebase;
 import org.texastorque.texastorque2015.subsystem.Elevator;
 import org.texastorque.texastorque2015.subsystem.Intake;
+import org.texastorque.texastorque2015.subsystem.Stingers;
 import org.texastorque.torquelib.base.TorqueIterative;
 import org.texastorque.torquelib.util.Parameters;
 import org.texastorque.torquelib.util.TorqueLogging;
@@ -24,6 +25,7 @@ public class Robot extends TorqueIterative {
     Elevator elevator;
     Arms arms;
     Intake intake;
+    Stingers stingers;
 
     //Input
     Input activeInput;
@@ -53,6 +55,7 @@ public class Robot extends TorqueIterative {
         elevator = new Elevator();
         arms = new Arms();
         intake = new Intake();
+        stingers = new Stingers();
 
         lights = new Lights();
 
@@ -68,6 +71,7 @@ public class Robot extends TorqueIterative {
         logger.addLoggable(elevator);
         logger.addLoggable(arms);
         logger.addLoggable(intake);
+        logger.addLoggable(stingers);
         logger.addLoggable(new PDPLogger());
 
         numcycles = 0;
@@ -92,6 +96,10 @@ public class Robot extends TorqueIterative {
         intake.setInput(activeInput);
         intake.setOutput(activeOutput);
         intake.setFeedback(activeFeedback);
+        
+        stingers.setInput(activeInput);
+        stingers.setOutput(activeOutput);
+        stingers.setFeedback(activeFeedback);
 
         lights.setInput(activeInput);
         lights.setFeedback(activeFeedback);
@@ -178,6 +186,7 @@ public class Robot extends TorqueIterative {
         elevator.setOutputEnabled(true);
         intake.setOutputEnabled(true);
         arms.setOutputEnabled(true);
+        stingers.setOutputEnabled(true);
 
         activeInput.setFeedback(activeFeedback);
 

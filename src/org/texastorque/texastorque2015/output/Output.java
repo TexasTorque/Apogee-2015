@@ -19,4 +19,8 @@ public abstract class Output {
     public abstract void setIntakeMotorSpeed(double left, double right);
 
     public abstract void setIntakeGrasp(boolean grasp);
+    
+    //Stingers
+    public abstract void setStingerLatch(boolean latched);
+    public abstract void setStingerMotorSpeeds(double left, double right);
 }

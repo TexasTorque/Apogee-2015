@@ -123,5 +123,17 @@ public abstract class Input implements Runnable {
     public boolean wantAutoStack() {
         return autoStack;
     }
+    
+    //Stingers
+    protected volatile boolean stingerLatch;
+    protected volatile boolean stingersDown;
+
+    public boolean isStingerLatched() {
+        return stingerLatch;
+    }
+
+    public boolean areStingersDown() {
+        return stingersDown;
+    }
 
 }
