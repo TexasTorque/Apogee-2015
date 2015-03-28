@@ -138,9 +138,8 @@ public abstract class Feedback implements Runnable {
     }
     
     //Stingers
-    
-    private volatile double leftStingerAngle;
-    private volatile double rightStingerAngle;
+    protected volatile double leftStingerAngle;
+    protected volatile double rightStingerAngle;
 
     public double getLeftStingerAngle() {
         return leftStingerAngle;

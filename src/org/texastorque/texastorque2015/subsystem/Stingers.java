@@ -1,5 +1,6 @@
 package org.texastorque.texastorque2015.subsystem;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.torquelib.controlLoop.TorquePID;
 
@@ -14,6 +15,8 @@ public class Stingers extends Subsystem {
     private double leftMotorSpeed;
     private double rightMotorSpeed;
     
+    private double leftAngle;
+    
     public Stingers() {
         
     }
@@ -26,6 +29,8 @@ public class Stingers extends Subsystem {
     public void run() {
         latched = input.isStingerLatched();
         down = input.areStingersDown();
+        
+        leftAngle = feedback.getLeftStingerAngle();
         
         double armSetpoint = (down) ? 0.0 : 90.0;
         
@@ -61,5 +66,6 @@ public class Stingers extends Subsystem {
 
     @Override
     public void pushToDashboard() {
+        SmartDashboard.putNumber("leftStingerAngle", leftAngle);
     }
 }

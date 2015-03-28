@@ -26,6 +26,8 @@ public class DriverInput extends Input {
 
     @Override
     public void run() {
+        stingersDown = false;
+        
         if (operator.getLeftCenterButton()) {
             override = true;
         } else if (operator.getRightCenterButton()) {

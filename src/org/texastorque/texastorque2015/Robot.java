@@ -113,6 +113,7 @@ public class Robot extends TorqueIterative {
         elevator.loadParams();
         arms.loadParams();
         intake.loadParams();
+        stingers.loadParams();
     }
 
     //Push all sybsystems to dashboard.
@@ -122,6 +123,7 @@ public class Robot extends TorqueIterative {
         elevator.pushToDashboard();
         arms.pushToDashboard();
         intake.pushToDashboard();
+        stingers.pushToDashboard();
     }
 
     private void initSubsystems() {
@@ -144,6 +146,7 @@ public class Robot extends TorqueIterative {
         elevator.setOutputEnabled(true);
         arms.setOutputEnabled(true);
         intake.setOutputEnabled(true);
+        stingers.setOutputEnabled(true);
 
         logger.reset();
         logger.enable();
@@ -167,6 +170,7 @@ public class Robot extends TorqueIterative {
         elevator.run();
         arms.run();
         intake.run();
+        stingers.run();
 
         SmartDashboard.putNumber("NumCycles", numcycles++);
     }
@@ -213,6 +217,7 @@ public class Robot extends TorqueIterative {
         elevator.run();
         arms.run();
         intake.run();
+        stingers.run();
 
         SmartDashboard.putNumber("NumCycles", numcycles++);
     }

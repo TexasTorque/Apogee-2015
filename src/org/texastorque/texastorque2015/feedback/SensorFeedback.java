@@ -27,6 +27,9 @@ public class SensorFeedback extends Feedback {
     private TorqueGyro gyro;
     private double angleOffset;
     private double prevTime;
+    
+    //Stingers
+    private TorqueEncoder leftStingerEncoder;
 
     public SensorFeedback() {
         pdp = new PowerDistributionPanel();
@@ -40,6 +43,8 @@ public class SensorFeedback extends Feedback {
 
         gyro = new TorqueGyro(Ports.GYRO_PORT_A, Ports.GYRO_PORT_B);
         angleOffset = gyro.getAngle();
+        
+        leftStingerEncoder = new TorqueEncoder(4, 5, true, CounterBase.EncodingType.k2X);
     }
 
     @Override
@@ -71,6 +76,9 @@ public class SensorFeedback extends Feedback {
         //angularVelocity = (gyro.getAngle() - angle) / (Timer.getFPGATimestamp() - prevTime);
         prevTime = Timer.getFPGATimestamp();
         angle = gyro.getAngle() - angleOffset;
+        
+        leftStingerEncoder.calc();
+        leftStingerAngle = leftStingerEncoder.get() * 360 / 250;
     }
 
     @Override

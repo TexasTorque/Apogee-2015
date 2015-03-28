@@ -7,15 +7,15 @@ public class TwoCanGrabber extends AutoMode {
         stingerLatch = true;
         stingersDown = true;
         
-        wait(0.5);
-        
-        leftSpeed = 1.0;
-        rightSpeed = 1.0;
-        
-        wait(1.0);
-        
-        leftSpeed = 0.0;
-        rightSpeed = 0.0;
+//        wait(0.5);
+//        
+//        leftSpeed = 1.0;
+//        rightSpeed = 1.0;
+//        
+//        wait(1.0);
+//        
+//        leftSpeed = 0.0;
+//        rightSpeed = 0.0;
     }
 
 }
