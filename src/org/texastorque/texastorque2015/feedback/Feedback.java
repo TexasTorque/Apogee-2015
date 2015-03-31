@@ -148,4 +148,6 @@ public abstract class Feedback implements Runnable {
     public double getRightStingerAngle() {
         return rightStingerAngle;
     }
+    
+    public abstract void resetStingerAngle();
 }

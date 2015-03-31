@@ -21,10 +21,10 @@ import java.util.TimerTask;
  */
 public abstract class TorqueIterative extends RobotBase {
 
-    private boolean m_disabledInitialized;
-    private boolean m_autonomousInitialized;
-    private boolean m_teleopInitialized;
-    private boolean m_testInitialized;
+    private volatile boolean m_disabledInitialized;
+    private volatile boolean m_autonomousInitialized;
+    private volatile boolean m_teleopInitialized;
+    private volatile boolean m_testInitialized;
 
     Thread periodicThread;
     Timer continousTimer;

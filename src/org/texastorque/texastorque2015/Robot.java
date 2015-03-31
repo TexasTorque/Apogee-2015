@@ -129,6 +129,7 @@ public class Robot extends TorqueIterative {
     private void initSubsystems() {
         drivebase.init();
         elevator.init();
+        stingers.init();
     }
 
     // ----- Teleop -----
@@ -182,6 +183,8 @@ public class Robot extends TorqueIterative {
         activeOutput = robotOutput;
         activeFeedback = sensorFeedback;
 
+        activeFeedback.resetStingerAngle();
+        
         updateIO();
         loadParams();
         initSubsystems();
@@ -207,6 +210,7 @@ public class Robot extends TorqueIterative {
     public void autonomousPeriodic() {
         pushToDashboard();
         logger.log();
+        stingers.run();
     }
 
     @Override
@@ -217,7 +221,7 @@ public class Robot extends TorqueIterative {
         elevator.run();
         arms.run();
         intake.run();
-        stingers.run();
+        
 
         SmartDashboard.putNumber("NumCycles", numcycles++);
     }
@@ -228,7 +232,7 @@ public class Robot extends TorqueIterative {
         activeInput = driverInput;
         activeOutput = robotOutput;
         activeFeedback = sensorFeedback;
-
+        
         updateIO();
         drivebase.setOutputEnabled(false);
         elevator.setOutputEnabled(false);

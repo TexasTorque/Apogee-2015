@@ -16,13 +16,19 @@ public class Stingers extends Subsystem {
     private double rightMotorSpeed;
     
     private double leftAngle;
+    private double setPoint;
     
     public Stingers() {
-        
+        leftPID = new TorquePID();
+        rightPID = new TorquePID();
     }
 
     @Override
     public void init() {
+        leftAngle = 0.0;
+        setPoint = 0.0;
+        leftPID.reset();
+        leftPID.setSetpoint(setPoint);
     }
 
     @Override
@@ -32,13 +38,19 @@ public class Stingers extends Subsystem {
         
         leftAngle = feedback.getLeftStingerAngle();
         
-        double armSetpoint = (down) ? 0.0 : 90.0;
+        setPoint = (down) ? 60.0 : 0.0;
+        SmartDashboard.putNumber("S_setpoint", setPoint);
         
-        leftPID.setSetpoint(armSetpoint);
-        rightPID.setSetpoint(armSetpoint);
+        leftPID.setSetpoint(setPoint);
+        rightPID.setSetpoint(setPoint);
         
-        leftMotorSpeed = leftPID.calculate(feedback.getLeftStingerAngle());
+        leftMotorSpeed = leftPID.calculate(leftAngle);
         rightMotorSpeed = rightPID.calculate(feedback.getRightStingerAngle());
+        
+        if (leftMotorSpeed < 0) {
+            SmartDashboard.putNumber("bla", setPoint);
+            SmartDashboard.putNumber("bla2", leftAngle);
+        }
 
         output.setStingerLatch(latched);
         if (outputEnabled) {
@@ -67,5 +79,6 @@ public class Stingers extends Subsystem {
     @Override
     public void pushToDashboard() {
         SmartDashboard.putNumber("leftStingerAngle", leftAngle);
+        SmartDashboard.putNumber("leftStingerMotorSpeed", leftMotorSpeed);
     }
 }

@@ -20,8 +20,8 @@ public class SensorFeedback extends Feedback {
 
     //Elevator
     private TorqueEncoder elevatorEncoder;
-    private DigitalInput topLimit;
-    private DigitalInput bottomLimit;
+    //private DigitalInput topLimit;
+    //private DigitalInput bottomLimit;
 
     //Angle
     private TorqueGyro gyro;
@@ -34,17 +34,17 @@ public class SensorFeedback extends Feedback {
     public SensorFeedback() {
         pdp = new PowerDistributionPanel();
         
-        leftDriveEncoder = new TorqueEncoder(Ports.LEFT_ENCODER_PORT_A, Ports.LEFT_ENCODER_PORT_B, true, CounterBase.EncodingType.k2X);
-        rightDriveEncoder = new TorqueEncoder(Ports.RIGHT_ENCODER_PORT_A, Ports.RIGHT_ENCODER_PORT_B, false, CounterBase.EncodingType.k2X);
+        leftDriveEncoder = new TorqueEncoder(Ports.LEFT_ENCODER_PORT_A, Ports.LEFT_ENCODER_PORT_B, true, CounterBase.EncodingType.k1X);
+        rightDriveEncoder = new TorqueEncoder(Ports.RIGHT_ENCODER_PORT_A, Ports.RIGHT_ENCODER_PORT_B, false, CounterBase.EncodingType.k1X);
 
-        elevatorEncoder = new TorqueEncoder(Ports.LEFT_ELEVATOR_ENCODER_PORT_A, Ports.LEFT_ELEVATOR_ENCODER_PORT_B, false, CounterBase.EncodingType.k4X);
-        topLimit = new DigitalInput(Ports.ELEVATOR_TOP_LIMIT);
-        bottomLimit = new DigitalInput(Ports.ELEVATOR_BOTTOM_LIMIT);
+        elevatorEncoder = new TorqueEncoder(Ports.LEFT_ELEVATOR_ENCODER_PORT_A, Ports.LEFT_ELEVATOR_ENCODER_PORT_B, false, CounterBase.EncodingType.k2X);
+        //topLimit = new DigitalInput(Ports.ELEVATOR_TOP_LIMIT);
+        //bottomLimit = new DigitalInput(Ports.ELEVATOR_BOTTOM_LIMIT);
 
         gyro = new TorqueGyro(Ports.GYRO_PORT_A, Ports.GYRO_PORT_B);
         angleOffset = gyro.getAngle();
         
-        leftStingerEncoder = new TorqueEncoder(4, 5, true, CounterBase.EncodingType.k2X);
+        leftStingerEncoder = new TorqueEncoder(4, 5, false, CounterBase.EncodingType.k4X);
     }
 
     @Override
@@ -69,8 +69,8 @@ public class SensorFeedback extends Feedback {
         elevatorHeight = elevatorEncoder.get() * 0.0225; //Put in conversion
         elevatorVelocity = elevatorEncoder.getAverageRate() * 0.0225; //Put in conversion
 
-        elevatorAtTop = topLimit.get();
-        elevatorAtBottom = bottomLimit.get();
+        //elevatorAtTop = topLimit.get();
+        //elevatorAtBottom = bottomLimit.get();
 
         //angle
         //angularVelocity = (gyro.getAngle() - angle) / (Timer.getFPGATimestamp() - prevTime);
@@ -95,5 +95,11 @@ public class SensorFeedback extends Feedback {
     @Override
     public void resetGyro() {
         angleOffset = gyro.getAngle();
+    }
+
+    @Override
+    public void resetStingerAngle() {
+        leftStingerAngle = 0.0;
+        leftStingerEncoder.reset();
     }
 }
