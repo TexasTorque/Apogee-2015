@@ -110,6 +110,8 @@ public class Constants extends Parameters {
     public final static Constant PlaceLevel4 = new Constant("E_PlaceLevel4", 50.0);
     public final static Constant PlaceLevel5 = new Constant("E_PlaceLevel5", 50.0);
     public final static Constant PlaceLevel6 = new Constant("E_PlaceLevel6", 50.0);
+    
+    public final static Constant transportLevel = new Constant("E_TransportLevel", 0.0);
 
     //Step
     public final static Constant StepElevatorLevel1 = new Constant("E_StepL1", 150.0);
