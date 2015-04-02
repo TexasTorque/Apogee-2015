@@ -26,8 +26,6 @@ public class DriverInput extends Input {
 
     @Override
     public void run() {
-        stingersDown = false;
-        
         if (operator.getLeftCenterButton()) {
             override = true;
         } else if (operator.getRightCenterButton()) {
@@ -40,6 +38,17 @@ public class DriverInput extends Input {
             calcElevator();
         }
 
+        if (driver.getAButton()) {
+            stingersSpeed = -0.5;
+        } else {
+            stingersSpeed = 0.0;
+        }
+        if (driver.getBButton()) {
+            stingerRetractSpeed = 1.0;
+        } else {
+            stingerRetractSpeed = 0.0;
+        }
+        
         calcIntake();
         calcDrivebase();
     }

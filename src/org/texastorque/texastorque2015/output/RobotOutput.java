@@ -32,10 +32,9 @@ public class RobotOutput extends Output {
     private TorqueMotor rightElevatorMotorA;
     
     //Stingers
-    private Servo leftStingerServo;
-    private Servo rightStingerServo;
     private TorqueMotor leftStingerMotor;
     private TorqueMotor rightStingerMotor;
+    private TorqueMotor stingerRetractMotor;
 
     public RobotOutput() {
         //Drivebase
@@ -59,10 +58,10 @@ public class RobotOutput extends Output {
         leftElevatorMotorA = new TorqueMotor(new VictorSP(Ports.LEFT_ELEVATOR), true, TorqueMotor.LinearizationType.kNone);
         rightElevatorMotorA = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR), false, TorqueMotor.LinearizationType.kNone);
         
-        leftStingerServo = new Servo(Ports.leftStingerServoPort);
-        rightStingerServo = new Servo(Ports.rightStingerServoPort);
         leftStingerMotor = new TorqueMotor(new VictorSP(Ports.leftStingerMotor), true, TorqueMotor.LinearizationType.kNone);
         rightStingerMotor = new TorqueMotor(new VictorSP(Ports.rightStingerMotor), false, TorqueMotor.LinearizationType.kNone);
+        
+        stingerRetractMotor = new TorqueMotor(new VictorSP(Ports.STINGER_RETRACT_MOTOR), false, TorqueMotor.LinearizationType.kNone);
     }
 
     //Drivebase
@@ -111,15 +110,13 @@ public class RobotOutput extends Output {
     }
 
     @Override
-    public void setStingerLatch(boolean latched) {
-        double angle = (latched) ? 0.0 : 90.0;
-        leftStingerServo.setAngle(angle);
-        rightStingerServo.setAngle(angle);
-    }
-
-    @Override
     public void setStingerMotorSpeeds(double left, double right) {
         leftStingerMotor.set(left);
         rightStingerMotor.set(right);
+    }
+    
+    @Override
+    public void setStingerRetractSpeed(double speed) {
+        stingerRetractMotor.set(speed);
     }
 }

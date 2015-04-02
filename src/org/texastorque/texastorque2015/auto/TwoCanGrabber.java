@@ -1,16 +1,20 @@
 package org.texastorque.texastorque2015.auto;
 
+import org.texastorque.texastorque2015.constants.Constants;
+
 public class TwoCanGrabber extends AutoMode {
 
     @Override
     public void run() {
-        stingerLatch = true;
-        stingersDown = true;
+        stingersSpeed = 1.0;
+        double time = Constants.leftStingerP.getDouble();
         
-        wait(2.0);
+        wait(time);
         
-        stingerLatch = false;
-//        
+        stingersSpeed = 0.0;
+        
+        wait(0.1);
+        
 //        leftSpeed = 1.0;
 //        rightSpeed = 1.0;
 //        
