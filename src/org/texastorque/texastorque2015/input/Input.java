@@ -126,13 +126,18 @@ public abstract class Input implements Runnable {
     
     //Stingers
     protected volatile double stingerRetractSpeed;
-    protected volatile double stingersSpeed;
+    protected volatile double leftStingerSpeed;
+    protected volatile double rightStingerSpeed;
 
     public double getStingerRetractSpeed() {
         return stingerRetractSpeed;
     }
 
-    public double getStingersSpeed() {
-        return stingersSpeed;
+    public double getLeftStingersSpeed() {
+        return leftStingerSpeed;
+    }
+    
+    public double getRightStingerSpeed() {
+        return rightStingerSpeed;
     }
 }

@@ -140,6 +140,8 @@ public abstract class Feedback implements Runnable {
     //Stingers
     protected volatile double leftStingerAngle;
     protected volatile double rightStingerAngle;
+    protected volatile boolean leftStingerUp;
+    protected volatile boolean rightStingerUp;
 
     public double getLeftStingerAngle() {
         return leftStingerAngle;
@@ -147,6 +149,14 @@ public abstract class Feedback implements Runnable {
 
     public double getRightStingerAngle() {
         return rightStingerAngle;
+    }
+    
+    public boolean isLeftStingerUp() {
+        return leftStingerUp;
+    }
+    
+    public boolean isRightStingerUp() {
+        return rightStingerUp;
     }
     
     public abstract void resetStingerAngle();

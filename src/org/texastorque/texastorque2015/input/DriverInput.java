@@ -1,5 +1,6 @@
 package org.texastorque.texastorque2015.input;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.torquelib.util.GenericController;
 import org.texastorque.torquelib.util.TorqueFilter;
@@ -45,9 +46,14 @@ public class DriverInput extends Input {
         }
 
         if (driver.getAButton()) {
-            stingersSpeed = -0.5;
+            leftStingerSpeed = -0.5;
         } else {
-            stingersSpeed = 0.0;
+            leftStingerSpeed = 0.0;
+        }
+        if (driver.getXButton()) {
+            rightStingerSpeed = -0.5;
+        } else {
+            rightStingerSpeed = 0.0;
         }
         if (driver.getBButton()) {
             stingerRetractSpeed = 1.0;
@@ -79,28 +85,38 @@ public class DriverInput extends Input {
     }
 
     private void calcElevator() {
-        if (operator.getAButton()) {
+//        if (operator.getAButton()) {
+//            autoStack = true;
+//        }
+//        if (operator.getXButton()) {
+//            autoStack = false;
+//            elevatorPosition = feedback.getElevatorHeight();
+//            newPosition = true;
+//            wentDown = false;
+//        }
+        if (operator.getAButton() && !autoStack) {
+            armOpen = false;
+            elevatorPosition = Constants.autoStackLevel.getDouble();
+            newPosition = true;
+            numTotes++;
             autoStack = true;
-        }
-        if (operator.getXButton()) {
-            autoStack = false;
-            elevatorPosition = feedback.getElevatorHeight();
-        }
-        if (autoStack) {
-            if (feedback.isElevatorHere(Constants.autoStackLevel.getDouble())) {
-                elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
-                newPosition = true;
-                wentDown = true;
-
-                numTotes++;
-            } else if (!wentDown) {
-                elevatorPosition = Constants.autoStackLevel.getDouble();
-                newPosition = true;
-            } else if (wentDown && feedback.isElevatorHere(Constants.FloorElevatorLevel2.getDouble())) {
-                wentDown = false;
-                autoStack = false;
-            }
+//            if (!wentDown && feedback.isElevatorHere(Constants.autoStackLevel.getDouble())) {
+//                elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
+//                newPosition = true;
+//                wentDown = true;
+//
+//                numTotes++;
+//            } else if (!wentDown) {
+//                elevatorPosition = Constants.autoStackLevel.getDouble();
+//                newPosition = true;
+//            } else if (wentDown && feedback.isElevatorHere(Constants.FloorElevatorLevel2.getDouble())) {
+//                wentDown = false;
+//                autoStack = false;
+//            }
         } else if (operator.getRightTrigger()) {
+            autoStack = false;
+            wentDown = false;
+            numTotes = 0;
             newPosition = true;
             elevatorPosition = Constants.PlaceLevel1.getDouble();
             if (feedback.isElevatorDone()) {
@@ -109,7 +125,10 @@ public class DriverInput extends Input {
                 armOpen = false;
             }
         } else {
-            if (panel.getLevel1Button()) {
+            autoStack = false;
+            wentDown = false;
+            armOpen = false;
+            if (panel.getLevel1Button() || operator.getYButton()) {
                 elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
                 newPosition = true;
             } else if (panel.getLevel2Button() || operator.getBButton()) {
@@ -127,17 +146,21 @@ public class DriverInput extends Input {
             } else if (panel.getLevel6Button()) {
                 elevatorPosition = Constants.FloorElevatorLevel6.getDouble();
                 newPosition = true;
-            } else if (operator.getYButton()) {
+            } else if (operator.getLeftStickClick()) {
                 elevatorPosition = Constants.transportLevel.getDouble();
                 newPosition = true;
             } else {
                 newPosition = false;
             }
         }
+        
+        armOpen = armOpen || operator.getLeftTrigger();
     }
 
     private void calcOverride() {
         overrideElevatorMotorSpeed = -1 * operator.getLeftYAxis();
+        
+        armOpen = operator.getLeftTrigger();
     }
 
     private void calcIntake() {

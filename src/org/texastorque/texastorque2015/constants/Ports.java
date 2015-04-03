@@ -28,11 +28,11 @@ public class Ports {
     public final static int ELEVATOR_BOTTOM_LIMIT = 18;//?
 
     //crazy arms
-    public final static int ARM_A = 0;
-    public final static int ARM_B = 7;
+    public final static int ARM_A = 5;
+    public final static int ARM_B = 1;
     public final static int PUNCH_SOLENOID = 6;
     public final static int INTAKE_SOLENOID = 4;
-    public final static int TILT_SOLENOID_A_PORT = 5;
+    public final static int TILT_SOLENOID_A_PORT = 2;
     public final static int TILT_SOLENOID_B_PORT = 3;
 
     //intake
@@ -47,4 +47,6 @@ public class Ports {
     public final static int STINGER_RETRACT_MOTOR = 9;
     public final static int leftStingerMotor = 2;
     public final static int rightStingerMotor = 0;
+    public final static int LEFT_STINGER_LIMIT_SWITCH = 4;//?
+    public final static int RIGHT_STINGER_LIMIT_SWITCH = 5;//?
 }

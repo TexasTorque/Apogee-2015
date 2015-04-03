@@ -2,7 +2,6 @@ package org.texastorque.texastorque2015.feedback;
 
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Timer;
 import org.texastorque.texastorque2015.constants.Ports;
@@ -29,7 +28,8 @@ public class SensorFeedback extends Feedback {
     private double prevTime;
     
     //Stingers
-    private TorqueEncoder leftStingerEncoder;
+    private DigitalInput leftStingerSwitch;
+    private DigitalInput rightStingerSwitch;
 
     public SensorFeedback() {
         pdp = new PowerDistributionPanel();
@@ -44,7 +44,8 @@ public class SensorFeedback extends Feedback {
         gyro = new TorqueGyro(Ports.GYRO_PORT_A, Ports.GYRO_PORT_B);
         angleOffset = gyro.getAngle();
         
-        leftStingerEncoder = new TorqueEncoder(4, 5, false, CounterBase.EncodingType.k4X);
+        leftStingerSwitch = new DigitalInput(Ports.LEFT_STINGER_LIMIT_SWITCH);
+        rightStingerSwitch = new DigitalInput(Ports.RIGHT_STINGER_LIMIT_SWITCH);
     }
 
     @Override
@@ -77,8 +78,8 @@ public class SensorFeedback extends Feedback {
         prevTime = Timer.getFPGATimestamp();
         angle = gyro.getAngle() - angleOffset;
         
-        leftStingerEncoder.calc();
-        leftStingerAngle = leftStingerEncoder.get() * 360 / 250;
+        leftStingerUp = leftStingerSwitch.get();
+        rightStingerUp = rightStingerSwitch.get();
     }
 
     @Override
@@ -100,6 +101,5 @@ public class SensorFeedback extends Feedback {
     @Override
     public void resetStingerAngle() {
         leftStingerAngle = 0.0;
-        leftStingerEncoder.reset();
     }
 }
