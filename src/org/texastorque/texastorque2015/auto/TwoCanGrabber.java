@@ -6,7 +6,7 @@ public class TwoCanGrabber extends AutoMode {
 
     @Override
     public void run() {
-        runCommand(new DriveDistance("touch drive", -1.5, 1, 10, 10));
+        runCommand(new DriveDistance("touch drive", (-1.5/12.0), (0.3/12.0), 10, 1.0));
         leftStingerSpeed = 1.0;
         rightStingerSpeed = 1.0;
         double time = Constants.leftStingerP.getDouble();
@@ -21,7 +21,7 @@ public class TwoCanGrabber extends AutoMode {
 //        leftSpeed = 1.0;
 //        rightSpeed = 1.0;
 //        
-//        wait(1.0);
+//        wait(0.5);
 //        
 //        leftSpeed = 0.0;
 //        rightSpeed = 0.0;
