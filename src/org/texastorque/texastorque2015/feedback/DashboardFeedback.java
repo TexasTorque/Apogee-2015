@@ -43,8 +43,4 @@ public class DashboardFeedback extends Feedback {
         //angle (radians)
         angle = SmartDashboard.getNumber("angle", 0.0);
     }
-
-    @Override
-    public void resetStingerAngle() {
-    }
 }

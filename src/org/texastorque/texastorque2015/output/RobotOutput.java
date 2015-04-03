@@ -32,8 +32,7 @@ public class RobotOutput extends Output {
     private TorqueMotor rightElevatorMotorA;
     
     //Stingers
-    private Servo leftStingerServo;
-    private Servo rightStingerServo;
+    private TorqueMotor stingerRetractMotor;
     private TorqueMotor leftStingerMotor;
     private TorqueMotor rightStingerMotor;
 
@@ -59,8 +58,7 @@ public class RobotOutput extends Output {
         leftElevatorMotorA = new TorqueMotor(new VictorSP(Ports.LEFT_ELEVATOR), true, TorqueMotor.LinearizationType.kNone);
         rightElevatorMotorA = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR), false, TorqueMotor.LinearizationType.kNone);
         
-        leftStingerServo = new Servo(Ports.leftStingerServoPort);
-        rightStingerServo = new Servo(Ports.rightStingerServoPort);
+        stingerRetractMotor = new TorqueMotor(new VictorSP(Ports.stingerRetractMotor), true, TorqueMotor.LinearizationType.kNone);
         leftStingerMotor = new TorqueMotor(new VictorSP(Ports.leftStingerMotor), true, TorqueMotor.LinearizationType.kNone);
         rightStingerMotor = new TorqueMotor(new VictorSP(Ports.rightStingerMotor), false, TorqueMotor.LinearizationType.kNone);
     }
@@ -111,15 +109,9 @@ public class RobotOutput extends Output {
     }
 
     @Override
-    public void setStingerLatch(boolean latched) {
-        double angle = (latched) ? 0.0 : 90.0;
-        leftStingerServo.setAngle(angle);
-        rightStingerServo.setAngle(angle);
-    }
-
-    @Override
-    public void setStingerMotorSpeeds(double left, double right) {
+    public void setStingerMotorSpeeds(double left, double right, double retract) {
         leftStingerMotor.set(left);
         rightStingerMotor.set(right);
+        stingerRetractMotor.set(retract);
     }
 }

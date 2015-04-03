@@ -6,7 +6,6 @@ import org.texastorque.torquelib.controlLoop.TorquePID;
 
 public class Stingers extends Subsystem {
     
-    private boolean latched;
     private boolean down;
     
     private TorquePID leftPID;
@@ -14,6 +13,7 @@ public class Stingers extends Subsystem {
     
     private double leftMotorSpeed;
     private double rightMotorSpeed;
+    private double retractSpeed;
     
     private double leftAngle;
     private double setPoint;
@@ -33,7 +33,7 @@ public class Stingers extends Subsystem {
 
     @Override
     public void run() {
-        latched = input.isStingerLatched();
+        retractSpeed = input.getStingerRetractSpeed();
         down = input.areStingersDown();
         
         leftAngle = feedback.getLeftStingerAngle();
@@ -52,11 +52,10 @@ public class Stingers extends Subsystem {
             SmartDashboard.putNumber("bla2", leftAngle);
         }
 
-        output.setStingerLatch(latched);
         if (outputEnabled) {
-            output.setStingerMotorSpeeds(leftMotorSpeed, rightMotorSpeed);
+            output.setStingerMotorSpeeds(leftMotorSpeed, rightMotorSpeed, retractSpeed);
         } else {
-            output.setStingerMotorSpeeds(0.0, 0.0);
+            output.setStingerMotorSpeeds(0.0, 0.0, 0.0);
         }
     }
 

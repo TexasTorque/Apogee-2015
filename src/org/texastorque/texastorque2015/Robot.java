@@ -183,8 +183,6 @@ public class Robot extends TorqueIterative {
         activeOutput = robotOutput;
         activeFeedback = sensorFeedback;
 
-        activeFeedback.resetStingerAngle();
-        
         updateIO();
         loadParams();
         initSubsystems();

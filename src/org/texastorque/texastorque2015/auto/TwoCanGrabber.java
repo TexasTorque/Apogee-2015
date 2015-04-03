@@ -4,12 +4,10 @@ public class TwoCanGrabber extends AutoMode {
 
     @Override
     public void run() {
-        stingerLatch = true;
         stingersDown = true;
         
         wait(2.0);
         
-        stingerLatch = false;
 //        
 //        leftSpeed = 1.0;
 //        rightSpeed = 1.0;

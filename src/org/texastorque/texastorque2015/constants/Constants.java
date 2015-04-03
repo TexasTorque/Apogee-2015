@@ -168,6 +168,11 @@ public class Constants extends Parameters {
     public final static Constant rightStingerP = new Constant("S_RightP", 0.0);
     public final static Constant rightStingerI = new Constant("S_RightI", 0.0);
     public final static Constant rightStingerD = new Constant("S_RightD", 0.0);
+    
+    public final static Constant LEFT_STINGER_VOLTAGE_UP = new Constant("S_LeftUpVoltage", 0);
+    public final static Constant LEFT_STINGER_VOLTAGE_DOWN = new Constant("S_LeftDownVoltage", 0);
+    public final static Constant RIGHT_STINGER_VOLTAGE_UP = new Constant("S_RightUpVoltage", 0);
+    public final static Constant RIGHT_STINGER_VOLTAGE_DOWN = new Constant("S_RightDownVoltage", 0);
 
     static {
         load();

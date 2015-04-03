@@ -1,16 +1,17 @@
 package org.texastorque.texastorque2015.feedback;
 
 import edu.wpi.first.wpilibj.CounterBase;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.texastorque2015.constants.Ports;
 import org.texastorque.torquelib.component.TorqueEncoder;
 import org.texastorque.torquelib.component.TorqueGyro;
+import org.texastorque.torquelib.component.TorquePotentiometer;
 
 public class SensorFeedback extends Feedback {
-    
+
     //PD Panel
     PowerDistributionPanel pdp;
 
@@ -27,13 +28,14 @@ public class SensorFeedback extends Feedback {
     private TorqueGyro gyro;
     private double angleOffset;
     private double prevTime;
-    
+
     //Stingers
-    private TorqueEncoder leftStingerEncoder;
+    private TorquePotentiometer leftStingerPot;
+    private TorquePotentiometer rightStingerPot;
 
     public SensorFeedback() {
         pdp = new PowerDistributionPanel();
-        
+
         leftDriveEncoder = new TorqueEncoder(Ports.LEFT_ENCODER_PORT_A, Ports.LEFT_ENCODER_PORT_B, true, CounterBase.EncodingType.k1X);
         rightDriveEncoder = new TorqueEncoder(Ports.RIGHT_ENCODER_PORT_A, Ports.RIGHT_ENCODER_PORT_B, false, CounterBase.EncodingType.k1X);
 
@@ -43,12 +45,19 @@ public class SensorFeedback extends Feedback {
 
         gyro = new TorqueGyro(Ports.GYRO_PORT_A, Ports.GYRO_PORT_B);
         angleOffset = gyro.getAngle();
-        
-        leftStingerEncoder = new TorqueEncoder(4, 5, false, CounterBase.EncodingType.k4X);
+
+        leftStingerPot = new TorquePotentiometer(Ports.LEFT_STINGER_POT_PORT);
+        leftStingerPot.setInputRange(Constants.LEFT_STINGER_VOLTAGE_UP.getDouble(), Constants.LEFT_STINGER_VOLTAGE_DOWN.getDouble());
+        leftStingerPot.setPositionRange(90, 0);
+        rightStingerPot = new TorquePotentiometer(Ports.RIGHT_STINGER_POT_PORT);
+        rightStingerPot.setInputRange(Constants.RIGHT_STINGER_VOLTAGE_UP.getDouble(), Constants.RIGHT_STINGER_VOLTAGE_DOWN.getDouble());
+        rightStingerPot.setPositionRange(90, 0);
     }
 
     @Override
     public void run() {
+        SmartDashboard.putNumber("leftstingervalue", leftStingerPot.getRaw());
+        SmartDashboard.putNumber("rightstingervalue", rightStingerPot.getRaw());
         //Drivebase
         //Units use feet and seconds.
         leftDriveEncoder.calc();
@@ -71,14 +80,11 @@ public class SensorFeedback extends Feedback {
 
         //elevatorAtTop = topLimit.get();
         //elevatorAtBottom = bottomLimit.get();
-
         //angle
         //angularVelocity = (gyro.getAngle() - angle) / (Timer.getFPGATimestamp() - prevTime);
         prevTime = Timer.getFPGATimestamp();
         angle = gyro.getAngle() - angleOffset;
-        
-        leftStingerEncoder.calc();
-        leftStingerAngle = leftStingerEncoder.get() * 360 / 250;
+
     }
 
     @Override
@@ -86,7 +92,7 @@ public class SensorFeedback extends Feedback {
         leftDriveEncoder.reset();
         rightDriveEncoder.reset();
     }
-    
+
     @Override
     public void resetElevatorEncoders() {
         elevatorEncoder.reset();
@@ -95,11 +101,5 @@ public class SensorFeedback extends Feedback {
     @Override
     public void resetGyro() {
         angleOffset = gyro.getAngle();
-    }
-
-    @Override
-    public void resetStingerAngle() {
-        leftStingerAngle = 0.0;
-        leftStingerEncoder.reset();
     }
 }
