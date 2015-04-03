@@ -16,6 +16,7 @@ public class Stingers extends Subsystem {
     private double retractSpeed;
     
     private double leftAngle;
+    private double rightAngle;
     private double setPoint;
     
     public Stingers() {
@@ -37,6 +38,7 @@ public class Stingers extends Subsystem {
         down = input.areStingersDown();
         
         leftAngle = feedback.getLeftStingerAngle();
+        rightAngle = feedback.getRightStingerAngle();
         
         setPoint = (down) ? 60.0 : 0.0;
         SmartDashboard.putNumber("S_setpoint", setPoint);
@@ -45,12 +47,7 @@ public class Stingers extends Subsystem {
         rightPID.setSetpoint(setPoint);
         
         leftMotorSpeed = leftPID.calculate(leftAngle);
-        rightMotorSpeed = rightPID.calculate(feedback.getRightStingerAngle());
-        
-        if (leftMotorSpeed < 0) {
-            SmartDashboard.putNumber("bla", setPoint);
-            SmartDashboard.putNumber("bla2", leftAngle);
-        }
+        rightMotorSpeed = rightPID.calculate(rightAngle);
 
         if (outputEnabled) {
             output.setStingerMotorSpeeds(leftMotorSpeed, rightMotorSpeed, retractSpeed);
@@ -78,6 +75,7 @@ public class Stingers extends Subsystem {
     @Override
     public void pushToDashboard() {
         SmartDashboard.putNumber("leftStingerAngle", leftAngle);
+        SmartDashboard.putNumber("rightStingerAngle", rightAngle);
         SmartDashboard.putNumber("leftStingerMotorSpeed", leftMotorSpeed);
     }
 }

@@ -127,7 +127,7 @@ public abstract class Input implements Runnable {
     //Stingers
     protected volatile boolean stingersDown;
     protected volatile double stingerRetractSpeed;
-
+    
     public boolean areStingersDown() {
         return stingersDown;
     }
