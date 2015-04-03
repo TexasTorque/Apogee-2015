@@ -173,6 +173,7 @@ public class Constants extends Parameters {
     public final static Constant LEFT_STINGER_VOLTAGE_DOWN = new Constant("S_LeftDownVoltage", 0);
     public final static Constant RIGHT_STINGER_VOLTAGE_UP = new Constant("S_RightUpVoltage", 0);
     public final static Constant RIGHT_STINGER_VOLTAGE_DOWN = new Constant("S_RightDownVoltage", 0);
+    public final static Constant transportLevel = new Constant("E_TransportLevel", 8.5);
 
     static {
         load();
