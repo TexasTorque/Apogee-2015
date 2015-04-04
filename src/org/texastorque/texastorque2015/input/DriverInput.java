@@ -46,13 +46,16 @@ public class DriverInput extends Input {
         }
 
         if (driver.getAButton()) {
-            leftStingerSpeed = -0.5;
+            leftStingerSpeed = -0.25;
+            rightStingerSpeed = 0.0;
+        } else if (driver.getXButton()) {
+            rightStingerSpeed = -0.25;
+            leftStingerSpeed = 0.0;
+        } else if (driver.getYButton()) {
+            leftStingerSpeed = 0.25;
+            rightStingerSpeed = 0.25;
         } else {
             leftStingerSpeed = 0.0;
-        }
-        if (driver.getXButton()) {
-            rightStingerSpeed = -0.5;
-        } else {
             rightStingerSpeed = 0.0;
         }
         if (driver.getBButton()) {
@@ -153,13 +156,13 @@ public class DriverInput extends Input {
                 newPosition = false;
             }
         }
-        
+
         armOpen = armOpen || operator.getLeftTrigger();
     }
 
     private void calcOverride() {
         overrideElevatorMotorSpeed = -1 * operator.getLeftYAxis();
-        
+
         armOpen = operator.getLeftTrigger();
     }
 

@@ -19,7 +19,7 @@ public class Stingers extends Subsystem {
     public void run() {
         leftMotorSpeed = input.getLeftStingersSpeed();
         rightMotorSpeed = input.getRightStingerSpeed();
-        retractSpeed = feedback.isLeftStingerUp() && feedback.isRightStingerUp() ? 0.0 : input.getStingerRetractSpeed();
+        retractSpeed = /*feedback.isLeftStingerUp() && feedback.isRightStingerUp() ? 0.0 :*/ input.getStingerRetractSpeed();
         
         if (outputEnabled) {
             output.setStingerMotorSpeeds(leftMotorSpeed, rightMotorSpeed);
