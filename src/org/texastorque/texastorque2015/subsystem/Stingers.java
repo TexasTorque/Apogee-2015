@@ -40,7 +40,7 @@ public class Stingers extends Subsystem {
         leftAngle = feedback.getLeftStingerAngle();
         rightAngle = feedback.getRightStingerAngle();
         
-        setPoint = (down) ? 60.0 : 0.0;
+        setPoint = (down) ? 20.0 : 60.0;
         SmartDashboard.putNumber("S_setpoint", setPoint);
         
         leftPID.setSetpoint(setPoint);

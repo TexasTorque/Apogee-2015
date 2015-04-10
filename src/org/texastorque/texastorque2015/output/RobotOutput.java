@@ -59,8 +59,8 @@ public class RobotOutput extends Output {
         rightElevatorMotorA = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR), false, TorqueMotor.LinearizationType.kNone);
         
         stingerRetractMotor = new TorqueMotor(new VictorSP(Ports.stingerRetractMotor), true, TorqueMotor.LinearizationType.kNone);
-        leftStingerMotor = new TorqueMotor(new VictorSP(Ports.leftStingerMotor), true, TorqueMotor.LinearizationType.kNone);
-        rightStingerMotor = new TorqueMotor(new VictorSP(Ports.rightStingerMotor), false, TorqueMotor.LinearizationType.kNone);
+        leftStingerMotor = new TorqueMotor(new VictorSP(Ports.leftStingerMotor), false, TorqueMotor.LinearizationType.kNone);
+        rightStingerMotor = new TorqueMotor(new VictorSP(Ports.rightStingerMotor), true, TorqueMotor.LinearizationType.kNone);
     }
 
     //Drivebase
