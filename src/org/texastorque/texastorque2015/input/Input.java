@@ -86,6 +86,7 @@ public abstract class Input implements Runnable {
     protected volatile boolean armOpen;
     protected volatile boolean punchOut;
     protected volatile boolean tiltUp;
+    protected volatile boolean canHolderUp;
 
     public boolean isArmOpen() {
         return armOpen;
@@ -97,6 +98,10 @@ public abstract class Input implements Runnable {
 
     public boolean isTiltUp() {
         return tiltUp;
+    }
+    
+    public boolean isCanHolderUp() {
+        return canHolderUp;
     }
 
     //Intake

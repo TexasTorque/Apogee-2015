@@ -34,6 +34,8 @@ public class Ports {
     public final static int INTAKE_SOLENOID = 4;
     public final static int TILT_SOLENOID_A_PORT = 5;
     public final static int TILT_SOLENOID_B_PORT = 3;
+    public final static int LEFT_CANHOLDER_SOLENOID = 100;
+    public final static int RIGHT_CANHOLDER_SOLENOID = 100;
 
     //intake
     public final static int LEFT_INTAKE_PORT = 7;
@@ -42,7 +44,7 @@ public class Ports {
     //gyro
     public final static int GYRO_PORT_A = 1;
     public final static int GYRO_PORT_B = 0;
-    
+
     //Stingers
     public final static int LEFT_STINGER_POT_PORT = 2;
     public final static int RIGHT_STINGER_POT_PORT = 3;

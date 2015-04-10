@@ -8,6 +8,7 @@ public class Arms extends Subsystem {
     private boolean armsOpen;
     private boolean punchOut;
     private boolean tiltUp;
+    private boolean canHolderUp;
 
 
     @Override
@@ -19,6 +20,7 @@ public class Arms extends Subsystem {
         //if (feedback.isElevatorHere(input.getElevatorPosition()) || input.isOverride()) {
         armsOpen = input.isArmOpen();
         punchOut = input.isPunchOut();
+        canHolderUp = input.isCanHolderUp();
         //} else {
         //    armsOpen = false;
         //    punchOut = false;
@@ -30,6 +32,7 @@ public class Arms extends Subsystem {
             output.setArmsOpen(armsOpen);
             output.setPunchOut(punchOut);
             output.setTiltUp(tiltUp);
+            output.setCanHolderUp(canHolderUp);
         }
     }
 
@@ -42,16 +45,17 @@ public class Arms extends Subsystem {
         SmartDashboard.putBoolean("ArmsOpen", armsOpen);
         SmartDashboard.putBoolean("PunchOut", punchOut);
         SmartDashboard.putBoolean("TiltUp", tiltUp);
+        SmartDashboard.putBoolean("CanHolderUp", canHolderUp);
     }
 
     @Override
     public String getLogNames() {
-        return "ArmsOpen,PunchOut,TiltUp,";
+        return "ArmsOpen,PunchOut,TiltUp,CanHolderUp";
     }
 
     @Override
     public String getLogValues() {
-        return armsOpen + "," + punchOut + "," + tiltUp + ",";
+        return armsOpen + "," + punchOut + "," + tiltUp + "," + canHolderUp + ",";
     }
 
 }

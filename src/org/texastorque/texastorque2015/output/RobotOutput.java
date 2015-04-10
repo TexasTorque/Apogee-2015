@@ -2,7 +2,6 @@ package org.texastorque.texastorque2015.output;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 import org.texastorque.texastorque2015.constants.Ports;
@@ -22,6 +21,8 @@ public class RobotOutput extends Output {
     private Solenoid punchSolenoid;
     private Solenoid intakeSolenoid;
     private DoubleSolenoid tiltSolenoid;
+    private Solenoid leftCanHolderSolenoid;
+    private Solenoid rightCanHolderSolenoid;
 
     //Intake
     private TorqueMotor leftIntakeMotor;
@@ -30,7 +31,7 @@ public class RobotOutput extends Output {
     //Elevator
     private TorqueMotor leftElevatorMotorA;
     private TorqueMotor rightElevatorMotorA;
-    
+
     //Stingers
     private TorqueMotor stingerRetractMotor;
     private TorqueMotor leftStingerMotor;
@@ -49,6 +50,8 @@ public class RobotOutput extends Output {
         punchSolenoid = new Solenoid(Ports.PUNCH_SOLENOID);
         intakeSolenoid = new Solenoid(Ports.INTAKE_SOLENOID);
         tiltSolenoid = new DoubleSolenoid(Ports.TILT_SOLENOID_A_PORT, Ports.TILT_SOLENOID_B_PORT);
+        leftCanHolderSolenoid = new Solenoid(Ports.LEFT_CANHOLDER_SOLENOID);
+        rightCanHolderSolenoid = new Solenoid(Ports.RIGHT_CANHOLDER_SOLENOID);
 
         //Intake
         leftIntakeMotor = new TorqueMotor(new VictorSP(Ports.LEFT_INTAKE_PORT), false, TorqueMotor.LinearizationType.kNone);
@@ -57,7 +60,7 @@ public class RobotOutput extends Output {
         //Elevator
         leftElevatorMotorA = new TorqueMotor(new VictorSP(Ports.LEFT_ELEVATOR), true, TorqueMotor.LinearizationType.kNone);
         rightElevatorMotorA = new TorqueMotor(new VictorSP(Ports.RIGHT_ELEVATOR), false, TorqueMotor.LinearizationType.kNone);
-        
+
         stingerRetractMotor = new TorqueMotor(new VictorSP(Ports.stingerRetractMotor), true, TorqueMotor.LinearizationType.kNone);
         leftStingerMotor = new TorqueMotor(new VictorSP(Ports.leftStingerMotor), false, TorqueMotor.LinearizationType.kNone);
         rightStingerMotor = new TorqueMotor(new VictorSP(Ports.rightStingerMotor), true, TorqueMotor.LinearizationType.kNone);
@@ -94,6 +97,12 @@ public class RobotOutput extends Output {
     @Override
     public void setPunchOut(boolean out) {
         punchSolenoid.set(out);
+    }
+
+    @Override
+    public void setCanHolderUp(boolean up) {
+        leftCanHolderSolenoid.set(up);
+        rightCanHolderSolenoid.set(up);
     }
 
     //Intake

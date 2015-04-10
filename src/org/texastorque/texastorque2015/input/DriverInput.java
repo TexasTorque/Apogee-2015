@@ -3,6 +3,7 @@ package org.texastorque.texastorque2015.input;
 import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.torquelib.util.GenericController;
 import org.texastorque.torquelib.util.TorqueFilter;
+import org.texastorque.torquelib.util.TorqueToggle;
 
 public class DriverInput extends Input {
 
@@ -12,6 +13,9 @@ public class DriverInput extends Input {
 
     private TorqueFilter driveAccelFilter;
     private TorqueFilter turnAccelFilter;
+
+    private TorqueToggle tiltToggle;
+    private TorqueToggle canHolderToggle;
 
     private boolean wentDown;
     private boolean isAutoStack;
@@ -23,6 +27,9 @@ public class DriverInput extends Input {
 
         driveAccelFilter = new TorqueFilter(25);
         turnAccelFilter = new TorqueFilter(25);
+
+        tiltToggle = new TorqueToggle();
+        canHolderToggle = new TorqueToggle();
 
         override = false;
         armOpen = false;
@@ -52,9 +59,16 @@ public class DriverInput extends Input {
 
         calcIntake();
         calcDrivebase();
+        calcArms();
     }
 
-    //Drivebase
+    private void calcArms() {
+        tiltToggle.calc(operator.getLeftBumper());
+        tiltUp = tiltToggle.get();
+        canHolderToggle.calc(operator.getLeftTrigger());
+        canHolderUp = canHolderToggle.get();
+    }
+
     private void calcDrivebase() {
         strafeSpeed = driver.getLeftXAxis();
 
@@ -142,13 +156,13 @@ public class DriverInput extends Input {
                 newPosition = false;
             }
         }
-        
+
         armOpen = armOpen || operator.getLeftTrigger();
     }
 
     private void calcOverride() {
         overrideElevatorMotorSpeed = -1 * operator.getLeftYAxis();
-        
+
         armOpen = operator.getLeftTrigger();
     }
 
