@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.torquelib.util.GenericController;
 import org.texastorque.torquelib.util.TorqueFilter;
+import org.texastorque.torquelib.util.TorqueToggle;
 
 public class DriverInput extends Input {
 
@@ -13,6 +14,8 @@ public class DriverInput extends Input {
 
     private TorqueFilter driveAccelFilter;
     private TorqueFilter turnAccelFilter;
+    
+    private TorqueToggle tiltToggle;
 
     private boolean wentDown;
     private boolean isAutoStack;
@@ -24,6 +27,8 @@ public class DriverInput extends Input {
 
         driveAccelFilter = new TorqueFilter(25);
         turnAccelFilter = new TorqueFilter(25);
+        
+        tiltToggle = new TorqueToggle();
 
         override = false;
         armOpen = false;
@@ -33,6 +38,9 @@ public class DriverInput extends Input {
 
     @Override
     public void run() {
+        tiltToggle.calc(operator.getLeftBumper());
+        tiltUp = tiltToggle.get();
+        
         if (operator.getLeftCenterButton()) {
             override = true;
         } else if (operator.getRightCenterButton()) {
@@ -88,45 +96,40 @@ public class DriverInput extends Input {
     }
 
     private void calcElevator() {
-//        if (operator.getAButton()) {
-//            autoStack = true;
-//        }
-//        if (operator.getXButton()) {
-//            autoStack = false;
-//            elevatorPosition = feedback.getElevatorHeight();
-//            newPosition = true;
-//            wentDown = false;
-//        }
-        if (operator.getAButton() && !autoStack) {
-            armOpen = false;
-            elevatorPosition = Constants.autoStackLevel.getDouble();
+        if (operator.getAButton()) {
+            //autoStack = bring elevator down and back up to stack tote
+            tiltUp = false;
+            punchOut = false;
+
             newPosition = true;
-            numTotes++;
-            autoStack = true;
-//            if (!wentDown && feedback.isElevatorHere(Constants.autoStackLevel.getDouble())) {
-//                elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
-//                newPosition = true;
-//                wentDown = true;
-//
-//                numTotes++;
-//            } else if (!wentDown) {
-//                elevatorPosition = Constants.autoStackLevel.getDouble();
-//                newPosition = true;
-//            } else if (wentDown && feedback.isElevatorHere(Constants.FloorElevatorLevel2.getDouble())) {
-//                wentDown = false;
-//                autoStack = false;
-//            }
+            if (feedback.isElevatorHere(Constants.autoStackLevel.getDouble()) && !wentDown) {
+                SmartDashboard.putNumber("bla", 0);
+                armOpen = false;
+
+                elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
+
+                numTotes++;
+                wentDown = true;
+            } else if (feedback.isElevatorDone() && wentDown) {
+                SmartDashboard.putNumber("bla", 1);
+                autoStack = false;
+                wentDown = false;
+            } else if (elevatorPosition == Constants.FloorElevatorLevel2.getDouble() && wentDown) {
+                //catch else to make sure that nothing happens if elevator is not donee
+                SmartDashboard.putNumber("bla", 2);
+            } else {
+                SmartDashboard.putNumber("bla", 3);
+                elevatorPosition = Constants.autoStackLevel.getDouble();
+
+                armOpen = feedback.getElevatorHeight() < Constants.autoStackArmOpenLevel.getDouble();
+            }
         } else if (operator.getRightTrigger()) {
             autoStack = false;
             wentDown = false;
             numTotes = 0;
             newPosition = true;
             elevatorPosition = Constants.PlaceLevel1.getDouble();
-            if (feedback.isElevatorDone()) {
-                armOpen = true;
-            } else {
-                armOpen = false;
-            }
+            armOpen = feedback.isElevatorDone();
         } else {
             autoStack = false;
             wentDown = false;

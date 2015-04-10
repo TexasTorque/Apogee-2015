@@ -33,7 +33,7 @@ public class Ports {
     public final static int PUNCH_SOLENOID = 6;
     public final static int INTAKE_SOLENOID = 4;
     public final static int TILT_SOLENOID_A_PORT = 5;
-    public final static int TILT_SOLENOID_B_PORT = 3;
+    public final static int TILT_SOLENOID_B_PORT = 1;
 
     //intake
     public final static int LEFT_INTAKE_PORT = 7;

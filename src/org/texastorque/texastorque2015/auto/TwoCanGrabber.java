@@ -10,7 +10,7 @@ public class TwoCanGrabber extends AutoMode {
          leftSpeed = -0.35;
         rightSpeed = -0.35;
         
-        wait(0.15);
+        wait(0.25);
         
         leftSpeed = 0.0;
         rightSpeed = 0.0;
@@ -23,12 +23,12 @@ public class TwoCanGrabber extends AutoMode {
         leftStingerSpeed = 0.0;
         rightStingerSpeed = 0.0;
         
-        wait(2.0);
+        wait(1.0);
         
-        leftSpeed = 0.175;
-        rightSpeed = 0.175;
+        leftSpeed = 0.5;
+        rightSpeed = 0.5;
         
-        wait(10.0);
+        wait(1.5);
         
         leftSpeed = 0.0;
         rightSpeed = 0.0;
