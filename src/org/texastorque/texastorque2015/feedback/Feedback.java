@@ -94,8 +94,6 @@ public abstract class Feedback implements Runnable {
     //Elevator
     protected double elevatorHeight;
     protected double elevatorVelocity;
-    protected boolean elevatorAtTop;
-    protected boolean elevatorAtBottom;
     protected boolean elevatorDone;
 
     public boolean isElevatorDone() {
@@ -127,14 +125,6 @@ public abstract class Feedback implements Runnable {
      */
     public double getElevatorVelocity() {
         return elevatorVelocity;
-    }
-
-    public boolean isElevatorAtTop() {
-        return elevatorAtTop;
-    }
-
-    public boolean isElevatorAtBottom() {
-        return elevatorAtBottom;
     }
     
     //Stingers

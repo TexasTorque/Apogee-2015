@@ -23,10 +23,6 @@ public class Ports {
     public final static int RIGHT_ELEVATOR_ENCODER_PORT_A = 8;
     public final static int RIGHT_ELEVATOR_ENCODER_PORT_B = 9;
 
-    //Limit switches
-    public final static int ELEVATOR_TOP_LIMIT = 19;//?
-    public final static int ELEVATOR_BOTTOM_LIMIT = 18;//?
-
     //crazy arms
     public final static int PUNCH_SOLENOID = 6;
     public final static int INTAKE_SOLENOID = 4;

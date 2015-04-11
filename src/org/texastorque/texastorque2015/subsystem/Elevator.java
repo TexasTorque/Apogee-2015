@@ -93,13 +93,6 @@ public class Elevator extends Subsystem {
         if (!input.isElevatorFFpOff()) {
             motorSpeed += ffPosition;
         }
-
-        //Use limit switches so that the elevator does not force itself through the top and bottom.
-//        if (feedback.isElevatorAtTop()) {
-//            motorSpeed = Math.min(motorSpeed, 0.0);
-//        } else if (feedback.isElevatorAtBottom()) {
-//            motorSpeed = Math.max(motorSpeed, 0.0);
-//        }
         
         feedback.setElevatorDone(isDone());
         
@@ -202,8 +195,6 @@ public class Elevator extends Subsystem {
         SmartDashboard.putNumber("NumTotes", numTotes);
         SmartDashboard.putBoolean("ElevatorDone", isDone());
         SmartDashboard.putNumber("ElevatorMotorSpeed", motorSpeed);
-        SmartDashboard.putBoolean("ElevatorAtBottom", feedback.isElevatorAtBottom());
-        SmartDashboard.putBoolean("ElevatorAtTop", feedback.isElevatorAtTop());
     }
 
     @Override

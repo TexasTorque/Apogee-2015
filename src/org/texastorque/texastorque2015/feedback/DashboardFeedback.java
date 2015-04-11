@@ -37,9 +37,6 @@ public class DashboardFeedback extends Feedback {
         elevatorHeight = SmartDashboard.getNumber("ElevatorTargetPosition", 0.0);
         elevatorVelocity = SmartDashboard.getNumber("ElevatorTargetVelocity", 0.0);
 
-        elevatorAtTop = SmartDashboard.getBoolean("elevatorAtTop", false);
-        elevatorAtBottom = SmartDashboard.getBoolean("elevatorAtBottom", false);
-
         //angle (radians)
         angle = SmartDashboard.getNumber("angle", 0.0);
     }
