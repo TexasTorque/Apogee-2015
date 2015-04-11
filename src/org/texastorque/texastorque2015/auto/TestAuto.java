@@ -20,7 +20,6 @@ public class TestAuto extends AutoMode {
 
         wait(0.25);
 
-        armOpen = true;
         elevatorPosition = Constants.autoStackLevel.getDouble();
         //intakeState = Intake.OFF;
 
@@ -29,7 +28,6 @@ public class TestAuto extends AutoMode {
             wait(0.05);
         }
 
-        armOpen = false;
         elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
 
         wait(0.5);

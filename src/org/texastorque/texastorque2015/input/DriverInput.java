@@ -32,7 +32,6 @@ public class DriverInput extends Input {
         canHolderToggle = new TorqueToggle();
 
         override = false;
-        armOpen = false;
         punchOut = false;
         tiltUp = false;
     }
@@ -98,7 +97,6 @@ public class DriverInput extends Input {
 //            wentDown = false;
 //        }
         if (operator.getAButton() && !autoStack) {
-            armOpen = false;
             elevatorPosition = Constants.autoStackLevel.getDouble();
             newPosition = true;
             numTotes++;
@@ -122,15 +120,9 @@ public class DriverInput extends Input {
             numTotes = 0;
             newPosition = true;
             elevatorPosition = Constants.PlaceLevel1.getDouble();
-            if (feedback.isElevatorDone()) {
-                armOpen = true;
-            } else {
-                armOpen = false;
-            }
         } else {
             autoStack = false;
             wentDown = false;
-            armOpen = false;
             if (panel.getLevel1Button() || operator.getYButton()) {
                 elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
                 newPosition = true;
@@ -156,14 +148,10 @@ public class DriverInput extends Input {
                 newPosition = false;
             }
         }
-
-        armOpen = armOpen || operator.getLeftTrigger();
     }
 
     private void calcOverride() {
         overrideElevatorMotorSpeed = -1 * operator.getLeftYAxis();
-
-        armOpen = operator.getLeftTrigger();
     }
 
     private void calcIntake() {

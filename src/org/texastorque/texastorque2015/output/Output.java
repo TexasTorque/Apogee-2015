@@ -9,8 +9,6 @@ public abstract class Output {
     public abstract void setElevatorMotorSpeeds(double speed);
 
     //Crazy Arms
-    public abstract void setArmsOpen(boolean open);
-
     public abstract void setTiltUp(boolean on);
 
     public abstract void setPunchOut(boolean out);
