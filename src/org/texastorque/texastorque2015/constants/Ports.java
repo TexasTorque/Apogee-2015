@@ -32,8 +32,8 @@ public class Ports {
     public final static int INTAKE_SOLENOID = 4;
     public final static int TILT_SOLENOID_A_PORT = 5;
     public final static int TILT_SOLENOID_B_PORT = 3;
-    public final static int LEFT_CANHOLDER_SOLENOID = 100;
-    public final static int RIGHT_CANHOLDER_SOLENOID = 100;
+    public final static int LEFT_CANHOLDER_SOLENOID = 0;
+    public final static int RIGHT_CANHOLDER_SOLENOID = 7;
 
     //intake
     public final static int LEFT_INTAKE_PORT = 7;
