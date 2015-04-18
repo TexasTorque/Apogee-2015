@@ -74,7 +74,17 @@ public abstract class Input implements Runnable {
     }
 
     //Crazy Arms
+    protected volatile boolean punchOut;
+    protected volatile boolean tiltUp;
     protected volatile boolean canHolderUp;
+
+    public boolean isPunchOut() {
+        return punchOut;
+    }
+
+    public boolean isTiltUp() {
+        return tiltUp;
+    }
     
     public boolean isCanHolderUp() {
         return canHolderUp;

@@ -14,6 +14,7 @@ public class DriverInput extends Input {
     private TorqueFilter driveAccelFilter;
     private TorqueFilter turnAccelFilter;
 
+    private TorqueToggle tiltToggle;
     private TorqueToggle canHolderToggle;
 
     public DriverInput() {
@@ -24,9 +25,12 @@ public class DriverInput extends Input {
         driveAccelFilter = new TorqueFilter(25);
         turnAccelFilter = new TorqueFilter(25);
 
+        tiltToggle = new TorqueToggle();
         canHolderToggle = new TorqueToggle();
 
         override = false;
+        punchOut = false;
+        tiltUp = false;
     }
 
     @Override
@@ -55,6 +59,8 @@ public class DriverInput extends Input {
     }
 
     private void calcArms() {
+        tiltToggle.calc(operator.getLeftBumper());
+        tiltUp = tiltToggle.get();
         canHolderToggle.calc(operator.getLeftTrigger());
         canHolderUp = canHolderToggle.get();
     }
@@ -79,9 +85,11 @@ public class DriverInput extends Input {
 
     private void calcElevator() {
         if (operator.getRightTrigger()) {
+            punchOut = false;
             newPosition = true;
             elevatorPosition = Constants.PlaceLevel1.getDouble();
         } else {
+            punchOut = false;
             if (panel.getLevel1Button() || operator.getYButton()) {
                 elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
                 newPosition = true;
@@ -114,6 +122,12 @@ public class DriverInput extends Input {
 
     private void calcOverride() {
         overrideElevatorMotorSpeed = -1 * operator.getLeftYAxis();
+
+        if (operator.getRightTrigger() && tiltUp) {
+            punchOut = true;
+        } else {
+            punchOut = false;
+        }
     }
 
     private void calcIntake() {
