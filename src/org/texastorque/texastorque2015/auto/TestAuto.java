@@ -20,7 +20,6 @@ public class TestAuto extends AutoMode {
 
         wait(0.25);
 
-        elevatorPosition = Constants.autoStackLevel.getDouble();
         //intakeState = Intake.OFF;
 
         //wait for elevator to lower

@@ -51,11 +51,6 @@ public class Constants extends Parameters {
     public final static Constant FloorElevatorLevel5 = new Constant("E_FloorL5", 500.0);
     public final static Constant FloorElevatorLevel6 = new Constant("E_FloorL6", 600.0);
     public final static Constant PlaceLevel1 = new Constant("E_PlaceLevel1", 50.0);
-    public final static Constant PlaceLevel2 = new Constant("E_PlaceLevel2", 50.0);
-    public final static Constant PlaceLevel3 = new Constant("E_PlaceLevel3", 50.0);
-    public final static Constant PlaceLevel4 = new Constant("E_PlaceLevel4", 50.0);
-    public final static Constant PlaceLevel5 = new Constant("E_PlaceLevel5", 50.0);
-    public final static Constant PlaceLevel6 = new Constant("E_PlaceLevel6", 50.0);
 
     //Step
     public final static Constant StepElevatorLevel1 = new Constant("E_StepL1", 150.0);
@@ -66,10 +61,6 @@ public class Constants extends Parameters {
     public final static Constant StepPlaceLevel2 = new Constant("E_StepPlaceLevel2", 225.0);
     public final static Constant StepPlaceLevel3 = new Constant("E_StepPlaceLevel3", 325.0);
     public final static Constant StepPlaceLevel4 = new Constant("E_StepPlaceLevel4", 425.0);
-
-    //Autostack
-    public final static Constant autoStackLevel = new Constant("E_AutoStackLevel", 0.0);
-    public final static Constant autoStackArmOpenLevel = new Constant("E_AutoStackArmOpenLevel", 0.0);
 
     //Recycling can
     public final static Constant RCElevatorLevel1 = new Constant("E_RCL1", 0.0);
@@ -98,9 +89,6 @@ public class Constants extends Parameters {
     public final static Constant DrivebaseTurnD = new Constant("D_TurnP", 0.0);
     public final static Constant DrivebaseTurnDoneRange = new Constant("D_TurnDoneRange", 0.0);
 
-    //Manipulator
-    public final static Constant TotePullBAckTime = new Constant("I_TotePullBAckTime", 1.0);
-    
     //Stingers
     public final static Constant leftStingerP = new Constant("S_LeftP", 0.0);
     public final static Constant leftStingerI = new Constant("S_LeftI", 0.0);
