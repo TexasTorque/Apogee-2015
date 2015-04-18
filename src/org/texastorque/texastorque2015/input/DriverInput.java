@@ -17,9 +17,6 @@ public class DriverInput extends Input {
     private TorqueToggle tiltToggle;
     private TorqueToggle canHolderToggle;
 
-    private boolean wentDown;
-    private boolean isAutoStack;
-
     public DriverInput() {
         driver = new GenericController(0, GenericController.TYPE_XBOX, 0.2);
         operator = new GenericController(1, GenericController.TYPE_XBOX, 0.2);
@@ -87,44 +84,13 @@ public class DriverInput extends Input {
     }
 
     private void calcElevator() {
-//        if (operator.getAButton()) {
-//            autoStack = true;
-//        }
-//        if (operator.getXButton()) {
-//            autoStack = false;
-//            elevatorPosition = feedback.getElevatorHeight();
-//            newPosition = true;
-//            wentDown = false;
-//        }
-        if (operator.getAButton() && !autoStack) {
-            elevatorPosition = Constants.autoStackLevel.getDouble();
-            newPosition = true;
-            numTotes++;
-            autoStack = true;
-//            if (!wentDown && feedback.isElevatorHere(Constants.autoStackLevel.getDouble())) {
-//                elevatorPosition = Constants.FloorElevatorLevel2.getDouble();
-//                newPosition = true;
-//                wentDown = true;
-//
-//                numTotes++;
-//            } else if (!wentDown) {
-//                elevatorPosition = Constants.autoStackLevel.getDouble();
-//                newPosition = true;
-//            } else if (wentDown && feedback.isElevatorHere(Constants.FloorElevatorLevel2.getDouble())) {
-//                wentDown = false;
-//                autoStack = false;
-//            }
-        } else if (operator.getRightTrigger()) {
-            autoStack = false;
-            wentDown = false;
+        if (operator.getRightTrigger()) {
             numTotes = 0;
             punchOut = false;
             newPosition = true;
             elevatorPosition = Constants.PlaceLevel1.getDouble();
         } else {
             punchOut = false;
-            autoStack = false;
-            wentDown = false;
             if (panel.getLevel1Button() || operator.getYButton()) {
                 elevatorPosition = Constants.FloorElevatorLevel1.getDouble();
                 newPosition = true;
