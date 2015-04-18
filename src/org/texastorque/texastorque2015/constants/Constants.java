@@ -40,62 +40,6 @@ public class Constants extends Parameters {
     public final static Constant ElevatorffP0Tote = new Constant("E_ffP_0Tote", 0.0);
     public final static Constant ElevatorMaxV0Tote = new Constant("E_MaxV_0Tote", 0.0);
     public final static Constant ElevatorMaxA0Tote = new Constant("E_MaxA_0Tote", 0.0);
-
-    public final static Constant ElevatorP1Tote = new Constant("E_P_1Tote", 0.0);
-    public final static Constant ElevatorV1Tote = new Constant("E_V_1Tote", 0.0);
-    public final static Constant ElevatorffV1Tote = new Constant("E_ffV_1Tote", 0.0);
-    public final static Constant ElevatorffA1Tote = new Constant("E_ffA_1Tote", 0.0);
-    public final static Constant ElevatorffP1Tote = new Constant("E_ffP_1Tote", 0.0);
-    public final static Constant ElevatorMaxV1Tote = new Constant("E_MaxV_1Tote", 0.0);
-    public final static Constant ElevatorMaxA1Tote = new Constant("E_MaxA_1Tote", 0.0);
-
-    public final static Constant ElevatorP2Tote = new Constant("E_P_2Tote", 0.0);
-    public final static Constant ElevatorV2Tote = new Constant("E_V_2Tote", 0.0);
-    public final static Constant ElevatorffV2Tote = new Constant("E_ffV_2Tote", 0.0);
-    public final static Constant ElevatorffA2Tote = new Constant("E_ffA_2Tote", 0.0);
-    public final static Constant ElevatorffP2Tote = new Constant("E_ffP_2Tote", 0.0);
-    public final static Constant ElevatorMaxV2Tote = new Constant("E_MaxV_2Tote", 0.0);
-    public final static Constant ElevatorMaxA2Tote = new Constant("E_MaxA_2Tote", 0.0);
-
-    public final static Constant ElevatorP3Tote = new Constant("E_P_3Tote", 0.0);
-    public final static Constant ElevatorV3Tote = new Constant("E_V_3Tote", 0.0);
-    public final static Constant ElevatorffV3Tote = new Constant("E_ffV_3Tote", 0.0);
-    public final static Constant ElevatorffA3Tote = new Constant("E_ffA_3Tote", 0.0);
-    public final static Constant ElevatorffP3Tote = new Constant("E_ffP_3Tote", 0.0);
-    public final static Constant ElevatorMaxV3Tote = new Constant("E_MaxV_3Tote", 0.0);
-    public final static Constant ElevatorMaxA3Tote = new Constant("E_MaxA_3Tote", 0.0);
-
-    public final static Constant ElevatorP4Tote = new Constant("E_P_4Tote", 0.0);
-    public final static Constant ElevatorV4Tote = new Constant("E_V_4Tote", 0.0);
-    public final static Constant ElevatorffV4Tote = new Constant("E_ffV_4Tote", 0.0);
-    public final static Constant ElevatorffA4Tote = new Constant("E_ffA_4Tote", 0.0);
-    public final static Constant ElevatorffP4Tote = new Constant("E_ffP_4Tote", 0.0);
-    public final static Constant ElevatorMaxV4Tote = new Constant("E_MaxV_4Tote", 0.0);
-    public final static Constant ElevatorMaxA4Tote = new Constant("E_MaxA_4Tote", 0.0);
-
-    public final static Constant ElevatorP5Tote = new Constant("E_P_5Tote", 0.0);
-    public final static Constant ElevatorV5Tote = new Constant("E_V_5Tote", 0.0);
-    public final static Constant ElevatorffV5Tote = new Constant("E_ffV_5Tote", 0.0);
-    public final static Constant ElevatorffA5Tote = new Constant("E_ffA_5Tote", 0.0);
-    public final static Constant ElevatorffP5Tote = new Constant("E_ffP_5Tote", 0.0);
-    public final static Constant ElevatorMaxV5Tote = new Constant("E_MaxV_5Tote", 0.0);
-    public final static Constant ElevatorMaxA5Tote = new Constant("E_MaxA_5Tote", 0.0);
-
-    public final static Constant ElevatorP6Tote = new Constant("E_P_6Tote", 0.0);
-    public final static Constant ElevatorV6Tote = new Constant("E_V_6Tote", 0.0);
-    public final static Constant ElevatorffV6Tote = new Constant("E_ffV_6Tote", 0.0);
-    public final static Constant ElevatorffA6Tote = new Constant("E_ffA_6Tote", 0.0);
-    public final static Constant ElevatorffP6Tote = new Constant("E_ffP_6Tote", 0.0);
-    public final static Constant ElevatorMaxV6Tote = new Constant("E_MaxV_6Tote", 0.0);
-    public final static Constant ElevatorMaxA6Tote = new Constant("E_MaxA_6Tote", 0.0);
-
-    public final static Constant ElevatorPRecyclingCan = new Constant("E_P_RC", 0.0);
-    public final static Constant ElevatorVRecyclingCan = new Constant("E_V_RC", 0.0);
-    public final static Constant ElevatorffVRecyclingCan = new Constant("E_ffV_RC", 0.0);
-    public final static Constant ElevatorffARecyclingCan = new Constant("E_ffA_RC", 0.0);
-    public final static Constant ElevatorffPRecyclingCan = new Constant("E_ffP_RC", 0.0);
-    public final static Constant ElevatorMaxVRecyclingCan = new Constant("E_MaxV_RC", 0.0);
-    public final static Constant ElevatorMaxARecyclingCan = new Constant("E_MaxA_RC", 0.0);
     
     public final static Constant Carry4ToteLevel = new Constant("E_Carry4ToteLevel", 0.0);
 
@@ -128,12 +72,6 @@ public class Constants extends Parameters {
     public final static Constant autoStackArmOpenLevel = new Constant("E_AutoStackArmOpenLevel", 0.0);
 
     //Recycling can
-    public final static Constant RCElevatorP = new Constant("E_RC_P", 0.0);
-    public final static Constant RCElevatorV = new Constant("E_RV_V", 0.0);
-    public final static Constant RCElevatorffV = new Constant("E_RV_ffV", 0.0);
-    public final static Constant RCElevatorffA = new Constant("E_RV_ffA", 0.0);
-    public final static Constant RCElevatorffP = new Constant("E_RV_ffP", 0.0);
-
     public final static Constant RCElevatorLevel1 = new Constant("E_RCL1", 0.0);
     public final static Constant RCElevatorLevel2 = new Constant("E_RCL2", 0.0);
     public final static Constant RCElevatorLevel3 = new Constant("E_RCL3", 0.0);

@@ -10,7 +10,7 @@ public class Elevator extends Subsystem {
 
     private TorqueTMP tmp;
     private TorquePV pv;
-    
+
     double prevTime;
 
     private double setPointElevation;
@@ -23,16 +23,12 @@ public class Elevator extends Subsystem {
 
     private double ffPosition;
 
-    private int numTotes;
-
     //up = positive, down = negative
     private double motorSpeed;
 
     public Elevator() {
         tmp = new TorqueTMP(0.0, 0.0);
         pv = new TorquePV();
-
-        numTotes = 0;
     }
 
     @Override
@@ -43,7 +39,7 @@ public class Elevator extends Subsystem {
         currentVelocity = feedback.getElevatorVelocity();
 
         tmp.generateTrapezoid(setPointElevation, currentPosition, currentVelocity);
-        
+
         prevTime = Timer.getFPGATimestamp();
     }
 
@@ -63,15 +59,9 @@ public class Elevator extends Subsystem {
         currentPosition = feedback.getElevatorHeight();
         currentVelocity = feedback.getElevatorVelocity();
 
-        if (input.getNumTotes() != numTotes) {
-            numTotes = input.getNumTotes();
-            loadParams();
-            tmp.generateTrapezoid(setPointElevation, currentPosition, currentVelocity);
-        }
-
         //Control loop operation
         if (!input.isOverride()) {
-            if (input.getElevatorPosition() != setPointElevation && input.newPosition())  {
+            if (input.getElevatorPosition() != setPointElevation && input.newPosition()) {
                 setPointElevation = input.getElevatorPosition();
 
                 tmp.generateTrapezoid(setPointElevation, currentPosition, currentVelocity);
@@ -93,9 +83,9 @@ public class Elevator extends Subsystem {
         if (!input.isElevatorFFpOff()) {
             motorSpeed += ffPosition;
         }
-        
+
         feedback.setElevatorDone(isDone());
-        
+
         //Output to the robot if we want to.
         if (outputEnabled) {
             output.setElevatorMotorSpeeds(motorSpeed);
@@ -106,80 +96,13 @@ public class Elevator extends Subsystem {
 
     @Override
     public void loadParams() {
-        double p = 0.0, v = 0.0, ffV = 0.0, ffA = 0.0;
-        if (numTotes == 0) {
-            tmp = new TorqueTMP(Constants.ElevatorMaxV0Tote.getDouble(), Constants.ElevatorMaxA0Tote.getDouble());
-            p = Constants.ElevatorP0Tote.getDouble();
-            v = Constants.ElevatorV0Tote.getDouble();
-            ffV = Constants.ElevatorffV0Tote.getDouble();
-            ffA = Constants.ElevatorffA0Tote.getDouble();
+        tmp = new TorqueTMP(Constants.ElevatorMaxV0Tote.getDouble(), Constants.ElevatorMaxA0Tote.getDouble());
+        double p = Constants.ElevatorP0Tote.getDouble();
+        double v = Constants.ElevatorV0Tote.getDouble();
+        double ffV = Constants.ElevatorffV0Tote.getDouble();
+        double ffA = Constants.ElevatorffA0Tote.getDouble();
 
-            ffPosition = Constants.ElevatorffP0Tote.getDouble();
-        } else if (numTotes == 1) {
-            tmp = new TorqueTMP(Constants.ElevatorMaxV1Tote.getDouble(), Constants.ElevatorMaxA1Tote.getDouble());
-            p = Constants.ElevatorP1Tote.getDouble();
-            v = Constants.ElevatorV1Tote.getDouble();
-            ffV = Constants.ElevatorffV1Tote.getDouble();
-            ffA = Constants.ElevatorffA1Tote.getDouble();
-
-            ffPosition = Constants.ElevatorffP1Tote.getDouble();
-        } else if (numTotes == 2) {
-            tmp = new TorqueTMP(Constants.ElevatorMaxV2Tote.getDouble(), Constants.ElevatorMaxA2Tote.getDouble());
-            p = Constants.ElevatorP2Tote.getDouble();
-            v = Constants.ElevatorV2Tote.getDouble();
-            ffV = Constants.ElevatorffV2Tote.getDouble();
-            ffA = Constants.ElevatorffA2Tote.getDouble();
-
-            ffPosition = Constants.ElevatorffP2Tote.getDouble();
-        } else if (numTotes == 3) {
-            tmp = new TorqueTMP(Constants.ElevatorMaxV3Tote.getDouble(), Constants.ElevatorMaxA3Tote.getDouble());
-            p = Constants.ElevatorP3Tote.getDouble();
-            v = Constants.ElevatorV3Tote.getDouble();
-            ffV = Constants.ElevatorffV3Tote.getDouble();
-            ffA = Constants.ElevatorffA3Tote.getDouble();
-
-            ffPosition = Constants.ElevatorffP3Tote.getDouble();
-        } else if (numTotes == 4) {
-            tmp = new TorqueTMP(Constants.ElevatorMaxV4Tote.getDouble(), Constants.ElevatorMaxA4Tote.getDouble());
-            p = Constants.ElevatorP4Tote.getDouble();
-            v = Constants.ElevatorV4Tote.getDouble();
-            ffV = Constants.ElevatorffV4Tote.getDouble();
-            ffA = Constants.ElevatorffA4Tote.getDouble();
-
-            ffPosition = Constants.ElevatorffP4Tote.getDouble();
-        } else if (numTotes == 5) {
-            tmp = new TorqueTMP(Constants.ElevatorMaxV5Tote.getDouble(), Constants.ElevatorMaxA5Tote.getDouble());
-            p = Constants.ElevatorP5Tote.getDouble();
-            v = Constants.ElevatorV5Tote.getDouble();
-            ffV = Constants.ElevatorffV5Tote.getDouble();
-            ffA = Constants.ElevatorffA5Tote.getDouble();
-
-            ffPosition = Constants.ElevatorffP5Tote.getDouble();
-        } else if (numTotes >= 6) {
-            tmp = new TorqueTMP(Constants.ElevatorMaxV6Tote.getDouble(), Constants.ElevatorMaxA6Tote.getDouble());
-            p = Constants.ElevatorP6Tote.getDouble();
-            v = Constants.ElevatorV6Tote.getDouble();
-            ffV = Constants.ElevatorffV6Tote.getDouble();
-            ffA = Constants.ElevatorffA6Tote.getDouble();
-
-            ffPosition = Constants.ElevatorffP6Tote.getDouble();
-        } else if (numTotes == -1) {
-            tmp = new TorqueTMP(Constants.ElevatorMaxARecyclingCan.getDouble(), Constants.ElevatorMaxARecyclingCan.getDouble());
-            p = Constants.ElevatorPRecyclingCan.getDouble();
-            v = Constants.ElevatorVRecyclingCan.getDouble();
-            ffV = Constants.ElevatorffVRecyclingCan.getDouble();
-            ffA = Constants.ElevatorffARecyclingCan.getDouble();
-
-            ffPosition = Constants.ElevatorffPRecyclingCan.getDouble();
-        } else {
-            tmp = new TorqueTMP(Constants.ElevatorMaxV0Tote.getDouble(), Constants.ElevatorMaxA0Tote.getDouble());
-            p = Constants.ElevatorP0Tote.getDouble();
-            v = Constants.ElevatorV0Tote.getDouble();
-            ffV = Constants.ElevatorffV0Tote.getDouble();
-            ffA = Constants.ElevatorffA0Tote.getDouble();
-
-            ffPosition = Constants.ElevatorffP0Tote.getDouble();
-        }
+        ffPosition = Constants.ElevatorffP0Tote.getDouble();
         pv.setGains(p, v, ffV, ffA);
         pv.setTunedVoltage(12.5);
     }
@@ -192,7 +115,6 @@ public class Elevator extends Subsystem {
         SmartDashboard.putNumber("ElevatorTargetPosition", targetPosition);
         SmartDashboard.putNumber("ElevatorTargetVelocity", targetVelocity);
         SmartDashboard.putNumber("ElevatorTargetAcceleration", targetAcceleration);
-        SmartDashboard.putNumber("NumTotes", numTotes);
         SmartDashboard.putBoolean("ElevatorDone", isDone());
         SmartDashboard.putNumber("ElevatorMotorSpeed", motorSpeed);
     }

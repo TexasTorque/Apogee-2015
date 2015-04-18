@@ -85,7 +85,6 @@ public class DriverInput extends Input {
 
     private void calcElevator() {
         if (operator.getRightTrigger()) {
-            numTotes = 0;
             punchOut = false;
             newPosition = true;
             elevatorPosition = Constants.PlaceLevel1.getDouble();
