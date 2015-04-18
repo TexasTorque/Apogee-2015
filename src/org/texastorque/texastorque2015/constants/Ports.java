@@ -24,10 +24,7 @@ public class Ports {
     public final static int RIGHT_ELEVATOR_ENCODER_PORT_B = 9;
 
     //crazy arms
-    public final static int PUNCH_SOLENOID = 6;
     public final static int INTAKE_SOLENOID = 4;
-    public final static int TILT_SOLENOID_A_PORT = 5;
-    public final static int TILT_SOLENOID_B_PORT = 3;
     public final static int CANHOLDER_SOLENOID_A = 7;
     public final static int CANHOLDER_SOLENOID_B = 0;
 
