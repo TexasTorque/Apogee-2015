@@ -1,7 +1,5 @@
 package org.texastorque.torquelib.controlLoop;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 public class TorquePV extends ControlLoop {
 
     private double kP;

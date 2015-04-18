@@ -118,9 +118,11 @@ public class DriverInput extends Input {
             autoStack = false;
             wentDown = false;
             numTotes = 0;
+            punchOut = false;
             newPosition = true;
             elevatorPosition = Constants.PlaceLevel1.getDouble();
         } else {
+            punchOut = false;
             autoStack = false;
             wentDown = false;
             if (panel.getLevel1Button() || operator.getYButton()) {
@@ -144,6 +146,9 @@ public class DriverInput extends Input {
             } else if (operator.getLeftStickClick()) {
                 elevatorPosition = Constants.transportLevel.getDouble();
                 newPosition = true;
+            } else if (operator.getXButton()) {
+                elevatorPosition = Constants.Carry4ToteLevel.getDouble();
+                newPosition = true;
             } else {
                 newPosition = false;
             }
@@ -152,6 +157,12 @@ public class DriverInput extends Input {
 
     private void calcOverride() {
         overrideElevatorMotorSpeed = -1 * operator.getLeftYAxis();
+
+        if (operator.getRightTrigger() && tiltUp) {
+            punchOut = true;
+        } else {
+            punchOut = false;
+        }
     }
 
     private void calcIntake() {

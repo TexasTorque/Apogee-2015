@@ -98,7 +98,7 @@ public abstract class Input implements Runnable {
     public boolean isCanHolderUp() {
         return canHolderUp;
     }
-
+    
     //Intake
     protected volatile double leftIntakeSpeed;
     protected volatile double rightIntakeSpeed;
@@ -126,10 +126,15 @@ public abstract class Input implements Runnable {
     
     //Stingers
     protected volatile boolean stingersDown;
+    protected volatile boolean stingersMiddle;
     protected volatile double stingerRetractSpeed;
     
     public boolean areStingersDown() {
         return stingersDown;
+    }
+    
+    public boolean areStingersMiddle() {
+        return stingersMiddle;
     }
 
     public double getStingerRetractSpeed() {

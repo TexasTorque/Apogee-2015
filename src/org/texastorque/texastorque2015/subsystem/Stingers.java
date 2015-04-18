@@ -7,6 +7,7 @@ import org.texastorque.torquelib.controlLoop.TorquePID;
 public class Stingers extends Subsystem {
     
     private boolean down;
+    private boolean middle;
     
     private TorquePID leftPID;
     private TorquePID rightPID;
@@ -30,17 +31,25 @@ public class Stingers extends Subsystem {
         setPoint = 0.0;
         leftPID.reset();
         leftPID.setSetpoint(setPoint);
+        
+        rightAngle = 0.0;
+        rightPID.reset();
+        rightPID.setSetpoint(setPoint);
     }
 
     @Override
     public void run() {
         retractSpeed = input.getStingerRetractSpeed();
         down = input.areStingersDown();
+        middle = input.areStingersMiddle();
         
         leftAngle = feedback.getLeftStingerAngle();
         rightAngle = feedback.getRightStingerAngle();
         
-        setPoint = (down) ? 20.0 : 60.0;
+        setPoint = (down) ? 17.0 : 90.0;
+        if (middle) {
+            setPoint = 30.0;
+        }
         SmartDashboard.putNumber("S_setpoint", setPoint);
         
         leftPID.setSetpoint(setPoint);

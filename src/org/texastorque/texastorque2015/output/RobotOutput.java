@@ -2,6 +2,7 @@ package org.texastorque.texastorque2015.output;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 import org.texastorque.texastorque2015.constants.Ports;
@@ -20,8 +21,7 @@ public class RobotOutput extends Output {
     private Solenoid punchSolenoid;
     private Solenoid intakeSolenoid;
     private DoubleSolenoid tiltSolenoid;
-    private Solenoid leftCanHolderSolenoid;
-    private Solenoid rightCanHolderSolenoid;
+    private DoubleSolenoid leftCanHolderSolenoid;
 
     //Intake
     private TorqueMotor leftIntakeMotor;
@@ -48,8 +48,7 @@ public class RobotOutput extends Output {
         punchSolenoid = new Solenoid(Ports.PUNCH_SOLENOID);
         intakeSolenoid = new Solenoid(Ports.INTAKE_SOLENOID);
         tiltSolenoid = new DoubleSolenoid(Ports.TILT_SOLENOID_A_PORT, Ports.TILT_SOLENOID_B_PORT);
-        leftCanHolderSolenoid = new Solenoid(Ports.LEFT_CANHOLDER_SOLENOID);
-        rightCanHolderSolenoid = new Solenoid(Ports.RIGHT_CANHOLDER_SOLENOID);
+        leftCanHolderSolenoid = new DoubleSolenoid(Ports.CANHOLDER_SOLENOID_A, Ports.CANHOLDER_SOLENOID_B);
 
         //Intake
         leftIntakeMotor = new TorqueMotor(new VictorSP(Ports.LEFT_INTAKE_PORT), false, TorqueMotor.LinearizationType.kNone);
@@ -94,8 +93,7 @@ public class RobotOutput extends Output {
 
     @Override
     public void setCanHolderUp(boolean up) {
-        leftCanHolderSolenoid.set(up);
-        rightCanHolderSolenoid.set(up);
+        leftCanHolderSolenoid.set(up ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
     }
 
     //Intake

@@ -9,7 +9,6 @@ public class Arms extends Subsystem {
     private boolean tiltUp;
     private boolean canHolderUp;
 
-
     @Override
     public void init() {
     }
