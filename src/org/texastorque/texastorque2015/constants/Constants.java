@@ -9,19 +9,6 @@ public class Constants extends Parameters {
     public final static Constant distanceDoneRange = new Constant("A_DistanceDoneRange", 0.25);
     public final static Constant turnDoneRange = new Constant("A_TurnDoneRange", 2.5);
     
-    //Yellow Tote Auto
-    public final static Constant autoMode = new Constant("Auto", 0);
-    public final static Constant FirstLeftTurnDegrees = new Constant("A_FirstTurnLeftDegrees", 0.0);
-    public final static Constant DriveWithFirstToteFeet = new Constant("A_DriveWithFirstToteFeet", 6.0);
-    public final static Constant TurnToSecondToteDegrees = new Constant("A_TurnToSecondToteDegrees", 50.0);
-    public final static Constant DriveToSecondToteFeet = new Constant("A_DriveToSecondToteFeet", 0.0);
-    public final static Constant DriveWithSecondToteFeet = new Constant("A_DriveWithSecondToteFeet", 0.0);
-    public final static Constant TurnToThirdToteDegrees = new Constant("A_TurnToThirdToteDegrees", 0.0);
-    public final static Constant DriveToThirdToteFeet = new Constant("A_DriveToThirdToteFeet", 0.0);
-    public final static Constant TurnWithThirdToteDegrees = new Constant("A_TurnWithThirdToteDegrees", 0.0);
-    public final static Constant DriveTotesToZoneFeet = new Constant("A_DriveTotesToZoneFeet", 0.0);
-    public final static Constant BackAwayFromTotesFeet = new Constant("A_BackAwayFromTotesFeet", 0.0);
-
     //Drive Auto
     public final static Constant DriveForwardFeet = new Constant("A_DriveForwardFeet", 0.0);
     
