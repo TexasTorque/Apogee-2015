@@ -108,20 +108,20 @@ public abstract class Input implements Runnable {
     }
 
     //Stingers
-    protected volatile boolean stingersDown;
-    protected volatile boolean stingersMiddle;
+    protected volatile double stingerAngle;
     protected volatile double stingerRetractSpeed;
-    
-    public boolean areStingersDown() {
-        return stingersDown;
-    }
-    
-    public boolean areStingersMiddle() {
-        return stingersMiddle;
-    }
+    protected volatile boolean stingersOff;
 
     public double getStingerRetractSpeed() {
         return stingerRetractSpeed;
+    }
+
+    public double getStingerAngle() {
+        return stingerAngle;
+    }
+
+    public boolean areStingersOff() {
+        return stingersOff;
     }
 
 }

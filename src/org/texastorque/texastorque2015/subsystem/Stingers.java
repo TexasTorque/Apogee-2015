@@ -1,13 +1,11 @@
 package org.texastorque.texastorque2015.subsystem;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.torquelib.controlLoop.TorquePID;
 
 public class Stingers extends Subsystem {
-    
-    private boolean down;
-    private boolean middle;
     
     private TorquePID leftPID;
     private TorquePID rightPID;
@@ -40,25 +38,24 @@ public class Stingers extends Subsystem {
     @Override
     public void run() {
         retractSpeed = input.getStingerRetractSpeed();
-        down = input.areStingersDown();
-        middle = input.areStingersMiddle();
         
         leftAngle = feedback.getLeftStingerAngle();
         rightAngle = feedback.getRightStingerAngle();
         
-        setPoint = (down) ? 17.0 : 90.0;
-        if (middle) {
-            setPoint = 30.0;
-        }
-        SmartDashboard.putNumber("S_setpoint", setPoint);
+        setPoint = input.getStingerAngle();
         
         leftPID.setSetpoint(setPoint);
         rightPID.setSetpoint(setPoint);
         
         leftMotorSpeed = leftPID.calculate(leftAngle);
         rightMotorSpeed = rightPID.calculate(rightAngle);
+        
+        if (DriverStation.getInstance().isOperatorControl()) {
+            leftMotorSpeed = Math.min(0.5, leftMotorSpeed);
+            rightMotorSpeed = Math.min(0.5, rightMotorSpeed);
+        }
 
-        if (outputEnabled) {
+        if (outputEnabled && !input.areStingersOff()) {
             output.setStingerMotorSpeeds(leftMotorSpeed, rightMotorSpeed, retractSpeed);
         } else {
             output.setStingerMotorSpeeds(0.0, 0.0, 0.0);

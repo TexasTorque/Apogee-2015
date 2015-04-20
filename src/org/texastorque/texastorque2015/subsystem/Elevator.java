@@ -22,6 +22,8 @@ public class Elevator extends Subsystem {
     private double currentVelocity;
 
     private double ffPosition;
+    
+    private boolean override;
 
     //up = positive, down = negative
     private double motorSpeed;
@@ -61,6 +63,10 @@ public class Elevator extends Subsystem {
 
         //Control loop operation
         if (!input.isOverride()) {
+            if (override) {
+                init();
+            }
+            override = false;
             if (input.getElevatorPosition() != setPointElevation && input.newPosition()) {
                 setPointElevation = input.getElevatorPosition();
 
@@ -76,9 +82,10 @@ public class Elevator extends Subsystem {
 
             motorSpeed = pv.calculate(tmp, currentPosition, currentVelocity);
         } else { //Raw motor speeds for manual control
+            override = true;
             motorSpeed = input.getOverrideElevatorMotorSpeed();
         }
-
+        
         //Add in constant power to balance gravity.
         if (!input.isElevatorFFpOff()) {
             motorSpeed += ffPosition;
