@@ -55,7 +55,7 @@ public class SensorFeedback extends Feedback {
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         SmartDashboard.putNumber("leftstingervalue", leftStingerPot.getRaw());
         SmartDashboard.putNumber("rightstingervalue", rightStingerPot.getRaw());
         //Drivebase

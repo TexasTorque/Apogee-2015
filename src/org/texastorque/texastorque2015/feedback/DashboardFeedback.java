@@ -21,7 +21,7 @@ public class DashboardFeedback extends Feedback {
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         //Drivebase
         //Units use feet and seconds.
         leftDrivePosition = SmartDashboard.getNumber("leftPosition", 0.0);

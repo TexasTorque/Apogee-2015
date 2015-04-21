@@ -22,27 +22,27 @@ public abstract class Input implements Runnable {
     protected volatile double driveDistance;
     protected volatile double driveAngle;
 
-    public double getLeftSpeed() {
+    public synchronized double getLeftSpeed() {
         return leftSpeed;
     }
 
-    public double getRightSpeed() {
+    public synchronized double getRightSpeed() {
         return rightSpeed;
     }
 
-    public double getStrafeSpeed() {
+    public synchronized double getStrafeSpeed() {
         return strafeSpeed;
     }
 
-    public boolean isDrivebaseControlled() {
+    public synchronized boolean isDrivebaseControlled() {
         return drivebaseControlled;
     }
 
-    public double getDriveDistance() {
+    public synchronized double getDriveDistance() {
         return driveDistance;
     }
 
-    public double getDriveAngle() {
+    public synchronized double getDriveAngle() {
         return driveAngle;
     }
 
@@ -53,23 +53,23 @@ public abstract class Input implements Runnable {
     protected volatile boolean elevatorFFpOff;
     protected volatile boolean newPosition;
 
-    public boolean isOverride() {
+    public synchronized boolean isOverride() {
         return override;
     }
 
-    public double getOverrideElevatorMotorSpeed() {
+    public synchronized double getOverrideElevatorMotorSpeed() {
         return overrideElevatorMotorSpeed;
     }
 
-    public double getElevatorPosition() {
+    public synchronized double getElevatorPosition() {
         return elevatorPosition;
     }
 
-    public boolean isElevatorFFpOff() {
+    public synchronized boolean isElevatorFFpOff() {
         return elevatorFFpOff;
     }
 
-    public boolean newPosition() {
+    public synchronized boolean newPosition() {
         return newPosition;
     }
 
@@ -78,15 +78,15 @@ public abstract class Input implements Runnable {
     protected volatile boolean tiltUp;
     protected volatile boolean canHolderUp;
 
-    public boolean isPunchOut() {
+    public synchronized boolean isPunchOut() {
         return punchOut;
     }
 
-    public boolean isTiltUp() {
+    public synchronized boolean isTiltUp() {
         return tiltUp;
     }
     
-    public boolean isCanHolderUp() {
+    public synchronized boolean isCanHolderUp() {
         return canHolderUp;
     }
     
@@ -95,15 +95,15 @@ public abstract class Input implements Runnable {
     protected volatile double rightIntakeSpeed;
     protected volatile boolean intakeIn;
 
-    public double getLeftIntakeSpeed() {
+    public synchronized double getLeftIntakeSpeed() {
         return leftIntakeSpeed;
     }
 
-    public double getRightIntakeSpeed() {
+    public synchronized double getRightIntakeSpeed() {
         return rightIntakeSpeed;
     }
 
-    public boolean getIntakeIn() {
+    public synchronized boolean getIntakeIn() {
         return intakeIn;
     }
 
@@ -112,15 +112,15 @@ public abstract class Input implements Runnable {
     protected volatile double stingerRetractSpeed;
     protected volatile boolean stingersOff;
 
-    public double getStingerRetractSpeed() {
+    public synchronized double getStingerRetractSpeed() {
         return stingerRetractSpeed;
     }
 
-    public double getStingerAngle() {
+    public synchronized double getStingerAngle() {
         return stingerAngle;
     }
 
-    public boolean areStingersOff() {
+    public synchronized boolean areStingersOff() {
         return stingersOff;
     }
 

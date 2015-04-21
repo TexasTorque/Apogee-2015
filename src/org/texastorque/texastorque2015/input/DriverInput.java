@@ -35,7 +35,7 @@ public class DriverInput extends Input {
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         if (operator.getLeftCenterButton()) {
             override = true;
         } else if (operator.getRightCenterButton()) {

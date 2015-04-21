@@ -18,7 +18,7 @@ public abstract class Feedback implements Runnable {
      *
      * @return The position in feet
      */
-    public double getLeftDrivePosition() {
+    public synchronized double getLeftDrivePosition() {
         return leftDrivePosition;
     }
 
@@ -27,7 +27,7 @@ public abstract class Feedback implements Runnable {
      *
      * @return The position in feet
      */
-    public double getRightDrivePosition() {
+    public synchronized double getRightDrivePosition() {
         return rightDrivePosition;
     }
 
@@ -36,7 +36,7 @@ public abstract class Feedback implements Runnable {
      *
      * @return The velocity in ft/s
      */
-    public double getLeftDriveVelocity() {
+    public synchronized double getLeftDriveVelocity() {
         return leftDriveVelocity;
     }
 
@@ -45,7 +45,7 @@ public abstract class Feedback implements Runnable {
      *
      * @return The velocity in ft/s
      */
-    public double getRightDriveVelocity() {
+    public synchronized double getRightDriveVelocity() {
         return rightDriveVelocity;
     }
 
@@ -54,7 +54,7 @@ public abstract class Feedback implements Runnable {
      *
      * @return The acceleration in ft/s^2
      */
-    public double getLeftDriveAcceleration() {
+    public synchronized double getLeftDriveAcceleration() {
         return leftDriveAcceleration;
     }
 
@@ -63,7 +63,7 @@ public abstract class Feedback implements Runnable {
      *
      * @return The acceleration in ft/s^2
      */
-    public double getRightDriveAcceleration() {
+    public synchronized double getRightDriveAcceleration() {
         return rightDriveAcceleration;
     }
 
@@ -72,7 +72,7 @@ public abstract class Feedback implements Runnable {
      *
      * @return The angle in degrees
      */
-    public double getAngle() {
+    public synchronized double getAngle() {
         return angle;
     }
 
@@ -96,15 +96,15 @@ public abstract class Feedback implements Runnable {
     protected double elevatorVelocity;
     protected boolean elevatorDone;
 
-    public boolean isElevatorDone() {
+    public synchronized boolean isElevatorDone() {
         return elevatorDone;
     }
 
-    public void setElevatorDone(boolean elevatorDone) {
+    public synchronized void setElevatorDone(boolean elevatorDone) {
         this.elevatorDone = elevatorDone;
     }
 
-    public boolean isElevatorHere(double height) {
+    public synchronized boolean isElevatorHere(double height) {
         return Math.abs(height - elevatorHeight) <= Constants.ElevatorPDoneRange.getDouble()
                 && Math.abs(elevatorVelocity) <= Constants.ElevatorVDoneRange.getDouble();
     }
@@ -114,7 +114,7 @@ public abstract class Feedback implements Runnable {
      *
      * @return The height in inches.
      */
-    public double getElevatorHeight() {
+    public synchronized double getElevatorHeight() {
         return elevatorHeight;
     }
 
@@ -123,7 +123,7 @@ public abstract class Feedback implements Runnable {
      *
      * @return The velocity in inches/second.
      */
-    public double getElevatorVelocity() {
+    public synchronized double getElevatorVelocity() {
         return elevatorVelocity;
     }
     
@@ -131,11 +131,11 @@ public abstract class Feedback implements Runnable {
     protected volatile double leftStingerAngle;
     protected volatile double rightStingerAngle;
 
-    public double getLeftStingerAngle() {
+    public synchronized double getLeftStingerAngle() {
         return leftStingerAngle;
     }
 
-    public double getRightStingerAngle() {
+    public synchronized double getRightStingerAngle() {
         return rightStingerAngle;
     }
 }
