@@ -5,9 +5,9 @@ public class Ports {
     //Drivebase motor ports
     public final static int LEFT_A_DRIVE_PORT = 11;//unused
     public final static int LEFT_B_DRIVE_PORT = 3;
-    public final static int RIGHT_A_DRIVE_PORT = 4;
+    public final static int RIGHT_A_DRIVE_PORT = 1;
     public final static int RIGHT_B_DRIVE_PORT = 12;//unused
-    public final static int STRAFE_PORT = 2;
+    public final static int STRAFE_PORT = 15;
 
     //Elevator
     public final static int LEFT_ELEVATOR = 5;
@@ -26,10 +26,10 @@ public class Ports {
     //crazy arms
     public final static int PUNCH_SOLENOID = 6;
     public final static int INTAKE_SOLENOID = 4;
-    public final static int TILT_SOLENOID_A_PORT = 5;
-    public final static int TILT_SOLENOID_B_PORT = 3;
-    public final static int CANHOLDER_SOLENOID_A = 7;
-    public final static int CANHOLDER_SOLENOID_B = 0;
+    public final static int TILT_SOLENOID_A_PORT = 0;
+    public final static int TILT_SOLENOID_B_PORT = 7;
+    public final static int CANHOLDER_SOLENOID_A = 1;
+    public final static int CANHOLDER_SOLENOID_B = 5;
 
     //intake
     public final static int LEFT_INTAKE_PORT = 7;
@@ -42,7 +42,7 @@ public class Ports {
     //Stingers
     public final static int LEFT_STINGER_POT_PORT = 2;
     public final static int RIGHT_STINGER_POT_PORT = 3;
-    public final static int leftStingerMotor = 1;
+    public final static int leftStingerMotor = 2;
     public final static int rightStingerMotor = 0;
-    public final static int stingerRetractMotor = 17;
+    public final static int stingerRetractMotor = 9;
 }
