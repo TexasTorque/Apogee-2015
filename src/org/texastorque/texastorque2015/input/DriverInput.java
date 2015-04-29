@@ -1,5 +1,6 @@
 package org.texastorque.texastorque2015.input;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.torquelib.util.GenericController;
 import org.texastorque.torquelib.util.TorqueFilter;
@@ -16,6 +17,7 @@ public class DriverInput extends Input {
 
     private TorqueToggle tiltToggle;
     private TorqueToggle canHolderToggle;
+//    private TorqueToggle stingersToggle;
 
     public DriverInput() {
         driver = new GenericController(0, GenericController.TYPE_XBOX, 0.2);
@@ -27,11 +29,12 @@ public class DriverInput extends Input {
 
         tiltToggle = new TorqueToggle();
         canHolderToggle = new TorqueToggle();
+//        stingersToggle = new TorqueToggle();
 
         override = false;
         punchOut = false;
         tiltUp = false;
-        stingerAngle = 90.0;
+        stingerAngle = 75.0;
     }
 
     @Override
@@ -55,9 +58,16 @@ public class DriverInput extends Input {
         }
         if (driver.getAButton()) {
             stingerAngle = 120.0;
-        }
-        if (driver.getXButton()) {
+        } else if (driver.getXButton()) {
             stingersOff = true;
+        } else if (driver.getYButton()) {
+            stingersOff = false;
+            stingerSpeedOverride = -.25;
+        } else {
+            stingerSpeedOverride = 0.0;
+            if (stingerAngle != 120.0) {
+                stingerAngle = 75.0 - (75.0 * driver.getRawAxis(2));
+            }
         }
 
         calcIntake();

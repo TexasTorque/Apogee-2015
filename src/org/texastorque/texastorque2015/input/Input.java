@@ -109,11 +109,16 @@ public abstract class Input implements Runnable {
 
     //Stingers
     protected volatile double stingerAngle;
+    protected volatile double stingerSpeedOverride;
     protected volatile double stingerRetractSpeed;
     protected volatile boolean stingersOff;
 
     public synchronized double getStingerRetractSpeed() {
         return stingerRetractSpeed;
+    }
+    
+    public synchronized double getStingerSpeedOverride() {
+        return stingerSpeedOverride;
     }
 
     public synchronized double getStingerAngle() {
@@ -123,5 +128,5 @@ public abstract class Input implements Runnable {
     public synchronized boolean areStingersOff() {
         return stingersOff;
     }
-
+    
 }

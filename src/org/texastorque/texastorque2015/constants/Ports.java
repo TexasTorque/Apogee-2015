@@ -43,6 +43,6 @@ public class Ports {
     public final static int LEFT_STINGER_POT_PORT = 2;
     public final static int RIGHT_STINGER_POT_PORT = 3;
     public final static int leftStingerMotor = 2;
-    public final static int rightStingerMotor = 0;
+    public final static int rightStingerMotor = 4;
     public final static int stingerRetractMotor = 9;
 }
