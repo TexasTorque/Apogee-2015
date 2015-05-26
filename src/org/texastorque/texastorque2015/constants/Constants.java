@@ -25,6 +25,7 @@ public class Constants extends Parameters {
     public final static Constant ElevatorMaxA0Tote = new Constant("E_MaxA_0Tote", 0.0);
     
     public final static Constant Carry4ToteLevel = new Constant("E_Carry4ToteLevel", 0.0);
+    public final static Constant Can4ToteLevel = new Constant("E_Can4ToteLevel", 0.0);
 
     //Regular stacking levels
     public final static Constant FloorElevatorLevel1 = new Constant("E_FloorL1", 100.0);

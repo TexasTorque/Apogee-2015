@@ -21,7 +21,7 @@ public abstract class Input implements Runnable {
     protected volatile boolean drivebaseControlled;
     protected volatile double driveDistance;
     protected volatile double driveAngle;
-
+    
     public synchronized double getLeftSpeed() {
         return leftSpeed;
     }
@@ -37,7 +37,7 @@ public abstract class Input implements Runnable {
     public synchronized boolean isDrivebaseControlled() {
         return drivebaseControlled;
     }
-
+    
     public synchronized double getDriveDistance() {
         return driveDistance;
     }

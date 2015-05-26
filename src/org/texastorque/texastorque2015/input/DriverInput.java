@@ -1,6 +1,5 @@
 package org.texastorque.texastorque2015.input;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import org.texastorque.texastorque2015.constants.Constants;
 import org.texastorque.torquelib.util.GenericController;
 import org.texastorque.torquelib.util.TorqueFilter;
@@ -131,11 +130,14 @@ public class DriverInput extends Input {
         } else if (operator.getXButton()) {
             elevatorPosition = Constants.Carry4ToteLevel.getDouble();
             newPosition = true;
+        } else if (operator.getAButton()) {
+            elevatorPosition = Constants.Can4ToteLevel.getDouble();
+            newPosition = true;
         } else {
             newPosition = false;
         }
     }
-
+    
     private void calcOverride() {
         overrideElevatorMotorSpeed = -1 * operator.getLeftYAxis();
     }

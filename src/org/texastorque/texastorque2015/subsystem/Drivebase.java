@@ -41,14 +41,14 @@ public class Drivebase extends Subsystem {
 
     //angular
     private TorquePID turnPID;
-    
+
     double prevTime;
 
     public Drivebase() {
         linearProfile = new TorqueTMP(Constants.DrivebaseMaxV.getDouble(), Constants.DrivebaseMaxA.getDouble());
         leftPV = new TorquePV();
         rightPV = new TorquePV();
-        
+
         turnPID = new TorquePID();
     }
 
@@ -59,7 +59,7 @@ public class Drivebase extends Subsystem {
         setPointAngle = 0.0;
         linearProfile.generateTrapezoid(0.0, 0.0, (leftVelocity + rightVelocity) / 2);
         feedback.resetDriveEncoders();
-        
+
         feedback.resetGyro();
         turnPID.setSetpoint(feedback.getAngle());
 
@@ -80,9 +80,8 @@ public class Drivebase extends Subsystem {
         angle = feedback.getAngle();
 
         /**
-         * Drive directions are defined as following: +1 for leftSpeed and
-         * rightSpeed: full forward -1 for leftSpeed and rightSpeed: full
-         * reverse +1 for strafe: full right -1 for strafe: full left
+         * Drive directions are defined as following: +1 for leftSpeed and rightSpeed: full forward -1 for leftSpeed and rightSpeed: full reverse +1 for strafe:
+         * full right -1 for strafe: full left
          *
          */
         double dt = Timer.getFPGATimestamp() - prevTime;
@@ -115,7 +114,7 @@ public class Drivebase extends Subsystem {
 
                 turnPID.setSetpoint(setPointAngle);
                 turnPID.reset();
-                
+
                 feedback.resetGyro();
             }
 
@@ -152,7 +151,7 @@ public class Drivebase extends Subsystem {
                 Constants.DrivebaseRightffV.getDouble(), Constants.DrivebaseRightffA.getDouble());
         leftPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
         rightPV.setTunedVoltage(Constants.DrivebaseTunedVoltage.getDouble());
-        
+
         //set turn gains
         turnPID.setPIDGains(Constants.DrivebaseTurnP.getDouble(), Constants.DrivebaseTurnI.getDouble(), Constants.DrivebaseTurnD.getDouble());
     }
